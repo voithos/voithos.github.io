@@ -1,0 +1,6 @@
+name: Skepsi
+markdown: redcarpet
+pygments: true
+safe: true
+lsi: false
+encoding: 'UTF-8'
