@@ -2,14 +2,21 @@ task :default => :serve
 
 ## Tasks
 
-desc 'Build site'
-task :build => :clean do
-    sh 'bundle exec jekyll build'
-end
-
 desc 'Start the development server'
 task :serve => :clean do
     sh 'bundle exec jekyll serve -w'
+end
+
+desc 'Start SCSS watcher'
+task :scss do
+    scss = File.join('assets', 'scss')
+    css = File.join('assets', 'css')
+    sh "bundle exec scss --watch #{scss}:#{css}"
+end
+
+desc 'Build site'
+task :build => :clean do
+    sh 'bundle exec jekyll build'
 end
 
 desc 'Create a new post'

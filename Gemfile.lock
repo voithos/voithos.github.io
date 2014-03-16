@@ -51,6 +51,7 @@ GEM
     rdiscount (2.1.7)
     redcarpet (2.3.0)
     safe_yaml (0.9.7)
+    sass (3.2.13)
     toml (0.1.1)
       parslet (~> 1.5.0)
     yajl-ruby (1.1.0)
@@ -60,3 +61,4 @@ PLATFORMS
 
 DEPENDENCIES
   github-pages
+  sass
