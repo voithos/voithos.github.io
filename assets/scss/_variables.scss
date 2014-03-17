@@ -1,0 +1,19 @@
+// Central location of style variables
+//
+
+$background-image-url: '/assets/img/dark_mosaic.png';
+
+// Fonts
+$title-font-family: 'Planet Kosmos';
+$title-font-url: '/assets/fonts/planet';
+
+$title-font-stack: $title-font-family, Helvetica, Arial, sans-serif;
+$text-font-stack: 'Ubuntu', Geneva, Tahoma, Verdana, sans-serif;
+$mono-font-stack: 'Ubuntu Mono', Consolas, monaco, monospace;
+
+// Colors
+$primary-color: #16A8A6;
+$secondary-color: #BD114A;
+$default-color: #F4F3F4;
+$lowlight-color: #97B5BF;
+$dark-color: #202020;
