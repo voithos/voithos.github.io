@@ -21,12 +21,8 @@ body {
 a {
     color: $secondary-color;
     text-decoration: none;
-}
-
-// Separated out, because otherwise certain browsers will try to
-// do the transition from the reset style -> current style on load
-a {
     @include transition(all, 0.5s, ease-out);
+    @include transition-property(color, text-shadow);
 }
 
 a:hover {
@@ -168,7 +164,7 @@ article {
     border: 2px solid lighten($dark-color, 11);
     background-color: $dark-color;
     margin-bottom: 1rem;
-    @include transition(all, 0.2s, ease-in-out);
+    @include transition(border-radius, 0.2s, ease-in-out);
 
     &:hover {
         border-radius: 0;

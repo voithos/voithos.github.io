@@ -215,14 +215,17 @@ body {
 
 a {
   color: #bd114a;
-  text-decoration: none; }
-
-a {
+  text-decoration: none;
   -webkit-transition: all 0.5s ease-out 0s;
   -moz-transition: all 0.5s ease-out 0s;
   -o-transition: all 0.5s ease-out 0s;
   -ms-transition: all 0.5s ease-out 0s;
-  transition: all 0.5s ease-out 0s; }
+  transition: all 0.5s ease-out 0s;
+  -webkit-transition-property: color, text-shadow;
+  -moz-transition-property: color, text-shadow;
+  -o-transition-property: color, text-shadow;
+  -ms-transition-property: color, text-shadow;
+  transition-property: color, text-shadow; }
 
 a:hover {
   color: #ec2e6d;
@@ -304,10 +307,10 @@ article .post h3 {
   border: 2px solid #3c3c3c;
   background-color: #202020;
   margin-bottom: 1rem;
-  -webkit-transition: all 0.2s ease-in-out 0s;
-  -moz-transition: all 0.2s ease-in-out 0s;
-  -o-transition: all 0.2s ease-in-out 0s;
-  -ms-transition: all 0.2s ease-in-out 0s;
-  transition: all 0.2s ease-in-out 0s; }
+  -webkit-transition: border-radius 0.2s ease-in-out 0s;
+  -moz-transition: border-radius 0.2s ease-in-out 0s;
+  -o-transition: border-radius 0.2s ease-in-out 0s;
+  -ms-transition: border-radius 0.2s ease-in-out 0s;
+  transition: border-radius 0.2s ease-in-out 0s; }
   .highlight:hover {
     border-radius: 0; }

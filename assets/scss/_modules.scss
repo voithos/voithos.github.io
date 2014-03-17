@@ -21,3 +21,11 @@
         -ms-transition: $property $duration $easing $delay;
             transition: $property $duration $easing $delay;
 }
+
+@mixin transition-property($properties...) {
+    -webkit-transition-property: $properties;
+       -moz-transition-property: $properties;    
+         -o-transition-property: $properties;   
+        -ms-transition-property: $properties;
+            transition-property: $properties;
+}
