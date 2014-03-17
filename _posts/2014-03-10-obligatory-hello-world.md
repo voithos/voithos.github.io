@@ -16,7 +16,8 @@ def foo
 end
 ```
 
-Indubitably.
+Indubitably. *Indeed*. **Fantastic!!** And, _in fact_, I am attempting
+to __consider__ such things. `#take_while()`.
 
 ---
 

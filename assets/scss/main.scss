@@ -21,6 +21,11 @@ body {
 a {
     color: $secondary-color;
     text-decoration: none;
+}
+
+// Separated out, because otherwise certain browsers will try to
+// do the transition from the reset style -> current style on load
+a {
     @include transition(all, 0.5s, ease-out);
 }
 
@@ -45,7 +50,8 @@ p {
 .site {
     font-size: 1.3rem;
     width: 60rem;
-    margin: 1rem auto 1rem;
+    margin: 0 auto;
+    padding: 1rem;
 
     @media screen and (max-width: 980px) {
         width: 100%;
@@ -107,13 +113,26 @@ footer {
     }
 }
 
+// Index
+.posts {
+    article {
+        > h2 a {
+            color: $lowlight-color;
+            text-decoration: none;
+            &:hover {
+                text-shadow: 0 0 5px $lowlight-color;
+            }
+        }
+    }
+}
+
 // Post
 //
 article {
     > h2 {
         font-size: 2.2rem;
         color: $lowlight-color;
-        border-bottom: 2px solid desaturate(darken($lowlight-color, 40), 10);
+        border-bottom: 2px solid desaturate(darken($lowlight-color, 25), 10);
         margin-bottom: 0.4rem;
     }
 

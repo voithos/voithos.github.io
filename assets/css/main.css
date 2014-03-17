@@ -215,7 +215,9 @@ body {
 
 a {
   color: #bd114a;
-  text-decoration: none;
+  text-decoration: none; }
+
+a {
   -webkit-transition: all 0.5s ease-out 0s;
   -moz-transition: all 0.5s ease-out 0s;
   -o-transition: all 0.5s ease-out 0s;
@@ -239,7 +241,8 @@ p {
 .site {
   font-size: 1.3rem;
   width: 60rem;
-  margin: 1rem auto 1rem; }
+  margin: 0 auto;
+  padding: 1rem; }
   @media screen and (max-width: 980px) {
     .site {
       width: 100%; } }
@@ -272,10 +275,16 @@ header nav {
 footer hr {
   border-color: #b31b4d; }
 
+.posts article > h2 a {
+  color: #97b5bf;
+  text-decoration: none; }
+  .posts article > h2 a:hover {
+    text-shadow: 0 0 5px #97b5bf; }
+
 article > h2 {
   font-size: 2.2rem;
   color: #97b5bf;
-  border-bottom: 2px solid #3b4a4f;
+  border-bottom: 2px solid #5c737a;
   margin-bottom: 0.4rem; }
 article > .meta {
   font-size: 0.9rem; }
