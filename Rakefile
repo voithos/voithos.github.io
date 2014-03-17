@@ -4,7 +4,7 @@ task :default => :serve
 
 desc 'Start the development server'
 task :serve => :clean do
-    sh 'bundle exec jekyll serve -w'
+    sh 'bundle exec jekyll serve -w -D'
 end
 
 desc 'Start SCSS watcher'
