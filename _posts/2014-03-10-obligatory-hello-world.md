@@ -19,6 +19,12 @@ end
 Indubitably. *Indeed*. **Fantastic!!** And, _in fact_, I am attempting
 to __consider__ such things. `#take_while()`.
 
+> Blockquote. You have no chance to survive.
+> Make your time. Indeed. Yes. Lorem ipsum dolor
+> sit amet blah blah and a ha cha cha.
+> ## Header inside
+> <cite>Someone awesome</cite>
+
 ---
 
 And in fact, after this, I have nothing more to say.

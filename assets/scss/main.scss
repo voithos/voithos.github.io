@@ -44,6 +44,34 @@ p {
     margin-bottom: 1rem;
 }
 
+blockquote {
+    font-style: italic;
+    margin: 2rem 0;
+    padding: 0 2rem;
+    position: relative;
+    color: $lowlight-color;
+
+    &:before {
+        display: block;
+        content: '\201C';
+        font-size: 5rem;
+        position: absolute;
+        left: -1rem;
+        top: -1.2rem;
+        color: lighten($lowlight-color, 30);
+    }
+
+    cite {
+        color: lighten($default-color, 20);
+        font-size: 1rem;
+        display: block;
+
+        &:before {
+            content: '\2014 \2009';
+        }
+    }
+}
+
 h1, h2, h3 {
     margin-bottom: 1rem;
 }
@@ -70,6 +98,7 @@ h3 {
         width: 100%;
     }
 }
+
 
 // Header
 //
@@ -127,6 +156,7 @@ footer {
 }
 
 // Index
+//
 .posts {
     article {
         > h2 a {
