@@ -233,13 +233,26 @@ a:hover {
   text-shadow: 0 0 5px #bd114a; }
 
 pre {
-  padding: 1rem; }
+  padding: 1rem;
+  white-space: pre; }
 
 code {
   font-family: "Ubuntu Mono", Consolas, monaco, monospace; }
 
 p {
   margin-bottom: 1rem; }
+
+h1, h2, h3 {
+  margin-bottom: 1rem; }
+
+h1 {
+  font-size: 2rem; }
+
+h2 {
+  font-size: 1.5rem; }
+
+h3 {
+  font-size: 1.3rem; }
 
 .site {
   font-size: 1.3rem;
@@ -293,14 +306,6 @@ article > .meta {
   font-size: 0.9rem; }
 article .post ul, article .post ol {
   margin-left: 1.35rem; }
-article .post h1, article .post h2, article .post h3 {
-  margin-bottom: 1rem; }
-article .post h1 {
-  font-size: 2rem; }
-article .post h2 {
-  font-size: 1.5rem; }
-article .post h3 {
-  font-size: 1.3rem; }
 
 .highlight {
   border-radius: 1rem;

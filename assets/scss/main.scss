@@ -33,6 +33,7 @@ a:hover {
 
 pre {
     padding: 1rem;
+    white-space: pre;
 }
 
 code {
@@ -41,6 +42,22 @@ code {
 
 p {
     margin-bottom: 1rem;
+}
+
+h1, h2, h3 {
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.3rem;
 }
 
 .site {
@@ -139,22 +156,6 @@ article {
     .post {
         ul, ol {
             margin-left: 1.35rem;
-        }
-
-        h1, h2, h3 {
-            margin-bottom: 1rem;
-        }
-
-        h1 {
-            font-size: 2rem;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-        }
-
-        h3 {
-            font-size: 1.3rem;
         }
     }
 }
