@@ -284,30 +284,34 @@ h3 {
     .site {
       width: 100%; } }
 
-header .title {
-  display: inline;
-  font-family: "Planet Kosmos", Helvetica, Arial, sans-serif;
-  font-size: 4rem; }
-  header .title a {
-    color: #16a8a6;
-    padding: 0 1.5rem; }
-    header .title a:hover {
-      color: #28e3e0;
-      text-shadow: 0 0 10px #16a8a6;
-      text-decoration: none; }
-header nav {
-  display: inline;
-  margin-left: 4rem;
-  text-align: right;
-  position: relative;
-  top: -0.5rem; }
-  header nav ul {
-    display: inline; }
-    header nav ul li {
-      display: inline;
-      margin: 1rem; }
-  header nav a {
-    font-weight: bold; }
+header {
+  display: flex;
+  flex-flow: row nowrap; }
+  header .title {
+    flex: initial;
+    font-family: "Planet Kosmos", Helvetica, Arial, sans-serif;
+    font-size: 4rem; }
+    header .title a {
+      color: #16a8a6;
+      padding: 0 1.5rem; }
+      header .title a:hover {
+        color: #28e3e0;
+        text-shadow: 0 0 10px #16a8a6;
+        text-decoration: none; }
+  header nav {
+    flex: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -0.7rem; }
+    header nav ul {
+      display: inline; }
+      header nav ul li {
+        display: inline;
+        margin: 1.5rem; }
+    header nav a {
+      font-weight: bold; }
 
 footer hr {
   margin-top: 1.5rem;

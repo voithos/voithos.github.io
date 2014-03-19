@@ -103,11 +103,14 @@ h3 {
 // Header
 //
 header {
+    display: flex;
+    flex-flow: row nowrap;
+
     @media screen and (max-width: 480px) {
     }
 
     .title {
-        display: inline;
+        flex: initial;
 
         font: {
             family: $title-font-stack;
@@ -127,17 +130,19 @@ header {
     }
 
     nav {
-        display: inline;
-        margin-left: 4rem;
-        text-align: right;
+        flex: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
         position: relative;
-        top: -0.5rem;
+        top: -0.7rem;
 
         ul {
             display: inline;
             li {
                 display: inline;
-                margin: 1rem;
+                margin: 1.5rem;
             }
         }
 
