@@ -151,6 +151,7 @@ header {
 //
 footer {
     hr {
+        margin-top: 1.5rem;
         border-color: desaturate($secondary-color, 10);
     }
 }
@@ -191,14 +192,14 @@ article {
 
     .post {
         ul, ol {
-            margin-left: 1.35rem;
+            margin-left: 2.5rem;
         }
     }
 }
 
 .highlight {
     border-radius: 1rem;
-    border: 2px solid lighten($dark-color, 11);
+    border: 1px solid lighten($dark-color, 11);
     background-color: $dark-color;
     margin-bottom: 1rem;
     @include transition(border-radius, 0.2s, ease-in-out);

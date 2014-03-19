@@ -310,6 +310,7 @@ header nav {
     font-weight: bold; }
 
 footer hr {
+  margin-top: 1.5rem;
   border-color: #b31b4d; }
 
 .posts article > h2 a {
@@ -330,11 +331,11 @@ article > h2 {
 article > .meta {
   font-size: 0.9rem; }
 article .post ul, article .post ol {
-  margin-left: 1.35rem; }
+  margin-left: 2.5rem; }
 
 .highlight {
   border-radius: 1rem;
-  border: 2px solid #3c3c3c;
+  border: 1px solid #3c3c3c;
   background-color: #202020;
   margin-bottom: 1rem;
   -webkit-transition: border-radius 0.2s ease-in-out 0s;
