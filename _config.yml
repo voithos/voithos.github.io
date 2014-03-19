@@ -1,5 +1,5 @@
 name: Skepsi
-markdown: redcarpet
+markdown: kramdown
 pygments: true
 safe: true
 lsi: false
