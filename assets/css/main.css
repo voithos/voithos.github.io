@@ -317,6 +317,10 @@ footer hr {
   text-decoration: none; }
   .posts article > h2 a:hover {
     text-shadow: 0 0 5px #97b5bf; }
+.posts .readmore {
+  font-size: 1.2rem;
+  text-align: right;
+  margin-bottom: 0.8rem; }
 
 article > h2 {
   font-size: 2.2rem;
