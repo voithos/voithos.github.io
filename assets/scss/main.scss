@@ -1,4 +1,6 @@
-@import 'reset';
+@import 'lib/reset';
+@import 'lib/syntax';
+@import 'lib/font-awesome/font-awesome';
 @import 'modules';
 @import 'variables';
 
@@ -16,6 +18,20 @@ body {
         size: 100%;
         family: $text-font-stack;
     }
+}
+
+a,
+label,
+button, 
+input[type="radio"], 
+input[type="submit"], 
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
+button[disabled], 
+input[disabled] {
+    cursor: default;
 }
 
 a {
@@ -158,6 +174,21 @@ footer {
     hr {
         margin-top: 1.5rem;
         border-color: desaturate($secondary-color, 10);
+    }
+
+    .footer-links {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+
+        .license .cc {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .links a {
+            margin: 0 1rem;
+        }
     }
 }
 

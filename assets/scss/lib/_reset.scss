@@ -25,20 +25,7 @@ html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquot
 article, aside, figure, footer, header, nav, section, details, summary {display: block;}
 
 /* consider resetting the default cursor: https://gist.github.com/murtaugh/5247154 */
-a,
-label,
-button, 
-input[type="radio"], 
-input[type="submit"], 
-input[type="checkbox"] {
-    cursor: pointer;
-}
  
-button[disabled], 
-input[disabled] {
-    cursor: default;
-}
-
 /* Apply a natural box layout model to all elements: http://paulirish.com/2012/box-sizing-border-box-ftw/ */
 *, *:before, *:after {box-sizing: border-box; }
 
