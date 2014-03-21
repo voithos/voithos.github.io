@@ -20,24 +20,25 @@ task :build => :clean do
 end
 
 desc 'Create a new post'
-task :new, :title do |t, args|
+task :new, [:title, :edit] do |t, args|
+    args.with_defaults(:edit => 'true')
     if not args.title
         puts "Title required"
-        return
+        next
     end
 
-    filetitle = args.title.gsub(/\s/, '_').downcase
-    filetimestamp = Time.now.strftime('%Y-%m-%d')
-    filename = "#{filetimestamp}-#{filetitle}.md"
+    filetitle = normalizetitle(args.title)
+    filename = "#{filetitle}.md"
 
     path = File.join('_drafts', filename)
     if File.exist? path
-        raise "Would clobber #{path}"
+        puts "Would clobber #{path}"
+        next
     end
 
     timestamp = Time.now.strftime('%Y-%m-%d %k:%M:%S')
     File.open(path, 'w') do |file|
-        file.write <<-EOS
+        file.puts <<-EOS
 ---
 layout: post
 title: #{args.title}
@@ -46,8 +47,48 @@ date: #{timestamp}
 EOS
     end
 
-    if not openeditor(path)
+    if not to_bool(args.edit) or not openeditor(path)
         puts "#{path} has been created"
+    end
+end
+
+desc 'Publish a draft'
+task :publish, [:title] do |t, args|
+    filetitle = normalizetitle(args.title)
+    wildcard = filetitle.split('').join('*').gsub(/^|$/, '*')
+    candidates = Dir[File.join('_drafts', wildcard)]
+
+    if candidates.length == 0
+        puts "'#{filetitle}' does not match any draft"
+        next
+    elsif candidates.length > 1
+        puts "'#{filetitle}' matches multiple drafts:"
+        candidates.each do |file|
+            puts "    #{File.basename(file)}"
+        end
+        next
+    end
+
+    draftpath = candidates.first
+    draftbase = File.basename(draftpath)
+    filetimestamp = Time.now.strftime('%Y-%m-%d')
+    postpath = File.join('_posts', "#{filetimestamp}-#{draftbase}")
+
+    if File.exist? postpath
+        puts "Would clobber #{postpath}"
+        next
+    end
+
+    File.rename(draftpath, postpath)
+
+    timestamp = Time.now.strftime('%Y-%m-%d %k:%M:%S')
+    timestampline = "date: #{timestamp}"
+
+    text = File.read(postpath)
+    text = text.sub(/date: \d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d/, timestampline)
+
+    File.open(postpath, 'w') do |file|
+        file.puts text
     end
 end
 
@@ -63,7 +104,7 @@ def openeditor(path)
     # Prefer gvim/vim
     editor = which('gvim') || which('vim')
     if not editor.nil?
-        system("#{editor} #{path}")
+        system("#{editor} '#{path}'")
         true
     else
         false
@@ -79,4 +120,12 @@ def which(cmd)
         }
     end
     return nil
+end
+
+def normalizetitle(title)
+    title.gsub(/\s/, '-').gsub(/[^a-zA-Z0-9_-]/, '').downcase
+end
+
+def to_bool(s)
+    !!(s =~ /^(true|t|yes|y|1)$/i)
 end
