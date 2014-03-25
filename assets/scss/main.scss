@@ -50,6 +50,15 @@ a:hover {
 pre {
     padding: 1rem;
     white-space: pre;
+    border-radius: 1rem;
+    border: 1px solid lighten($dark-color, 11);
+    background-color: $dark-color;
+    margin-bottom: 1rem;
+    @include transition(border-radius, 0.2s, ease-in-out);
+
+    &:hover {
+        border-radius: 0;
+    }
 }
 
 code {
@@ -230,18 +239,6 @@ article {
         ul, ol {
             margin-left: 2.5rem;
         }
-    }
-}
-
-.highlight {
-    border-radius: 1rem;
-    border: 1px solid lighten($dark-color, 11);
-    background-color: $dark-color;
-    margin-bottom: 1rem;
-    @include transition(border-radius, 0.2s, ease-in-out);
-
-    &:hover {
-        border-radius: 0;
     }
 }
 
