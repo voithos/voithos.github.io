@@ -19,13 +19,13 @@ This is full of HTML. And it's definitely not XML[^1], yo.
 
 Lorem ipsum dolor, for sure, absolutely, indeed.
 
-``` ruby
+~~~ ruby
 def foo
     foobar do |lol|
         format.html
     end
 end
-```
+~~~
 
 Indubitably. *Indeed*. **Fantastic!!** And, _in fact_, I am attempting
 to __consider__ such things. <s>Nevermind</s> Twotothe<sup>fourth</sup><sub>power</sub> `#take_while()`.
