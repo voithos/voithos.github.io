@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+puts 'Autopushing into raw...'
+outdir = "../raw.#{File.basename(Dir.getwd)}"
+protect = ['.git', '.nojekyll'].map {|s| "--filter='P #{s}'"}.join(' ')
+
+system('rake build')
+system("rsync -az --delete #{protect} _site/ #{outdir}")
+
+Dir.chdir(outdir) do
+    system('git fetch origin')
+    system('git add -A')
+    system('git commit -m "Sync raw with jekyll"')
+    system('git push origin')
+end
