@@ -11,5 +11,5 @@ Dir.chdir(outdir) do
     system('git fetch origin')
     system('git add -A')
     system('git commit -m "Sync raw with jekyll"')
-    system('git push origin')
+    system('git push origin master')
 end
