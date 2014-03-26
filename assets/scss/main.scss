@@ -235,6 +235,23 @@ article {
         font-size: 0.9rem;
     }
 
+    h1[id] a, h2[id] a, h3[id] a {
+        color: $lowlight-color;
+        position: relative;
+
+        &:hover {
+            color: $lowlight-color;
+            text-shadow: 0 0 5px $lowlight-color;
+
+            &:before {
+                content: '\00B6'; // Pilcrow
+                display: block;
+                position: absolute;
+                left: -1.5rem;
+            }
+        }
+    }
+
     .post {
         ul, ol {
             margin-left: 2.5rem;
