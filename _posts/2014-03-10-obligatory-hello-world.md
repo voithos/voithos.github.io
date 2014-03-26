@@ -17,6 +17,12 @@ Lorem ipsum dolor, for sure, absolutely, indeed.
 
 This is full of HTML. And it's definitely not XML[^1], yo.
 
+# [The greatness that is foobar](#absolute) {#absolute}
+
+## [The importance of food](#facilituous) {#facilituous}
+
+## [And another thing](#another) {#another}
+
 Lorem ipsum dolor, for sure, absolutely, indeed.
 
 ~~~ ruby
@@ -36,6 +42,7 @@ to __consider__ such things. <s>Nevermind</s> Twotothe<sup>fourth</sup><sub>powe
 > Blockquote. You have no chance to survive.
 > Make your time. Indeed. Yes. Lorem ipsum dolor
 > sit amet blah blah and a ha cha cha.
+>
 > ## Header inside
 > <cite>Someone awesome</cite>
 

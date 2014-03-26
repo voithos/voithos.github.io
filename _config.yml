@@ -3,6 +3,8 @@ markdown: kramdown
 # Bogus extension, so that the markdown plugin can
 # find the Markdown files instead
 markdown_ext: hide_markdown
+kramdown:
+    auto_ids: false
 pygments: true
 lsi: false
 encoding: 'UTF-8'
