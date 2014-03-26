@@ -36,7 +36,7 @@ task :new, [:title, :edit] do |t, args|
         next
     end
 
-    timestamp = Time.now.strftime('%Y-%m-%d %k:%M:%S')
+    timestamp = Time.now.strftime('%Y-%m-%d %H:%M:%S')
     File.open(path, 'w') do |file|
         file.puts <<-EOS
 ---
@@ -81,11 +81,11 @@ task :publish, [:title] do |t, args|
 
     File.rename(draftpath, postpath)
 
-    timestamp = Time.now.strftime('%Y-%m-%d %k:%M:%S')
-    timestampline = "date: #{timestamp}"
+    timestamp = Time.now.strftime('%Y-%m-%d %H:%M:%S')
+    timestampline = "date:   #{timestamp}"
 
     text = File.read(postpath)
-    text = text.sub(/date: \d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d/, timestampline)
+    text = text.sub(/date:\s*\d\d\d\d-\d\d-\d\d\s+(\d\d:\d\d:\d\d)?/, timestampline)
 
     File.open(postpath, 'w') do |file|
         file.puts text
