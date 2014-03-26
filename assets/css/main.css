@@ -1924,7 +1924,14 @@ article > h2 {
   border-bottom: 2px solid #5c737a;
   margin-bottom: 0.4rem; }
 article > .meta {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
   font-size: 0.9rem; }
+  article > .meta .tags {
+    color: #97b5bf; }
+    article > .meta .tags .tag {
+      margin: 0 0.2rem; }
 article h1[id] a, article h2[id] a, article h3[id] a {
   color: #97b5bf;
   position: relative; }
