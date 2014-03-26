@@ -1,7 +1,8 @@
 ---
 layout: post
-title:  "Obligatory Hello World!"
+title:  Obligatory Hello World!
 date:   2014-03-10
+tags:   foo bar baz
 ---
 
 Hello world! Здравствуйте! Unicode test!

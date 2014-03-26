@@ -20,8 +20,8 @@ task :build => :clean do
 end
 
 desc 'Create a new post'
-task :new, [:title, :edit] do |t, args|
-    args.with_defaults(:edit => 'true')
+task :new, [:title, :tags, :edit] do |t, args|
+    args.with_defaults(:tags => '', :edit => 'true')
     if not args.title
         puts "Title required"
         next
@@ -41,8 +41,9 @@ task :new, [:title, :edit] do |t, args|
         file.puts <<-EOS
 ---
 layout: post
-title: #{args.title}
-date: #{timestamp}
+title:  #{args.title}
+date:   #{timestamp}
+tags:   #{args.tags}
 ---
 EOS
     end

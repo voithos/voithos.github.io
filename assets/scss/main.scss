@@ -232,7 +232,18 @@ article {
     }
 
     > .meta {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
         font-size: 0.9rem;
+
+        .tags {
+            color: $lowlight-color;
+
+            .tag {
+                margin: 0 0.2rem;
+            }
+        }
     }
 
     h1[id] a, h2[id] a, h3[id] a {

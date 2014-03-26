@@ -4,7 +4,17 @@ layout: default
 <main>
     <article>
         <h2>{{ page.title }}</h2>
-        <p class="meta">{{ page.date | date_to_long_string }}</p>
+        <p class="meta">
+            <span class="date">
+                {{ page.date | date_to_long_string }}
+            </span>
+
+            <span class="tags">
+                {% for tag in page.tags %}
+                <span class="tag">{{ tag }}</span>
+                {% endfor %}
+            </span>
+        </p>
 
         <section class="post">
         {{ content }}
