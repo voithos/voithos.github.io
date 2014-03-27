@@ -4,7 +4,7 @@ markdown: kramdown
 # find the Markdown files instead
 markdown_ext: hide_markdown
 kramdown:
-    auto_ids: false
+  auto_ids: false
 pygments: true
 lsi: false
 encoding: 'UTF-8'
