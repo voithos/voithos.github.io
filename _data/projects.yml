@@ -4,10 +4,10 @@
   url:      https://swiftcode.jit.su/
   code_url: https://github.com/voithos/swiftcode
   desc: >
-    Status one point oh
-    booting rom
-    removing internet
-    done.
+    A multiplayer typing speed game for programmers, supporting a variety of
+    programming languages. Uses Node.js in the server, and Socket.IO for
+    real-time communication. Built during, and polished after, [Pandacodium
+    2013](http://pandacodium.ca/).
 
 - name:     brot.js
   class:    project-brotjs
@@ -15,10 +15,9 @@
   url:      http://skepsi.me/brot.js
   code_url: https://github.com/voithos/brot.js
   desc: >
-    foobar? baz
-    indeed absolutely
-    fine thank you
-    SHTO ETO
+    A [Buddhabrot](http://en.wikipedia.org/wiki/Buddhabrot) generator written
+    in JavaScript using the HTML5 `canvas` element. Features interactive
+    customizability.
 
 - name:     Elemental One
   class:    project-elemental-one
@@ -26,6 +25,6 @@
   url:      http://skepsi.me/elemental-one
   code_url: https://github.com/voithos/elemental-one
   desc: >
-    I really should stop using 
-    random words [and](google.com)
-    that mean nothing :[
+    A small puzzle platformer made along the theme of [Ludum
+    Dare](http://www.ludumdare.com/compo/) 28.  Made using the
+    [Phaser.js](http://phaser.io/) HTML5 game engine.
