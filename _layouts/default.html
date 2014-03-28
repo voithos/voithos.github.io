@@ -7,6 +7,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/assets/css/main.css">
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic,700italic|Ubuntu:400,700,400italic,700italic">
+        {% for css_url in page.extra_css %}
+        <link rel="stylesheet" href="{{ css_url }}">
+        {% endfor %}
     </head>
     <body>
 
@@ -47,5 +50,8 @@
             </footer>
         </section>
 
+        {% for js_url in page.extra_js %}
+        <script src="{{ js_url }}"></script>
+        {% endfor %}
     </body>
 </html>
