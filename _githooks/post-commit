@@ -1,15 +1,30 @@
 #!/usr/bin/env ruby
 
+require 'tmpdir'
+
 puts 'Autocommitting into raw...'
-outdir = "../raw.#{File.basename(Dir.getwd)}"
+rawdir = "../raw.#{File.basename(Dir.getwd)}"
 protect = ['.git', '.nojekyll'].map {|s| "--filter='P #{s}'"}.join(' ')
 
-system('rake build')
-system("rsync -az --delete #{protect} _site/ #{outdir}")
+Dir.chdir(rawdir) do
+  system('git fetch origin')
+  system('git checkout jekyll')
+  system('git merge origin/jekyll')
+  system('rake build')
 
-Dir.chdir(outdir) do
-    system('git fetch origin')
+  tmpdir = Dir.mktmpdir
+  begin
+    puts tmpdir
+    tmpsite = File.join(tmpdir, '_site')
+    FileUtils.mv('_site', tmpsite)
+
+    system('git checkout master')
+    system("rsync -az --delete #{protect} #{tmpsite}/ .")
+
     system('git add -A')
     system('git commit -m "Sync raw with jekyll"')
     system('git push origin master')
+  ensure
+    FileUtils.remove_entry_secure tmpdir
+  end
 end
