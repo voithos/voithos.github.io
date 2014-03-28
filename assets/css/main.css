@@ -1765,6 +1765,7 @@ pre .gi {
   font-weight: normal;
   font-style: normal; }
 html {
+  background-color: black;
   background: url("/assets/img/dark_mosaic.png"); }
 
 body {
@@ -1879,7 +1880,12 @@ h3 {
   -moz-transition: all 0.2s ease-in-out 0s;
   -o-transition: all 0.2s ease-in-out 0s;
   -ms-transition: all 0.2s ease-in-out 0s;
-  transition: all 0.2s ease-in-out 0s; }
+  transition: all 0.2s ease-in-out 0s;
+  -webkit-transition-property: color, border-radius, background-color, box-shadow;
+  -moz-transition-property: color, border-radius, background-color, box-shadow;
+  -o-transition-property: color, border-radius, background-color, box-shadow;
+  -ms-transition-property: color, border-radius, background-color, box-shadow;
+  transition-property: color, border-radius, background-color, box-shadow; }
   .link-button:hover {
     text-decoration: none;
     border-radius: 0;
@@ -1946,11 +1952,11 @@ footer .footer-links {
   padding: 1.5rem;
   border-top: 1px solid #16a8a6;
   border-bottom: 1px solid #16a8a6;
-  -webkit-transition: all 0.5s ease-out 0s;
-  -moz-transition: all 0.5s ease-out 0s;
-  -o-transition: all 0.5s ease-out 0s;
-  -ms-transition: all 0.5s ease-out 0s;
-  transition: all 0.5s ease-out 0s; }
+  -webkit-transition: box-shadow 0.5s ease-out 0s;
+  -moz-transition: box-shadow 0.5s ease-out 0s;
+  -o-transition: box-shadow 0.5s ease-out 0s;
+  -ms-transition: box-shadow 0.5s ease-out 0s;
+  transition: box-shadow 0.5s ease-out 0s; }
   .projects .project:hover {
     -webkit-box-shadow: 0 0 5px 1px #16a8a6;
     box-shadow: 0 0 5px 1px #16a8a6; }
