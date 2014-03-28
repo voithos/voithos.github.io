@@ -1,0 +1,31 @@
+- name:     SwiftCODE
+  class:    project-swiftcode
+  img:      swiftcode.png
+  url:      https://swiftcode.jit.su/
+  code_url: https://github.com/voithos/swiftcode
+  desc: >
+    Status one point oh
+    booting rom
+    removing internet
+    done.
+
+- name:     brot.js
+  class:    project-brotjs
+  img:      brotjs.png
+  url:      http://skepsi.me/brot.js
+  code_url: https://github.com/voithos/brot.js
+  desc: >
+    foobar? baz
+    indeed absolutely
+    fine thank you
+    SHTO ETO
+
+- name:     Elemental One
+  class:    project-elemental-one
+  img:      elemental-one.png
+  url:      http://skepsi.me/elemental-one
+  code_url: https://github.com/voithos/elemental-one
+  desc: >
+    I really should stop using 
+    random words [and](google.com)
+    that mean nothing :[

@@ -1822,7 +1822,7 @@ code {
   font-family: "Ubuntu Mono", Consolas, monaco, monospace; }
 
 img {
-  margin: 2rem; }
+  padding: 2rem; }
 
 p {
   margin-bottom: 1rem; }
@@ -1868,6 +1868,25 @@ h3 {
   @media screen and (max-width: 980px) {
     .site {
       width: 100%; } }
+
+.link-button {
+  padding: 0.5rem 0.7rem 0.7rem 0.7rem;
+  border: 1px solid #8e0d38;
+  border-radius: 2rem;
+  background-color: #bd114a;
+  color: #d6e2e6;
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  -moz-transition: all 0.2s ease-in-out 0s;
+  -o-transition: all 0.2s ease-in-out 0s;
+  -ms-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s; }
+  .link-button:hover {
+    text-decoration: none;
+    border-radius: 0;
+    background-color: #e21459;
+    color: #fff;
+    -webkit-box-shadow: 0 0 2px 2px #bd114a;
+    box-shadow: 0 0 2px 2px #bd114a; }
 
 header {
   display: flex;
@@ -1920,6 +1939,35 @@ footer .footer-links {
   font-size: 1.2rem;
   text-align: right;
   margin-bottom: 0.8rem; }
+
+.projects .project {
+  background-color: #202020;
+  background-color: rgba(32, 32, 32, 0.4);
+  padding: 1.5rem;
+  border-top: 1px solid #16a8a6;
+  border-bottom: 1px solid #16a8a6; }
+  .projects .project > h2 {
+    text-align: center;
+    font-size: 1.8rem; }
+.projects .project-detail {
+  display: flex;
+  flex-flow: row nowrap; }
+  .projects .project-detail .project-image {
+    flex: 1;
+    padding: 1rem; }
+    .projects .project-detail .project-image img {
+      padding: 0;
+      -webkit-box-shadow: 0 1px 3px 1px #070707;
+      box-shadow: 0 1px 3px 1px #070707; }
+  .projects .project-detail .project-desc {
+    flex: 1;
+    padding: 1rem;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around; }
+    .projects .project-detail .project-desc .project-code {
+      padding: 2rem 0;
+      text-align: center; }
 
 article > h2 {
   font-size: 2.2rem;

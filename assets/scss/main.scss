@@ -66,7 +66,7 @@ code {
 }
 
 img {
-    margin: 2rem;
+    padding: 2rem;
 }
 
 p {
@@ -125,6 +125,25 @@ h3 {
 
     @media screen and (max-width: 980px) {
         width: 100%;
+    }
+}
+
+.link-button {
+    padding: 0.5rem 0.7rem 0.7rem 0.7rem;
+
+    border: 1px solid darken($secondary-color, 10);
+    border-radius: 2rem;
+    background-color: $secondary-color;
+    color: lighten($lowlight-color, 20);
+    @include transition(all, 0.2s, ease-in-out);
+
+    &:hover {
+        text-decoration: none;
+
+        border-radius: 0;
+        background-color: lighten($secondary-color, 8);
+        color: #fff;
+        @include box-shadow(0, 0, 2px, 2px, $secondary-color);
     }
 }
 
@@ -222,6 +241,52 @@ footer {
         font-size: 1.2rem;
         text-align: right;
         margin-bottom: 0.8rem;
+    }
+}
+
+// Projects
+//
+
+.projects {
+    .project {
+        background-color: $dark-color;
+        background-color: rgba($dark-color, 0.4);
+        padding: 1.5rem;
+        border-top: 1px solid $primary-color;
+        border-bottom: 1px solid $primary-color;
+
+        > h2 {
+            text-align: center;
+            font-size: 1.8rem;
+        }
+    }
+
+    .project-detail {
+        display: flex;
+        flex-flow: row nowrap;
+
+        .project-image {
+            flex: 1;
+            padding: 1rem;
+
+            img {
+                padding: 0;
+                @include box-shadow(0, 1px, 3px, 1px, darken($dark-color, 10));
+            }
+        }
+
+        .project-desc {
+            flex: 1;
+            padding: 1rem;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: space-around;
+
+            .project-code {
+                padding: 2rem 0;
+                text-align: center;
+            }
+        }
     }
 }
 

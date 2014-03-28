@@ -29,3 +29,8 @@
         -ms-transition-property: $properties;
             transition-property: $properties;
 }
+
+@mixin box-shadow($left, $top, $blur, $spread, $color) {
+    -webkit-box-shadow: $left $top $blur $spread $color;
+            box-shadow: $left $top $blur $spread $color;
+}
