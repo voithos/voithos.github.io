@@ -250,10 +250,15 @@ footer {
 .projects {
     .project {
         background-color: $dark-color;
-        background-color: rgba($dark-color, 0.4);
+        background-color: rgba($dark-color, 0.5);
         padding: 1.5rem;
         border-top: 1px solid $primary-color;
         border-bottom: 1px solid $primary-color;
+        @include transition(all, 0.5s, ease-out);
+
+        &:hover {
+            @include box-shadow(0, 0, 5px, 1px, $primary-color);
+        }
 
         > h2 {
             text-align: center;
