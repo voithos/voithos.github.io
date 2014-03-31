@@ -306,6 +306,10 @@ footer {
         color: lighten($lowlight-color, 10);
         font-size: 3rem;
         text-align: center;
+    }
+
+    hr {
+        border-color: $lowlight-color;
         margin-bottom: 2rem;
     }
 }
