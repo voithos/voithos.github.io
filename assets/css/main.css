@@ -1988,7 +1988,9 @@ footer .footer-links {
   .about h2 {
     color: #b7cbd2;
     font-size: 3rem;
-    text-align: center;
+    text-align: center; }
+  .about hr {
+    border-color: #97b5bf;
     margin-bottom: 2rem; }
 
 article > h2 {
