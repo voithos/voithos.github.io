@@ -68,6 +68,10 @@ code {
 
 img {
     padding: 2rem;
+
+    @media screen and (max-width: 600px) {
+        padding: 1rem;
+    }
 }
 
 p {
@@ -108,14 +112,26 @@ h1, h2, h3 {
 
 h1 {
     font-size: 2rem;
+
+    @media screen and (max-width: 600px) {
+        font-size: 1.5rem;
+    }
 }
 
 h2 {
     font-size: 1.5rem;
+
+    @media screen and (max-width: 600px) {
+        font-size: 1.3rem;
+    }
 }
 
 h3 {
     font-size: 1.3rem;
+
+    @media screen and (max-width: 600px) {
+        font-size: 1rem;
+    }
 }
 
 h1[id] a, h2[id] a, h3[id] a {
@@ -126,11 +142,13 @@ h1[id] a, h2[id] a, h3[id] a {
         color: $lowlight-color;
         text-shadow: 0 0 5px $lowlight-color;
 
-        &:before {
-            content: '\00B6'; // Pilcrow
-            display: block;
-            position: absolute;
-            left: -1.5rem;
+        @media screen and (min-width: 980px) {
+            &:before {
+                content: '\00B6'; // Pilcrow
+                display: block;
+                position: absolute;
+                left: -1.5rem;
+            }
         }
     }
 }
@@ -143,6 +161,10 @@ h1[id] a, h2[id] a, h3[id] a {
 
     @media screen and (max-width: 980px) {
         width: 100%;
+    }
+
+    @media screen and (max-width: 600px) {
+        font-size: 1.1rem;
     }
 }
 
@@ -173,11 +195,16 @@ header {
     display: flex;
     flex-flow: row nowrap;
 
-    @media screen and (max-width: 480px) {
-    }
-
     .title {
         flex: initial;
+
+        @media screen and (max-width: 980px) {
+            font-size: 3rem;
+        }
+
+        @media screen and (max-width: 600px) {
+            font-size: 2rem;
+        }
 
         font: {
             family: $title-font-stack;
@@ -210,6 +237,10 @@ header {
             li {
                 display: inline;
                 margin: 1.5rem;
+
+                @media screen and (max-width: 980px) {
+                    margin: 0.6rem;
+                }
 
                 &.active a {
                     color: lighten($secondary-color, 15);
@@ -244,6 +275,10 @@ footer {
 
         .links a {
             margin: 0 1rem;
+
+            @media screen and (max-width: 600px) {
+                margin: 0 0.5rem;
+            }
         }
     }
 }
@@ -294,6 +329,10 @@ footer {
         display: flex;
         flex-flow: row nowrap;
 
+        @media screen and (max-width: 750px) {
+            flex-direction: column;
+        }
+
         .project-image {
             flex: 1;
             padding: 1rem;
@@ -324,10 +363,18 @@ footer {
 .about {
     padding-bottom: 2rem;
 
+    @media screen and (max-width: 600px) {
+        padding-bottom: 1rem;
+    }
+
     h2 {
         color: lighten($lowlight-color, 10);
         font-size: 3rem;
         text-align: center;
+
+        @media screen and (max-width: 600px) {
+            font-size: 2rem;
+        }
     }
 
     hr {
@@ -344,6 +391,10 @@ article {
         color: $lowlight-color;
         border-bottom: 2px solid desaturate(darken($lowlight-color, 25), 10);
         margin-bottom: 0.4rem;
+
+        @media screen and (max-width: 600px) {
+            font-size: 1.5rem;
+        }
     }
 
     > .meta {

@@ -1824,6 +1824,9 @@ code {
 
 img {
   padding: 2rem; }
+  @media screen and (max-width: 600px) {
+    img {
+      padding: 1rem; } }
 
 p {
   margin-bottom: 1rem; }
@@ -1854,12 +1857,21 @@ h1, h2, h3 {
 
 h1 {
   font-size: 2rem; }
+  @media screen and (max-width: 600px) {
+    h1 {
+      font-size: 1.5rem; } }
 
 h2 {
   font-size: 1.5rem; }
+  @media screen and (max-width: 600px) {
+    h2 {
+      font-size: 1.3rem; } }
 
 h3 {
   font-size: 1.3rem; }
+  @media screen and (max-width: 600px) {
+    h3 {
+      font-size: 1rem; } }
 
 h1[id] a, h2[id] a, h3[id] a {
   color: #97b5bf;
@@ -1867,11 +1879,12 @@ h1[id] a, h2[id] a, h3[id] a {
   h1[id] a:hover, h2[id] a:hover, h3[id] a:hover {
     color: #97b5bf;
     text-shadow: 0 0 5px #97b5bf; }
-    h1[id] a:hover:before, h2[id] a:hover:before, h3[id] a:hover:before {
-      content: '\00B6';
-      display: block;
-      position: absolute;
-      left: -1.5rem; }
+    @media screen and (min-width: 980px) {
+      h1[id] a:hover:before, h2[id] a:hover:before, h3[id] a:hover:before {
+        content: '\00B6';
+        display: block;
+        position: absolute;
+        left: -1.5rem; } }
 
 .site {
   font-size: 1.3rem;
@@ -1881,6 +1894,9 @@ h1[id] a, h2[id] a, h3[id] a {
   @media screen and (max-width: 980px) {
     .site {
       width: 100%; } }
+  @media screen and (max-width: 600px) {
+    .site {
+      font-size: 1.1rem; } }
 
 .link-button {
   padding: 0.5rem 0.7rem 0.7rem 0.7rem;
@@ -1913,6 +1929,12 @@ header {
     flex: initial;
     font-family: "Planet Kosmos", Helvetica, Arial, sans-serif;
     font-size: 4rem; }
+    @media screen and (max-width: 980px) {
+      header .title {
+        font-size: 3rem; } }
+    @media screen and (max-width: 600px) {
+      header .title {
+        font-size: 2rem; } }
     header .title a {
       color: #16a8a6;
       padding: 0 1.5rem; }
@@ -1932,6 +1954,9 @@ header {
       header nav ul li {
         display: inline;
         margin: 1.5rem; }
+        @media screen and (max-width: 980px) {
+          header nav ul li {
+            margin: 0.6rem; } }
         header nav ul li.active a {
           color: #ec2e6d;
           text-shadow: 0 0 5px #bd114a; }
@@ -1950,6 +1975,9 @@ footer .footer-links {
     font-size: 0.9rem; }
   footer .footer-links .links a {
     margin: 0 1rem; }
+    @media screen and (max-width: 600px) {
+      footer .footer-links .links a {
+        margin: 0 0.5rem; } }
 
 .posts article > h2 a {
   color: #97b5bf;
@@ -1981,6 +2009,9 @@ footer .footer-links {
 .projects .project-detail {
   display: flex;
   flex-flow: row nowrap; }
+  @media screen and (max-width: 750px) {
+    .projects .project-detail {
+      flex-direction: column; } }
   .projects .project-detail .project-image {
     flex: 1;
     padding: 1rem; }
@@ -2000,10 +2031,16 @@ footer .footer-links {
 
 .about {
   padding-bottom: 2rem; }
+  @media screen and (max-width: 600px) {
+    .about {
+      padding-bottom: 1rem; } }
   .about h2 {
     color: #b7cbd2;
     font-size: 3rem;
     text-align: center; }
+    @media screen and (max-width: 600px) {
+      .about h2 {
+        font-size: 2rem; } }
   .about hr {
     border-color: #97b5bf;
     margin-bottom: 2rem; }
@@ -2013,6 +2050,9 @@ article > h2 {
   color: #97b5bf;
   border-bottom: 2px solid #5c737a;
   margin-bottom: 0.4rem; }
+  @media screen and (max-width: 600px) {
+    article > h2 {
+      font-size: 1.5rem; } }
 article > .meta {
   display: flex;
   flex-flow: row nowrap;
