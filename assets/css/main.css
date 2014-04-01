@@ -1861,6 +1861,18 @@ h2 {
 h3 {
   font-size: 1.3rem; }
 
+h1[id] a, h2[id] a, h3[id] a {
+  color: #97b5bf;
+  position: relative; }
+  h1[id] a:hover, h2[id] a:hover, h3[id] a:hover {
+    color: #97b5bf;
+    text-shadow: 0 0 5px #97b5bf; }
+    h1[id] a:hover:before, h2[id] a:hover:before, h3[id] a:hover:before {
+      content: '\00B6';
+      display: block;
+      position: absolute;
+      left: -1.5rem; }
+
 .site {
   font-size: 1.3rem;
   width: 60rem;
@@ -1920,6 +1932,9 @@ header {
       header nav ul li {
         display: inline;
         margin: 1.5rem; }
+        header nav ul li.active a {
+          color: #ec2e6d;
+          text-shadow: 0 0 5px #bd114a; }
     header nav a {
       font-weight: bold; }
 
@@ -2007,17 +2022,6 @@ article > .meta {
     color: #97b5bf; }
     article > .meta .tags .tag {
       margin: 0 0.2rem; }
-article h1[id] a, article h2[id] a, article h3[id] a {
-  color: #97b5bf;
-  position: relative; }
-  article h1[id] a:hover, article h2[id] a:hover, article h3[id] a:hover {
-    color: #97b5bf;
-    text-shadow: 0 0 5px #97b5bf; }
-    article h1[id] a:hover:before, article h2[id] a:hover:before, article h3[id] a:hover:before {
-      content: '\00B6';
-      display: block;
-      position: absolute;
-      left: -1.5rem; }
 article .post ul, article .post ol {
   margin-left: 2.5rem; }
 
