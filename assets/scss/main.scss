@@ -118,6 +118,23 @@ h3 {
     font-size: 1.3rem;
 }
 
+h1[id] a, h2[id] a, h3[id] a {
+    color: $lowlight-color;
+    position: relative;
+
+    &:hover {
+        color: $lowlight-color;
+        text-shadow: 0 0 5px $lowlight-color;
+
+        &:before {
+            content: '\00B6'; // Pilcrow
+            display: block;
+            position: absolute;
+            left: -1.5rem;
+        }
+    }
+}
+
 .site {
     font-size: 1.3rem;
     width: 60rem;
@@ -193,6 +210,11 @@ header {
             li {
                 display: inline;
                 margin: 1.5rem;
+
+                &.active a {
+                    color: lighten($secondary-color, 15);
+                    text-shadow: 0 0 5px $secondary-color;
+                }
             }
         }
 
@@ -335,23 +357,6 @@ article {
 
             .tag {
                 margin: 0 0.2rem;
-            }
-        }
-    }
-
-    h1[id] a, h2[id] a, h3[id] a {
-        color: $lowlight-color;
-        position: relative;
-
-        &:hover {
-            color: $lowlight-color;
-            text-shadow: 0 0 5px $lowlight-color;
-
-            &:before {
-                content: '\00B6'; // Pilcrow
-                display: block;
-                position: absolute;
-                left: -1.5rem;
             }
         }
     }
