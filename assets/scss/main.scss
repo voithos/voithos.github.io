@@ -233,12 +233,21 @@ header {
         top: -0.7rem;
 
         ul {
-            display: inline;
+            display: inline-flex;
+            flex-flow: row nowrap;
+
+            @media screen and (max-width: 600px) {
+                flex-direction: column;
+            }
+
             li {
                 display: inline;
                 margin: 1.5rem;
 
                 @media screen and (max-width: 980px) {
+                    margin: 1.2rem;
+                }
+                @media screen and (max-width: 750px) {
                     margin: 0.6rem;
                 }
 
