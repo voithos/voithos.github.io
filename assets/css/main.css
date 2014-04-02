@@ -1950,11 +1950,18 @@ header {
     position: relative;
     top: -0.7rem; }
     header nav ul {
-      display: inline; }
+      display: inline-flex;
+      flex-flow: row nowrap; }
+      @media screen and (max-width: 600px) {
+        header nav ul {
+          flex-direction: column; } }
       header nav ul li {
         display: inline;
         margin: 1.5rem; }
         @media screen and (max-width: 980px) {
+          header nav ul li {
+            margin: 1.2rem; } }
+        @media screen and (max-width: 750px) {
           header nav ul li {
             margin: 0.6rem; } }
         header nav ul li.active a {
