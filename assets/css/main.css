@@ -2093,6 +2093,9 @@ footer .footer-links {
   .projects .project > h2 {
     text-align: center;
     font-size: 1.8rem; }
+  @media screen and (max-width: 600px) {
+    .projects .project {
+      padding: 0.5rem; } }
 .projects .project-detail {
   display: flex;
   flex-flow: row nowrap; }
@@ -2106,6 +2109,9 @@ footer .footer-links {
       padding: 0;
       -webkit-box-shadow: 0 1px 3px 1px #070707;
       box-shadow: 0 1px 3px 1px #070707; }
+    @media screen and (max-width: 600px) {
+      .projects .project-detail .project-image {
+        padding: 0.5rem; } }
   .projects .project-detail .project-desc {
     flex: 1;
     padding: 1rem;
@@ -2115,6 +2121,9 @@ footer .footer-links {
     .projects .project-detail .project-desc .project-code {
       padding: 2rem 0;
       text-align: center; }
+    @media screen and (max-width: 600px) {
+      .projects .project-detail .project-desc {
+        padding: 0.5rem; } }
 
 .about {
   padding-bottom: 2rem; }

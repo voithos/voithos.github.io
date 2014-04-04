@@ -424,6 +424,10 @@ footer {
             text-align: center;
             font-size: 1.8rem;
         }
+
+        @media screen and (max-width: 600px) {
+            padding: 0.5rem;
+        }
     }
 
     .project-detail {
@@ -442,6 +446,10 @@ footer {
                 padding: 0;
                 @include box-shadow(0, 1px, 3px, 1px, darken($dark-color, 10));
             }
+
+            @media screen and (max-width: 600px) {
+                padding: 0.5rem;
+            }
         }
 
         .project-desc {
@@ -454,6 +462,10 @@ footer {
             .project-code {
                 padding: 2rem 0;
                 text-align: center;
+            }
+
+            @media screen and (max-width: 600px) {
+                padding: 0.5rem;
             }
         }
     }
