@@ -1976,7 +1976,8 @@ header {
     header .nav-checkbox:checked ~ .nav-toggle:after {
       content: '\f068'; }
     header .nav-checkbox:checked ~ nav {
-      display: flex; }
+      max-height: 8rem;
+      margin-bottom: 1rem; }
   header nav {
     flex: auto;
     display: flex;
@@ -1986,9 +1987,20 @@ header {
     top: -0.7rem; }
     @media screen and (max-width: 600px) {
       header nav {
-        display: none;
+        overflow: hidden;
         flex: 1 100%;
-        margin-bottom: 1rem; } }
+        margin-bottom: 0rem;
+        max-height: 0rem;
+        -webkit-transition: all 0.7s ease-in-out 0s;
+        -moz-transition: all 0.7s ease-in-out 0s;
+        -o-transition: all 0.7s ease-in-out 0s;
+        -ms-transition: all 0.7s ease-in-out 0s;
+        transition: all 0.7s ease-in-out 0s;
+        -webkit-transition-property: max-height, margin-bottom;
+        -moz-transition-property: max-height, margin-bottom;
+        -o-transition-property: max-height, margin-bottom;
+        -ms-transition-property: max-height, margin-bottom;
+        transition-property: max-height, margin-bottom; } }
     header nav ul {
       display: inline-flex;
       flex-flow: row nowrap; }
