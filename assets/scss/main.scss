@@ -266,7 +266,8 @@ header {
         }
 
         &:checked ~ nav {
-            display: flex;
+            max-height: 8rem;
+            margin-bottom: 1rem;
         }
     }
 
@@ -280,9 +281,12 @@ header {
         top: -0.7rem;
 
         @media screen and (max-width: 600px) {
-            display: none;
+            overflow: hidden;
             flex: 1 100%;
-            margin-bottom: 1rem;
+            margin-bottom: 0rem;
+            max-height: 0rem;
+            @include transition(all, 0.7s, ease-in-out);
+            @include transition-property(max-height, margin-bottom);
         }
 
         ul {
