@@ -5,6 +5,8 @@ markdown: kramdown
 markdown_ext: hide_markdown
 kramdown:
   auto_ids: false
-pygments: true
+sass:
+  sass_dir: assets/_sass
+highlighter: 'pygments'
 lsi: false
 encoding: 'UTF-8'
