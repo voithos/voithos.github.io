@@ -2164,3 +2164,8 @@ article .post ul, article .post ol {
 .footnotes {
   font-size: 1.2rem;
   color: #cfcbcf; }
+
+.err404 h2 {
+  color: #97b5bf;
+  font-size: 2.8rem;
+  text-align: center; }
