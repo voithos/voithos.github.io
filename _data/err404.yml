@@ -1,0 +1,16 @@
+markup: >
+  # 404 Not Found
+
+  ---
+
+
+  ## Well, that didn't work
+
+
+  Looks like the page you were looking for doesn't exist. If you think this
+  is an error, please <a href="mailto:zaven@skepsi.me">let me know</a>.
+
+
+  Otherwise, make sure your spelling in the URL is correct. Alternatively,
+  just <a href="/">go to the top</a> and search from there.
+

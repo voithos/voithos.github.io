@@ -229,7 +229,7 @@ header {
         a {
             color: $primary-color;
             padding: 0 1.5rem;
-            
+
             &:hover {
                 color: lighten($primary-color, 15);
                 text-shadow: 0 0 10px $primary-color;
@@ -537,4 +537,12 @@ article {
 .footnotes {
     font-size: 1.2rem;
     color: darken($default-color, 15);
+}
+
+.err404 {
+    h2 {
+        color: $lowlight-color;
+        font-size: 2.8rem;
+        text-align: center;
+    }
 }
