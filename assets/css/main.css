@@ -1861,22 +1861,22 @@ h1, h2, h3 {
   margin-bottom: 1rem; }
 
 h1 {
-  font-size: 2rem; }
+  font-size: 2.1rem; }
   @media screen and (max-width: 600px) {
     h1 {
-      font-size: 1.5rem; } }
+      font-size: 1.8rem; } }
 
 h2 {
-  font-size: 1.5rem; }
+  font-size: 1.8rem; }
   @media screen and (max-width: 600px) {
     h2 {
-      font-size: 1.3rem; } }
+      font-size: 1.5rem; } }
 
 h3 {
-  font-size: 1.3rem; }
+  font-size: 1.5rem; }
   @media screen and (max-width: 600px) {
     h3 {
-      font-size: 1rem; } }
+      font-size: 1.3rem; } }
 
 h1[id] a, h2[id] a, h3[id] a {
   color: #97b5bf;
