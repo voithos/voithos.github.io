@@ -523,7 +523,22 @@ article {
         justify-content: space-between;
         font-size: 0.9rem;
 
+        .meta-separator {
+            margin: 0 0.5rem;
+
+            @media screen and (max-width: 600px) {
+                display: none;
+            }
+        }
+
+        .read-time {
+            @media screen and (max-width: 600px) {
+                display: none;
+            }
+        }
+
         .tags {
+            text-align: right;
             color: $lowlight-color;
 
             .tag {
