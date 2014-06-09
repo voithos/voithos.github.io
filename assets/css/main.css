@@ -1769,6 +1769,14 @@ pre .gi {
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
+::selection {
+  background: #1bccca;
+  color: #f4f3f4; }
+
+::-moz-selection {
+  background: #1bccca;
+  color: #f4f3f4; }
+
 html {
   background-color: black;
   background: url("/assets/img/dark_mosaic.png"); }
