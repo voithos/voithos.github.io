@@ -16,6 +16,11 @@
             box-sizing: border-box;
 }
 
+@include selection {
+    background: lighten($primary-color, 8);
+    color: $default-color;
+}
+
 html {
     background-color: black;
     background: url($background-image-url);

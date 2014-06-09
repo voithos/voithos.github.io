@@ -34,3 +34,12 @@
     -webkit-box-shadow: $left $top $blur $spread $color;
             box-shadow: $left $top $blur $spread $color;
 }
+
+@mixin selection {
+    ::-moz-selection {
+        @content;
+    }
+    ::selection {
+        @content;
+    }
+}
