@@ -4,36 +4,7 @@ layout: default
 <main>
     <article>
         <h2>{{ page.title }}</h2>
-        <p class="meta">
-            <span class="meta-group">
-                <span class="date">
-                    {{ page.date | date_to_long_string }}
-                </span>
-
-                {% assign min_time = 0 %}
-                {% assign avg_speed = 180.0 %}
-
-                {% capture read_time %}
-                    {{ page.content | number_of_words | divided_by: avg_speed | round | minus: min_time }}
-                {% endcapture %}
-
-                {% unless read_time contains "-" %}
-                <span class="meta-separator">
-                    •
-                </span>
-
-                <span class="read-time">
-                    Read time: ~{{ read_time | plus: min_time | pluralize: 'min' }}
-                </span>
-                {% endunless %}
-            </span>
-
-            <span class="tags">
-                {% for tag in page.tags %}
-                <span class="tag">{{ tag }}</span>
-                {% endfor %}
-            </span>
-        </p>
+        {% include postmeta.html post=page %}
 
         <section class="post">
         {{ content }}
