@@ -8,7 +8,7 @@
         {% assign avg_speed = 180.0 %}
 
         {% capture read_time %}
-            {{ include.post.content | number_of_words | divided_by: avg_speed | round | minus: min_time }}
+            {{ include.content | number_of_words | divided_by: avg_speed | round | minus: min_time }}
         {% endcapture %}
 
         {% unless read_time contains "-" %}
