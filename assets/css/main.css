@@ -1801,21 +1801,23 @@ input[disabled] {
 a {
   color: #bd114a;
   text-decoration: none;
+  border-bottom: 2px solid #bd114a;
+  border-bottom-color: rgba(189, 17, 74, 0);
   -webkit-transition: all 0.5s ease-out 0s;
   -moz-transition: all 0.5s ease-out 0s;
   -o-transition: all 0.5s ease-out 0s;
   -ms-transition: all 0.5s ease-out 0s;
   transition: all 0.5s ease-out 0s;
-  -webkit-transition-property: color, text-shadow;
-  -moz-transition-property: color, text-shadow;
-  -o-transition-property: color, text-shadow;
-  -ms-transition-property: color, text-shadow;
-  transition-property: color, text-shadow; }
+  -webkit-transition-property: color, text-shadow, border-bottom-color;
+  -moz-transition-property: color, text-shadow, border-bottom-color;
+  -o-transition-property: color, text-shadow, border-bottom-color;
+  -ms-transition-property: color, text-shadow, border-bottom-color;
+  transition-property: color, text-shadow, border-bottom-color; }
 
 a:hover {
   color: #ec2e6d;
-  text-decoration: underline;
-  text-shadow: 0 0 5px #bd114a; }
+  text-shadow: 0 0 5px #bd114a;
+  border-bottom-color: #ec2e6d; }
 
 pre {
   padding: 1rem;
@@ -1889,15 +1891,24 @@ h3 {
 h1[id] a, h2[id] a, h3[id] a {
   color: #97b5bf;
   position: relative; }
+  h1[id] a:before, h2[id] a:before, h3[id] a:before {
+    content: '\00B6';
+    display: block;
+    position: absolute;
+    left: -1.5rem;
+    color: rgba(151, 181, 191, 0);
+    -webkit-transition: color 0.5s ease-out 0s;
+    -moz-transition: color 0.5s ease-out 0s;
+    -o-transition: color 0.5s ease-out 0s;
+    -ms-transition: color 0.5s ease-out 0s;
+    transition: color 0.5s ease-out 0s; }
   h1[id] a:hover, h2[id] a:hover, h3[id] a:hover {
     color: #97b5bf;
-    text-shadow: 0 0 5px #97b5bf; }
+    text-shadow: 0 0 5px #97b5bf;
+    border-bottom-color: #97b5bf; }
     @media screen and (min-width: 980px) {
       h1[id] a:hover:before, h2[id] a:hover:before, h3[id] a:hover:before {
-        content: '\00B6';
-        display: block;
-        position: absolute;
-        left: -1.5rem; } }
+        color: #97b5bf; } }
 
 .site {
   font-size: 1.3rem;
@@ -1928,7 +1939,7 @@ h1[id] a, h2[id] a, h3[id] a {
   -ms-transition-property: color, border-radius, background-color, box-shadow;
   transition-property: color, border-radius, background-color, box-shadow; }
   .link-button:hover {
-    text-decoration: none;
+    border-bottom: 1px solid #8e0d38;
     border-radius: 0;
     background-color: #e21459;
     color: #fff;
@@ -1956,11 +1967,11 @@ header {
         font-size: 2rem; } }
     header .title a {
       color: #16a8a6;
-      padding: 0 1.5rem; }
+      padding: 0 1.5rem;
+      border-bottom: none; }
       header .title a:hover {
         color: #28e3e0;
-        text-shadow: 0 0 10px #16a8a6;
-        text-decoration: none; }
+        text-shadow: 0 0 10px #16a8a6; }
   header .nav-toggle {
     cursor: pointer;
     position: relative;
@@ -2048,7 +2059,8 @@ header {
             header nav ul li a {
               color: #d6e2e6;
               display: block;
-              width: 100%; }
+              width: 100%;
+              border-bottom: none; }
             header nav ul li.active {
               background-color: #bd114a;
               border-top: 1px solid #5f0925;
@@ -2065,6 +2077,8 @@ footer .footer-links {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between; }
+  footer .footer-links a {
+    border-bottom: none; }
   footer .footer-links .license .cc {
     font-weight: bold;
     font-size: 0.9rem; }
@@ -2076,7 +2090,7 @@ footer .footer-links {
 
 .posts article > h2 a {
   color: #97b5bf;
-  text-decoration: none; }
+  border-bottom: none; }
   .posts article > h2 a:hover {
     text-shadow: 0 0 5px #97b5bf; }
 .posts .readmore {
