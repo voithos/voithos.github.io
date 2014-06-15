@@ -1,6 +1,6 @@
 # Skepsi
 
-Skepsi - Greek word for "consideration", "meditation", or "thought".
+Skepsi - Greek word for "consideration," "meditation," or "thought."
 Personal site of Zaven Muradyan.
 
 ### Requirements
