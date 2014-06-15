@@ -124,9 +124,12 @@ computer science and programming.
     used day to day.
 
     As programming languages are the primary tools for software developers,
-    knowledge of their design and implementation -- concepts like type theory,
-    generics, and metaprogramming -- can greatly aid in a developer's ability
-    to use their preferred languages skillfully.
+    knowledge of their design and implementation -- concepts like [type
+    theory](http://en.wikipedia.org/wiki/Type_theory),
+    [generics](http://en.wikipedia.org/wiki/Generic_programming), and
+    [metaprogramming](http://en.wikipedia.org/wiki/Metaprogramming) -- can
+    greatly aid in a developer's ability to use their preferred languages
+    skillfully.
 
 - [Artificial Intelligence](http://en.wikipedia.org/wiki/Artificial_intelligence)
 
@@ -178,8 +181,8 @@ computer science and programming.
     > <cite>*[Code Complete](http://en.wikipedia.org/wiki/Code_Complete)*</cite>
 
     The abstract nature of software poses few physical constraints on the size,
-    interconnectivity, and locality -- in other words, the complexity -- of
-    software system.  Due to this, and [a variety of other
+    interconnectivity, and information locality -- in other words, the
+    complexity -- of software system.  Due to this, and [a variety of other
     factors](http://programmers.stackexchange.com/questions/158640/why-cant-the-it-industry-deliver-large-faultless-projects-quickly-as-in-other),
     software development is still difficult and many software engineering
     practices, although not a panacea, can help impose the limitations on
@@ -197,6 +200,6 @@ value. So, *what is programming*, then?
 **Programming is the act of, and the discipline associated with, taking an
 abstract task or idea and materializing it in the form of useful software.**
 
-The possibilities are limitless.
+The possibilities are boundless.
 
 *Let the learning commence!*
