@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Obligatory "Hello World!" and Reflections on CS
-date:   2014-04-05 19:48:42
+date:   2014-06-15 12:13:30
 tags:   computer-science
 ---
 
