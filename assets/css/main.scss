@@ -51,14 +51,17 @@ input[disabled] {
 a {
     color: $secondary-color;
     text-decoration: none;
+    border-bottom: 2px solid $secondary-color;
+    border-bottom-color: rgba($secondary-color, 0);
+
     @include transition(all, 0.5s, ease-out);
-    @include transition-property(color, text-shadow);
+    @include transition-property(color, text-shadow, border-bottom-color);
 }
 
 a:hover {
     color: lighten($secondary-color, 15);
-    text-decoration: underline;
     text-shadow: 0 0 5px $secondary-color;
+    border-bottom-color: rgba(lighten($secondary-color, 15), 1);
 }
 
 pre {
@@ -151,16 +154,24 @@ h1[id] a, h2[id] a, h3[id] a {
     color: $lowlight-color;
     position: relative;
 
+    &:before {
+        content: '\00B6'; // Pilcrow
+        display: block;
+        position: absolute;
+        left: -1.5rem;
+        color: rgba($lowlight-color, 0);
+
+        @include transition(color, 0.5s, ease-out);
+    }
+
     &:hover {
         color: $lowlight-color;
         text-shadow: 0 0 5px $lowlight-color;
+        border-bottom-color: rgba($lowlight-color, 1);
 
         @media screen and (min-width: 980px) {
             &:before {
-                content: '\00B6'; // Pilcrow
-                display: block;
-                position: absolute;
-                left: -1.5rem;
+                color: rgba($lowlight-color, 1);
             }
         }
     }
@@ -192,8 +203,7 @@ h1[id] a, h2[id] a, h3[id] a {
     @include transition-property(color, border-radius, background-color, box-shadow);
 
     &:hover {
-        text-decoration: none;
-
+        border-bottom: 1px solid darken($secondary-color, 10);
         border-radius: 0;
         background-color: lighten($secondary-color, 8);
         color: #fff;
@@ -234,11 +244,11 @@ header {
         a {
             color: $primary-color;
             padding: 0 1.5rem;
+            border-bottom: none;
 
             &:hover {
                 color: lighten($primary-color, 15);
                 text-shadow: 0 0 10px $primary-color;
-                text-decoration: none;
             }
         }
     }
@@ -342,6 +352,7 @@ header {
                         color: lighten($lowlight-color, 20);
                         display: block;
                         width: 100%;
+                        border-bottom: none;
                     }
 
                     &.active {
@@ -376,6 +387,10 @@ footer {
         flex-flow: row nowrap;
         justify-content: space-between;
 
+        a {
+            border-bottom: none;
+        }
+
         .license .cc {
             font-weight: bold;
             font-size: 0.9rem;
@@ -397,7 +412,7 @@ footer {
     article {
         > h2 a {
             color: $lowlight-color;
-            text-decoration: none;
+            border-bottom: none;
             &:hover {
                 text-shadow: 0 0 5px $lowlight-color;
             }
