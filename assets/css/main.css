@@ -1875,16 +1875,16 @@ h1 {
       font-size: 1.8rem; } }
 
 h2 {
-  font-size: 1.8rem; }
+  font-size: 1.7rem; }
   @media screen and (max-width: 600px) {
     h2 {
-      font-size: 1.5rem; } }
+      font-size: 1.4rem; } }
 
 h3 {
-  font-size: 1.5rem; }
+  font-size: 1.4rem; }
   @media screen and (max-width: 600px) {
     h3 {
-      font-size: 1.3rem; } }
+      font-size: 1.2rem; } }
 
 h1[id] a, h2[id] a, h3[id] a {
   color: #97b5bf;
@@ -2176,7 +2176,12 @@ article > .meta {
     article > .meta .tags .tag {
       margin: 0 0.2rem; }
 article .post ul, article .post ol {
-  margin-left: 2.5rem; }
+  margin-left: 2.5rem;
+  margin-bottom: 1rem; }
+article .post ul {
+  list-style-type: square; }
+article .post ol {
+  list-style-type: decimal; }
 
 .footnotes {
   font-size: 1.2rem;
