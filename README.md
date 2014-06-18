@@ -13,10 +13,9 @@ Personal site of Zaven Muradyan.
 
 ### Tasks
 
-- `rake serve` Start the Jekyll development server. Default.
+- `rake serve` Start the Jekyll development server. [Default]
 - `rake build` Rebuild the Jekyll site without starting a local server.
 - `rake clean` Remove the generated `_site` directory.
-- `rake scss` Start SASS in watch mode.
 - `rake new[title,tags,edit]` Create a new draft with the specified title and tags.
   Opens the draft in an editor by default, unless a falsy value is given to `edit`.
 - `rake publish[title]` Publish a draft, stamped with the current date and time,
