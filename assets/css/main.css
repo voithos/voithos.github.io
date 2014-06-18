@@ -1891,23 +1891,23 @@ h3 {
 h1[id] a, h2[id] a, h3[id] a {
   color: #97b5bf;
   position: relative; }
-  h1[id] a:before, h2[id] a:before, h3[id] a:before {
-    content: '\00B6';
-    display: block;
-    position: absolute;
-    left: -1.5rem;
-    color: rgba(151, 181, 191, 0);
-    -webkit-transition: color 0.5s ease-out 0s;
-    -moz-transition: color 0.5s ease-out 0s;
-    -o-transition: color 0.5s ease-out 0s;
-    -ms-transition: color 0.5s ease-out 0s;
-    transition: color 0.5s ease-out 0s; }
   h1[id] a:hover, h2[id] a:hover, h3[id] a:hover {
     color: #97b5bf;
     text-shadow: 0 0 5px #97b5bf;
     border-bottom-color: #97b5bf; }
-    @media screen and (min-width: 980px) {
-      h1[id] a:hover:before, h2[id] a:hover:before, h3[id] a:hover:before {
+  @media screen and (min-width: 980px) {
+    h1[id] a:before, h2[id] a:before, h3[id] a:before {
+      content: '\00B6';
+      display: block;
+      position: absolute;
+      left: -1.5rem;
+      color: rgba(151, 181, 191, 0);
+      -webkit-transition: color 0.5s ease-out 0s;
+      -moz-transition: color 0.5s ease-out 0s;
+      -o-transition: color 0.5s ease-out 0s;
+      -ms-transition: color 0.5s ease-out 0s;
+      transition: color 0.5s ease-out 0s; }
+      h1[id] a:before:hover, h2[id] a:before:hover, h3[id] a:before:hover {
         color: #97b5bf; } }
 
 .site {
