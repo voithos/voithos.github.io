@@ -154,23 +154,23 @@ h1[id] a, h2[id] a, h3[id] a {
     color: $lowlight-color;
     position: relative;
 
-    &:before {
-        content: '\00B6'; // Pilcrow
-        display: block;
-        position: absolute;
-        left: -1.5rem;
-        color: rgba($lowlight-color, 0);
-
-        @include transition(color, 0.5s, ease-out);
-    }
-
     &:hover {
         color: $lowlight-color;
         text-shadow: 0 0 5px $lowlight-color;
         border-bottom-color: rgba($lowlight-color, 1);
+    }
 
-        @media screen and (min-width: 980px) {
-            &:before {
+    @media screen and (min-width: 980px) {
+        &:before {
+            content: '\00B6'; // Pilcrow
+            display: block;
+            position: absolute;
+            left: -1.5rem;
+            color: rgba($lowlight-color, 0);
+
+            @include transition(color, 0.5s, ease-out);
+
+            &:hover {
                 color: rgba($lowlight-color, 1);
             }
         }
