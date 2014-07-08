@@ -1907,8 +1907,8 @@ h1[id] a, h2[id] a, h3[id] a {
       -o-transition: color 0.5s ease-out 0s;
       -ms-transition: color 0.5s ease-out 0s;
       transition: color 0.5s ease-out 0s; }
-      h1[id] a:before:hover, h2[id] a:before:hover, h3[id] a:before:hover {
-        color: #97b5bf; } }
+    h1[id] a:hover:before, h2[id] a:hover:before, h3[id] a:hover:before {
+      color: #97b5bf; } }
 
 .site {
   font-size: 1.3rem;
