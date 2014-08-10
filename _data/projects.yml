@@ -9,6 +9,16 @@
     real-time communication. Built during, and polished after, [Pandacodium
     2013](http://pandacodium.ca/).
 
+- name:     Awl
+  class:    project-awl
+  img:      awl.png
+  url:      http://skepsi.me/awl
+  code_url: https://github.com/voithos/awl
+  desc: >
+    A Lispy, dynamic, interpreted programming language written for learning
+    purposes in C and transpiled to JavaScript via
+    [emscripten](https://github.com/kripken/emscripten).
+
 - name:     brot.js
   class:    project-brotjs
   img:      brotjs.png

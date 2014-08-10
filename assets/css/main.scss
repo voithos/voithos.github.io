@@ -36,14 +36,14 @@ body {
 
 a,
 label,
-button, 
-input[type="radio"], 
-input[type="submit"], 
+button,
+input[type="radio"],
+input[type="submit"],
 input[type="checkbox"] {
     cursor: pointer;
 }
 
-button[disabled], 
+button[disabled],
 input[disabled] {
     cursor: default;
 }
