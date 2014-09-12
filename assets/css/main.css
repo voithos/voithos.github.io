@@ -1803,15 +1803,15 @@ a {
   text-decoration: none;
   border-bottom: 2px solid #bd114a;
   border-bottom-color: rgba(189, 17, 74, 0);
-  -webkit-transition: all 0.5s ease-out 0s;
-  -moz-transition: all 0.5s ease-out 0s;
-  -o-transition: all 0.5s ease-out 0s;
-  -ms-transition: all 0.5s ease-out 0s;
-  transition: all 0.5s ease-out 0s;
+  -webkit-transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -ms-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
   -webkit-transition-property: color, text-shadow, border-bottom-color;
   -moz-transition-property: color, text-shadow, border-bottom-color;
-  -o-transition-property: color, text-shadow, border-bottom-color;
   -ms-transition-property: color, text-shadow, border-bottom-color;
+  -o-transition-property: color, text-shadow, border-bottom-color;
   transition-property: color, text-shadow, border-bottom-color; }
 
 a:hover {
@@ -1826,11 +1826,11 @@ pre {
   border: 1px solid #3c3c3c;
   background-color: #202020;
   margin-bottom: 1rem;
-  -webkit-transition: border-radius 0.2s ease-in-out 0s;
-  -moz-transition: border-radius 0.2s ease-in-out 0s;
-  -o-transition: border-radius 0.2s ease-in-out 0s;
-  -ms-transition: border-radius 0.2s ease-in-out 0s;
-  transition: border-radius 0.2s ease-in-out 0s; }
+  -webkit-transition: border-radius 0.2s ease-in-out;
+  -moz-transition: border-radius 0.2s ease-in-out;
+  -ms-transition: border-radius 0.2s ease-in-out;
+  -o-transition: border-radius 0.2s ease-in-out;
+  transition: border-radius 0.2s ease-in-out; }
   pre:hover {
     border-radius: 0; }
 
@@ -1902,11 +1902,11 @@ h1[id] a, h2[id] a, h3[id] a {
       position: absolute;
       left: -1.5rem;
       color: rgba(151, 181, 191, 0);
-      -webkit-transition: color 0.5s ease-out 0s;
-      -moz-transition: color 0.5s ease-out 0s;
-      -o-transition: color 0.5s ease-out 0s;
-      -ms-transition: color 0.5s ease-out 0s;
-      transition: color 0.5s ease-out 0s; }
+      -webkit-transition: color 0.5s ease-out;
+      -moz-transition: color 0.5s ease-out;
+      -ms-transition: color 0.5s ease-out;
+      -o-transition: color 0.5s ease-out;
+      transition: color 0.5s ease-out; }
     h1[id] a:hover:before, h2[id] a:hover:before, h3[id] a:hover:before {
       color: #97b5bf; } }
 
@@ -1928,15 +1928,15 @@ h1[id] a, h2[id] a, h3[id] a {
   border-radius: 2rem;
   background-color: #bd114a;
   color: #d6e2e6;
-  -webkit-transition: all 0.2s ease-in-out 0s;
-  -moz-transition: all 0.2s ease-in-out 0s;
-  -o-transition: all 0.2s ease-in-out 0s;
-  -ms-transition: all 0.2s ease-in-out 0s;
-  transition: all 0.2s ease-in-out 0s;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   -webkit-transition-property: color, border-radius, background-color, box-shadow;
   -moz-transition-property: color, border-radius, background-color, box-shadow;
-  -o-transition-property: color, border-radius, background-color, box-shadow;
   -ms-transition-property: color, border-radius, background-color, box-shadow;
+  -o-transition-property: color, border-radius, background-color, box-shadow;
   transition-property: color, border-radius, background-color, box-shadow; }
   .link-button:hover {
     border-bottom: 1px solid #8e0d38;
@@ -1944,6 +1944,9 @@ h1[id] a, h2[id] a, h3[id] a {
     background-color: #e21459;
     color: #fff;
     -webkit-box-shadow: 0 0 2px 2px #bd114a;
+    -moz-box-shadow: 0 0 2px 2px #bd114a;
+    -ms-box-shadow: 0 0 2px 2px #bd114a;
+    -o-box-shadow: 0 0 2px 2px #bd114a;
     box-shadow: 0 0 2px 2px #bd114a; }
 
 header {
@@ -2015,15 +2018,15 @@ header {
         flex: 1 100%;
         margin-bottom: 0rem;
         max-height: 0rem;
-        -webkit-transition: all 0.7s ease-in-out 0s;
-        -moz-transition: all 0.7s ease-in-out 0s;
-        -o-transition: all 0.7s ease-in-out 0s;
-        -ms-transition: all 0.7s ease-in-out 0s;
-        transition: all 0.7s ease-in-out 0s;
+        -webkit-transition: all 0.7s ease-in-out;
+        -moz-transition: all 0.7s ease-in-out;
+        -ms-transition: all 0.7s ease-in-out;
+        -o-transition: all 0.7s ease-in-out;
+        transition: all 0.7s ease-in-out;
         -webkit-transition-property: max-height, margin-bottom;
         -moz-transition-property: max-height, margin-bottom;
-        -o-transition-property: max-height, margin-bottom;
         -ms-transition-property: max-height, margin-bottom;
+        -o-transition-property: max-height, margin-bottom;
         transition-property: max-height, margin-bottom; } }
     header nav ul {
       display: inline-flex;
@@ -2104,13 +2107,16 @@ footer .footer-links {
   padding: 1.5rem;
   border-top: 1px solid #16a8a6;
   border-bottom: 1px solid #16a8a6;
-  -webkit-transition: box-shadow 0.5s ease-out 0s;
-  -moz-transition: box-shadow 0.5s ease-out 0s;
-  -o-transition: box-shadow 0.5s ease-out 0s;
-  -ms-transition: box-shadow 0.5s ease-out 0s;
-  transition: box-shadow 0.5s ease-out 0s; }
+  -webkit-transition: box-shadow 0.5s ease-out;
+  -moz-transition: box-shadow 0.5s ease-out;
+  -ms-transition: box-shadow 0.5s ease-out;
+  -o-transition: box-shadow 0.5s ease-out;
+  transition: box-shadow 0.5s ease-out; }
   .projects .project:hover {
     -webkit-box-shadow: 0 0 5px 1px #16a8a6;
+    -moz-box-shadow: 0 0 5px 1px #16a8a6;
+    -ms-box-shadow: 0 0 5px 1px #16a8a6;
+    -o-box-shadow: 0 0 5px 1px #16a8a6;
     box-shadow: 0 0 5px 1px #16a8a6; }
   .projects .project > h2 {
     text-align: center;
@@ -2130,6 +2136,9 @@ footer .footer-links {
     .projects .project-detail .project-image img {
       padding: 0;
       -webkit-box-shadow: 0 1px 3px 1px #070707;
+      -moz-box-shadow: 0 1px 3px 1px #070707;
+      -ms-box-shadow: 0 1px 3px 1px #070707;
+      -o-box-shadow: 0 1px 3px 1px #070707;
       box-shadow: 0 1px 3px 1px #070707; }
     @media screen and (max-width: 600px) {
       .projects .project-detail .project-image {
