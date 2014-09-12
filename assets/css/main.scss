@@ -182,6 +182,39 @@ h1[id] a, h2[id] a, h3[id] a {
     }
 }
 
+@include keyframes(fadein) {
+    0% {
+        opacity: 0;
+        @include prefix(transform, translate3d(0, 3rem, 0));
+    }
+
+    30% {
+        opacity: 0;
+        @include prefix(transform, translate3d(0, 2rem, 0));
+    }
+
+    100% {
+        opacity: 1;
+        @include prefix(transform, none);
+    }
+}
+
+.smooth-scene {
+    .scene-element {
+        @include prefix(animation-duration, 0.3s);
+        @include prefix(transition-timing-function, ease-in);
+        @include prefix(animation-fill-mode, both);
+
+        &.scene-element--fadein {
+            @include prefix(animation-name, fadein);
+        }
+    }
+
+    &.is-exiting .scene-element {
+        @include prefix(animation-direction, reverse);
+    }
+}
+
 .site {
     font-size: 1.3rem;
     width: 60rem;

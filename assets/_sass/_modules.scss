@@ -1,5 +1,5 @@
 // Reusable mixins
-// 
+//
 
 @mixin font-face($name, $path) {
     @font-face {
@@ -25,6 +25,24 @@
         @content;
     }
     ::selection {
+        @content;
+    }
+}
+
+@mixin keyframes($name) {
+    @-webkit-keyframes #{$name} {
+        @content;
+    }
+    @-moz-keyframes #{$name} {
+        @content;
+    }
+    @-o-keyframes #{$name} {
+        @content;
+    }
+    @-ms-keyframes #{$name} {
+        @content;
+    }
+    @keyframes #{$name} {
         @content;
     }
 }
