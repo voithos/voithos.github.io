@@ -14,25 +14,10 @@
     }
 }
 
-@mixin transition($property, $duration, $easing: ease, $delay: 0s) {
-    -webkit-transition: $property $duration $easing $delay;
-       -moz-transition: $property $duration $easing $delay;
-         -o-transition: $property $duration $easing $delay;
-        -ms-transition: $property $duration $easing $delay;
-            transition: $property $duration $easing $delay;
-}
-
-@mixin transition-property($properties...) {
-    -webkit-transition-property: $properties;
-       -moz-transition-property: $properties;    
-         -o-transition-property: $properties;   
-        -ms-transition-property: $properties;
-            transition-property: $properties;
-}
-
-@mixin box-shadow($left, $top, $blur, $spread, $color) {
-    -webkit-box-shadow: $left $top $blur $spread $color;
-            box-shadow: $left $top $blur $spread $color;
+@mixin prefix($name, $properties...) {
+    @each $vendor in ('-webkit-', '-moz-', '-ms-', '-o-', '') {
+        #{$vendor}#{$name}: $properties;
+    }
 }
 
 @mixin selection {

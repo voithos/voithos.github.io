@@ -54,8 +54,8 @@ a {
     border-bottom: 2px solid $secondary-color;
     border-bottom-color: rgba($secondary-color, 0);
 
-    @include transition(all, 0.5s, ease-out);
-    @include transition-property(color, text-shadow, border-bottom-color);
+    @include prefix(transition, all 0.5s ease-out);
+    @include prefix(transition-property, color, text-shadow, border-bottom-color);
 }
 
 a:hover {
@@ -71,7 +71,7 @@ pre {
     border: 1px solid lighten($dark-color, 11);
     background-color: $dark-color;
     margin-bottom: 1rem;
-    @include transition(border-radius, 0.2s, ease-in-out);
+    @include prefix(transition, border-radius 0.2s ease-in-out);
 
     &:hover {
         border-radius: 0;
@@ -171,7 +171,7 @@ h1[id] a, h2[id] a, h3[id] a {
             left: -1.5rem;
             color: rgba($lowlight-color, 0);
 
-            @include transition(color, 0.5s, ease-out);
+            @include prefix(transition, color 0.5s ease-out);
         }
 
         // Order matters: 'before' is a pseudo-element, whereas 'hover' is
@@ -204,15 +204,15 @@ h1[id] a, h2[id] a, h3[id] a {
     border-radius: 2rem;
     background-color: $secondary-color;
     color: lighten($lowlight-color, 20);
-    @include transition(all, 0.2s, ease-in-out);
-    @include transition-property(color, border-radius, background-color, box-shadow);
+    @include prefix(transition, all 0.2s ease-in-out);
+    @include prefix(transition-property, color, border-radius, background-color, box-shadow);
 
     &:hover {
         border-bottom: 1px solid darken($secondary-color, 10);
         border-radius: 0;
         background-color: lighten($secondary-color, 8);
         color: #fff;
-        @include box-shadow(0, 0, 2px, 2px, $secondary-color);
+        @include prefix(box-shadow, 0 0 2px 2px $secondary-color);
     }
 }
 
@@ -313,8 +313,8 @@ header {
             flex: 1 100%;
             margin-bottom: 0rem;
             max-height: 0rem;
-            @include transition(all, 0.7s, ease-in-out);
-            @include transition-property(max-height, margin-bottom);
+            @include prefix(transition, all 0.7s ease-in-out);
+            @include prefix(transition-property, max-height, margin-bottom);
         }
 
         ul {
@@ -441,10 +441,10 @@ footer {
         padding: 1.5rem;
         border-top: 1px solid $primary-color;
         border-bottom: 1px solid $primary-color;
-        @include transition(box-shadow, 0.5s, ease-out);
+        @include prefix(transition, box-shadow 0.5s ease-out);
 
         &:hover {
-            @include box-shadow(0, 0, 5px, 1px, $primary-color);
+            @include prefix(box-shadow, 0 0 5px 1px $primary-color);
         }
 
         > h2 {
@@ -471,7 +471,7 @@ footer {
 
             img {
                 padding: 0;
-                @include box-shadow(0, 1px, 3px, 1px, darken($dark-color, 10));
+                @include prefix(box-shadow, 0 1px 3px 1px darken($dark-color, 10));
             }
 
             @media screen and (max-width: 600px) {
