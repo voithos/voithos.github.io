@@ -1910,6 +1910,155 @@ h1[id] a, h2[id] a, h3[id] a {
     h1[id] a:hover:before, h2[id] a:hover:before, h3[id] a:hover:before {
       color: #97b5bf; } }
 
+@-webkit-keyframes fadein {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 3rem, 0);
+    -moz-transform: translate3d(0, 3rem, 0);
+    -ms-transform: translate3d(0, 3rem, 0);
+    -o-transform: translate3d(0, 3rem, 0);
+    transform: translate3d(0, 3rem, 0); }
+
+  30% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 2rem, 0);
+    -moz-transform: translate3d(0, 2rem, 0);
+    -ms-transform: translate3d(0, 2rem, 0);
+    -o-transform: translate3d(0, 2rem, 0);
+    transform: translate3d(0, 2rem, 0); }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none; } }
+@-moz-keyframes fadein {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 3rem, 0);
+    -moz-transform: translate3d(0, 3rem, 0);
+    -ms-transform: translate3d(0, 3rem, 0);
+    -o-transform: translate3d(0, 3rem, 0);
+    transform: translate3d(0, 3rem, 0); }
+
+  30% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 2rem, 0);
+    -moz-transform: translate3d(0, 2rem, 0);
+    -ms-transform: translate3d(0, 2rem, 0);
+    -o-transform: translate3d(0, 2rem, 0);
+    transform: translate3d(0, 2rem, 0); }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none; } }
+@-o-keyframes fadein {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 3rem, 0);
+    -moz-transform: translate3d(0, 3rem, 0);
+    -ms-transform: translate3d(0, 3rem, 0);
+    -o-transform: translate3d(0, 3rem, 0);
+    transform: translate3d(0, 3rem, 0); }
+
+  30% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 2rem, 0);
+    -moz-transform: translate3d(0, 2rem, 0);
+    -ms-transform: translate3d(0, 2rem, 0);
+    -o-transform: translate3d(0, 2rem, 0);
+    transform: translate3d(0, 2rem, 0); }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none; } }
+@-ms-keyframes fadein {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 3rem, 0);
+    -moz-transform: translate3d(0, 3rem, 0);
+    -ms-transform: translate3d(0, 3rem, 0);
+    -o-transform: translate3d(0, 3rem, 0);
+    transform: translate3d(0, 3rem, 0); }
+
+  30% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 2rem, 0);
+    -moz-transform: translate3d(0, 2rem, 0);
+    -ms-transform: translate3d(0, 2rem, 0);
+    -o-transform: translate3d(0, 2rem, 0);
+    transform: translate3d(0, 2rem, 0); }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none; } }
+@keyframes fadein {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 3rem, 0);
+    -moz-transform: translate3d(0, 3rem, 0);
+    -ms-transform: translate3d(0, 3rem, 0);
+    -o-transform: translate3d(0, 3rem, 0);
+    transform: translate3d(0, 3rem, 0); }
+
+  30% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 2rem, 0);
+    -moz-transform: translate3d(0, 2rem, 0);
+    -ms-transform: translate3d(0, 2rem, 0);
+    -o-transform: translate3d(0, 2rem, 0);
+    transform: translate3d(0, 2rem, 0); }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none; } }
+.smooth-scene .scene-element {
+  -webkit-animation-duration: 0.3s;
+  -moz-animation-duration: 0.3s;
+  -ms-animation-duration: 0.3s;
+  -o-animation-duration: 0.3s;
+  animation-duration: 0.3s;
+  -webkit-transition-timing-function: ease-in;
+  -moz-transition-timing-function: ease-in;
+  -ms-transition-timing-function: ease-in;
+  -o-transition-timing-function: ease-in;
+  transition-timing-function: ease-in;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -ms-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both; }
+  .smooth-scene .scene-element.scene-element--fadein {
+    -webkit-animation-name: fadein;
+    -moz-animation-name: fadein;
+    -ms-animation-name: fadein;
+    -o-animation-name: fadein;
+    animation-name: fadein; }
+.smooth-scene.is-exiting .scene-element {
+  -webkit-animation-direction: reverse;
+  -moz-animation-direction: reverse;
+  -ms-animation-direction: reverse;
+  -o-animation-direction: reverse;
+  animation-direction: reverse; }
+
 .site {
   font-size: 1.3rem;
   width: 60rem;

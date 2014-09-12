@@ -12,7 +12,7 @@
     </head>
     <body>
 
-        <section class="site">
+        <section id="main" class="site smooth-scene">
             <header>
                 <h1 class="title"><a href="/">Skepsi</a></h1>
                 <input type="checkbox" id="nav-checkbox" class="nav-checkbox" role="button">
@@ -48,7 +48,8 @@
                 </nav>
             </header>
 
-            <main class="projects">
+            <section class="scene-element scene-element--fadein">
+                <main class="projects">
     
     <section class="project project-project-swiftcode">
         <h2 class="project-name">
@@ -161,28 +162,34 @@
 </main>
 
 
-            <footer>
-                <hr>
-                <section class="footer-links">
-                    <section class="links">
-                        <a href="mailto:zaven@skepsi.me"><i class="fa fa-envelope fa-2x"></i></a>
-                        <a href="https://twitter.com/zvoithos"><i class="fa fa-twitter fa-2x"></i></a>
+                <footer>
+                    <hr>
+                    <section class="footer-links">
+                        <section class="links">
+                            <a href="mailto:zaven@skepsi.me"><i class="fa fa-envelope fa-2x"></i></a>
+                            <a href="https://twitter.com/zvoithos"><i class="fa fa-twitter fa-2x"></i></a>
+                        </section>
+                        <section class="license">
+                            <a href="http://creativecommons.org/licenses/by/4.0/">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle-o fa-stack-2x"></i>
+                                    <i class="fa fa-stack-1x cc">CC</i>
+                                </span>
+                            </a>
+                        </section>
+                        <section class="links">
+                            <a href="https://github.com/voithos/"><i class="fa fa-github fa-2x"></i></a>
+                            <a href="http://stackoverflow.com/users/716118/voithos"><i class="fa fa-stack-overflow fa-2x"></i></a>
+                        </section>
                     </section>
-                    <section class="license">
-                        <a href="http://creativecommons.org/licenses/by/4.0/">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle-o fa-stack-2x"></i>
-                                <i class="fa fa-stack-1x cc">CC</i>
-                            </span>
-                        </a>
-                    </section>
-                    <section class="links">
-                        <a href="https://github.com/voithos/"><i class="fa fa-github fa-2x"></i></a>
-                        <a href="http://stackoverflow.com/users/716118/voithos"><i class="fa fa-stack-overflow fa-2x"></i></a>
-                    </section>
-                </section>
-            </footer>
+                </footer>
+            </section>
         </section>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/assets/js/lib/jquery-2.1.1.min.js"><\/script>');</script>
+        <script src="/assets/js/lib/jquery.smoothState.js"></script>
+        <script src="/assets/js/main.js"></script>
 
         
     </body>
