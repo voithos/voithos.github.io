@@ -158,12 +158,9 @@ h1[id] a, h2[id] a, h3[id] a {
         color: $lowlight-color;
         text-shadow: 0 0 5px $lowlight-color;
         border-bottom-color: rgba($lowlight-color, 1);
-
-        @media screen and (min-width: 980px) {
-        }
     }
 
-    @media screen and (min-width: 980px) {
+    @media screen and (min-width: 1024px) {
         &:before {
             content: '\00B6'; // Pilcrow
             display: block;
@@ -215,13 +212,32 @@ h1[id] a, h2[id] a, h3[id] a {
     }
 }
 
+.scroll-button {
+    opacity: 0;
+    position: absolute;
+
+    @include prefix(transition, opacity 0.5s ease-in-out);
+
+    &.active {
+        opacity: 1;
+    }
+
+    a {
+        border: none;
+    }
+
+    @media screen and (max-width: 1200px) {
+        display: none;
+    }
+}
+
 .site {
     font-size: 1.3rem;
     width: 60rem;
     margin: 0 auto;
     padding: 1rem;
 
-    @media screen and (max-width: 980px) {
+    @media screen and (max-width: 1024px) {
         width: 100%;
     }
 
@@ -266,7 +282,7 @@ header {
     .title {
         flex: initial;
 
-        @media screen and (max-width: 980px) {
+        @media screen and (max-width: 1024px) {
             font-size: 3rem;
         }
 
@@ -372,7 +388,7 @@ header {
                     text-shadow: 0 0 5px $secondary-color;
                 }
 
-                @media screen and (max-width: 980px) {
+                @media screen and (max-width: 1024px) {
                     margin: 1.2rem;
                 }
                 @media screen and (max-width: 750px) {
