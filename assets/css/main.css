@@ -1895,7 +1895,7 @@ h1[id] a, h2[id] a, h3[id] a {
     color: #97b5bf;
     text-shadow: 0 0 5px #97b5bf;
     border-bottom-color: #97b5bf; }
-  @media screen and (min-width: 980px) {
+  @media screen and (min-width: 1024px) {
     h1[id] a:before, h2[id] a:before, h3[id] a:before {
       content: '\00B6';
       display: block;
@@ -2059,12 +2059,28 @@ h1[id] a, h2[id] a, h3[id] a {
   -o-animation-direction: reverse;
   animation-direction: reverse; }
 
+.scroll-button {
+  opacity: 0;
+  position: absolute;
+  -webkit-transition: opacity 0.5s ease-in-out;
+  -moz-transition: opacity 0.5s ease-in-out;
+  -ms-transition: opacity 0.5s ease-in-out;
+  -o-transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out; }
+  .scroll-button.active {
+    opacity: 1; }
+  .scroll-button a {
+    border: none; }
+  @media screen and (max-width: 1200px) {
+    .scroll-button {
+      display: none; } }
+
 .site {
   font-size: 1.3rem;
   width: 60rem;
   margin: 0 auto;
   padding: 1rem; }
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1024px) {
     .site {
       width: 100%; } }
   @media screen and (max-width: 600px) {
@@ -2111,7 +2127,7 @@ header {
     flex: initial;
     font-family: "Planet Kosmos", Helvetica, Arial, sans-serif;
     font-size: 4rem; }
-    @media screen and (max-width: 980px) {
+    @media screen and (max-width: 1024px) {
       header .title {
         font-size: 3rem; } }
     @media screen and (max-width: 600px) {
@@ -2194,7 +2210,7 @@ header {
         header nav ul li.active a {
           color: #ec2e6d;
           text-shadow: 0 0 5px #bd114a; }
-        @media screen and (max-width: 980px) {
+        @media screen and (max-width: 1024px) {
           header nav ul li {
             margin: 1.2rem; } }
         @media screen and (max-width: 750px) {
