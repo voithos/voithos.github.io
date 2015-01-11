@@ -12,8 +12,8 @@ weight: 1
             <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
             {% include postmeta.html post=post content=post.content %}
 
-            <section class="post">
-            {{ post.excerpt }}
+            <section class="post excerpt">
+            {{ post.content | truncatewords: 50 }}
             </section>
             <section class="readmore">
                 <a href="{{ post.url }}">Continue reading &rarr;</a>
