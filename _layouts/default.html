@@ -13,6 +13,8 @@
         {% for css_url in page.extra_css %}
         <link rel="stylesheet" href="{{ css_url }}">
         {% endfor %}
+
+        {% include analytics.html %}
     </head>
     <body>
 
@@ -65,7 +67,5 @@
         {% for js_url in page.extra_js %}
         <script src="{{ js_url }}"></script>
         {% endfor %}
-
-        {% include analytics.html %}
     </body>
 </html>
