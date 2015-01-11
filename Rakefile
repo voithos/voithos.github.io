@@ -1,3 +1,5 @@
+require 'tmpdir'
+
 task :default => :serve
 
 ## Tasks
@@ -89,6 +91,42 @@ end
 desc 'Clean generated site'
 task :clean do
   FileUtils.rm_rf('_site')
+end
+
+desc 'Deploy into `master` branch'
+task :deploy do
+  repo_dir = Dir.getwd
+  protect = ['.git', '.nojekyll'].map {|s| "--filter='P #{s}'"}.join(' ')
+
+  raw_dir = Dir.mktmpdir
+  begin
+    puts "Beginning deploy to #{raw_dir}"
+
+    Dir.chdir(raw_dir) do
+      system("git clone -q #{repo_dir} .")
+      system('git checkout jekyll')
+      system('rake build')
+
+      tmp_dir = Dir.mktmpdir
+      begin
+        puts "Setting up _site in #{tmp_dir}"
+        tmp_site = File.join(tmp_dir, '_site')
+        FileUtils.mv('_site', tmp_site)
+
+        system('git checkout master')
+        puts "Copying to master..."
+        system("rsync -az --delete #{protect} #{tmp_site}/ .")
+
+        system('git add -A')
+        system('git commit -m "Sync raw with jekyll"')
+        system("git push #{repo_dir} master")
+      ensure
+        FileUtils.remove_entry_secure tmp_dir
+      end
+    end
+  ensure
+    FileUtils.remove_entry_secure raw_dir
+  end
 end
 
 
