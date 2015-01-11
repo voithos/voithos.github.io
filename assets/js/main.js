@@ -87,6 +87,12 @@
                     $container.removeClass('is-exiting');
                 });
             }
+        },
+
+        callback: function(url, $container, $content) {
+            if (window.ga) {
+                window.ga('send', 'pageview');
+            }
         }
     });
 })(jQuery);
