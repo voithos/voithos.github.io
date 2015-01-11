@@ -65,5 +65,7 @@
         {% for js_url in page.extra_js %}
         <script src="{{ js_url }}"></script>
         {% endfor %}
+
+        {% include analytics.html %}
     </body>
 </html>
