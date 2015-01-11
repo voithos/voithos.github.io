@@ -20,6 +20,8 @@ Personal site of Zaven Muradyan.
   Opens the draft in an editor by default, unless a falsy value is given to `edit`.
 - `rake publish[title]` Publish a draft, stamped with the current date and time,
   based on a fuzzy search of the `title` parameter.
+- `rake deploy` Automatically build and deploy the current Jekyll site in a raw
+  form to the `master` branch.
 
 ### License
 The content of the site is licensed under [CC-BY](http://creativecommons.org/licenses/by/4.0/).
