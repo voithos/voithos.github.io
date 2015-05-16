@@ -10,3 +10,4 @@ sass:
 highlighter: 'pygments'
 lsi: false
 encoding: 'UTF-8'
+exclude: [vendor]

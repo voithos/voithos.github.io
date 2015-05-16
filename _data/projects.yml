@@ -1,7 +1,7 @@
 - name:     SwiftCODE
   class:    project-swiftcode
   img:      swiftcode.png
-  url:      https://swiftcode.jit.su/
+  url:      https://swiftcode.herokuapp.com/
   code_url: https://github.com/voithos/swiftcode
   desc: >
     A multiplayer typing speed game for programmers, supporting a variety of
