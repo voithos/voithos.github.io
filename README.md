@@ -9,7 +9,7 @@ Personal site of Zaven Muradyan.
 
 ### Setup
 
-    $ bundle install
+    $ bundle install --path vendor/bundle
 
 ### Tasks
 

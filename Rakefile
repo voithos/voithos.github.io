@@ -105,6 +105,7 @@ task :deploy do
     Dir.chdir(raw_dir) do
       system("git clone -q #{repo_dir} .")
       system('git checkout jekyll')
+      system('bundle install --path vendor/bundle')
       system('rake build')
 
       tmp_dir = Dir.mktmpdir
