@@ -5,6 +5,8 @@ markdown: kramdown
 markdown_ext: hide_markdown
 kramdown:
   auto_ids: false
+babel:
+  source_maps: true
 sass:
   sass_dir: assets/_sass
 highlighter: 'pygments'

@@ -1,26 +1,24 @@
 (function($) {
-    'use strict';
-
-    var $window = $(window);
-    var $body = $('html, body');
-    var $main = $('#main');
+    let $window = $(window);
+    let $body = $('html, body');
+    let $main = $('#main');
 
     // Add scroll trigger
-    var $scrollButton = $('.scroll-button');
+    let $scrollButton = $('.scroll-button');
 
     (function() {
-        var initialComplete = false;
-        var topOffset = -150;
-        var leftOffset = 75;
-        var animDuration = 300;
+        let initialComplete = false;
+        let topOffset = -150;
+        let leftOffset = 75;
+        let animDuration = 300;
 
-        var scrollStart = 400;
-        var lastScroll = 0;
+        let scrollStart = 400;
+        let lastScroll = 0;
 
         function calculatePosition(scroll) {
-            var mainWidth = $main.width();
-            var topPos = topOffset + $window.height();
-            var leftPos = leftOffset + mainWidth + ($body.width() - mainWidth) / 2
+            let mainWidth = $main.width();
+            let topPos = topOffset + $window.height();
+            let leftPos = leftOffset + mainWidth + ($body.width() - mainWidth) / 2
 
             return {
                 top: scroll + topPos,
@@ -29,7 +27,7 @@
         }
 
         $window.scroll(function() {
-            var scroll = $window.scrollTop();
+            let scroll = $window.scrollTop();
 
             // Only change the class when the scroll point is passed
             if (scroll > scrollStart && lastScroll <= scrollStart ) {
@@ -38,7 +36,7 @@
                 $scrollButton.removeClass('active');
             }
 
-            var pos = calculatePosition(scroll);
+            let pos = calculatePosition(scroll);
 
             // Set the CSS initially, to avoid an animation when the page loads
             if (!initialComplete) {
@@ -52,26 +50,26 @@
         });
 
         $window.resize(function() {
-            var scroll = $window.scrollTop();
+            let scroll = $window.scrollTop();
             $scrollButton.css(calculatePosition(scroll));
         });
     })();
 
     // Add up-scroll handler
-    $scrollButton.find('a').click(function(event) {
+    $scrollButton.find('a').click(event => {
         event.preventDefault();
         $body.animate({ scrollTop: 0 });
     });
 
     // Add smooth page transitions
-    var $content = $main.smoothState({
+    let $content = $main.smoothState({
         development: true,
         prefetch: true,
         pageCacheSize: 4,
 
         onStart: {
             duration: 300,
-            render: function(url, $container) {
+            render(url, $container) {
                 $body.animate({ scrollTop: 0 });
 
                 // Remove class to trigger animation re-calc, then re-add after
@@ -83,13 +81,12 @@
                     $container.addClass('is-exiting');
                 }, 0);
 
-                $container.one("ss.onStartEnd ss.onProgressEnd ss.onEndEnd", function(){
-                    $container.removeClass('is-exiting');
-                });
+                $container.one("ss.onStartEnd ss.onProgressEnd ss.onEndEnd",
+                               () => $container.removeClass('is-exiting'));
             }
         },
 
-        callback: function(url, $container, $content) {
+        callback(url, $container, $content) {
             if (window.ga) {
                 window.ga('send', 'pageview');
             }

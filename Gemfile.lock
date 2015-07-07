@@ -1,6 +1,10 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    babel-source (5.6.15)
+    babel-transpiler (0.7.0)
+      babel-source (>= 4.0, < 6)
+      execjs (~> 2.0)
     blankslate (2.1.2.4)
     celluloid (0.15.2)
       timers (~> 1.1.0)
@@ -62,5 +66,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  babel-transpiler
   jekyll (~> 2.0.3)
   typogruby
