@@ -1,6 +1,6 @@
-(function($) {
-    'use strict';
+'use strict';
 
+(function ($) {
     var $window = $(window);
     var $body = $('html, body');
     var $main = $('#main');
@@ -8,7 +8,7 @@
     // Add scroll trigger
     var $scrollButton = $('.scroll-button');
 
-    (function() {
+    (function () {
         var initialComplete = false;
         var topOffset = -150;
         var leftOffset = 75;
@@ -20,7 +20,7 @@
         function calculatePosition(scroll) {
             var mainWidth = $main.width();
             var topPos = topOffset + $window.height();
-            var leftPos = leftOffset + mainWidth + ($body.width() - mainWidth) / 2
+            var leftPos = leftOffset + mainWidth + ($body.width() - mainWidth) / 2;
 
             return {
                 top: scroll + topPos,
@@ -28,11 +28,11 @@
             };
         }
 
-        $window.scroll(function() {
+        $window.scroll(function () {
             var scroll = $window.scrollTop();
 
             // Only change the class when the scroll point is passed
-            if (scroll > scrollStart && lastScroll <= scrollStart ) {
+            if (scroll > scrollStart && lastScroll <= scrollStart) {
                 $scrollButton.addClass('active');
             } else if (scroll <= scrollStart && lastScroll > scrollStart) {
                 $scrollButton.removeClass('active');
@@ -51,14 +51,14 @@
             lastScroll = scroll;
         });
 
-        $window.resize(function() {
+        $window.resize(function () {
             var scroll = $window.scrollTop();
             $scrollButton.css(calculatePosition(scroll));
         });
     })();
 
     // Add up-scroll handler
-    $scrollButton.find('a').click(function(event) {
+    $scrollButton.find('a').click(function (event) {
         event.preventDefault();
         $body.animate({ scrollTop: 0 });
     });
@@ -71,28 +71,29 @@
 
         onStart: {
             duration: 300,
-            render: function(url, $container) {
+            render: function render(url, $container) {
                 $body.animate({ scrollTop: 0 });
 
                 // Remove class to trigger animation re-calc, then re-add after
                 // yielding to browser events, to restart the animation
                 $container.removeClass('smooth-scene');
 
-                setTimeout(function() {
+                setTimeout(function () {
                     $container.addClass('smooth-scene');
                     $container.addClass('is-exiting');
                 }, 0);
 
-                $container.one("ss.onStartEnd ss.onProgressEnd ss.onEndEnd", function(){
-                    $container.removeClass('is-exiting');
+                $container.one('ss.onStartEnd ss.onProgressEnd ss.onEndEnd', function () {
+                    return $container.removeClass('is-exiting');
                 });
             }
         },
 
-        callback: function(url, $container, $content) {
+        callback: function callback(url, $container, $content) {
             if (window.ga) {
                 window.ga('send', 'pageview');
             }
         }
     });
 })(jQuery);
+//# sourceMappingURL=/assets/js/main.js.map
