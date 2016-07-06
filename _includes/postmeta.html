@@ -1,7 +1,7 @@
 <p class="meta">
     <span class="meta-group">
         <span class="date">
-            {{ include.post.date | date_to_long_string }}
+            {{ include.post.date | date: "%B %-d, %Y" }}
         </span>
 
         {% assign min_time = 0 %}
