@@ -1,13 +1,12 @@
-- name:     SwiftCODE
-  class:    project-swiftcode
-  img:      swiftcode.png
-  url:      https://swiftcode.herokuapp.com/
-  code_url: https://github.com/voithos/swiftcode
+- name:     endgame
+  class:    project-endgame
+  img:      endgame.png
+  url:      https://endgame-chess.firebaseapp.com/
+  code_url: https://github.com/voithos/endgame
   desc: >
-    A multiplayer typing speed game for programmers, supporting a variety of
-    programming languages. Uses Node.js in the server, and Socket.IO for
-    real-time communication. Built during, and polished after, [Pandacodium
-    2013](http://pandacodium.ca/).
+    A WebRTC-enabled 3D chess game built on top of PeerJS and three.js. Began
+    as an entry in [Static Showdown 2015](https://2015.staticshowdown.com/),
+    and was refined and completed afterwards.
 
 - name:     Awl
   class:    project-awl
@@ -38,3 +37,14 @@
     A small puzzle platformer made along the theme of [Ludum
     Dare](http://www.ludumdare.com/compo/) 28.  Made using the
     [Phaser.js](http://phaser.io/) HTML5 game engine.
+
+- name:     SwiftCODE
+  class:    project-swiftcode
+  img:      swiftcode.png
+  url:      https://swiftcode.herokuapp.com/
+  code_url: https://github.com/voithos/swiftcode
+  desc: >
+    A multiplayer typing speed game for programmers, supporting a variety of
+    programming languages. Uses Node.js in the server, and Socket.IO for
+    real-time communication. Built during, and polished after, [Pandacodium
+    2013](http://pandacodium.ca/).
