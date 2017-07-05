@@ -1,3 +1,12 @@
+- name:     graviton
+  class:    project-graviton
+  img:      graviton.png
+  url:      http://skepsi.me/graviton/
+  code_url: https://github.com/voithos/graviton
+  desc: >
+    A gravitational simulation toy that was built to explore the Barnes-Hut
+    simulation algorithm, as well as explore the HTML5 `canvas` element.
+
 - name:     endgame
   class:    project-endgame
   img:      endgame.png
