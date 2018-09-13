@@ -1,6 +1,5 @@
-# Skepsi
+# voithos.io
 
-Skepsi - Greek word for "consideration," "meditation," or "thought."
 Personal site of Zaven Muradyan.
 
 ### Requirements

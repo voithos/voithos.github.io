@@ -1,7 +1,7 @@
 - name:     graviton
   class:    project-graviton
   img:      graviton.png
-  url:      http://skepsi.me/graviton/
+  url:      http://voithos.io/graviton/
   code_url: https://github.com/voithos/graviton
   desc: >
     A gravitational simulation toy that was built to explore the Barnes-Hut
@@ -20,7 +20,7 @@
 - name:     Awl
   class:    project-awl
   img:      awl.png
-  url:      http://skepsi.me/awl
+  url:      http://voithos.io/awl
   code_url: https://github.com/voithos/awl
   desc: >
     A Lispy, dynamic, interpreted programming language written for learning
@@ -30,7 +30,7 @@
 - name:     brot.js
   class:    project-brotjs
   img:      brotjs.png
-  url:      http://skepsi.me/brot.js
+  url:      http://voithos.io/brot.js
   code_url: https://github.com/voithos/brot.js
   desc: >
     A [Buddhabrot](http://en.wikipedia.org/wiki/Buddhabrot) generator written
@@ -40,7 +40,7 @@
 - name:     Elemental One
   class:    project-elemental-one
   img:      elemental-one.png
-  url:      http://skepsi.me/elemental-one
+  url:      http://voithos.io/elemental-one
   code_url: https://github.com/voithos/elemental-one
   desc: >
     A small puzzle platformer made along the theme of [Ludum
