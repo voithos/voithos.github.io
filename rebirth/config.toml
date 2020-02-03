@@ -1,0 +1,4 @@
+baseURL = "https://voithos.io/"
+languageCode = "en-us"
+title = "voithos.io"
+theme = "hugo-coder"

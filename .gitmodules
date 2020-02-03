@@ -1,0 +1,3 @@
+[submodule "rebirth/themes/hugo-coder"]
+	path = rebirth/themes/hugo-coder
+	url = https://github.com/luizdepra/hugo-coder.git
