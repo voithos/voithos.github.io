@@ -1,0 +1,23 @@
+<meta charset="utf-8">
+<title>{{- block "title" . -}}
+  {{ if .IsHome }}
+    {{ .Site.Title }}
+  {{ else }}
+    {{ .Title }} | {{ .Site.Title }}
+  {{ end }}
+{{- end -}}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="{{ "favicon.ico" | absURL }}">
+
+{{ if .Site.IsServer }}
+  {{ $cssOpts := (dict "enableSourceMap" true ) }}
+  {{ $style := resources.Get "sass/main.scss" | resources.ToCSS $cssOpts }}
+  <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+{{ else }}
+  {{ $style := resources.Get "sass/main.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+{{ end }}
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu+Mono%3A400%2C700%2C400italic%2C700italic%7CUbuntu%3A400%2C700%2C400italic%2C700italic">
+
+{{- partial "analytics.html" . -}}

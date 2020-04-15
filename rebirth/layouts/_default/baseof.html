@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  {{- partial "head.html" . -}}
+  <body>
+    <section id="main" class="site smooth-scene">
+      {{- partial "header.html" . -}}
+      <section class="scene-element scene-element--fadein">
+        {{- block "main" . }}{{- end }}
+        {{- partial "footer.html" . -}}
+      </section>
+    </section>
+  </body>
+</html>
