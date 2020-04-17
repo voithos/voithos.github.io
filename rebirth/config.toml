@@ -1,16 +1,3 @@
 baseURL = "https://voithos.io/"
 languageCode = "en-us"
 title = "voithos.io"
-
-[menu]
-  [[menu.main]]
-  identifier = "projects"
-  name = "Projects"
-  url = "/projects.html"
-  weight = 1
-
-  [[menu.main]]
-  identifier = "about"
-  name = "About"
-  url = "/about.html"
-  weight = 2

@@ -1,0 +1,31 @@
+{{ define "main" }}
+<main class="projects">
+  {{ range .Site.Data.projects }}
+  <section class="project project-{{ .class }}">
+    <h2 class="project-name">
+      <a class="no-smoothstate" href="{{ .url }}">{{ .name }}</a>
+    </h2>
+    <section class="project-detail">
+      <section class="project-image">
+        <a class="no-smoothstate" href="{{ .url }}">
+          <img alt="{{ .name }}" src="/img/projects/{{ .img }}">
+        </a>
+      </section>
+      <section class="project-desc">
+        <section class="project-desc-text">
+          {{ .desc | markdownify }}
+        </section>
+
+        {{ if .code_url }}
+        <section class="project-code">
+          <a class="link-button no-smoothstate" href="{{ .code_url }}">
+              <i class="fa fa-code"></i> Source Code
+          </a>
+        </section>
+        {{ end }}
+      </section>
+    </section>
+  </section>
+  {{ end }}
+</main>
+{{ end }}
