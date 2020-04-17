@@ -5,7 +5,7 @@
     <section id="main" class="site smooth-scene">
       {{- partial "header.html" . -}}
       <section class="scene-element scene-element--fadein">
-        {{- block "main" . }}{{- end }}
+        {{- block "main" . }}{{ .Content }}{{- end }}
         {{- partial "footer.html" . -}}
       </section>
     </section>
