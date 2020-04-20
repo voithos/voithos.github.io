@@ -1,4 +1,2 @@
-_site/
-.bundle/
-.sass-cache/
-vendor/
+public/
+resources/
