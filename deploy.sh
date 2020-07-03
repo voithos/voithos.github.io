@@ -9,12 +9,12 @@ repo_dir=$(pwd)
 clone_dir=$(mktemp -d -t voithos-clone-XXXXXXXXXX)
 tmp_dir=$(mktemp -d -t voithos-raw-XXXXXXXXXX)
 
-echo "Beginning clone to ${clone_dir}"
+echo "Cloning to ${clone_dir}"
 pushd "${clone_dir}" > /dev/null
 git clone -q "${repo_dir}" .
 git checkout "source"
 
-echo "Beginning deploy to ${tmp_dir}"
+echo "Compiling to ${tmp_dir}"
 hugo -d "${tmp_dir}"
 
 echo "Copying to master"
