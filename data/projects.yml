@@ -1,3 +1,13 @@
+- name:     elfin
+  class:    project-elfin
+  img:      elfin.png
+  url:      https://voithos.itch.io/elfin
+  code_url: https://github.com/voithos/elfin
+  desc: >
+    A timing-based puzzle platformer that follows the journey of a little
+    sprite as it tries to escape the underground labyrinth. Made for the [GMTK
+    Game Jam 2018](https://itch.io/jam/gmtk-2018).
+
 - name:     graviton
   class:    project-graviton
   img:      graviton.png
