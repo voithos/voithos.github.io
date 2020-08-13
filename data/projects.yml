@@ -1,3 +1,12 @@
+- name:     DRIFTWORLD
+  class:    project-driftworld
+  img:      driftworld.png
+  url:      https://voithos.itch.io/driftworld
+  code_url: https://github.com/voithos/driftworld
+  desc: >
+    A 2D real time strategy game about patience, conquest, and control. Made
+    for the [GMTK Game Jam 2020](https://itch.io/jam/gmtk-2020).
+
 - name:     elfin
   class:    project-elfin
   img:      elfin.png
