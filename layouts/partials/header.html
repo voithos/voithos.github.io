@@ -1,15 +1,32 @@
-<header>
-  <h1 class="title"><a href="/">{{ .Site.Title }}</a></h1>
-  <input type="checkbox" id="nav-checkbox" class="nav-checkbox" role="button">
-  <label for="nav-checkbox" class="nav-toggle" onclick></label>
-  <nav>
-    <ul>
-      {{ $currentPage := . }}
-      {{ range .Site.Menus.main }}
-      <li class="{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }}active{{ end }}">
-        <a href="{{ .URL }}" title="{{ .Name }}">{{ .Name }}</a>
-      </li>
-      {{ end }}
-    </ul>
-  </nav>
-</header>
+<section class="header-box">
+  <section class="site-container">
+    <header>
+        <h1 class="title"><a href="/">voithos</a></h1>
+        <input type="checkbox" id="nav-checkbox" class="nav-checkbox" role="button">
+        <label for="nav-checkbox" class="nav-toggle" onclick></label>
+        <nav>
+          <ul>
+            {{ $currentPage := . }}
+            {{ range .Site.Menus.main }}
+            <li class="{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }}active{{ end }}">
+              <a href="{{ .URL }}" title="{{ .Name }}">{{ .Name }}</a>
+            </li>
+            {{ end }}
+          </ul>
+        </nav>
+        <nav class="social-nav">
+          <ul>
+            <li>
+              <a href="https://twitter.com/voithoz"><i class="fa fa-twitter"></i></a>
+            </li>
+            <li>
+              <a href="https://github.com/voithos/"><i class="fa fa-github"></i></a>
+            </li>
+            <li>
+              <a href="TODO"><i class="fa fa-instagram"></i></a>
+            </li>
+          </ul>
+        </nav>
+    </header>
+  </section>
+</section>

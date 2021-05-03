@@ -1,8 +1,8 @@
 ---
-title: "About"
-type: "about"
+title: "Contact"
+type: "contact"
 menu: "main"
-weight: 2
+weight: 3
 ---
 
 ## Hi there! I'm Zaven.

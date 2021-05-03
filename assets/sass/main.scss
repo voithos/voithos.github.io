@@ -3,8 +3,6 @@
 @import 'mixins';
 @import 'variables';
 
-@include font-face($title-font-family, $title-font-url);
-
 // Base
 //
 *, *:before, *:after {
@@ -15,7 +13,7 @@
 
 @include selection {
     background: lighten($primary-color, 8);
-    color: $default-color;
+    color: $body-color;
 }
 
 html {
@@ -24,7 +22,7 @@ html {
 }
 
 body {
-    color: $default-color;
+    color: $body-color;
     font: {
         size: 100%;
         family: $text-font-stack;
@@ -46,19 +44,19 @@ input[disabled] {
 }
 
 a {
-    color: $secondary-color;
+    color: $contrast-color;
     text-decoration: none;
-    border-bottom: 2px solid $secondary-color;
-    border-bottom-color: rgba($secondary-color, 0);
+    border-bottom: 2px solid $contrast-color;
+    border-bottom-color: rgba($contrast-color, 0);
 
     @include prefix(transition, all 0.5s ease-out);
     @include prefix(transition-property, color, text-shadow, border-bottom-color);
 }
 
 a:hover {
-    color: lighten($secondary-color, 15);
-    text-shadow: 0 0 5px $secondary-color;
-    border-bottom-color: rgba(lighten($secondary-color, 15), 1);
+    color: lighten($contrast-color, 15);
+    text-shadow: 0 0 5px $contrast-color;
+    border-bottom-color: rgba(lighten($contrast-color, 15), 1);
 }
 
 pre {
@@ -109,7 +107,7 @@ blockquote {
     }
 
     cite {
-        color: lighten($default-color, 20);
+        color: lighten($body-color, 20);
         font-size: 1rem;
         display: block;
 
@@ -228,11 +226,10 @@ h1[id] a, h2[id] a, h3[id] a {
     }
 }
 
-.site {
+.site-container {
     font-size: 1.3rem;
-    width: 60rem;
+    max-width: $max-width;
     margin: 0 auto;
-    padding: 1rem;
 
     @media screen and (max-width: 1024px) {
         width: 100%;
@@ -246,25 +243,30 @@ h1[id] a, h2[id] a, h3[id] a {
 .link-button {
     padding: 0.5rem 0.7rem 0.7rem 0.7rem;
 
-    border: 1px solid darken($secondary-color, 10);
+    border: 1px solid darken($primary-color, 10);
     border-radius: 2rem;
-    background-color: $secondary-color;
+    background-color: $primary-color;
     color: lighten($lowlight-color, 20);
     @include prefix(transition, all 0.2s ease-in-out);
     @include prefix(transition-property, color, border-radius, background-color, box-shadow);
 
     &:hover {
-        border-bottom: 1px solid darken($secondary-color, 10);
+        border-bottom: 1px solid darken($primary-color, 10);
         border-radius: 0;
-        background-color: lighten($secondary-color, 8);
-        color: #fff;
-        @include prefix(box-shadow, 0 0 2px 2px $secondary-color);
+        background-color: lighten($primary-color, 8);
+        color: #ECF9FD;
+        @include prefix(box-shadow, 0 0 2px 2px $primary-color);
     }
 }
 
 
 // Header
 //
+.header-box {
+  background-color: $dark-color;
+  border-bottom: 1px solid darken($primary-color, 5);
+}
+
 header {
     display: flex;
     flex-flow: row nowrap;
@@ -272,12 +274,15 @@ header {
     align-items: center;
     overflow: hidden;
 
+    text-transform: uppercase;
+
     @media screen and (max-width: 600px) {
         flex-flow: row wrap;
     }
 
     .title {
         flex: initial;
+        margin-bottom: 0;
 
         @media screen and (max-width: 1024px) {
             font-size: 3rem;
@@ -289,12 +294,12 @@ header {
 
         font: {
             family: $title-font-stack;
-            size: 4rem;
+            size: $header-font-size;
         }
 
         a {
             color: $primary-color;
-            padding: 0 1.5rem;
+            padding: 0 2rem;
             border-bottom: none;
 
             &:hover {
@@ -310,11 +315,11 @@ header {
         z-index: 1;
         display: none;
         padding: 0.6rem;
-        border: 1px solid darken($secondary-color, 10);
+        border: 1px solid darken($primary-color, 5);
         border-radius: 0.4rem;
         margin-right: 1rem;
         top: -0.7rem;
-        background-color: $secondary-color;
+        background-color: $primary-color;
 
         @media screen and (max-width: 600px) {
             display: block;
@@ -350,6 +355,7 @@ header {
         display: flex;
         align-items: center;
         justify-content: center;
+        font-size: $header-font-size;
 
         position: relative;
         top: -0.7rem;
@@ -378,11 +384,25 @@ header {
 
             li {
                 display: inline;
-                margin: 1.5rem;
+                margin: 1.25rem;
+                margin-bottom: 0;
 
+                a {
+                  color: $light-color;
+                  border-bottom-color: rgba($light-color, 0);
+                  &:hover {
+                      color: lighten($primary-color, 15);
+                      text-shadow: 0 0 5px $primary-color;
+                      border-bottom-color: rgba($primary-color, 1);
+                  }
+                }
                 &.active a {
-                    color: lighten($secondary-color, 15);
-                    text-shadow: 0 0 5px $secondary-color;
+                    color: lighten($primary-color, 10);
+                    &:hover {
+                        color: lighten($primary-color, 15);
+                        text-shadow: 0 0 5px $primary-color;
+                        border-bottom-color: rgba($primary-color, 1);
+                    }
                 }
 
                 @media screen and (max-width: 1024px) {
@@ -407,9 +427,9 @@ header {
                     }
 
                     &.active {
-                        background-color: darken($secondary-color, 0);
-                        border-top: 1px solid darken($secondary-color, 20);
-                        border-bottom: 1px solid darken($secondary-color, 20);
+                        background-color: darken($primary-color, 0);
+                        border-top: 1px solid darken($primary-color, 20);
+                        border-bottom: 1px solid darken($primary-color, 20);
 
                         a {
                             color: lighten($lowlight-color, 30);
@@ -419,8 +439,22 @@ header {
             }
         }
 
-        a {
-            font-weight: bold;
+        &.social-nav {
+          flex: 0;
+
+          li {
+            margin: 1.25rem 0.25rem;
+            margin-bottom: 0;
+          }
+
+          a {
+            border-bottom: none;
+            color: $secondary-color;
+
+            &:hover {
+                color: lighten($secondary-color, 15);
+            }
+          }
         }
     }
 }
@@ -428,33 +462,20 @@ header {
 // Footer
 //
 footer {
-    hr {
-        margin-top: 1.5rem;
-        border-color: desaturate($secondary-color, 10);
-    }
+  margin: 2rem 0;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
 
-    .footer-links {
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-between;
+  a {
+      border-bottom: none;
+  }
+}
 
-        a {
-            border-bottom: none;
-        }
-
-        .license .cc {
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-
-        .links a {
-            margin: 0 1rem;
-
-            @media screen and (max-width: 600px) {
-                margin: 0 0.5rem;
-            }
-        }
-    }
+// Main
+//
+main {
+  margin: 2rem 0;
 }
 
 // Index
@@ -477,7 +498,7 @@ footer {
     }
 }
 
-// Projects
+// Code
 //
 
 .projects {
@@ -517,7 +538,7 @@ footer {
 
             img {
                 padding: 0;
-                @include prefix(box-shadow, 0 1px 3px 1px darken($dark-color, 10));
+                @include prefix(box-shadow, 0 1px 3px 1px $dark-color);
             }
 
             @media screen and (max-width: 600px) {
@@ -544,11 +565,9 @@ footer {
     }
 }
 
-// About
+// Contact
 //
-.about {
-    padding-bottom: 2rem;
-
+.contact {
     @media screen and (max-width: 600px) {
         padding-bottom: 1rem;
     }
@@ -633,7 +652,7 @@ article {
 
 .footnotes {
     font-size: 1.2rem;
-    color: darken($default-color, 15);
+    color: darken($body-color, 15);
 }
 
 .err404 {
