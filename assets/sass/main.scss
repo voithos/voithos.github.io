@@ -46,17 +46,33 @@ input[disabled] {
 a {
     color: $contrast-color;
     text-decoration: none;
-    border-bottom: 2px solid $contrast-color;
-    border-bottom-color: rgba($contrast-color, 0);
+    display: inline-block;
+    position: relative;
 
     @include prefix(transition, all 0.5s ease-out);
-    @include prefix(transition-property, color, text-shadow, border-bottom-color);
-}
+    @include prefix(transition-property, color, text-shadow);
 
-a:hover {
-    color: lighten($contrast-color, 15);
-    text-shadow: 0 0 5px $contrast-color;
-    border-bottom-color: rgba(lighten($contrast-color, 15), 1);
+    &:hover {
+      color: lighten($contrast-color, 2);
+      text-shadow: 0 0 5px $contrast-color;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0%;
+      height: 100%;
+
+      border-bottom: 2px solid $contrast-color;
+      @include prefix(transition, width 0.3s ease);
+    }
+
+    &:hover:after {
+      left: 0;
+      width: 100%;
+    }
 }
 
 pre {
@@ -152,7 +168,7 @@ h1[id] a, h2[id] a, h3[id] a {
     &:hover {
         color: $lowlight-color;
         text-shadow: 0 0 5px $lowlight-color;
-        border-bottom-color: rgba($lowlight-color, 1);
+        border-bottom: 2px solid $lowlight-color;
     }
 
     @media screen and (min-width: 1024px) {
@@ -251,11 +267,13 @@ h1[id] a, h2[id] a, h3[id] a {
     @include prefix(transition-property, color, border-radius, background-color, box-shadow);
 
     &:hover {
-        border-bottom: 1px solid darken($primary-color, 10);
         border-radius: 0;
         background-color: lighten($primary-color, 8);
         color: #ECF9FD;
         @include prefix(box-shadow, 0 0 2px 2px $primary-color);
+    }
+    &:after {
+      display: none;
     }
 }
 
@@ -284,6 +302,10 @@ header {
         flex: initial;
         margin-bottom: 0;
 
+        font-family: $title-font-stack;
+        font-size: $header-font-size;
+        font-weight: bold;
+
         @media screen and (max-width: 1024px) {
             font-size: 3rem;
         }
@@ -292,19 +314,16 @@ header {
             font-size: 2rem;
         }
 
-        font: {
-            family: $title-font-stack;
-            size: $header-font-size;
-        }
-
         a {
-            color: $primary-color;
-            padding: 0 2rem;
+            color: $secondary-color;
             border-bottom: none;
 
             &:hover {
-                color: lighten($primary-color, 15);
-                text-shadow: 0 0 10px $primary-color;
+                color: lighten($secondary-color, 15);
+                text-shadow: 0 0 10px $secondary-color;
+            }
+            &:after {
+              display: none;
             }
         }
     }
@@ -395,13 +414,19 @@ header {
                       text-shadow: 0 0 5px $primary-color;
                       border-bottom-color: rgba($primary-color, 1);
                   }
+                  &:after {
+                    border-bottom: 2px solid $primary-color;
+                  }
                 }
                 &.active a {
-                    color: lighten($primary-color, 10);
+                    color: lighten($primary-color, 15);
                     &:hover {
                         color: lighten($primary-color, 15);
                         text-shadow: 0 0 5px $primary-color;
                         border-bottom-color: rgba($primary-color, 1);
+                    }
+                    &:after {
+                      border-bottom: 2px solid $primary-color;
                     }
                 }
 
@@ -453,6 +478,10 @@ header {
 
             &:hover {
                 color: lighten($secondary-color, 15);
+                text-shadow: 0 0 5px $secondary-color;
+            }
+            &:after {
+              display: none;
             }
           }
         }
@@ -468,7 +497,9 @@ footer {
   justify-content: center;
 
   a {
-      border-bottom: none;
+      &:after {
+        display: none;
+      }
   }
 }
 
