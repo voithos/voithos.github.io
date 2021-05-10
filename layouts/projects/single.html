@@ -16,13 +16,22 @@
           {{ .desc | markdownify }}
         </section>
 
-        {{ if .code_url }}
-        <section class="project-code">
-          <a class="link-button no-smoothstate" href="{{ .code_url }}">
-              <i class="fa fa-code"></i> Source Code
-          </a>
+        <section class="project-links">
+          {{ if .url }}
+          <div>
+            <a class="link-button no-smoothstate" href="{{ .url }}">
+                <i class="fa fa-link"></i> View Project
+            </a>
+          </div>
+          {{ end }}
+          {{ if .code_url }}
+          <div>
+            <a class="link-button no-smoothstate" href="{{ .code_url }}">
+                <i class="fa fa-code"></i> Source Code
+            </a>
+          </div>
+          {{ end }}
         </section>
-        {{ end }}
       </section>
     </section>
   </section>

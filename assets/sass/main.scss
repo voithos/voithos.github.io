@@ -263,7 +263,7 @@ h1[id] a, h2[id] a, h3[id] a {
 
     border: 1px solid darken($primary-color, 10);
     border-radius: 2rem;
-    background-color: $primary-color;
+    background-color: lighten($primary-color, 3);
     color: lighten($lowlight-color, 20);
     @include prefix(transition, all 0.2s ease-in-out);
     @include prefix(transition-property, color, border-radius, background-color, box-shadow);
@@ -582,8 +582,7 @@ main {
         background-color: $dark-color;
         background-color: rgba($dark-color, 0.5);
         padding: 1.5rem;
-        border-top: 1px solid $primary-color;
-        border-bottom: 1px solid $primary-color;
+        border-bottom: 2px solid $primary-color;
         @include prefix(transition, box-shadow 0.5s ease-out);
 
         &:hover {
@@ -609,9 +608,12 @@ main {
         }
 
         .project-image {
-            flex: 1;
+            flex: 1.61;
             padding: 1rem;
 
+            a, img {
+              width: 100%;
+            }
             img {
                 padding: 0;
                 @include prefix(box-shadow, 0 1px 3px 1px $dark-color);
@@ -629,9 +631,15 @@ main {
             flex-flow: column nowrap;
             justify-content: space-around;
 
-            .project-code {
+            .project-links {
                 padding: 2rem 0;
                 text-align: center;
+                div {
+                  padding: 0.5rem;
+                }
+                a {
+                  margin: 0 0.5rem;
+                }
             }
 
             @media screen and (max-width: 600px) {
