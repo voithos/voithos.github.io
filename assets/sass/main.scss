@@ -69,6 +69,8 @@ a {
       @include prefix(transition, width 0.3s ease);
     }
 
+    // Order matters: 'before' is a pseudo-element, whereas 'hover' is
+    // a pseudo-class
     &:hover:after {
       left: 0;
       width: 100%;
@@ -285,12 +287,28 @@ h1[id] a, h2[id] a, h3[id] a {
   border-bottom: 1px solid darken($primary-color, 5);
 }
 
+@include keyframes(rotatecw) {
+    0% {
+        @include prefix(transform, rotate(0deg));
+    }
+    100% {
+        @include prefix(transform, rotate(360deg));
+    }
+}
+@include keyframes(rotateccw) {
+    0% {
+        @include prefix(transform, rotate(360deg));
+    }
+    100% {
+        @include prefix(transform, rotate(0deg));
+    }
+}
+
 header {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-    overflow: hidden;
 
     text-transform: uppercase;
 
@@ -299,6 +317,7 @@ header {
     }
 
     .title {
+        position: relative;
         flex: initial;
         margin-bottom: 0;
 
@@ -312,6 +331,32 @@ header {
 
         @media screen and (max-width: 600px) {
             font-size: 2rem;
+        }
+
+        .spin {
+          position: absolute;
+
+          @include prefix(transition, all 0.3s);
+          @include prefix(animation-iteration-count, infinite);
+          @include prefix(animation-timing-function, linear);
+          border: 1px solid rgba($lowlight-color, 0);
+
+          left: 25%;
+          top: -30%;
+          width: 40px;
+          height: 40px;
+        }
+        .cw {
+          @include prefix(animation-name, rotatecw);
+          @include prefix(animation-duration, 2s);
+        }
+        .ccw {
+          @include prefix(animation-name, rotateccw);
+          @include prefix(animation-duration, 3s);
+        }
+        &:hover .spin {
+          border: 1px solid rgba($lowlight-color, 0.7);
+          @include prefix(box-shadow, 0 0 5px 0 rgba($lowlight-color, 0.7), inset 0 0 2px 0 rgba($lowlight-color, 0.7));
         }
 
         a {
