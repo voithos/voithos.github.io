@@ -1,6 +1,6 @@
 ---
-title: "Contact"
-type: "contact"
+title: "Me"
+type: "me"
 menu: "main"
 weight: 3
 ---
