@@ -52,7 +52,7 @@ a {
     @include prefix(transition, all 0.5s ease-out);
     @include prefix(transition-property, color, text-shadow);
 
-    &:hover {
+    &:hover, &:focus {
       color: lighten($contrast-color, 2);
       text-shadow: 0 0 5px $contrast-color;
     }
@@ -71,7 +71,7 @@ a {
 
     // Order matters: 'before' is a pseudo-element, whereas 'hover' is
     // a pseudo-class
-    &:hover:after {
+    &:hover:after, &:focus:after {
       left: 0;
       width: 100%;
     }
@@ -167,7 +167,7 @@ h1[id] a, h2[id] a, h3[id] a {
     color: $lowlight-color;
     position: relative;
 
-    &:hover {
+    &:hover, &:focus {
         color: $lowlight-color;
         text-shadow: 0 0 5px $lowlight-color;
         border-bottom: 2px solid $lowlight-color;
@@ -186,7 +186,7 @@ h1[id] a, h2[id] a, h3[id] a {
 
         // Order matters: 'before' is a pseudo-element, whereas 'hover' is
         // a pseudo-class
-        &:hover:before {
+        &:hover:before, &:focus:before {
             color: rgba($lowlight-color, 1);
         }
     }
@@ -268,7 +268,7 @@ h1[id] a, h2[id] a, h3[id] a {
     @include prefix(transition, all 0.2s ease-in-out);
     @include prefix(transition-property, color, border-radius, background-color, box-shadow);
 
-    &:hover {
+    &:hover, &:focus {
         border-radius: 0;
         background-color: lighten($primary-color, 8);
         color: #ECF9FD;
@@ -354,7 +354,7 @@ header {
           @include prefix(animation-name, rotateccw);
           @include prefix(animation-duration, 3s);
         }
-        &:hover .spin {
+        &:hover .spin, &:focus .spin {
           border: 1px solid rgba($lowlight-color, 0.7);
           @include prefix(box-shadow, 0 0 5px 0 rgba($lowlight-color, 0.7), inset 0 0 2px 0 rgba($lowlight-color, 0.7));
         }
@@ -363,7 +363,7 @@ header {
             color: $secondary-color;
             border-bottom: none;
 
-            &:hover {
+            &:hover, &:focus {
                 color: lighten($secondary-color, 15);
                 text-shadow: 0 0 10px $secondary-color;
             }
@@ -454,7 +454,7 @@ header {
                 a {
                   color: $light-color;
                   border-bottom-color: rgba($light-color, 0);
-                  &:hover {
+                  &:hover, &:focus {
                       color: lighten($primary-color, 15);
                       text-shadow: 0 0 5px $primary-color;
                       border-bottom-color: rgba($primary-color, 1);
@@ -465,7 +465,7 @@ header {
                 }
                 &.active a {
                     color: lighten($primary-color, 15);
-                    &:hover {
+                    &:hover, &:focus {
                         color: lighten($primary-color, 15);
                         text-shadow: 0 0 5px $primary-color;
                         border-bottom-color: rgba($primary-color, 1);
@@ -521,7 +521,7 @@ header {
             border-bottom: none;
             color: $secondary-color;
 
-            &:hover {
+            &:hover, &:focus {
                 color: lighten($secondary-color, 15);
                 text-shadow: 0 0 5px $secondary-color;
             }
@@ -561,7 +561,7 @@ main {
         > h2 a {
             color: $lowlight-color;
             border-bottom: none;
-            &:hover {
+            &:hover, &:focus {
                 text-shadow: 0 0 5px $lowlight-color;
             }
         }
@@ -585,7 +585,7 @@ main {
         border-bottom: 2px solid $primary-color;
         @include prefix(transition, box-shadow 0.5s ease-out);
 
-        &:hover {
+        &:hover, &:focus {
             @include prefix(box-shadow, 0 0 5px 1px $primary-color);
         }
 
