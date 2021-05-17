@@ -97,6 +97,7 @@ code {
 
 img {
     padding: 2rem;
+    @include prefix(box-shadow, 0 1px 3px 1px $dark-color);
 
     @media screen and (max-width: 600px) {
         padding: 1rem;
@@ -621,7 +622,6 @@ main {
             }
             img {
                 padding: 0;
-                @include prefix(box-shadow, 0 1px 3px 1px $dark-color);
             }
 
             @media screen and (max-width: 600px) {
@@ -649,6 +649,51 @@ main {
 
             @media screen and (max-width: 600px) {
                 padding: 0.5rem;
+            }
+        }
+    }
+}
+
+// Art
+//
+.art {
+    .art-piece {
+        background-color: $dark-color;
+        background-color: rgba($dark-color, 0.5);
+
+        display: flex;
+        flex-flow: row nowrap;
+        border-bottom: 1px solid $primary-color;
+        padding: 2rem 0;
+
+        @media screen and (max-width: 750px) {
+            flex-direction: column;
+        }
+
+        .art-image {
+            flex: 2.59;
+            padding: 1rem;
+
+            a, img {
+              width: 100%;
+            }
+            img {
+                padding: 0;
+            }
+
+            @media screen and (max-width: 600px) {
+                padding: 0.5rem;
+            }
+        }
+
+        .art-desc {
+            flex: 1;
+            .art-desc-text {
+              padding: 2.5rem 1rem;
+
+              @media screen and (max-width: 600px) {
+                  padding: 0.5rem;
+              }
             }
         }
     }

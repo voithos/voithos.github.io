@@ -1,5 +1,16 @@
 {{ define "main" }}
 <main class="art">
-  Writing
+  {{ range .Site.Data.art }}
+  <section class="art-piece">
+    <section class="art-image">
+      <img alt="{{ .name }}" src="/img/art/{{ .img }}">
+    </section>
+    <section class="art-desc">
+      <section class="art-desc-text">
+        {{ .desc | markdownify }}
+      </section>
+    </section>
+  </section>
+  {{ end }}
 </main>
 {{ end }}
