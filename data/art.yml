@@ -1,9 +1,44 @@
-- name:     Rock Lee
+- name:     ロック・リー。
   img:      rock_lee.png
   desc: >
-    ロック・リー。A study of a piece by @humanmgn.
+    Rock Lee. A study of a piece by @humanmgn.
 
-- name:     Hinata
+- name:     日向ヒナタ。
   img:      hinata.png
   desc: >
-    日向ヒナタ。Hyuuga Hinata. A study of a piece by @humanmgn.
+    Hyuuga Hinata. A study of a piece by @humanmgn.
+
+- name:     Storm dragon.
+  img:      storm.png
+  desc: >
+    Inktober 2020, #17 - Storm. A study.
+
+- name:     Kwisatz Haderach.
+  img:      dune.png
+  desc: >
+    Inktober 2020, #13 - Dune. A study.
+
+- name:     Nice hat.
+  img:      fancy.png
+  desc: >
+    Inktober 2020, #07 - Fancy. A study.
+
+- name:     武士道。
+  img:      blade.png
+  desc: >
+    Bushido. Inktober 2020, #05 - Blade. A study.
+
+- name:     Fallen knight.
+  img:      ash_knight.png
+  desc: >
+    Inktober 2019, #13 - Ash.
+
+- name:     Do not fear the dark.
+  img:      dark.png
+  desc: >
+    Inktober 2019, #26 - Dark.
+
+- name:     Unknown footprint.
+  img:      tread.png
+  desc: >
+    Inktober 2019, #20 - Tread.

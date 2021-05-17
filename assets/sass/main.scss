@@ -688,6 +688,9 @@ main {
 
         .art-desc {
             flex: 1;
+            .art-title {
+              font-style: italic;
+            }
             .art-desc-text {
               padding: 2.5rem 1rem;
 
