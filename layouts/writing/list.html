@@ -5,14 +5,16 @@
       <section class="writing-title">
         <a href="{{.Permalink}}">{{.Title}}</a>
       </section>
+      {{ if .Description }}
       <section class="writing-description">
-        {{ .Description | markdownify }}
+        <blockquote>{{ .Description | markdownify }}</blockquote>
+      </section>
+      {{ end }}
+      <section class="writing-tags">
+        {{ delimit .Params.tags ", " }}
       </section>
       <section class="writing-words">
         {{ .Content | countwords }} words
-      </section>
-      <section class="writing-tags">
-        {{ delimit .Params.tags ", " }}
       </section>
     </section>
   {{ end }}

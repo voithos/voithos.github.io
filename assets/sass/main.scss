@@ -582,7 +582,6 @@ main {
 
 // Code
 //
-
 .projects {
     .project {
         background-color: $dark-color;
@@ -652,6 +651,36 @@ main {
             }
         }
     }
+}
+
+// Writing
+//
+.writing {
+  .writing-blurb {
+    background-color: $dark-color;
+    background-color: rgba($dark-color, 0.5);
+
+    border-bottom: 1px solid $primary-color;
+    padding: 2rem 10rem;
+    text-align: center;
+
+    .writing-title {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .writing-description blockquote {
+      margin: 1.5rem 0;
+      padding: 0 4rem;
+    }
+
+    .writing-words, .writing-tags {
+      text-align: right;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: lighten($lowlight-color, 15);
+    }
+  }
 }
 
 // Art
