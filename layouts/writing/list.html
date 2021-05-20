@@ -1,0 +1,20 @@
+{{ define "main" }}
+<main class="writing writing-list">
+  {{ range .Pages }}
+    <section class="writing-blurb">
+      <section class="writing-title">
+        <a href="{{.Permalink}}">{{.Title}}</a>
+      </section>
+      <section class="writing-description">
+        {{ .Description | markdownify }}
+      </section>
+      <section class="writing-words">
+        {{ .Content | countwords }} words
+      </section>
+      <section class="writing-tags">
+        {{ delimit .Params.tags ", " }}
+      </section>
+    </section>
+  {{ end }}
+</main>
+{{ end }}
