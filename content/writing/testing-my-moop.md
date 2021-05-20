@@ -9,8 +9,6 @@ tags:
 weight: 100
 ---
 
-# Testing my moop
-
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua. Facilisis leo vel fringilla est
 ullamcorper eget nulla facilisi. At imperdiet dui accumsan sit amet nulla

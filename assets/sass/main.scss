@@ -665,7 +665,7 @@ main {
     text-align: center;
 
     .writing-title {
-      font-size: 2rem;
+      font-size: 1.9rem;
       margin-bottom: 1rem;
     }
 
@@ -680,6 +680,25 @@ main {
       font-style: italic;
       color: lighten($lowlight-color, 15);
     }
+  }
+}
+.writing-single {
+  background-color: $dark-color;
+  background-color: rgba($dark-color, 0.5);
+
+  line-height: 1.5;
+  padding: 1rem;
+
+  .writing-title {
+    text-align: center;
+    color: lighten($lowlight-color, 15);
+  }
+  hr {
+    border-color: $lowlight-color;
+  }
+
+  .writing-text {
+    padding: 1rem;
   }
 }
 

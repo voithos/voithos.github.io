@@ -1,5 +1,9 @@
 {{ define "main" }}
 <main class="writing writing-single">
-  {{ .Content }}
+  <h1 class="writing-title">{{ .Title }}</h1>
+  <hr>
+  <section class="writing-text">
+    {{ .Content }}
+  </section>
 </main>
 {{ end }}
