@@ -1,3 +1,12 @@
+- name:     muon
+  class:    project-muon
+  img:      muon.png
+  url:      https://github.com/voithos/muon
+  desc: >
+    A physically based path tracer written in C++. Supports several material
+    models, CPU multithreading, BRDF importance sampling and multiple
+    importance sampling.
+
 - name:     DRIFTWORLD
   class:    project-driftworld
   img:      driftworld.png
@@ -24,7 +33,7 @@
   code_url: https://github.com/voithos/graviton
   desc: >
     A gravitational simulation toy that was built to explore the Barnes-Hut
-    simulation algorithm, as well as explore the HTML5 `canvas` element.
+    simulation algorithm, as well as to explore the HTML5 `canvas` element.
 
 - name:     endgame
   class:    project-endgame
