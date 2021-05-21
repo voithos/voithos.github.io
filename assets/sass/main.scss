@@ -753,6 +753,8 @@ main {
 // Me
 //
 .me {
+    padding: 0 6rem;
+
     @media screen and (max-width: 600px) {
         padding-bottom: 1rem;
     }
@@ -770,6 +772,14 @@ main {
     hr {
         border-color: $lowlight-color;
         margin-bottom: 2rem;
+    }
+
+    .name {
+      color: $secondary-color;
+    }
+
+    .keyword {
+      color: lighten($lowlight-color, 5);
     }
 }
 

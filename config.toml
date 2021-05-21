@@ -1,3 +1,6 @@
 baseURL = "https://voithos.io/"
 languageCode = "en-us"
 title = "voithos.io"
+
+[markup.goldmark.renderer]
+unsafe = true

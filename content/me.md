@@ -5,29 +5,22 @@ menu: "main"
 weight: 3
 ---
 
-## Hi there! I'm Zaven.
+## Hi there! I'm <span class="name">Zaven</span>.
 
 ---
 
-I'm a software developer living in the pleasant Seattle area with my
-wonderful wife Daisy.
+I'm a software engineer living in the pleasant Seattle area with my
+best friend Daisy ([who is _**amazing**_!](https://ladychamomile.ink/)).
 
+I like creating things!
 
-I find most things mathematical, scientific, or technological to be highly
-interesting, but I am *particularly* fascinated (enthralled, even) by
-computer science and programming. I enjoy learning about various such topics,
-and building interesting things based on what I learn.
+I'm hugely interested in <span class="keyword">game dev</span> and
+<span class="keyword">graphics programming</span>, and love the idea of
+creating interactive visual worlds. I'm inspired by great storytelling,
+whatever the medium, and enjoy [writing]({{< ref "/writing" >}}), [creating
+art]({{< ref "/art" >}}), and aspiring to tell stories of my own.
 
+Want to say hello? Shoot me an [email](mailto:zaven@voithos.io) or tweet at
+[@voithoz](https://twitter.com/voithoz)!
 
-If, perchance, anything here is interesting or useful to you, then feel free
-to copy, share, or extend it -- the content is all under
-[CC-BY](http://creativecommons.org/licenses/by/4.0/).
-
-
-I use the name `"voithos"` on most sites. If you'd like, you can send me an
-[email](mailto:zaven@voithos.io) or tweet at
-[@voithoz](https://twitter.com/voithoz). You can also check out some of my
-projects on [GitHub](https://github.com/voithos/).
-
-
-Thanks for reading, and have a nice day!
+<span class="keyword">以上！</span>
