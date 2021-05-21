@@ -1,7 +1,7 @@
 ---
 title: "The Call of the Giant"
 type: writing
-description: "TODO"
+description: "Reid. Dag. Othila. Geb. Naud."
 tags:
 - short story
 - fantasy

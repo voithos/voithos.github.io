@@ -1,7 +1,7 @@
 ---
 title: "Gift"
 type: writing
-description: "TODO"
+description: "The smallest voice can be the greatest balm."
 tags:
 - microfiction
 date: "2021-03-23"

@@ -1,7 +1,7 @@
 ---
 title: "The Messenger"
 type: writing
-description: "TODO"
+description: "Let Truth cut through the veil."
 tags:
 - short story
 - fantasy

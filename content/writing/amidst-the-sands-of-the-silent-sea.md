@@ -1,7 +1,7 @@
 ---
 title: "Amidst the Sands of the Silent Sea"
 type: writing
-description: TODO
+description: "The blinding light, the deafening silence. Was that memory really mine?"
 tags:
 - short story
 - fantasy
