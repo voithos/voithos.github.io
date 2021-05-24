@@ -16,9 +16,15 @@
   {{ $cssOpts := (dict "enableSourceMap" true ) }}
   {{ $style := resources.Get "sass/main.scss" | resources.ToCSS $cssOpts }}
   <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+
+  {{ $js := resources.Get "js/index.js" | js.Build }}
+  <script type="text/javascript" src="{{ $js.RelPermalink }}" defer></script>
 {{ else }}
   {{ $style := resources.Get "sass/main.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+
+  {{ $js := resources.Get "js/index.js" | js.Build | resources.Minify | resources.Fingerprint }}
+  <script type="text/javascript" src="{{ $js.RelPermalink }}" defer></script>
 {{ end }}
 
 

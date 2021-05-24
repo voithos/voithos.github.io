@@ -1,0 +1,11 @@
+{
+  "name": "voithos.github.io",
+  "version": "1.0.0",
+  "description": "Personal site of Zaven Muradyan.",
+  "license": "UNLICENSED",
+  "homepage": "https://voithos.io",
+  "private": true,
+  "dependencies": {
+    "three": "~0.128.0"
+  }
+}
