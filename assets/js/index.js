@@ -22,6 +22,8 @@ function createBackdrop() {
   };
   uniforms.iResolution.value.x = window.innerWidth;
   uniforms.iResolution.value.y = window.innerHeight;
+  uniforms.iMouse.value.x = window.innerWidth / 2;
+  uniforms.iMouse.value.y = window.innerHeight / 2;
 
   const vert = `
   void main() {
@@ -46,7 +48,7 @@ function createBackdrop() {
     // Mouse input.
     vec2 mouseCoords = iMouse.xy / iResolution.xy;
     vec2 ndcMouse = -1.0 + 2.0 * mouseCoords;
-    vec2 mouseOffset = ndcMouse * 0.1;
+    vec2 mouseOffset = ndcMouse * 0.8;
 
     // Camera.
     vec3 rho = vec3(sin(iTime * 0.16), 0, cos(iTime * 0.1));
@@ -98,16 +100,18 @@ function createBackdrop() {
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
 
+  const targetMousePos =
+      new THREE.Vector2(window.innerWidth / 2, window.innerHeight / 2);
   window.addEventListener('mousemove', (e) => {
-    uniforms.iMouse.value.x = e.clientX;
-    uniforms.iMouse.value.y = e.clientY;
+    targetMousePos.x = e.clientX;
+    targetMousePos.y = e.clientY;
   });
 
   // Animation.
   function animate() {
     requestAnimationFrame(animate);
-
     uniforms.iTime.value += clock.getDelta();
+    uniforms.iMouse.value.lerp(targetMousePos, 0.02);
     renderer.render(scene, camera);
   }
   animate();
