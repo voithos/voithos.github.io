@@ -6,11 +6,13 @@
   </head>
   <body>
     {{- partial "header.html" . -}}
-    <section id="main" class="site-container smooth-scene">
+    {{- block "parent-container" . }}
+    <section id="main" class="parent-content site-container smooth-scene">
       <section class="scene-element scene-element--fadein">
         {{- block "main" . }}{{ .Content }}{{- end }}
-        {{- partial "footer.html" . -}}
+        {{- block "footer" . }}{{- partial "footer.html" . -}}{{- end }}
       </section>
     </section>
+    {{- end }}
   </body>
 </html>

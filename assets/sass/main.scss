@@ -556,8 +556,10 @@ footer {
 
 // Main
 //
-main {
-  margin: 2rem 0;
+.parent-content {
+  padding: 1.5rem 0;
+  background-color: $dark-color;
+  background-color: rgba($dark-color, 0.95);
 }
 
 // Index
@@ -584,8 +586,6 @@ main {
 //
 .projects {
     .project {
-        background-color: $dark-color;
-        background-color: rgba($dark-color, 0.5);
         padding: 1.5rem;
         border-bottom: 2px solid $primary-color;
         @include prefix(transition, box-shadow 0.5s ease-out);
@@ -657,9 +657,6 @@ main {
 //
 .writing {
   .writing-blurb {
-    background-color: $dark-color;
-    background-color: rgba($dark-color, 0.5);
-
     border-bottom: 1px solid $primary-color;
     padding: 2rem 10rem;
     text-align: center;
@@ -683,9 +680,6 @@ main {
   }
 }
 .writing-single {
-  background-color: $dark-color;
-  background-color: rgba($dark-color, 0.5);
-
   line-height: 1.5;
   padding: 1rem;
 
@@ -706,9 +700,6 @@ main {
 //
 .art {
     .art-piece {
-        background-color: $dark-color;
-        background-color: rgba($dark-color, 0.5);
-
         display: flex;
         flex-flow: row nowrap;
         border-bottom: 1px solid $primary-color;
