@@ -12,6 +12,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&family=Oxygen+Mono&display=swap" rel="stylesheet">
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha512-DUC8yqWf7ez3JD1jszxCWSVB0DMP78eOyBpMa5aJki1bIRARykviOuImIczkxlj1KhVSyS16w2FSQetkD4UU2w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/smoothState.js/0.7.2/jquery.smoothState.min.js" integrity="sha512-PA88Ew5anBQLPlovdwOOMj+Ky0x+M6a6bDXYve4q+NDj17AJ37FwHT4Xo758ZQqYKLyvaYko27cQDQ5P/0kOJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 {{ if .Site.IsServer }}
   {{ $cssOpts := (dict "enableSourceMap" true ) }}
   {{ $style := resources.Get "sass/main.scss" | resources.ToCSS $cssOpts }}

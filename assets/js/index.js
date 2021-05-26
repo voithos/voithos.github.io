@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-
 import {WEBGL} from 'three/examples/jsm/WebGL.js';
 
 function createBackdrop() {
@@ -117,9 +116,50 @@ function createBackdrop() {
   animate();
 }
 
+function enableSmoothState() {
+  const $ = jQuery;
+
+  let smoothState;
+  const options = {
+    debug : true,
+    scroll : false,
+    prefetch : true,
+    cacheLength : 2,
+    onStart : {
+      duration : 300,
+      render : ($container) => {
+        $('html, body').animate({scrollTop : 0});
+        // Reverse CSS animations.
+        $container.addClass('is-exiting');
+        smoothState.restartCSSAnimations();
+      },
+    },
+    onReady : {
+      duration : 0,
+      render : ($container, $newContent) => {
+        // Remove reversing animations, and inject new content.
+        $container.removeClass('is-exiting');
+        $container.html($newContent);
+      },
+    },
+    onAfter : () => {
+      // Analytics.
+      if (typeof ga !== 'undefined') {
+        ga('set', 'page', window.location.pathname);
+        ga('send', 'pageview');
+      }
+    },
+  };
+  smoothState = $('#main').smoothState(options).data('smoothState');
+}
+
 if (WEBGL.isWebGLAvailable()) {
   createBackdrop();
 } else {
   console.warn(
       'Browser does not support WebGL; defaulting to static background');
+}
+
+if (typeof jQuery !== 'undefined') {
+  enableSmoothState();
 }
