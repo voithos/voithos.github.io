@@ -872,11 +872,12 @@ article {
 }
 
 .err404 {
-    h2 {
-        color: $lowlight-color;
-        font-size: 2.8rem;
-        text-align: center;
-    }
+  padding: 0 6rem;
+  h2 {
+      color: $lowlight-color;
+      font-size: 2.8rem;
+      text-align: center;
+  }
 }
 
 .backdrop {
