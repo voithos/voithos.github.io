@@ -1,42 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>voithos.io</title>
-    <link>https://voithos.io/</link>
-    <description>Recent content on voithos.io</description>
+    <title>Writing on voithos.io</title>
+    <link>https://voithos.io/writing/</link>
+    <description>Recent content in Writing on voithos.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 23 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://voithos.io/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Code</title>
-      <link>https://voithos.io/code/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://voithos.io/code/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Art</title>
-      <link>https://voithos.io/art/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://voithos.io/art/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Me</title>
-      <link>https://voithos.io/me/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://voithos.io/me/</guid>
-      <description>Hi there! I&amp;rsquo;m Zaven.  I&amp;rsquo;m a software engineer living in the pleasant Seattle area with my best friend Daisy (who is amazing!).
-I like creating things!
-I&amp;rsquo;m hugely interested in game dev and graphics programming, and love the idea of creating interactive visual worlds. I&amp;rsquo;m inspired by great storytelling, whatever the medium, and enjoy writing, creating art, and aspiring to tell stories of my own.
-Want to say hello? Shoot me an email or tweet at @voithoz!</description>
-    </item>
-    
+    <lastBuildDate>Tue, 23 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://voithos.io/writing/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Gift</title>
       <link>https://voithos.io/writing/gift/</link>
