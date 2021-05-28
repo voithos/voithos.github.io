@@ -299,6 +299,10 @@ h1[id] a, h2[id] a, h3[id] a {
 .header-box {
   background-color: $dark-color;
   border-bottom: 1px solid darken($primary-color, 5);
+  
+  @media screen and (max-width: 1300px) {
+    padding: 0 1rem;
+  }
 }
 
 @include keyframes(rotatecw) {
@@ -339,12 +343,8 @@ header {
         font-size: $header-font-size;
         font-weight: bold;
 
-        @media screen and (max-width: 1024px) {
-            font-size: 3rem;
-        }
-
         @media screen and (max-width: 600px) {
-            font-size: 2rem;
+            font-size: 1.5rem;
         }
 
         .spin {
@@ -396,7 +396,7 @@ header {
         border: 1px solid darken($primary-color, 5);
         border-radius: 0.4rem;
         margin-right: 1rem;
-        top: -0.7rem;
+        top: -0.5rem;
         background-color: $primary-color;
 
         @media screen and (max-width: 600px) {
@@ -423,8 +423,7 @@ header {
         }
 
         &:checked ~ nav {
-            max-height: 8rem;
-            margin-bottom: 1rem;
+            max-height: 10rem;
         }
     }
 
@@ -439,12 +438,13 @@ header {
         top: -0.7rem;
 
         @media screen and (max-width: 600px) {
-            overflow: hidden;
-            flex: 1 100%;
-            margin-bottom: 0rem;
-            max-height: 0rem;
-            @include prefix(transition, all 0.7s ease-in-out);
-            @include prefix(transition-property, max-height, margin-bottom);
+          top: 0;
+          overflow: hidden;
+          flex: 1 100%;
+          margin-bottom: 0rem;
+          max-height: 0rem;
+          @include prefix(transition, all 0.7s ease-in-out);
+          @include prefix(transition-property, max-height, margin-bottom);
         }
 
         ul {
@@ -489,12 +489,6 @@ header {
                     }
                 }
 
-                @media screen and (max-width: 1024px) {
-                    margin: 1.2rem;
-                }
-                @media screen and (max-width: 750px) {
-                    margin: 0.6rem;
-                }
                 @media screen and (max-width: 600px) {
                     background-color: $dark-color;
                     background-color: rgba($dark-color, 0.75);
@@ -529,6 +523,26 @@ header {
           li {
             margin: 1.25rem 0.25rem;
             margin-bottom: 0;
+          }
+
+          @media screen and (max-width: 600px) {
+            flex: auto;
+            margin-bottom: 0;
+
+            ul {
+              justify-content: center;
+              flex: auto;
+              width: auto;
+              flex-direction: row;
+              text-align: center;
+              border-top: none;
+              border-bottom: none;
+            }
+            li {
+              border-top: none;
+              border-bottom: none;
+              margin: 0.75rem 0.5rem;
+            }
           }
 
           a {
@@ -607,8 +621,18 @@ footer {
     text-transform: uppercase;
     font-size: 4rem;
     letter-spacing: 2.5rem;
-    color: lighten($lowlight-color, 10);
+    color: lighten($lowlight-color, 20);
     text-shadow: 0px 0px 15px $primary-color, 4px 4px 4px $dark-color, -4px -4px 4px $dark-color;
+
+    @media screen and (max-width: 1200px) {
+      font-size: 2.2rem;
+      letter-spacing: 1.0rem;
+    }
+    @media screen and (max-width: 600px) {
+      font-size: 1.8rem;
+      letter-spacing: 0.5rem;
+      text-shadow: 0px 0px 5px $primary-color, 2px 2px 2px $dark-color, -2px -2px 2px $dark-color;
+    }
   }
 }
 
@@ -690,6 +714,13 @@ footer {
     border-bottom: 1px solid $primary-color;
     padding: 2rem 10rem;
     text-align: center;
+
+    @media screen and (max-width: 900px) {
+      padding: 1rem 3rem;
+    }
+    @media screen and (max-width: 600px) {
+      padding: 1rem 1.5rem;
+    }
 
     .writing-title {
       font-size: 1.9rem;
@@ -776,8 +807,8 @@ footer {
 .me {
     padding: 0 6rem;
 
-    @media screen and (max-width: 600px) {
-        padding-bottom: 1rem;
+    @media screen and (max-width: 900px) {
+      padding: 0 3rem;
     }
 
     h2 {
@@ -873,6 +904,12 @@ article {
 
 .err404 {
   padding: 0 6rem;
+  @media screen and (max-width: 900px) {
+    padding: 0 3rem;
+  }
+  @media screen and (max-width: 600px) {
+    padding: 0 1.5rem;
+  }
   h2 {
       color: $lowlight-color;
       font-size: 2.8rem;
