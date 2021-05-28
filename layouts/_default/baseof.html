@@ -7,14 +7,14 @@
   <body>
     <section id="main" class="smooth-scene">
       {{- partial "header.html" . -}}
+      {{- block "site-container" . }}
       <section class="site-container">
-        {{- block "parent-container" . }}
         <section class="parent-content scene-element scene-element--fadein">
           {{- block "main" . }}{{ .Content }}{{- end }}
           {{- block "footer" . }}{{- partial "footer.html" . -}}{{- end }}
         </section>
-        {{- end }}
       </section>
+      {{- end }}
     </section>
   </body>
 </html>

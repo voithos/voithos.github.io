@@ -6,7 +6,7 @@ function createBackdrop() {
   const camera = new THREE.PerspectiveCamera(
       90, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-  const renderer = new THREE.WebGLRenderer({antialias : true});
+  const renderer = new THREE.WebGLRenderer({antialias : false});
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   // Add canvas to body.
@@ -33,10 +33,6 @@ function createBackdrop() {
   uniform float iTime;
   uniform vec2 iResolution;
   uniform vec2 iMouse;
-
-  float hash(float n) {
-    return fract(sin(n) * 43.5453);
-  }
 
   void main() {
     vec2 coord = gl_FragCoord.xy / iResolution.xy;
@@ -66,7 +62,7 @@ function createBackdrop() {
       vec3 p = rho + rd * s;
       for (float i = 0.1; i < 1.0; i += 0.12) {
         // Magic
-        p = abs(p) / dot(p + sin(iTime * 0.1) * 0.1, p) - 0.5;
+        p = abs(p) / dot(p + sin(iTime * 0.09) * 0.1, p) - 0.5;
         float a = length(p);
         v += vec3(pow(i, 2.0), pow(i, 1.2), pow(i, 1.0)) * a * 0.12;
       }
