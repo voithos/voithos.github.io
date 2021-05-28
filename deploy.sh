@@ -14,6 +14,9 @@ pushd "${clone_dir}" > /dev/null
 git clone -q "${repo_dir}" .
 git checkout "source"
 
+echo "Installing npm dependencies"
+npm install
+
 echo "Compiling to ${tmp_dir}"
 hugo -d "${tmp_dir}"
 
