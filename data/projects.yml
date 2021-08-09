@@ -7,6 +7,16 @@
     models, CPU multithreading, BRDF importance sampling and multiple
     importance sampling.
 
+- name:     OoboloO
+  class:    project-ooboloo
+  img:      ooboloo.png
+  url:      https://levilindsey.itch.io/ooboloo
+  code_url: https://github.com/levilindsey/global-game-jam-2021/
+  desc: >
+    You're a slime that's lost some of your blobs! A limited-jump platformer
+    made by my team for [Global Game Jam
+    2021](https://globalgamejam.org/2021/games/ooboloo-2).
+
 - name:     DRIFTWORLD
   class:    project-driftworld
   img:      driftworld.png
