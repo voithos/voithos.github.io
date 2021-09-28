@@ -1,3 +1,12 @@
+- name:     SoulBurst
+  class:    project-soulburst
+  img:      soulburst.png
+  url:      https://voithos.itch.io/soulburst
+  code_url: https://github.com/voithos/SoulBurst
+  desc: >
+    An "infinite flyer" prototype built in Unreal Engine. Fly through a cyber
+    city at high speeds and achieve the highest score that you can!
+
 - name:     neoncycles
   class:    project-neoncycles
   img:      neoncycles.png
