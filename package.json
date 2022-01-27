@@ -6,6 +6,6 @@
   "homepage": "https://voithos.io",
   "private": true,
   "dependencies": {
-    "three": "~0.128.0"
+    "three": "~0.137.0"
   }
 }
