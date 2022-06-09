@@ -1,3 +1,8 @@
+- name:     Rainier.
+  img:      rainier.png
+  desc: >
+    Mt. Rainier, pixel art.
+
 - name:     ロック・リー。
   img:      rock_lee.png
   desc: >
@@ -37,8 +42,3 @@
   img:      dark.png
   desc: >
     Inktober 2019, #26 - Dark.
-
-- name:     Unknown footprint.
-  img:      tread.png
-  desc: >
-    Inktober 2019, #20 - Tread.
