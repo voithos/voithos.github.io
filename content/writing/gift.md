@@ -1,7 +1,7 @@
 ---
 title: "Gift"
 type: writing
-description: "Lights grows inside you. But will you make it your own?"
+description: "Light grows inside you. But will you make it your own?"
 tags:
 - microfiction
 date: "2021-03-23"
