@@ -1,4 +1,4 @@
 # TODOs
 
 - Run Lighthouse / detect broken links, etc, on final site
-- Update Instagram
+- Allow disabling animations
