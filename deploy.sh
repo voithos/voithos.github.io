@@ -2,6 +2,8 @@
 
 # Exit on errors.
 set -e
+# Print commands as they run.
+set -x
 
 # First clone the source repo so that we don't affect the current checked out
 # state.
@@ -22,7 +24,7 @@ hugo -d "${tmp_dir}"
 
 echo "Copying to master"
 git checkout master
-rsync -az --delete --filter='P .git' "${tmp_dir}/" .
+rsync -az --delete --filter "P .git" "${tmp_dir}/" ./
 git add -A
 git commit -m "Sync raw from source."
 git push "${repo_dir}" master
