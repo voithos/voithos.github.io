@@ -1,3 +1,13 @@
+- name:     Coloroid
+  class:    project-coloroid
+  img:      coloroid.png
+  url:      https://voithos.itch.io/coloroid
+  code_url: https://github.com/voithos/coloroid
+  desc: >
+    A Metroidvania-like platformer made for [GMTK Game Jam
+    2022](https://itch.io/jam/gmtk-jam-2022). Find your Weapon Cores to gain
+    new abilities, then take on the remaining monsters and find an exit!
+
 - name:     Uchi no Ki
   class:    project-uchinoki
   img:      uchinoki.png
