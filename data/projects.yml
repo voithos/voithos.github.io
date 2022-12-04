@@ -8,6 +8,16 @@
     2022](https://itch.io/jam/gmtk-jam-2022). Find your Weapon Cores to gain
     new abilities, then take on the remaining monsters and find an exit!
 
+- name:     Tale of Two Sides
+  class:    project-tale-of-two-sides
+  img:      tale-of-two-sides.png
+  url:      https://voithos.itch.io/tale-of-two-sides
+  code_url: https://github.com/voithos/tale-of-two-sides
+  desc: >
+    Restore the shattered isles! A gravity-reversing platformer made by my team
+    for [Global Game Jam
+    2022](https://globalgamejam.org/2022/games/tale-two-sides-2).
+
 - name:     Uchi no Ki
   class:    project-uchinoki
   img:      uchinoki.png
