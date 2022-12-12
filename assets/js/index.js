@@ -7,7 +7,15 @@ class ShaderBackdrop {
     this.camera = new THREE.PerspectiveCamera(
         90, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-    this.renderer = new THREE.WebGLRenderer({antialias : false});
+    try {
+      this.renderer = new THREE.WebGLRenderer(
+          {antialias : false, failIfMajorPerformanceCaveat : true});
+    } catch (ex) {
+      // WebGL unsupported, or running on software rendering.
+      console.log(ex);
+      this.rendererFailure = true;
+      return;
+    }
     this.renderer.setSize(window.innerWidth, window.innerHeight);
 
     // Add canvas to body.
@@ -105,6 +113,9 @@ class ShaderBackdrop {
   }
 
   enable() {
+    if (this.rendererFailure) {
+      return;
+    }
     if (this.isRunning) {
       return;
     }
@@ -114,6 +125,9 @@ class ShaderBackdrop {
   }
 
   fadeIn() {
+    if (this.rendererFailure) {
+      return;
+    }
     if (this.isRunning) {
       return;
     }
@@ -137,6 +151,9 @@ class ShaderBackdrop {
 
   animate() {
     // Handle start and stop states.
+    if (this.rendererFailure) {
+      return;
+    }
     if (!this.isRunning) {
       return;
     }
