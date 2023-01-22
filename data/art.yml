@@ -1,3 +1,13 @@
+- name:     Lights.
+  img:      lights.gif
+  desc: >
+    Lights, pixel art.
+
+- name:     Mirage.
+  img:      mirage.png
+  desc: >
+    Mirage, pixel art.
+
 - name:     Rainier.
   img:      rainier.png
   desc: >
@@ -27,11 +37,6 @@
   img:      fancy.png
   desc: >
     Inktober 2020, #07 - Fancy. A study.
-
-- name:     武士道。
-  img:      blade.png
-  desc: >
-    Bushido. Inktober 2020, #05 - Blade. A study.
 
 - name:     Fallen knight.
   img:      ash_knight.png
