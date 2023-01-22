@@ -1,3 +1,10 @@
+- name:     quarkGL
+  class:    project-quarkgl
+  img:      quarkgl.png
+  url:      https://github.com/voithos/quarkGL
+  desc: >
+    A PBR OpenGL renderer and graphics library.
+
 - name:     Coloroid
   class:    project-coloroid
   img:      coloroid.png
