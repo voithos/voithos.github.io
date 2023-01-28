@@ -10,9 +10,11 @@
         <blockquote>{{ .Description | markdownify }}</blockquote>
       </section>
       {{ end }}
+      {{ if .Params.tags }}
       <section class="writing-tags">
         {{ delimit .Params.tags ", " }}
       </section>
+      {{ end }}
       <section class="writing-words">
         {{ .Content | countwords }} words
       </section>
