@@ -18,8 +18,9 @@ class ShaderBackdrop {
     }
     this.renderer.setSize(window.innerWidth, window.innerHeight);
 
-    // Add canvas to body.
+    // Add canvas to body and hide by default.
     this.renderer.domElement.className = 'backdrop';
+    this.renderer.domElement.style.opacity = '0';
     document.body.appendChild(this.renderer.domElement);
 
     // Set up scene and shader.
@@ -340,6 +341,8 @@ void main() {
     }
     this.isRunning = true;
     this.isFading = false;
+    this.currentOpacity = 1.0;
+    this.renderer.domElement.style.opacity = this.currentOpacity.toString();
     this.animate();
   }
 
@@ -358,7 +361,12 @@ void main() {
     this.animate();
   }
 
-  disable() { this.isRunning = false; }
+  disable() {
+    this.isRunning = false;
+    this.isFading = false;
+    this.currentOpacity = 0.0;
+    this.renderer.domElement.style.opacity = this.currentOpacity.toString();
+  }
 
   fadeOut() {
     this.isFading = true;
