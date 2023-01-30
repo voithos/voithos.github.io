@@ -295,6 +295,17 @@ h1[id] a, h2[id] a, h3[id] a {
     }
 }
 
+.keyword {
+  color: saturate($lowlight-color, 15);
+}
+
+.pill {
+  color: $dark-color;
+  background-color: $lowlight-color;
+  padding: 0.3em 0.6em;
+  border-radius: 1.0em;
+  vertical-align: middle;
+}
 
 // Header
 //
@@ -640,6 +651,70 @@ footer {
   }
 }
 
+// Articles
+//
+.parent-content.articles-list-parent {
+  background: none;
+}
+.articles {
+  max-width: 50rem;
+
+  .article-blurb {
+    border: 2px solid $primary-color;
+    border-radius: 1rem;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+
+    background-color: $dark-color;
+    background-color: rgba($dark-color, 0.95);
+
+    @media screen and (max-width: 1024px) {
+      padding: 1rem 2rem;
+      margin: 0 2rem 2rem 2rem;
+    }
+    @media screen and (max-width: 600px) {
+      padding: 1rem 1.5rem;
+    }
+
+    .article-title {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+      .article-draft {
+        color: $lowlight-color;
+      }
+    }
+
+    .article-description {
+      font-size: 1.2rem;
+      margin: 0.4rem 0;
+    }
+  }
+}
+.article-meta {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+
+  @media screen and (max-width: 750px) {
+    flex-direction: column;
+  }
+
+  .article-stats {
+    font-size: 1.15rem;
+    font-style: italic;
+    color: lighten($lowlight-color, 15);
+  }
+  .article-tags {
+    text-align: right;
+    font-size: 0.9rem;
+
+    @media screen and (max-width: 750px) {
+      text-align: left;
+      margin-top: 0.6rem;
+    }
+  }
+}
+
 // Code
 //
 .projects {
@@ -715,7 +790,7 @@ footer {
 //
 .writing {
   .writing-blurb {
-    border-bottom: 1px solid $primary-color;
+    border-bottom: 2px solid $primary-color;
     padding: 2rem 10rem;
     text-align: center;
 
@@ -767,7 +842,7 @@ footer {
     .art-piece {
         display: flex;
         flex-flow: row nowrap;
-        border-bottom: 1px solid $primary-color;
+        border-bottom: 2px solid $primary-color;
         padding: 2rem 0;
 
         @media screen and (max-width: 750px) {
@@ -834,9 +909,6 @@ footer {
       color: $secondary-color;
     }
 
-    .keyword {
-      color: lighten($lowlight-color, 5);
-    }
 }
 
 // Post

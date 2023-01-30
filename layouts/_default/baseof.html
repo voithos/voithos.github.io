@@ -9,7 +9,7 @@
       {{- partial "header.html" . -}}
       {{- block "site-container" . }}
       <section class="site-container">
-        <section class="parent-content scene-element scene-element--fadein">
+        <section class="parent-content scene-element scene-element--fadein {{ block "parent-content-class" . }}{{ end }}">
           {{- block "main" . }}{{ .Content }}{{- end }}
           {{- block "footer" . }}{{- partial "footer.html" . -}}{{- end }}
         </section>

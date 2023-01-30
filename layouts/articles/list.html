@@ -1,0 +1,45 @@
+{{ define "parent-content-class" }}articles-list-parent{{ end }}
+{{ define "main" }}
+<main class="articles articles-list">
+  {{ range .Paginator.Pages }}
+    <article class="article-blurb">
+      <section class="article-title">
+        <a href="{{.Permalink}}">{{.Title}}</a>
+        {{- if .Draft }}<sup><span class="article-draft">&nbsp;&nbsp;[draft]</span></sup>{{- end }}
+      </section>
+      {{ if .Description }}
+      <section class="article-description">
+        {{ .Description | markdownify }}
+      </section>
+      {{ end }}
+      <div class="article-meta">
+        <section class="article-stats">
+          {{ .Date | dateFormat ":date_long" }}&nbsp;·&nbsp;{{ .ReadingTime }} min&nbsp;·&nbsp;{{ .WordCount }} words
+        </section>
+        {{ if .Params.tags }}
+        <section class="article-tags">
+          {{ range .Params.tags }}
+            <span class="article-tag pill">{{ . }}</span>
+          {{ end }}
+        </section>
+        {{ end }}
+      </div>
+    </article>
+  {{ end }}
+
+  {{- if gt .Paginator.TotalPages 1 }}
+    <nav class="pagination">
+      {{- if .Paginator.HasPrev }}
+        <a class="prev" href="{{ .Paginator.Prev.URL | absURL }}">
+          «&nbsp;Prev&nbsp;
+        </a>
+      {{- end }}
+      {{- if .Paginator.HasNext }}
+        <a class="next" href="{{ .Paginator.Next.URL | absURL }}">
+          &nbsp;Next&nbsp;»
+        </a>
+      {{- end }}
+    </nav>
+  {{- end }}
+</main>
+{{ end }}
