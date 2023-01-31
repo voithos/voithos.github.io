@@ -30,16 +30,32 @@
   {{- if gt .Paginator.TotalPages 1 }}
     <nav class="pagination">
       {{- if .Paginator.HasPrev }}
-        <a class="prev" href="{{ .Paginator.Prev.URL | absURL }}">
-          «&nbsp;Prev&nbsp;
-        </a>
+        <span class="prev">
+          <a href="{{ .Paginator.Prev.URL | absURL }}">
+            «&nbsp;Newer&nbsp;
+          </a>
+        </span>
       {{- end }}
       {{- if .Paginator.HasNext }}
-        <a class="next" href="{{ .Paginator.Next.URL | absURL }}">
-          &nbsp;Next&nbsp;»
-        </a>
+        <span class="next">
+          <a href="{{ .Paginator.Next.URL | absURL }}">
+            &nbsp;Older&nbsp;»
+          </a>
+        </span>
       {{- end }}
     </nav>
   {{- end }}
+
+  <section class="extra-links">
+    <div class="left">
+    〈&nbsp;<a class="primary" href="">Archive</a>
+    </div>
+    <div class="center">
+      ｜<a class="primary" href="">Tags</a>｜
+    </div>
+    <div class="right">
+      <a class="primary" href="">RSS Feed</a>&nbsp;〉
+    </div>
+  </section>
 </main>
 {{ end }}

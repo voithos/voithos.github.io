@@ -85,6 +85,17 @@ a {
       left: 0;
       width: 100%;
     }
+
+    &.primary {
+      color: lighten($primary-color, 10);
+      &:hover, &:focus {
+        color: lighten($primary-color, 15);
+        text-shadow: 0 0 5px $primary-color;
+      }
+      &:after {
+        border-bottom: 2px solid $primary-color;
+      }
+    }
 }
 
 pre {
@@ -144,6 +155,10 @@ blockquote {
             content: '\2014 \2009';
         }
     }
+}
+
+hr {
+  border-top: 1px solid $lowlight-color;
 }
 
 h1, h2, h3 {
@@ -305,6 +320,22 @@ h1[id] a, h2[id] a, h3[id] a {
   padding: 0.3em 0.6em;
   border-radius: 1.0em;
   vertical-align: middle;
+}
+
+.pagination {
+  font-size: 1.2rem;
+  margin-bottom: 0.5em;
+  display: flex;
+  span {
+    flex: 1;
+  }
+  .prev {
+    padding-left: 1em;
+  }
+  .next {
+    padding-right: 1em;
+    text-align: right;
+  }
 }
 
 // Header
@@ -657,7 +688,7 @@ footer {
   background: none;
 }
 .articles {
-  max-width: 50rem;
+  width: 50rem;
 
   .article-blurb {
     border: 2px solid $primary-color;
@@ -687,6 +718,19 @@ footer {
     .article-description {
       font-size: 1.2rem;
       margin: 0.4rem 0;
+    }
+  }
+
+  .extra-links {
+    font-size: 1.2rem;
+    display: flex;
+    flex-flow: row nowrap;
+
+    .left {
+      text-align: right;
+    }
+    .left, .right {
+      flex: 1;
     }
   }
 }
