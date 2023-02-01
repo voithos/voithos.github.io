@@ -1,49 +1,59 @@
 - name:     Lights.
+  date:     2022-12-04
   img:      lights.gif
   desc: >
     Lights, pixel art.
 
 - name:     Mirage.
+  date:     2022-11-23
   img:      mirage.png
   desc: >
     Mirage, pixel art.
 
 - name:     Rainier.
+  date:     2022-01-06
   img:      rainier.png
   desc: >
     Mt. Rainier, pixel art.
 
 - name:     ロック・リー。
+  date:     2021-12-04
   img:      rock_lee.png
   desc: >
     Rock Lee. A study of a piece by @humanmgn.
 
 - name:     日向ヒナタ。
+  date:     2021-12-04
   img:      hinata.png
   desc: >
     Hyuuga Hinata. A study of a piece by @humanmgn.
 
 - name:     Storm dragon.
+  date:     2020-10-01
   img:      storm.png
   desc: >
     Inktober 2020, #17 - Storm. A study.
 
 - name:     Kwisatz Haderach.
+  date:     2020-10-01
   img:      dune.png
   desc: >
     Inktober 2020, #13 - Dune. A study.
 
 - name:     Nice hat.
+  date:     2020-10-01
   img:      fancy.png
   desc: >
     Inktober 2020, #07 - Fancy. A study.
 
 - name:     Fallen knight.
+  date:     2019-10-01
   img:      ash_knight.png
   desc: >
     Inktober 2019, #13 - Ash.
 
 - name:     Do not fear the dark.
+  date:     2019-10-01
   img:      dark.png
   desc: >
     Inktober 2019, #26 - Dark.

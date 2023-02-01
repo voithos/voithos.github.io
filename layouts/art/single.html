@@ -9,6 +9,8 @@
       <section class="art-desc-text">
         <h4 class="art-title">{{ .name }}</h4>
         {{ .desc | markdownify }}
+        <br>
+        –<span class="art-date">{{ .date | dateFormat "January, 2006" }}</span>
       </section>
     </section>
   </section>

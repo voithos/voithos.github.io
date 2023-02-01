@@ -913,6 +913,7 @@ footer {
             flex: 1;
             .art-title {
               font-style: italic;
+              color: $lowlight-color;
             }
             .art-desc-text {
               padding: 2.5rem 1rem;
@@ -920,6 +921,9 @@ footer {
               @media screen and (max-width: 600px) {
                   padding: 0.5rem;
               }
+            }
+            .art-date {
+              font-style: italic;
             }
         }
     }
