@@ -1,6 +1,8 @@
 baseURL = "https://voithos.io/"
 languageCode = "en-us"
 title = "voithos.io"
+paginate = 10
+enableEmoji = true
 
 [markup.goldmark.renderer]
 unsafe = true
