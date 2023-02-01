@@ -13,10 +13,10 @@
       <section class="project-image">
         {{ if .url }}
           <a class="no-smoothstate" href="{{ .url }}">
-            <img alt="{{ .name }}" src="/img/projects/{{ .img }}">
+            <img alt="{{ .name }}" src="/img/projects/{{ .img }}" loading="lazy">
           </a>
         {{ else }}
-          <img alt="{{ .name }}" src="/img/projects/{{ .img }}">
+          <img alt="{{ .name }}" src="/img/projects/{{ .img }}" loading="lazy">
         {{ end }}
       </section>
       <section class="project-desc">
