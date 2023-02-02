@@ -855,11 +855,17 @@ footer {
       padding: 0 4rem;
     }
 
-    .writing-words, .writing-tags {
+    .writing-words, .writing-tags, .writing-date {
       text-align: right;
       font-size: 1.15rem;
       font-style: italic;
       color: lighten($lowlight-color, 15);
+    }
+
+    .writing-submeta {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
     }
   }
 }

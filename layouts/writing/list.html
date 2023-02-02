@@ -15,8 +15,13 @@
         {{ delimit .Params.tags ", " }}
       </section>
       {{ end }}
-      <section class="writing-words">
-        {{ .ReadingTime }} min&nbsp;·&nbsp;{{ .WordCount }} words
+      <section class="writing-submeta">
+        <section class="writing-date">
+          {{ .Date | dateFormat "January, 2006" }}
+        </section>
+        <section class="writing-words">
+          {{ .ReadingTime }} min&nbsp;·&nbsp;{{ .WordCount }} words
+        </section>
       </section>
     </section>
   {{ end }}
