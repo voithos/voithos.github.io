@@ -74,6 +74,10 @@ Tables aren't part of the core Markdown spec, but Hugo supports supports them ou
 
 You can have `inline` code `function() {}`.
 
+Or just pre:
+
+<pre>This is only pre text</pre>
+
 #### Code block with backticks
 
 ```html
