@@ -161,12 +161,10 @@ hr {
   border-top: 1px solid $lowlight-color;
 }
 
-h1, h2, h3 {
-    margin-bottom: 1rem;
-}
-
 h1 {
+    margin: 1.5rem auto 1.3rem;
     font-size: 2.1rem;
+    font-weight: bold;
 
     @media screen and (max-width: 600px) {
         font-size: 1.8rem;
@@ -174,7 +172,9 @@ h1 {
 }
 
 h2 {
+    margin: 1.2rem auto 1.0rem;
     font-size: 1.7rem;
+    font-weight: bold;
 
     @media screen and (max-width: 600px) {
         font-size: 1.4rem;
@@ -182,11 +182,38 @@ h2 {
 }
 
 h3 {
+    margin: 1.2rem auto 1.0rem;
     font-size: 1.4rem;
+    font-weight: bold;
 
     @media screen and (max-width: 600px) {
         font-size: 1.2rem;
     }
+}
+
+h4, h5, h6 {
+    margin: 1rem auto 0.8rem;
+}
+
+h4 {
+    font-size: 1.3rem;
+    font-weight: bold;
+
+    @media screen and (max-width: 600px) {
+        font-size: 1.1rem;
+    }
+}
+
+h4, h5, h6 {
+    font-size: 1.3rem;
+
+    @media screen and (max-width: 600px) {
+        font-size: 1.1rem;
+    }
+}
+
+h6 {
+    font-style: italic;
 }
 
 h1[id] a, h2[id] a, h3[id] a {
@@ -756,6 +783,22 @@ footer {
       text-align: left;
       margin-top: 0.6rem;
     }
+  }
+}
+.article-single {
+  line-height: 1.3;
+  padding: 1rem;
+
+  .article-title {
+    text-align: center;
+    color: lighten($lowlight-color, 15);
+  }
+  hr {
+    border-color: $lowlight-color;
+  }
+
+  .article-body {
+    padding: 1rem;
   }
 }
 
