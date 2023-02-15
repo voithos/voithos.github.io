@@ -1,11 +1,14 @@
 - name:     quarkGL
+  date:     2023-01-20
   class:    project-quarkgl
   img:      quarkgl.png
   url:      https://github.com/voithos/quarkGL
   desc: >
-    A PBR OpenGL renderer and graphics library.
+    A PBR OpenGL renderer and graphics library. Features Cook-Torrance GGX,
+    deferred shading, runtime IBL, and numerous other rendering features.
 
 - name:     Coloroid
+  date:     2022-07-17
   class:    project-coloroid
   img:      coloroid.png
   url:      https://voithos.itch.io/coloroid
@@ -16,6 +19,7 @@
     new abilities, then take on the remaining monsters and find an exit!
 
 - name:     Tale of Two Sides
+  date:     2022-01-30
   class:    project-tale-of-two-sides
   img:      tale-of-two-sides.png
   url:      https://voithos.itch.io/tale-of-two-sides
@@ -26,6 +30,7 @@
     2022](https://globalgamejam.org/2022/games/tale-two-sides-2).
 
 - name:     Uchi no Ki
+  date:     2022-06-08
   class:    project-uchinoki
   img:      uchinoki.png
   url:      https://voithos.itch.io/uchi-no-ki
@@ -36,6 +41,7 @@
     a journey seeking truth.
 
 - name:     SoulBurst
+  date:     2021-09-27
   class:    project-soulburst
   img:      soulburst.png
   url:      https://voithos.itch.io/soulburst
@@ -45,6 +51,7 @@
     city at high speeds and achieve the highest score that you can!
 
 - name:     neoncycles
+  date:     2021-08-23
   class:    project-neoncycles
   img:      neoncycles.png
   url:      https://voithos.itch.io/neoncycles
@@ -54,6 +61,7 @@
     battle mode!
 
 - name:     muon
+  date:     2021-04-28
   class:    project-muon
   img:      muon.png
   url:      https://github.com/voithos/muon
@@ -63,6 +71,7 @@
     importance sampling.
 
 - name:     OoboloO
+  date:     2021-01-31
   class:    project-ooboloo
   img:      ooboloo.png
   url:      https://levilindsey.itch.io/ooboloo
@@ -73,6 +82,7 @@
     2021](https://globalgamejam.org/2021/games/ooboloo-2).
 
 - name:     DRIFTWORLD
+  date:     2020-07-12
   class:    project-driftworld
   img:      driftworld.png
   url:      https://voithos.itch.io/driftworld
@@ -82,6 +92,7 @@
     for the [GMTK Game Jam 2020](https://itch.io/jam/gmtk-2020).
 
 - name:     elfin
+  date:     2018-09-02
   class:    project-elfin
   img:      elfin.png
   url:      https://voithos.itch.io/elfin
@@ -92,6 +103,7 @@
     Game Jam 2018](https://itch.io/jam/gmtk-2018).
 
 - name:     graviton
+  date:     2017-07-04
   class:    project-graviton
   img:      graviton.png
   url:      http://voithos.io/graviton/
@@ -101,6 +113,7 @@
     simulation algorithm, as well as to explore the HTML5 `canvas` element.
 
 - name:     endgame
+  date:     2016-07-05
   class:    project-endgame
   img:      endgame.png
   url:      https://endgame-chess.firebaseapp.com/
@@ -111,6 +124,7 @@
     afterwards.
 
 - name:     Awl
+  date:     2014-09-24
   class:    project-awl
   img:      awl.png
   url:      http://voithos.io/awl
@@ -121,6 +135,7 @@
     [emscripten](https://github.com/kripken/emscripten).
 
 - name:     brot.js
+  date:     2014-02-20
   class:    project-brotjs
   img:      brotjs.png
   url:      http://voithos.io/brot.js
@@ -131,6 +146,7 @@
     customizability.
 
 - name:     Elemental One
+  date:     2014-01-16
   class:    project-elemental-one
   img:      elemental-one.png
   url:      http://voithos.io/elemental-one
@@ -141,6 +157,7 @@
     [Phaser.js](http://phaser.io/) HTML5 game engine.
 
 - name:     SwiftCODE
+  date:     2013-12-01
   class:    project-swiftcode
   img:      swiftcode.png
   code_url: https://github.com/voithos/swiftcode

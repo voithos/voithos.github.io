@@ -22,6 +22,8 @@
       <section class="project-desc">
         <section class="project-desc-text">
           {{ .desc | markdownify }}
+          <br>
+          <div class="project-date">–{{ .date | dateFormat "January, 2006" }}</div>
         </section>
 
         <section class="project-links">
