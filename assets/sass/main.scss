@@ -112,8 +112,13 @@ pre {
     }
 }
 
-code {
+:not(pre) > code {
     font-family: $mono-font-stack;
+    font-size: .8em;
+    margin: auto 0.1em;
+    padding: 0.1em 0.15em;
+    background: darken($lowlight-color, 18);
+    border-radius: 4px;
 }
 
 img {
@@ -298,7 +303,7 @@ h1[id] a, h2[id] a, h3[id] a {
 }
 
 .site-container {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     max-width: $max-width;
     margin: 0 auto;
 
@@ -408,7 +413,7 @@ header {
     .title {
         position: relative;
         flex: initial;
-        margin-bottom: 0;
+        margin: 0;
 
         font-family: $title-font-stack;
         font-size: $header-font-size;
