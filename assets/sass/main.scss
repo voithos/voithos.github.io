@@ -116,7 +116,7 @@ pre {
     font-family: $mono-font-stack;
     font-size: .8em;
     margin: auto 0.1em;
-    padding: 0.1em 0.15em;
+    padding: 0.1em 0.4em;
     background: darken($lowlight-color, 18);
     border-radius: 4px;
 }
@@ -136,7 +136,7 @@ p {
 
 blockquote {
     font-style: italic;
-    margin: 2rem 0;
+    margin: 1.5rem 0;
     padding: 0 2rem;
     position: relative;
     color: $lowlight-color;
