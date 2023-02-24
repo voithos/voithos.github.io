@@ -805,6 +805,53 @@ footer {
   .article-body {
     padding: 1rem;
   }
+
+  table {
+    margin-bottom: 2rem;
+
+    th, td {
+      min-width: 5rem;
+      line-height: 1.5;
+      padding: 0.6rem 0.5rem;
+      border-bottom: 1px solid desaturate(darken($lowlight-color, 25), 10);
+    }
+
+    th {
+      font-size: 1rem;
+      text-align: left;
+    }
+  }
+
+  ol, ul {
+    margin-bottom: 1.4rem;
+    padding-inline-start: 1.4rem;
+  }
+
+  li {
+    margin-top: 0.2rem;
+  }
+
+  ul {
+    list-style: disc;
+    ul {
+      list-style: circle;
+      ul {
+        list-style: square;
+      }
+    }
+  }
+
+  mark {
+    background: inherit;
+    color: inherit;
+  }
+
+  img {
+    padding: 1rem;
+  }
+  figcaption {
+    text-align: center;
+  }
 }
 
 // Code
