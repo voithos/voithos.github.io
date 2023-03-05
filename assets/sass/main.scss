@@ -846,8 +846,20 @@ footer {
     color: inherit;
   }
 
+  figure {
+    padding-top: 0.5rem;
+    padding-bottom: 1rem;
+    img {
+      padding: 0;
+    }
+    figcaption {
+      color: lighten($lowlight-color, 15);
+    }
+  }
   img {
+    display: block;
     padding: 1rem;
+    margin: 0 auto;
   }
   figcaption {
     text-align: center;

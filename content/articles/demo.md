@@ -57,7 +57,9 @@ and optionally with in-line changes such as annotations and abbreviations.
 
 ## Tables
 
-Tables aren't part of the core Markdown spec, but Hugo supports supports them out-of-the-box.
+Tables aren't part of the core Markdown spec[^2], but Hugo supports supports them out-of-the-box.
+
+[^2]: Which is a travesty.
 
    Name | Age
 --------|------
@@ -166,11 +168,11 @@ Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and ot
 
 Direct image inclusion:
 
-![image](https://mdg.imgix.net/assets/images/san-juan-mountains.jpg?auto=format&fit=clip&q=40&w=1080)
+<img src="https://mdg.imgix.net/assets/images/san-juan-mountains.jpg?auto=format&fit=clip&q=40&w=1080" style="max-width: 800px;" loading="lazy">
 
 Figure with a caption:
 
-{{< figure src="https://mdg.imgix.net/assets/images/san-juan-mountains.jpg?auto=format&fit=clip&q=40&w=1080" title="Would you look at that nice mountain" >}}
+{{< figure src="https://mdg.imgix.net/assets/images/san-juan-mountains.jpg?auto=format&fit=clip&q=40&w=1080" title="Would you look at that nice mountain" style="max-width: 500px;" loading="lazy" >}}
 
 ---
 
