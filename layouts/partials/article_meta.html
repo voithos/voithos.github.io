@@ -1,0 +1,12 @@
+<div class="article-meta">
+  <section class="article-stats">
+    {{ .Date | dateFormat ":date_long" }}&nbsp;·&nbsp;{{ .ReadingTime }} min&nbsp;·&nbsp;{{ .WordCount }} words
+  </section>
+  {{ if .Params.tags }}
+  <section class="article-tags">
+    {{ range .Params.tags }}
+      <span class="article-tag pill">{{ . }}</span>
+    {{ end }}
+  </section>
+  {{ end }}
+</div>

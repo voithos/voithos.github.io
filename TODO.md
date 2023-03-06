@@ -1,8 +1,8 @@
 # TODOs
 
-- Style individual page
-- Add article header
+- Style code blocks
 - Add archive
+- Add tags page?
 - Add RSS feed
 - Remove category pages?
 - Change the media query trigger point due to wider header

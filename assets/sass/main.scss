@@ -795,8 +795,15 @@ footer {
   padding: 1rem;
 
   .article-title {
-    text-align: center;
+    margin: 0;
+    margin-bottom: 0.5rem;
     color: lighten($lowlight-color, 15);
+  }
+  .article-description {
+    margin-bottom: 0.25rem;
+  }
+  .article-stats {
+    font-size: 1.0rem;
   }
   hr {
     border-color: $lowlight-color;
