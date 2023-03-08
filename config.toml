@@ -4,6 +4,9 @@ title = "voithos.io"
 paginate = 10
 enableEmoji = true
 
+[params]
+mainSections = ['articles']
+
 [markup.highlight]
 style = 'doom-one2'
 

@@ -1,0 +1,37 @@
+{{ define "main" }}
+<main class="archive">
+  <h1 class="archive-title">{{ .Title }}</h1>
+
+  {{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+
+  {{- range $pages.GroupByPublishDate "2006" }}
+    {{- if ne .Key "0001" }}
+    <section class="archive-year">
+      <h2 class="archive-year-header">
+        {{- replace .Key "0001" "" }}<sup class="archive-count">&nbsp;&nbsp;{{ len .Pages }}</sup>
+      </h2>
+      {{- range .Pages.GroupByDate "January" }}
+        <section class="archive-month">
+          <h3 class="archive-month-header">{{- .Key }}<sup class="archive-count">&nbsp;&nbsp;{{ len .Pages }}</sup></h3>
+          <section class="archive-posts">
+            {{- range .Pages }}
+              {{- if eq .Kind "page" }}
+              <div class="archive-entry">
+                <h3 class="archive-entry-title">
+                  <a href="{{ .Permalink }}">{{ .Title }}</a>
+                  {{- if .Draft }}<sup><span class="article-draft">&nbsp;&nbsp;[draft]</span></sup>{{- end }}
+                </h3>
+                <div class="archive-meta">
+                  {{ partial "article_meta.html" . }}
+                </div>
+              </div>
+              {{- end }}
+            {{- end }}
+          </section>
+        </section>
+      {{- end }}
+    </section>
+    {{- end }}
+  {{- end }}
+</main>
+{{ end }}
