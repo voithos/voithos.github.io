@@ -4,5 +4,8 @@ title = "voithos.io"
 paginate = 10
 enableEmoji = true
 
+[markup.highlight]
+style = 'doom-one2'
+
 [markup.goldmark.renderer]
 unsafe = true
