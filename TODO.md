@@ -1,6 +1,5 @@
 # TODOs
 
-- Add archive
 - Add RSS feed
 - Remove category pages?
 - Change the media query trigger point due to wider header
@@ -13,3 +12,4 @@ Later:
 - Add tags page?
 - Add prev/next buttons inside individual articles?
 - Add "Contribute" link per article, to Github
+- Add archive

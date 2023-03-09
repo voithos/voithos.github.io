@@ -739,6 +739,9 @@ footer {
 .parent-content.articles-list-parent {
   background: none;
 }
+.article-draft {
+  color: $lowlight-color;
+}
 .articles {
   width: 50rem;
 
@@ -762,9 +765,6 @@ footer {
     .article-title {
       font-size: 1.6rem;
       margin-bottom: 0.5rem;
-      .article-draft {
-        color: $lowlight-color;
-      }
     }
 
     .article-description {
@@ -890,6 +890,60 @@ footer {
   }
   figcaption {
     text-align: center;
+  }
+}
+
+// Archive
+//
+.archive {
+  padding: 0 5rem;
+
+  .archive-year {
+    margin-top: 2rem;
+
+    &:not(:last-of-type) {
+      border-bottom: 1px solid darken($lowlight-color, 15);
+    }
+  }
+  .archive-month {
+    padding: 1rem 0;
+    display: flex;
+    align-items: flex-start;
+
+    &:not(:last-of-type) {
+      border-bottom: 1px solid darken($lowlight-color, 40);
+    }
+  }
+  .archive-month-header {
+    margin: 1.7rem 0;
+    width: 12rem;
+  }
+  .archive-posts {
+    flex: 1;
+  }
+
+  .archive-meta .article-stats {
+    font-size: 1.1rem;
+  }
+
+  .archive-entry {
+    padding: 0.5rem;
+    margin: 0.6rem 0;
+  }
+
+  .archive-entry-title {
+    margin: 0.4rem 0;
+    font-size: 1.3rem;
+    font-weight: normal;
+  }
+
+  .archive-count,  {
+    color: $lowlight-color;
+    font-size: 1rem;
+  }
+
+  .article-tags {
+    display: none;
   }
 }
 
