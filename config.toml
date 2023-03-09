@@ -5,6 +5,8 @@ paginate = 10
 enableEmoji = true
 
 [params]
+author = "Zaven Muradyan"
+description = "Personal site of Zaven Muradyan"
 mainSections = ['articles']
 
 [markup.highlight]

@@ -1,7 +1,6 @@
 # TODOs
 
 - Change the media query trigger point due to wider header
-- Run Lighthouse / detect broken links, etc, on final site
 
 Later:
 - Add heading anchor links
@@ -10,3 +9,4 @@ Later:
 - Add tags page?
 - Add prev/next buttons inside individual articles?
 - Add "Contribute" link per article, to Github
+- Detect broken links

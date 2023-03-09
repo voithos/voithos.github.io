@@ -7,6 +7,7 @@
   {{ end }}
 {{- end -}}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="{{ if .Params.description }}{{ .Params.description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
 <link rel="icon" href="{{ "favicon.ico" | absURL }}">
 <link rel="alternate" href="{{ "/articles/feed.xml" | absURL }}" title="{{ .Site.Title }}">
 
