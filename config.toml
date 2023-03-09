@@ -12,3 +12,6 @@ style = 'doom-one2'
 
 [markup.goldmark.renderer]
 unsafe = true
+
+[outputFormats.RSS]
+baseName = "feed"
