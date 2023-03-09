@@ -1,7 +1,5 @@
 # TODOs
 
-- Change the media query trigger point due to wider header
-
 Later:
 - Add heading anchor links
 - Add article TOC
@@ -10,3 +8,4 @@ Later:
 - Add prev/next buttons inside individual articles?
 - Add "Contribute" link per article, to Github
 - Detect broken links
+- Redesign art page
