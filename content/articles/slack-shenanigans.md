@@ -147,7 +147,10 @@ memory location of the old reference, but as we said earlier, this reference is
 potentially no longer referring to valid memory, so we'll still be getting
 crashes.
 
-So how do we avoid this? One approach is to simply use a pointer throughout:
+So how do we avoid this? We could of course reserve memory up front like we
+showed earlier, but that may not be ideal if the size cannot be easily
+determined up front (for example, if we don't always traverse the entire tree).
+One alternative approach is to simply use a pointer throughout:
 
 ```c++ {hl_lines=[4]}
 FIntermediateResults TraverseNode(FNode* Node, TMap<FNode*, FTraversalStruct>& StructMap)
