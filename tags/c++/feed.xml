@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>c&#43;&#43; on voithos.io</title>
+    <link>https://voithos.io/tags/c&#43;&#43;/</link>
+    <description>Recent content in c&#43;&#43; on voithos.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 09 Mar 2023 21:40:37 -0800</lastBuildDate><atom:link href="https://voithos.io/tags/c++/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Slack Shenanigans</title>
+      <link>https://voithos.io/articles/slack-shenanigans/</link>
+      <pubDate>Thu, 09 Mar 2023 21:40:37 -0800</pubDate>
+      
+      <guid>https://voithos.io/articles/slack-shenanigans/</guid>
+      <description>A while back, I encountered a subtle bug (which of course feels obvious in hindsight) involving a tree traversal and a hash map used for intermediate information. At the time, I had lost the better part of the day to the issue, but it actually led me to some interesting conclusions and so I thought it&amp;rsquo;d be fun to try to present it here in a somewhat generalized and simplified way.</description>
+    </item>
+    
+  </channel>
+</rss>

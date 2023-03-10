@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://voithos.io/articles/</loc>
+    <lastmod>2023-03-09T21:40:37-08:00</lastmod>
+  </url><url>
     <loc>https://voithos.io/code/</loc>
   </url><url>
     <loc>https://voithos.io/writing/</loc>
@@ -11,6 +14,21 @@
   </url><url>
     <loc>https://voithos.io/me/</loc>
   </url><url>
+    <loc>https://voithos.io/tags/c&#43;&#43;/</loc>
+    <lastmod>2023-03-09T21:40:37-08:00</lastmod>
+  </url><url>
+    <loc>https://voithos.io/articles/slack-shenanigans/</loc>
+    <lastmod>2023-03-09T21:40:37-08:00</lastmod>
+  </url><url>
+    <loc>https://voithos.io/tags/</loc>
+    <lastmod>2023-03-09T21:40:37-08:00</lastmod>
+  </url><url>
+    <loc>https://voithos.io/tags/unreal-engine/</loc>
+    <lastmod>2023-03-09T21:40:37-08:00</lastmod>
+  </url><url>
+    <loc>https://voithos.io/</loc>
+    <lastmod>2023-03-09T21:40:37-08:00</lastmod>
+  </url><url>
     <loc>https://voithos.io/tags/dream/</loc>
     <lastmod>2022-06-22T00:00:00+00:00</lastmod>
   </url><url>
@@ -18,12 +36,6 @@
     <lastmod>2022-06-22T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://voithos.io/tags/short-story/</loc>
-    <lastmod>2022-06-22T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://voithos.io/tags/</loc>
-    <lastmod>2022-06-22T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://voithos.io/</loc>
     <lastmod>2022-06-22T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://voithos.io/writing/gift/</loc>
@@ -52,6 +64,8 @@
   </url><url>
     <loc>https://voithos.io/writing/amidst-the-sands-of-the-silent-sea/</loc>
     <lastmod>2020-07-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://voithos.io/archive/</loc>
   </url><url>
     <loc>https://voithos.io/categories/</loc>
   </url>

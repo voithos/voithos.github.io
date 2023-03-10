@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>dream on voithos.io</title>
-    <link>https://voithos.io/tags/dream/</link>
-    <description>Recent content in dream on voithos.io</description>
+    <title>Writing on voithos.io</title>
+    <link>https://voithos.io/writing/</link>
+    <description>Recent content in Writing on voithos.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://voithos.io/tags/dream/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://voithos.io/writing/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Reconstruction</title>
       <link>https://voithos.io/writing/reconstruction/</link>
@@ -18,12 +18,43 @@ I slowly opened my eyes. It took some time for my mind to identify the blank, bl
     </item>
     
     <item>
+      <title>Gift</title>
+      <link>https://voithos.io/writing/gift/</link>
+      <pubDate>Tue, 23 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://voithos.io/writing/gift/</guid>
+      <description>She started small.
+At first, it was dark, with nothing more than a sensation of a cool breeze against her skin. She pulled her arms and legs close, as they were the only real things she could feel. Her world was silent and lonely, although she couldn’t yet know. Her awareness was yet a small bud.
+After a time, she noticed a glint at the edge of her vision, a focused, mild glow from above.</description>
+    </item>
+    
+    <item>
+      <title>The Messenger</title>
+      <link>https://voithos.io/writing/the-messenger/</link>
+      <pubDate>Sat, 05 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://voithos.io/writing/the-messenger/</guid>
+      <description>Emerick Reeve stood, arms crossed, near the entrance of the open-air bazaar. The merchant, a quivering, balding man in his forties, stared at him intently, a film of sweat glistening on his forehead.
+“Tell me again, what was your price for the horse?” he said, unmoving. The merchant hesitated, eyed him up and down before briefly glancing at the woman standing nearby. She had a pouch of coin in hand, and was about to hand it all over before Emerick intervened.</description>
+    </item>
+    
+    <item>
       <title>Buggy</title>
       <link>https://voithos.io/writing/buggy/</link>
       <pubDate>Sun, 06 Sep 2020 00:00:00 +0000</pubDate>
       
       <guid>https://voithos.io/writing/buggy/</guid>
       <description>I woke up quietly. It was early and still dark, maybe cloudy, I couldn’t really tell. I began my morning routine, but it soon became clear that it was going to be one of those gradual mornings, where my brain would take a good 20 minutes to boot up, meaning that I’d only really regain consciousness somewhere between the shower and the sink. Why had I woken up so early? Ah, that’s right, it was project day, and I had wanted to get an early start on my novel.</description>
+    </item>
+    
+    <item>
+      <title>The Call of the Giant</title>
+      <link>https://voithos.io/writing/the-call-of-the-giant/</link>
+      <pubDate>Wed, 02 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://voithos.io/writing/the-call-of-the-giant/</guid>
+      <description>“Home is north.”
+Ketil froze as the words materialized in his mind. They were hushed, easy to miss, but they had been coming regularly enough now that he had learned to pick them out. For months, he had been enduring these whispers and the pull they exerted on him. He could feel it: a draw, a kind of primal longing, no doubt from whatever was the source of the words.</description>
     </item>
     
     <item>

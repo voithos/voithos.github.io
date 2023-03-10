@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<title>
+    Slack Shenanigans | voithos.io
+  </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The subtleties of memory safety, and how syntax can mask bugs.">
+<link rel="icon" href="https://voithos.io/favicon.ico">
+<link rel="alternate" href="https://voithos.io/articles/feed.xml" title="voithos.io">
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&family=Oxygen+Mono&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha512-DUC8yqWf7ez3JD1jszxCWSVB0DMP78eOyBpMa5aJki1bIRARykviOuImIczkxlj1KhVSyS16w2FSQetkD4UU2w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/smoothState.js/0.7.2/jquery.smoothState.min.js" integrity="sha512-PA88Ew5anBQLPlovdwOOMj+Ky0x+M6a6bDXYve4q+NDj17AJ37FwHT4Xo758ZQqYKLyvaYko27cQDQ5P/0kOJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
+  
+  <link rel="stylesheet" href="/sass/main.min.ac1860cf2d660241a4f55ec335dc02a814cf8d42b19b1155c3cb699d3aacd56b.css">
+
+  
+  <script type="text/javascript" src="/js/index.min.4eef8f5bd9a3df7f6b72cfa1fd3978fa22539474520e3f823d981f2599d1590e.js" defer></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-58393577-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-58393577-1');
+</script>
+
+  </head>
+  <body>
+    <section id="main" class="smooth-scene"><section class="header-box">
+  <section class="site-container">
+    <header>
+        <h1 class="title">
+          <div class="spin cw"></div>
+          <div class="spin ccw"></div>
+          <a href="/">voithos</a>
+        </h1>
+        <input type="checkbox" id="nav-checkbox" class="nav-checkbox" role="button">
+        <label for="nav-checkbox" class="nav-toggle" onclick></label>
+        <nav class="main-nav">
+          <ul>
+            
+            
+            <li class="active">
+              <a href="/articles/" title="Articles">Articles</a>
+            </li>
+            
+            <li class="">
+              <a href="/code/" title="Code">Code</a>
+            </li>
+            
+            <li class="">
+              <a href="/writing/" title="Writing">Writing</a>
+            </li>
+            
+            <li class="">
+              <a href="/art/" title="Art">Art</a>
+            </li>
+            
+            <li class="">
+              <a href="/me/" title="Me">Me</a>
+            </li>
+            
+          </ul>
+        </nav>
+        <nav class="social-nav">
+          <ul>
+            <li>
+              <a href="https://twitter.com/voithoz"><i class="fa-brands fa-twitter"></i></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/voithoz/"><i class="fa-brands fa-instagram"></i></a>
+            </li>
+            <li>
+              <a href="https://voithos.itch.io/"><i class="fa-brands fa-itch-io"></i></a>
+            </li>
+            <li>
+              <a href="https://github.com/voithos/"><i class="fa-brands fa-github"></i></a>
+            </li>
+          </ul>
+        </nav>
+    </header>
+  </section>
+</section>
+
+      <section class="site-container">
+        <section class="parent-content scene-element scene-element--fadein ">
+<main class="article article-single">
+  <section class="article-body">
+    <h1 class="article-title">Slack Shenanigans</h1>
+    
+    <section class="article-description">
+      The subtleties of memory safety, and how syntax can mask bugs.
+    </section>
+    
+    <div class="article-meta">
+  <section class="article-stats">
+    March 9, 2023&nbsp;·&nbsp;5 min&nbsp;·&nbsp;881 words
+  </section>
+  
+  <section class="article-tags">
+    
+      <span class="article-tag pill">c&#43;&#43;</span>
+    
+      <span class="article-tag pill">unreal-engine</span>
+    
+  </section>
+  
+</div>
+
+    <hr>
+    <p>A while back, I encountered a subtle bug (which of course feels obvious in
+hindsight) involving a tree traversal and a hash map used for intermediate
+information. At the time, I had lost the better part of the day to the issue,
+but it actually led me to some interesting conclusions and so I thought it&rsquo;d be
+fun to try to present it here in a somewhat generalized and simplified way.</p>
+<p>Note that this example uses Unreal Engine&rsquo;s custom hash map (<code>TMap</code>) and
+pointer (<code>TUniquePtr</code>) types, but the same mechanism and considerations can
+also apply to any similar hash map API, including the STL&rsquo;s
+<code>std::unordered_map</code>.</p>
+<h2 id="setting-the-stage">Setting the stage</h2>
+<p>To motivate the example, imagine you&rsquo;re processing some kind of tree data
+structure, and you need to gather and cache intermediate information as you
+traverse the tree. Suppose that you have the following constraints:</p>
+<ul>
+<li>The intermediate data is transient, while the tree is not, so instead of
+storing it in the tree nodes, you decide to create a <code>TMap</code> to store it.</li>
+<li>Your tree nodes are <code>TUniquePtrs</code>, so you can use their underlying address as
+a map key directly since they won&rsquo;t change.</li>
+<li>When traversing the tree, you&rsquo;ll need to do some processing both <em>before</em> and
+<em>after</em> you recurse.</li>
+</ul>
+<p>Your initial code might look something like the following. However, it turns
+out there&rsquo;s a problem with it. Can you see the issue?</p>
+<div class="highlight"><pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#e5c07b">void</span> <span style="color:#00b1f7">Traverse</span><span style="color:#abb2bf">(</span><span style="color:#aa89ea">TUniquePtr</span><span style="color:#54b1c7">&lt;</span><span style="color:#aa89ea">FNode</span><span style="color:#54b1c7">&gt;&amp;</span> <span style="color:#aa89ea">Root</span><span style="color:#abb2bf">)</span>
+<span style="color:#abb2bf">{</span>
+  <span style="color:#aa89ea">TMap</span><span style="color:#54b1c7">&lt;</span><span style="color:#aa89ea">FNode</span><span style="color:#54b1c7">*</span><span style="color:#abb2bf">,</span> <span style="color:#aa89ea">FTraversalStruct</span><span style="color:#54b1c7">&gt;</span> <span style="color:#aa89ea">StructMap</span><span style="color:#abb2bf">;</span>
+  <span style="color:#aa89ea">TraverseNode</span><span style="color:#abb2bf">(</span><span style="color:#aa89ea">Root</span><span style="color:#abb2bf">.</span><span style="color:#aa89ea">Get</span><span style="color:#abb2bf">(),</span> <span style="color:#aa89ea">StructMap</span><span style="color:#abb2bf">);</span>
+  <span style="color:#abb2bf">...</span>
+<span style="color:#abb2bf">}</span>
+
+<span style="color:#aa89ea">FIntermediateResults</span> <span style="color:#00b1f7">TraverseNode</span><span style="color:#abb2bf">(</span><span style="color:#aa89ea">FNode</span><span style="color:#54b1c7">*</span> <span style="color:#aa89ea">Node</span><span style="color:#abb2bf">,</span> <span style="color:#aa89ea">TMap</span><span style="color:#54b1c7">&lt;</span><span style="color:#aa89ea">FNode</span><span style="color:#54b1c7">*</span><span style="color:#abb2bf">,</span> <span style="color:#aa89ea">FTraversalStruct</span><span style="color:#54b1c7">&gt;&amp;</span> <span style="color:#aa89ea">StructMap</span><span style="color:#abb2bf">)</span>
+<span style="color:#abb2bf">{</span>
+  <span style="color:#aa89ea">FTraversalStruct</span><span style="color:#54b1c7">&amp;</span> <span style="color:#aa89ea">Struct</span> <span style="color:#54b1c7">=</span> <span style="color:#aa89ea">StructMap</span><span style="color:#abb2bf">.</span><span style="color:#aa89ea">FindOrAdd</span><span style="color:#abb2bf">(</span><span style="color:#aa89ea">Node</span><span style="color:#abb2bf">);</span>
+
+  <span style="color:#8a93a5;font-style:italic">// ... Do some initial work ...
+</span><span style="color:#8a93a5;font-style:italic"></span>  <span style="color:#aa89ea">Struct</span><span style="color:#abb2bf">.</span><span style="color:#aa89ea">SomeField</span> <span style="color:#54b1c7">=</span> <span style="color:#abb2bf">...;</span>
+  <span style="color:#aa89ea">Struct</span><span style="color:#abb2bf">.</span><span style="color:#aa89ea">OtherField</span> <span style="color:#54b1c7">=</span> <span style="color:#abb2bf">...;</span>
+
+  <span style="color:#8a93a5;font-style:italic">// Recurse down the tree.
+</span><span style="color:#8a93a5;font-style:italic"></span>  <span style="color:#aa89ea">FIntermediateResults</span> <span style="color:#aa89ea">Results</span><span style="color:#abb2bf">;</span>
+  <span style="color:#76a9f9">for</span> <span style="color:#abb2bf">(</span><span style="color:#76a9f9">auto</span><span style="color:#54b1c7">&amp;</span> <span style="color:#f5a40d">Child</span> <span style="color:#abb2bf">:</span> <span style="color:#aa89ea">Node</span><span style="color:#54b1c7">-&gt;</span><span style="color:#aa89ea">Children</span><span style="color:#abb2bf">)</span>
+  <span style="color:#abb2bf">{</span>
+    <span style="color:#76a9f9">auto</span> <span style="color:#aa89ea">ChildResults</span> <span style="color:#54b1c7">=</span> <span style="color:#aa89ea">TraverseNode</span><span style="color:#abb2bf">(</span><span style="color:#aa89ea">Child</span><span style="color:#abb2bf">.</span><span style="color:#aa89ea">Get</span><span style="color:#abb2bf">(),</span> <span style="color:#aa89ea">StructMap</span><span style="color:#abb2bf">);</span>
+    <span style="color:#aa89ea">AggregateResults</span><span style="color:#abb2bf">(</span><span style="color:#aa89ea">Results</span><span style="color:#abb2bf">,</span> <span style="color:#aa89ea">ChildResults</span><span style="color:#abb2bf">);</span>
+  <span style="color:#abb2bf">}</span>
+
+  <span style="color:#8a93a5;font-style:italic">// ... Do some more work with the intermediate results ...
+</span><span style="color:#8a93a5;font-style:italic"></span>  <span style="color:#aa89ea">Struct</span><span style="color:#abb2bf">.</span><span style="color:#aa89ea">AnotherField</span> <span style="color:#54b1c7">=</span> <span style="color:#aa89ea">Results</span><span style="color:#abb2bf">.</span><span style="color:#aa89ea">GetAnotherField</span><span style="color:#abb2bf">();</span>
+  <span style="color:#aa89ea">Struct</span><span style="color:#abb2bf">.</span><span style="color:#aa89ea">YetAnotherField</span> <span style="color:#54b1c7">=</span> <span style="color:#abb2bf">...;</span>
+
+  <span style="color:#76a9f9">return</span> <span style="color:#abb2bf">...;</span>
+<span style="color:#abb2bf">}</span>
+</code></pre></div><p>The above code <strong>can result in a corrupted <code>TMap</code></strong>, leading to crashes.</p>
+<p>But what&rsquo;s going on? Here&rsquo;s a hint: adding the following line works around the issue.</p>
+<div class="highlight"><pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#e5c07b">void</span> <span style="color:#00b1f7">Traverse</span><span style="color:#abb2bf">(</span><span style="color:#aa89ea">TUniquePtr</span><span style="color:#54b1c7">&lt;</span><span style="color:#aa89ea">FNode</span><span style="color:#54b1c7">&gt;&amp;</span> <span style="color:#aa89ea">Root</span><span style="color:#abb2bf">)</span>
+<span style="color:#abb2bf">{</span>
+  <span style="color:#aa89ea">TMap</span><span style="color:#54b1c7">&lt;</span><span style="color:#aa89ea">FNode</span><span style="color:#54b1c7">*</span><span style="color:#abb2bf">,</span> <span style="color:#aa89ea">FTraversalStruct</span><span style="color:#54b1c7">&gt;</span> <span style="color:#aa89ea">StructMap</span><span style="color:#abb2bf">;</span>
+<span style="display:block;width:100%;background-color:#3d4148">  <span style="color:#aa89ea">StructMap</span><span style="color:#abb2bf">.</span><span style="color:#aa89ea">Reserve</span><span style="color:#abb2bf">(</span><span style="color:#aa89ea">GetTotalNumberOfNodes</span><span style="color:#abb2bf">(</span><span style="color:#aa89ea">Root</span><span style="color:#abb2bf">.</span><span style="color:#aa89ea">Get</span><span style="color:#abb2bf">()));</span>
+</span>  <span style="color:#aa89ea">TraverseNode</span><span style="color:#abb2bf">(</span><span style="color:#aa89ea">Root</span><span style="color:#abb2bf">.</span><span style="color:#aa89ea">Get</span><span style="color:#abb2bf">(),</span> <span style="color:#aa89ea">StructMap</span><span style="color:#abb2bf">);</span>
+  <span style="color:#abb2bf">...</span>
+<span style="color:#abb2bf">}</span>
+</code></pre></div><h2 id="the-answer">The answer</h2>
+<p>It turns out that these lines were problematic.</p>
+<div class="highlight"><pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#aa89ea">FIntermediateResults</span> <span style="color:#00b1f7">TraverseNode</span><span style="color:#abb2bf">(</span><span style="color:#aa89ea">FNode</span><span style="color:#54b1c7">*</span> <span style="color:#aa89ea">Node</span><span style="color:#abb2bf">,</span> <span style="color:#aa89ea">TMap</span><span style="color:#54b1c7">&lt;</span><span style="color:#aa89ea">FNode</span><span style="color:#54b1c7">*</span><span style="color:#abb2bf">,</span> <span style="color:#aa89ea">FTraversalStruct</span><span style="color:#54b1c7">&gt;&amp;</span> <span style="color:#aa89ea">StructMap</span><span style="color:#abb2bf">)</span>
+<span style="color:#abb2bf">{</span>
+  <span style="color:#aa89ea">FTraversalStruct</span><span style="color:#54b1c7">&amp;</span> <span style="color:#aa89ea">Struct</span> <span style="color:#54b1c7">=</span> <span style="color:#aa89ea">StructMap</span><span style="color:#abb2bf">.</span><span style="color:#aa89ea">FindOrAdd</span><span style="color:#abb2bf">(</span><span style="color:#aa89ea">Node</span><span style="color:#abb2bf">);</span>
+
+  <span style="color:#8a93a5;font-style:italic">// ...
+</span><span style="color:#8a93a5;font-style:italic"></span>
+  <span style="color:#8a93a5;font-style:italic">// Recurse down the tree.
+</span><span style="color:#8a93a5;font-style:italic"></span>  <span style="color:#76a9f9">for</span> <span style="color:#abb2bf">(</span><span style="color:#76a9f9">auto</span><span style="color:#54b1c7">&amp;</span> <span style="color:#f5a40d">Child</span> <span style="color:#abb2bf">:</span> <span style="color:#aa89ea">Node</span><span style="color:#54b1c7">-&gt;</span><span style="color:#aa89ea">Children</span><span style="color:#abb2bf">)</span>
+  <span style="color:#abb2bf">{</span>
+    <span style="color:#76a9f9">auto</span> <span style="color:#aa89ea">ChildResults</span> <span style="color:#54b1c7">=</span> <span style="color:#aa89ea">TraverseNode</span><span style="color:#abb2bf">(</span><span style="color:#aa89ea">Child</span><span style="color:#abb2bf">.</span><span style="color:#aa89ea">Get</span><span style="color:#abb2bf">(),</span> <span style="color:#aa89ea">StructMap</span><span style="color:#abb2bf">);</span>
+    <span style="color:#abb2bf">...</span>
+  <span style="color:#abb2bf">}</span>
+
+  <span style="color:#8a93a5;font-style:italic">// ... Do some more work ...
+</span><span style="display:block;width:100%;background-color:#3d4148"><span style="color:#8a93a5;font-style:italic"></span>  <span style="color:#aa89ea">Struct</span><span style="color:#abb2bf">.</span><span style="color:#aa89ea">AnotherField</span> <span style="color:#54b1c7">=</span> <span style="color:#abb2bf">...;</span>
+</span><span style="display:block;width:100%;background-color:#3d4148">  <span style="color:#aa89ea">Struct</span><span style="color:#abb2bf">.</span><span style="color:#aa89ea">YetAnotherField</span> <span style="color:#54b1c7">=</span> <span style="color:#abb2bf">...;</span>
+</span>
+  <span style="color:#76a9f9">return</span> <span style="color:#abb2bf">...;</span>
+<span style="color:#abb2bf">}</span>
+</code></pre></div><p>Do you see the issue? It&rsquo;s because after the recursive calls, <strong><code>Struct</code> might
+be pointing to invalid memory</strong>. Since each recursive call invokes <code>FindOrAdd</code>,
+which will create a new struct if the node hasn&rsquo;t been visited yet, the map
+will quickly (and repeatedly) need to reallocate memory and copy over its
+contents as it fills up its reserved &ldquo;slack&rdquo; (this is what Unreal calls
+reserved-but-unused memory). This means that any previously-returned struct
+references or pointers are now invalid!</p>
+<p>So, can we fix this by simply re-fetching the location of the struct after the
+recursive calls, in case it has moved?</p>
+<div class="highlight"><pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#aa89ea">FIntermediateResults</span> <span style="color:#00b1f7">TraverseNode</span><span style="color:#abb2bf">(</span><span style="color:#aa89ea">FNode</span><span style="color:#54b1c7">*</span> <span style="color:#aa89ea">Node</span><span style="color:#abb2bf">,</span> <span style="color:#aa89ea">TMap</span><span style="color:#54b1c7">&lt;</span><span style="color:#aa89ea">FNode</span><span style="color:#54b1c7">*</span><span style="color:#abb2bf">,</span> <span style="color:#aa89ea">FTraversalStruct</span><span style="color:#54b1c7">&gt;&amp;</span> <span style="color:#aa89ea">StructMap</span><span style="color:#abb2bf">)</span>
+<span style="color:#abb2bf">{</span>
+  <span style="color:#8a93a5;font-style:italic">// ...
+</span><span style="color:#8a93a5;font-style:italic"></span>
+  <span style="color:#8a93a5;font-style:italic">// Recurse down the tree.
+</span><span style="color:#8a93a5;font-style:italic"></span>  <span style="color:#76a9f9">for</span> <span style="color:#abb2bf">(</span><span style="color:#76a9f9">auto</span><span style="color:#54b1c7">&amp;</span> <span style="color:#f5a40d">Child</span> <span style="color:#abb2bf">:</span> <span style="color:#aa89ea">Node</span><span style="color:#54b1c7">-&gt;</span><span style="color:#aa89ea">Children</span><span style="color:#abb2bf">)</span>
+  <span style="color:#abb2bf">{</span>
+    <span style="color:#76a9f9">auto</span> <span style="color:#aa89ea">ChildResults</span> <span style="color:#54b1c7">=</span> <span style="color:#aa89ea">TraverseNode</span><span style="color:#abb2bf">(</span><span style="color:#aa89ea">Child</span><span style="color:#abb2bf">.</span><span style="color:#aa89ea">Get</span><span style="color:#abb2bf">(),</span> <span style="color:#aa89ea">StructMap</span><span style="color:#abb2bf">);</span>
+    <span style="color:#abb2bf">...</span>
+  <span style="color:#abb2bf">}</span>
+
+  <span style="color:#8a93a5;font-style:italic">// Re-fetch the struct.
+</span><span style="display:block;width:100%;background-color:#3d4148"><span style="color:#8a93a5;font-style:italic"></span>  <span style="color:#aa89ea">FTraversalStruct</span><span style="color:#54b1c7">*</span> <span style="color:#aa89ea">StructPtr</span> <span style="color:#54b1c7">=</span> <span style="color:#aa89ea">StructMap</span><span style="color:#abb2bf">.</span><span style="color:#aa89ea">Find</span><span style="color:#abb2bf">(</span><span style="color:#aa89ea">Node</span><span style="color:#abb2bf">);</span>
+</span><span style="display:block;width:100%;background-color:#3d4148">  <span style="color:#aa89ea">check</span><span style="color:#abb2bf">(</span><span style="color:#aa89ea">StructPtr</span> <span style="color:#54b1c7">!=</span> <span style="color:#76a9f9">nullptr</span><span style="color:#abb2bf">);</span>
+</span><span style="display:block;width:100%;background-color:#3d4148">  <span style="color:#aa89ea">Struct</span> <span style="color:#54b1c7">=</span> <span style="color:#54b1c7">*</span><span style="color:#aa89ea">StructPtr</span><span style="color:#abb2bf">;</span>
+</span>
+  <span style="color:#8a93a5;font-style:italic">// ... Do some more work ...
+</span><span style="color:#8a93a5;font-style:italic"></span>  <span style="color:#aa89ea">Struct</span><span style="color:#abb2bf">.</span><span style="color:#aa89ea">AnotherField</span> <span style="color:#54b1c7">=</span> <span style="color:#abb2bf">...;</span>
+  <span style="color:#aa89ea">Struct</span><span style="color:#abb2bf">.</span><span style="color:#aa89ea">YetAnotherField</span> <span style="color:#54b1c7">=</span> <span style="color:#abb2bf">...;</span>
+
+  <span style="color:#76a9f9">return</span> <span style="color:#abb2bf">...;</span>
+<span style="color:#abb2bf">}</span>
+</code></pre></div><p>Oops! This line doesn&rsquo;t actually do what we would&rsquo;ve hoped: <code>Struct = *StructPtr;</code>.</p>
+<p>That&rsquo;s right, it&rsquo;s actually <strong>copying</strong> the newly-retrieved struct to the
+memory location of the old reference, but as we said earlier, this reference is
+potentially no longer referring to valid memory, so we&rsquo;ll still be getting
+crashes.</p>
+<p>So how do we avoid this? One approach is to simply use a pointer throughout:</p>
+<div class="highlight"><pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#aa89ea">FIntermediateResults</span> <span style="color:#00b1f7">TraverseNode</span><span style="color:#abb2bf">(</span><span style="color:#aa89ea">FNode</span><span style="color:#54b1c7">*</span> <span style="color:#aa89ea">Node</span><span style="color:#abb2bf">,</span> <span style="color:#aa89ea">TMap</span><span style="color:#54b1c7">&lt;</span><span style="color:#aa89ea">FNode</span><span style="color:#54b1c7">*</span><span style="color:#abb2bf">,</span> <span style="color:#aa89ea">FTraversalStruct</span><span style="color:#54b1c7">&gt;&amp;</span> <span style="color:#aa89ea">StructMap</span><span style="color:#abb2bf">)</span>
+<span style="color:#abb2bf">{</span>
+  <span style="color:#aa89ea">FTraversalStruct</span><span style="color:#54b1c7">&amp;</span> <span style="color:#aa89ea">StructRef</span> <span style="color:#54b1c7">=</span> <span style="color:#aa89ea">StructMap</span><span style="color:#abb2bf">.</span><span style="color:#aa89ea">FindOrAdd</span><span style="color:#abb2bf">(</span><span style="color:#aa89ea">Node</span><span style="color:#abb2bf">);</span>
+<span style="display:block;width:100%;background-color:#3d4148">  <span style="color:#aa89ea">FTraversalStruct</span><span style="color:#54b1c7">*</span> <span style="color:#aa89ea">Struct</span> <span style="color:#54b1c7">=</span> <span style="color:#54b1c7">&amp;</span><span style="color:#aa89ea">StructRef</span><span style="color:#abb2bf">;</span>
+</span>
+  <span style="color:#8a93a5;font-style:italic">// ... Do some initial work ...
+</span><span style="color:#8a93a5;font-style:italic"></span>  <span style="color:#aa89ea">Struct</span><span style="color:#54b1c7">-&gt;</span><span style="color:#aa89ea">SomeField</span> <span style="color:#54b1c7">=</span> <span style="color:#abb2bf">...;</span>
+  <span style="color:#aa89ea">Struct</span><span style="color:#54b1c7">-&gt;</span><span style="color:#aa89ea">OtherField</span> <span style="color:#54b1c7">=</span> <span style="color:#abb2bf">...;</span>
+
+  <span style="color:#8a93a5;font-style:italic">// Recurse down the tree.
+</span><span style="color:#8a93a5;font-style:italic"></span>  <span style="color:#76a9f9">for</span> <span style="color:#abb2bf">(</span><span style="color:#76a9f9">auto</span><span style="color:#54b1c7">&amp;</span> <span style="color:#f5a40d">Child</span> <span style="color:#abb2bf">:</span> <span style="color:#aa89ea">Node</span><span style="color:#54b1c7">-&gt;</span><span style="color:#aa89ea">Children</span><span style="color:#abb2bf">)</span>
+  <span style="color:#abb2bf">{</span>
+    <span style="color:#76a9f9">auto</span> <span style="color:#aa89ea">ChildResults</span> <span style="color:#54b1c7">=</span> <span style="color:#aa89ea">TraverseNode</span><span style="color:#abb2bf">(</span><span style="color:#aa89ea">Child</span><span style="color:#abb2bf">.</span><span style="color:#aa89ea">Get</span><span style="color:#abb2bf">(),</span> <span style="color:#aa89ea">StructMap</span><span style="color:#abb2bf">);</span>
+    <span style="color:#abb2bf">...</span>
+  <span style="color:#abb2bf">}</span>
+
+  <span style="color:#8a93a5;font-style:italic">// Re-fetch the struct.
+</span><span style="color:#8a93a5;font-style:italic"></span>  <span style="color:#aa89ea">Struct</span> <span style="color:#54b1c7">=</span> <span style="color:#aa89ea">StructMap</span><span style="color:#abb2bf">.</span><span style="color:#aa89ea">Find</span><span style="color:#abb2bf">(</span><span style="color:#aa89ea">Node</span><span style="color:#abb2bf">);</span>
+  <span style="color:#aa89ea">check</span><span style="color:#abb2bf">(</span><span style="color:#aa89ea">Struct</span> <span style="color:#54b1c7">!=</span> <span style="color:#76a9f9">nullptr</span><span style="color:#abb2bf">);</span>
+
+  <span style="color:#8a93a5;font-style:italic">// ... Do some more work with the intermediate results ...
+</span><span style="color:#8a93a5;font-style:italic"></span>  <span style="color:#aa89ea">Struct</span><span style="color:#54b1c7">-&gt;</span><span style="color:#aa89ea">AnotherField</span> <span style="color:#54b1c7">=</span> <span style="color:#abb2bf">...;</span>
+  <span style="color:#aa89ea">Struct</span><span style="color:#54b1c7">-&gt;</span><span style="color:#aa89ea">YetAnotherField</span> <span style="color:#54b1c7">=</span> <span style="color:#abb2bf">...;</span>
+
+  <span style="color:#76a9f9">return</span> <span style="color:#abb2bf">...;</span>
+<span style="color:#abb2bf">}</span>
+</code></pre></div><h2 id="takeaways">Takeaways</h2>
+<p>While this example ultimately boils down to a standard C++ memory safety bug,
+there were a few interesting takeaways for me as I debugged this:</p>
+<ul>
+<li>Be aware of where pointers <em>and references</em> are pointing to. Just because
+you&rsquo;re working with a reference <em>doesn&rsquo;t mean that the underlying memory
+can&rsquo;t change</em>, and reallocations can often happen automatically under the
+hood of simple-looking APIs.</li>
+<li>When you&rsquo;re aware of the possibility of such reallocations, it may be simpler
+to <strong>stick to pointers</strong> in your code to make the indirection explicit and
+decrease the chance of accidentally overwriting memory through reference
+semantics.</li>
+<li>Tip: Unreal has a special memory allocator that tries to help detect these
+kinds of issues! To use it, pass <code>-stompmalloc</code> when launching the editor.
+This was ultimately what helped me narrow down the issue.</li>
+</ul>
+<p>Finally, it turns out that this particular problem (keeping around a reference
+returned by <code>FindOrAdd</code>) is explicitly <a href="https://docs.unrealengine.com/4.27/en-US/ProgrammingAndScripting/ProgrammingWithCPP/UnrealArchitecture/TMap/">called out in Unreal&rsquo;s <code>TMap</code>
+documentation</a>,
+although in my defense the note is a bit hidden below the normal usage text, so
+was easy to miss.</p>
+<p>Read the docs (carefully)!</p>
+
+  </section>
+</main>
+<footer>
+  <i class="heart fa-solid fa-heart"></i>
+</footer>
+
+        </section>
+      </section>
+    </section>
+  </body>
+</html>
