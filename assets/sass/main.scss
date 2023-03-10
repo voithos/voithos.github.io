@@ -99,6 +99,7 @@ a {
 }
 
 pre {
+    font-size: 1.05rem;
     padding: 1rem;
     white-space: pre;
     overflow: auto;
@@ -139,11 +140,21 @@ pre {
 
 :not(pre) > code {
     font-family: $mono-font-stack;
-    font-size: .8em;
+    font-size: .75em;
     margin: auto 0.1em;
     padding: 0.1em 0.4em;
     background: darken($lowlight-color, 18);
     border-radius: 4px;
+}
+
+a > code {
+  background: none;
+  padding: 0.1em 0.1em;
+  font-size: .85em;
+}
+
+strong code {
+  font-weight: bold;
 }
 
 img {
