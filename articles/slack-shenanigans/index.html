@@ -102,7 +102,7 @@
     
     <div class="article-meta">
   <section class="article-stats">
-    March 9, 2023&nbsp;·&nbsp;5 min&nbsp;·&nbsp;881 words
+    March 9, 2023&nbsp;·&nbsp;5 min&nbsp;·&nbsp;919 words
   </section>
   
   <section class="article-tags">
@@ -234,7 +234,10 @@ recursive calls, in case it has moved?</p>
 memory location of the old reference, but as we said earlier, this reference is
 potentially no longer referring to valid memory, so we&rsquo;ll still be getting
 crashes.</p>
-<p>So how do we avoid this? One approach is to simply use a pointer throughout:</p>
+<p>So how do we avoid this? We could of course reserve memory up front like we
+showed earlier, but that may not be ideal if the size cannot be easily
+determined up front (for example, if we don&rsquo;t always traverse the entire tree).
+One alternative approach is to simply use a pointer throughout:</p>
 <div class="highlight"><pre tabindex="0" style="color:#b0c4de;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#aa89ea">FIntermediateResults</span> <span style="color:#00b1f7">TraverseNode</span><span style="color:#abb2bf">(</span><span style="color:#aa89ea">FNode</span><span style="color:#54b1c7">*</span> <span style="color:#aa89ea">Node</span><span style="color:#abb2bf">,</span> <span style="color:#aa89ea">TMap</span><span style="color:#54b1c7">&lt;</span><span style="color:#aa89ea">FNode</span><span style="color:#54b1c7">*</span><span style="color:#abb2bf">,</span> <span style="color:#aa89ea">FTraversalStruct</span><span style="color:#54b1c7">&gt;&amp;</span> <span style="color:#aa89ea">StructMap</span><span style="color:#abb2bf">)</span>
 <span style="color:#abb2bf">{</span>
   <span style="color:#aa89ea">FTraversalStruct</span><span style="color:#54b1c7">&amp;</span> <span style="color:#aa89ea">StructRef</span> <span style="color:#54b1c7">=</span> <span style="color:#aa89ea">StructMap</span><span style="color:#abb2bf">.</span><span style="color:#aa89ea">FindOrAdd</span><span style="color:#abb2bf">(</span><span style="color:#aa89ea">Node</span><span style="color:#abb2bf">);</span>
