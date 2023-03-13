@@ -1,15 +1,16 @@
 ---
-title: "Slack Shenanigans"
+title: "Reference Shenanigans"
 date: 2023-03-09T21:40:37-08:00
 description: "The subtleties of memory safety, and how syntax can mask bugs."
 tags: [c++, unreal-engine]
 ---
 
-A while back, I encountered a subtle bug (which of course feels obvious in
-hindsight) involving a tree traversal and a hash map used for intermediate
-information. At the time, I had lost the better part of the day to the issue,
-but it actually led me to some interesting conclusions and so I thought it'd be
-fun to try to present it here in a somewhat generalized and simplified way.
+A while back, I was working on some Unreal C++ code involving a tree traversal
+and a hash map used for intermediate information when I encountered a subtle
+bug (which of course feels obvious in hindsight). At the time, I had lost the
+better part of the day to the issue, but it actually led me to some interesting
+conclusions so I thought it'd be fun to try to present it here in a somewhat
+generalized and simplified way.
 
 Note that this example uses Unreal Engine's custom hash map (`TMap`) and
 pointer (`TUniquePtr`) types, but the same mechanism and considerations can
