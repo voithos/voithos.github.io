@@ -8,12 +8,12 @@
     <language>en-us</language>
     <lastBuildDate>Thu, 09 Mar 2023 21:40:37 -0800</lastBuildDate><atom:link href="https://voithos.io/tags/unreal-engine/feed.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Slack Shenanigans</title>
-      <link>https://voithos.io/articles/slack-shenanigans/</link>
+      <title>Reference Shenanigans</title>
+      <link>https://voithos.io/articles/reference-shenanigans/</link>
       <pubDate>Thu, 09 Mar 2023 21:40:37 -0800</pubDate>
       
-      <guid>https://voithos.io/articles/slack-shenanigans/</guid>
-      <description>A while back, I encountered a subtle bug (which of course feels obvious in hindsight) involving a tree traversal and a hash map used for intermediate information. At the time, I had lost the better part of the day to the issue, but it actually led me to some interesting conclusions and so I thought it&amp;rsquo;d be fun to try to present it here in a somewhat generalized and simplified way.</description>
+      <guid>https://voithos.io/articles/reference-shenanigans/</guid>
+      <description>A while back, I was working on some Unreal C++ code involving a tree traversal and a hash map used for intermediate information when I encountered a subtle bug (which of course feels obvious in hindsight). At the time, I had lost the better part of the day to the issue, but it actually led me to some interesting conclusions so I thought it&amp;rsquo;d be fun to try to present it here in a somewhat generalized and simplified way.</description>
     </item>
     
   </channel>

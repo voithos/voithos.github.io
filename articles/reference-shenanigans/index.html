@@ -2,7 +2,7 @@
 <html lang="en">
   <head><meta charset="utf-8">
 <title>
-    Slack Shenanigans | voithos.io
+    Reference Shenanigans | voithos.io
   </title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="The subtleties of memory safety, and how syntax can mask bugs.">
@@ -94,7 +94,7 @@
         <section class="parent-content scene-element scene-element--fadein ">
 <main class="article article-single">
   <section class="article-body">
-    <h1 class="article-title">Slack Shenanigans</h1>
+    <h1 class="article-title">Reference Shenanigans</h1>
     
     <section class="article-description">
       The subtleties of memory safety, and how syntax can mask bugs.
@@ -102,7 +102,7 @@
     
     <div class="article-meta">
   <section class="article-stats">
-    March 9, 2023&nbsp;·&nbsp;5 min&nbsp;·&nbsp;919 words
+    March 9, 2023&nbsp;·&nbsp;5 min&nbsp;·&nbsp;927 words
   </section>
   
   <section class="article-tags">
@@ -116,11 +116,12 @@
 </div>
 
     <hr>
-    <p>A while back, I encountered a subtle bug (which of course feels obvious in
-hindsight) involving a tree traversal and a hash map used for intermediate
-information. At the time, I had lost the better part of the day to the issue,
-but it actually led me to some interesting conclusions and so I thought it&rsquo;d be
-fun to try to present it here in a somewhat generalized and simplified way.</p>
+    <p>A while back, I was working on some Unreal C++ code involving a tree traversal
+and a hash map used for intermediate information when I encountered a subtle
+bug (which of course feels obvious in hindsight). At the time, I had lost the
+better part of the day to the issue, but it actually led me to some interesting
+conclusions so I thought it&rsquo;d be fun to try to present it here in a somewhat
+generalized and simplified way.</p>
 <p>Note that this example uses Unreal Engine&rsquo;s custom hash map (<code>TMap</code>) and
 pointer (<code>TUniquePtr</code>) types, but the same mechanism and considerations can
 also apply to any similar hash map API, including the STL&rsquo;s
