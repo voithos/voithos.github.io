@@ -1312,3 +1312,12 @@ article {
   left: 0;
   z-index: -1;
 }
+
+.backdrop-fallback {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  padding: 0;
+}
