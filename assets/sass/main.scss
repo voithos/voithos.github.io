@@ -1059,15 +1059,14 @@ footer {
     font-weight: normal;
   }
 
-  .archive-count,
-  {
-  color: $lowlight-color;
-  font-size: 1rem;
-}
+  .archive-count {
+    color: $lowlight-color;
+    font-size: 1rem;
+  }
 
-.article-tags {
-  display: none;
-}
+  .article-tags {
+    display: none;
+  }
 }
 
 // Code
