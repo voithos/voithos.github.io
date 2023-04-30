@@ -3,7 +3,7 @@
 Personal site of Zaven Muradyan.
 
 ### Requirements
-- hugo v0.83: Static site generator of choice
+- hugo v0.111: Static site generator of choice
 - node v14.17.0: For THREE.js
 
 ### Deployment
