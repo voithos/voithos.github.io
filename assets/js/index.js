@@ -1,15 +1,15 @@
 import * as THREE from 'three';
-import {WEBGL} from 'three/examples/jsm/WebGL.js';
+import { WEBGL } from 'three/examples/jsm/WebGL.js';
 
 class ShaderBackdrop {
   constructor() {
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(
-        90, window.innerWidth / window.innerHeight, 0.1, 1000);
+      90, window.innerWidth / window.innerHeight, 0.1, 1000);
 
     try {
       this.renderer = new THREE.WebGLRenderer(
-          {antialias : false, failIfMajorPerformanceCaveat : true});
+        { antialias: false, failIfMajorPerformanceCaveat: true });
     } catch (ex) {
       // WebGL unsupported, or running on software rendering.
       console.log(ex);
@@ -25,9 +25,9 @@ class ShaderBackdrop {
 
     // Set up scene and shader.
     this.uniforms = {
-      iTime : {type : 'f', value : 0.1},
-      iResolution : {type : 'v2', value : new THREE.Vector2()},
-      iMouse : {type : 'v2', value : new THREE.Vector2()},
+      iTime: { type: 'f', value: 0.1 },
+      iResolution: { type: 'v2', value: new THREE.Vector2() },
+      iMouse: { type: 'v2', value: new THREE.Vector2() },
     };
     this.uniforms.iResolution.value.x = window.innerWidth;
     this.uniforms.iResolution.value.y = window.innerHeight;
@@ -301,10 +301,10 @@ void main() {
 }
     `;
     const shaderMaterial = new THREE.ShaderMaterial({
-      uniforms : this.uniforms,
-      vertexShader : vert,
-      fragmentShader : frag,
-      side : THREE.DoubleSide,
+      uniforms: this.uniforms,
+      vertexShader: vert,
+      fragmentShader: frag,
+      side: THREE.DoubleSide,
     });
 
     const plane = new THREE.PlaneGeometry(100, 100);
@@ -325,7 +325,7 @@ void main() {
     });
 
     this.targetMousePos =
-        new THREE.Vector2(window.innerWidth / 2, window.innerHeight / 2);
+      new THREE.Vector2(window.innerWidth / 2, window.innerHeight / 2);
     window.addEventListener('mousemove', (e) => {
       this.targetMousePos.x = e.clientX;
       this.targetMousePos.y = e.clientY;
@@ -387,7 +387,7 @@ void main() {
     requestAnimationFrame(() => this.animate());
     if (this.isFading) {
       this.currentOpacity =
-          Math.max(Math.min(this.currentOpacity + this.fadeOffset, 1.0), 0.0);
+        Math.max(Math.min(this.currentOpacity + this.fadeOffset, 1.0), 0.0);
       if (this.currentOpacity === this.targetOpacity) {
         this.isFading = false;
         if (this.currentOpacity === 0.0) {
@@ -414,28 +414,28 @@ function enableSmoothState(backdrop) {
 
   let smoothState;
   const options = {
-    debug : true,
-    scroll : false,
-    prefetch : true,
-    cacheLength : 2,
-    onStart : {
-      duration : 300,
-      render : ($container) => {
-        $('html, body').animate({scrollTop : 0});
+    debug: true,
+    scroll: false,
+    prefetch: true,
+    cacheLength: 2,
+    onStart: {
+      duration: 300,
+      render: ($container) => {
+        $('html, body').animate({ scrollTop: 0 });
         // Reverse CSS animations.
         $container.addClass('is-exiting');
         smoothState.restartCSSAnimations();
       },
     },
-    onReady : {
-      duration : 0,
-      render : ($container, $newContent) => {
+    onReady: {
+      duration: 0,
+      render: ($container, $newContent) => {
         // Remove reversing animations, and inject new content.
         $container.removeClass('is-exiting');
         $container.html($newContent);
       },
     },
-    onAfter : () => {
+    onAfter: () => {
       if (backdrop) {
         // Enable the backdrop on the main page, and disable it on subsequent
         // pages.
@@ -463,7 +463,7 @@ if (WEBGL.isWebGLAvailable()) {
   }
 } else {
   console.warn(
-      'Browser does not support WebGL; defaulting to static background');
+    'Browser does not support WebGL; defaulting to static background');
 }
 
 if (typeof jQuery !== 'undefined') {

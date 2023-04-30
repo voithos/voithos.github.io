@@ -6,9 +6,9 @@
         font-family: $name;
         src: url($path + '.eot');
         src: url($path + '.eot?#iefix') format('embedded-opentype'),
-        url($path + '.woff') format('woff'),
-        url($path + '.ttf') format('truetype'),
-        url($path + '.svg#' + $name) format('svg');
+            url($path + '.woff') format('woff'),
+            url($path + '.ttf') format('truetype'),
+            url($path + '.svg#' + $name) format('svg');
         font-weight: normal;
         font-style: normal;
     }
@@ -24,6 +24,7 @@
     ::-moz-selection {
         @content;
     }
+
     ::selection {
         @content;
     }
@@ -33,15 +34,19 @@
     @-webkit-keyframes #{$name} {
         @content;
     }
+
     @-moz-keyframes #{$name} {
         @content;
     }
+
     @-o-keyframes #{$name} {
         @content;
     }
+
     @-ms-keyframes #{$name} {
         @content;
     }
+
     @keyframes #{$name} {
         @content;
     }

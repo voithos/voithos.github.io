@@ -7,33 +7,39 @@
 
 // Base
 //
-*, *:before, *:after {
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 @include selection {
-    background: lighten($primary-color, 8);
-    color: $body-color;
+  background: lighten($primary-color, 8);
+  color: $body-color;
 }
 
 html {
-    background-color: black;
-    background: url($background-image-url);
+  background-color: black;
+  background: url($background-image-url);
 }
 
 body {
-    color: $body-color;
-    font: {
-        size: 100%;
-        family: $text-font-stack;
-    }
+  color: $body-color;
+
+  font: {
+    size: 100%;
+    family: $text-font-stack;
+  }
 }
 
-html, body, #main {
+html,
+body,
+#main {
   height: 100%;
 }
+
 #main {
   display: flex;
   flex-direction: column;
@@ -45,109 +51,118 @@ button,
 input[type="radio"],
 input[type="submit"],
 input[type="checkbox"] {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 button[disabled],
 input[disabled] {
-    cursor: default;
+  cursor: default;
 }
 
 a {
-    color: $contrast-color;
-    text-decoration: none;
-    display: inline-block;
-    position: relative;
+  color: $contrast-color;
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
 
-    @include prefix(transition, all 0.5s ease-out);
-    @include prefix(transition-property, color, text-shadow);
+  @include prefix(transition, all 0.5s ease-out);
+  @include prefix(transition-property, color, text-shadow);
 
-    &:hover, &:focus {
-      color: lighten($contrast-color, 2);
-      text-shadow: 0 0 5px $contrast-color;
+  &:hover,
+  &:focus {
+    color: lighten($contrast-color, 2);
+    text-shadow: 0 0 5px $contrast-color;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0%;
+    height: 100%;
+
+    border-bottom: 2px solid $contrast-color;
+    @include prefix(transition, width 0.3s ease);
+  }
+
+  // Order matters: 'before' is a pseudo-element, whereas 'hover' is
+  // a pseudo-class
+  &:hover:after,
+  &:focus:after {
+    left: 0;
+    width: 100%;
+  }
+
+  &.primary {
+    color: lighten($primary-color, 10);
+
+    &:hover,
+    &:focus {
+      color: lighten($primary-color, 15);
+      text-shadow: 0 0 5px $primary-color;
     }
 
     &:after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 0%;
-      height: 100%;
-
-      border-bottom: 2px solid $contrast-color;
-      @include prefix(transition, width 0.3s ease);
+      border-bottom: 2px solid $primary-color;
     }
-
-    // Order matters: 'before' is a pseudo-element, whereas 'hover' is
-    // a pseudo-class
-    &:hover:after, &:focus:after {
-      left: 0;
-      width: 100%;
-    }
-
-    &.primary {
-      color: lighten($primary-color, 10);
-      &:hover, &:focus {
-        color: lighten($primary-color, 15);
-        text-shadow: 0 0 5px $primary-color;
-      }
-      &:after {
-        border-bottom: 2px solid $primary-color;
-      }
-    }
+  }
 }
 
 pre {
-    font-size: 1.05rem;
-    padding: 1rem;
-    white-space: pre;
-    overflow: auto;
-    border-radius: 1rem;
-    border: 1px solid lighten($dark-color, 11);
-    background-color: $dark-color;
-    margin-bottom: 1rem;
-    @include prefix(transition, border-radius 0.2s ease-in-out);
+  font-size: 1.05rem;
+  padding: 1rem;
+  white-space: pre;
+  overflow: auto;
+  border-radius: 1rem;
+  border: 1px solid lighten($dark-color, 11);
+  background-color: $dark-color;
+  margin-bottom: 1rem;
+  @include prefix(transition, border-radius 0.2s ease-in-out);
 
-    &:hover {
-        border-radius: 0;
-    }
+  &:hover {
+    border-radius: 0;
+  }
 
-    @media screen and (max-width: $media-mobile-max-width) {
-      font-size: 0.95rem;
-    }
+  @media screen and (max-width: $media-mobile-max-width) {
+    font-size: 0.95rem;
+  }
 }
 
 .highlight {
-  > div {
+  >div {
     margin-bottom: 1rem;
     border-radius: 1rem;
     @include prefix(transition, border-radius 0.2s ease-in-out);
+
     &:hover {
-        border-radius: 0;
+      border-radius: 0;
     }
   }
+
   table td:nth-of-type(1) pre {
     border-radius: 1rem 0 0 1rem;
   }
+
   table td:nth-of-type(2) pre {
     border-radius: 0 1rem 1rem 0;
   }
+
   table pre {
     margin: 0;
   }
 }
 
-:not(pre) > code {
-    font-family: $mono-font-stack;
-    font-size: .75em;
-    margin: auto 0.1em;
-    padding: 0.1em 0.4em;
-    background: darken($lowlight-color, 18);
-    border-radius: 4px;
+:not(pre)>code {
+  font-family: $mono-font-stack;
+  font-size: .75em;
+  margin: auto 0.1em;
+  padding: 0.1em 0.4em;
+  background: darken($lowlight-color, 18);
+  border-radius: 4px;
 }
 
-a > code {
+a>code {
   background: none;
   padding: 0.1em 0.1em;
   font-size: .85em;
@@ -158,45 +173,45 @@ strong code {
 }
 
 img {
-    padding: 2rem;
-    @include prefix(box-shadow, 0 1px 3px 1px $dark-color);
+  padding: 2rem;
+  @include prefix(box-shadow, 0 1px 3px 1px $dark-color);
 
-    @media screen and (max-width: $media-mobile-max-width) {
-      padding: 1rem;
-      width: 100%;
-    }
+  @media screen and (max-width: $media-mobile-max-width) {
+    padding: 1rem;
+    width: 100%;
+  }
 }
 
 p {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 blockquote {
-    font-style: italic;
-    margin: 1.5rem 0;
-    padding: 0 2rem;
-    position: relative;
-    color: lighten($lowlight-color, 8);
+  font-style: italic;
+  margin: 1.5rem 0;
+  padding: 0 2rem;
+  position: relative;
+  color: lighten($lowlight-color, 8);
+
+  &:before {
+    display: block;
+    content: '\201C';
+    font-size: 5rem;
+    position: absolute;
+    left: -1rem;
+    top: -1.2rem;
+    color: lighten($lowlight-color, 30);
+  }
+
+  cite {
+    color: lighten($body-color, 20);
+    font-size: 1rem;
+    display: block;
 
     &:before {
-        display: block;
-        content: '\201C';
-        font-size: 5rem;
-        position: absolute;
-        left: -1rem;
-        top: -1.2rem;
-        color: lighten($lowlight-color, 30);
+      content: '\2014 \2009';
     }
-
-    cite {
-        color: lighten($body-color, 20);
-        font-size: 1rem;
-        display: block;
-
-        &:before {
-            content: '\2014 \2009';
-        }
-    }
+  }
 }
 
 hr {
@@ -204,179 +219,190 @@ hr {
 }
 
 h1 {
-    margin: 1.5rem auto 1.3rem;
-    font-size: 2.1rem;
-    font-weight: bold;
+  margin: 1.5rem auto 1.3rem;
+  font-size: 2.1rem;
+  font-weight: bold;
 
-    @media screen and (max-width: $media-mobile-max-width) {
-      font-size: 1.8rem;
-    }
+  @media screen and (max-width: $media-mobile-max-width) {
+    font-size: 1.8rem;
+  }
 }
 
 h2 {
-    margin: 1.2rem auto 1.0rem;
-    font-size: 1.7rem;
-    font-weight: bold;
+  margin: 1.2rem auto 1.0rem;
+  font-size: 1.7rem;
+  font-weight: bold;
 
-    @media screen and (max-width: $media-mobile-max-width) {
-        font-size: 1.4rem;
-    }
+  @media screen and (max-width: $media-mobile-max-width) {
+    font-size: 1.4rem;
+  }
 }
 
 h3 {
-    margin: 1.2rem auto 1.0rem;
-    font-size: 1.4rem;
-    font-weight: bold;
+  margin: 1.2rem auto 1.0rem;
+  font-size: 1.4rem;
+  font-weight: bold;
 
-    @media screen and (max-width: $media-mobile-max-width) {
-        font-size: 1.2rem;
-    }
+  @media screen and (max-width: $media-mobile-max-width) {
+    font-size: 1.2rem;
+  }
 }
 
-h4, h5, h6 {
-    margin: 1rem auto 0.8rem;
+h4,
+h5,
+h6 {
+  margin: 1rem auto 0.8rem;
 }
 
 h4 {
-    font-size: 1.3rem;
-    font-weight: bold;
+  font-size: 1.3rem;
+  font-weight: bold;
 
-    @media screen and (max-width: $media-mobile-max-width) {
-        font-size: 1.1rem;
-    }
+  @media screen and (max-width: $media-mobile-max-width) {
+    font-size: 1.1rem;
+  }
 }
 
-h4, h5, h6 {
-    font-size: 1.3rem;
+h4,
+h5,
+h6 {
+  font-size: 1.3rem;
 
-    @media screen and (max-width: $media-mobile-max-width) {
-        font-size: 1.1rem;
-    }
+  @media screen and (max-width: $media-mobile-max-width) {
+    font-size: 1.1rem;
+  }
 }
 
 h6 {
-    font-style: italic;
+  font-style: italic;
 }
 
-h1[id] a, h2[id] a, h3[id] a {
+h1[id] a,
+h2[id] a,
+h3[id] a {
+  color: $lowlight-color;
+  position: relative;
+
+  &:hover,
+  &:focus {
     color: $lowlight-color;
-    position: relative;
+    text-shadow: 0 0 5px $lowlight-color;
+    border-bottom: 2px solid $lowlight-color;
+  }
 
-    &:hover, &:focus {
-        color: $lowlight-color;
-        text-shadow: 0 0 5px $lowlight-color;
-        border-bottom: 2px solid $lowlight-color;
+  @media screen and (min-width: 1024px) {
+    &:before {
+      content: '\00B6'; // Pilcrow
+      display: block;
+      position: absolute;
+      left: -1.5rem;
+      color: rgba($lowlight-color, 0);
+
+      @include prefix(transition, color 0.5s ease-out);
     }
 
-    @media screen and (min-width: 1024px) {
-        &:before {
-            content: '\00B6'; // Pilcrow
-            display: block;
-            position: absolute;
-            left: -1.5rem;
-            color: rgba($lowlight-color, 0);
-
-            @include prefix(transition, color 0.5s ease-out);
-        }
-
-        // Order matters: 'before' is a pseudo-element, whereas 'hover' is
-        // a pseudo-class
-        &:hover:before, &:focus:before {
-            color: rgba($lowlight-color, 1);
-        }
+    // Order matters: 'before' is a pseudo-element, whereas 'hover' is
+    // a pseudo-class
+    &:hover:before,
+    &:focus:before {
+      color: rgba($lowlight-color, 1);
     }
+  }
 }
 
 @include keyframes(fadein) {
-    0% {
-        opacity: 0;
-        @include prefix(transform, translate3d(0, 3rem, 0));
-    }
+  0% {
+    opacity: 0;
+    @include prefix(transform, translate3d(0, 3rem, 0));
+  }
 
-    30% {
-        opacity: 0;
-        @include prefix(transform, translate3d(0, 2rem, 0));
-    }
+  30% {
+    opacity: 0;
+    @include prefix(transform, translate3d(0, 2rem, 0));
+  }
 
-    100% {
-        opacity: 1;
-        @include prefix(transform, none);
-    }
+  100% {
+    opacity: 1;
+    @include prefix(transform, none);
+  }
 }
 
 .smooth-scene {
-    .scene-element {
-        @include prefix(animation-duration, 0.3s);
-        @include prefix(transition-timing-function, ease-in);
-        @include prefix(animation-fill-mode, both);
+  .scene-element {
+    @include prefix(animation-duration, 0.3s);
+    @include prefix(transition-timing-function, ease-in);
+    @include prefix(animation-fill-mode, both);
 
-        &.scene-element--fadein {
-            @include prefix(animation-name, fadein);
-        }
+    &.scene-element--fadein {
+      @include prefix(animation-name, fadein);
     }
+  }
 
-    &.is-exiting .scene-element {
-        @include prefix(animation-direction, reverse);
-    }
+  &.is-exiting .scene-element {
+    @include prefix(animation-direction, reverse);
+  }
 }
 
 .scroll-button {
-    opacity: 0;
-    position: absolute;
+  opacity: 0;
+  position: absolute;
 
-    @include prefix(transition, opacity 0.5s ease-in-out);
+  @include prefix(transition, opacity 0.5s ease-in-out);
 
-    &.active {
-        opacity: 1;
-    }
+  &.active {
+    opacity: 1;
+  }
 
-    a {
-        border: none;
-    }
+  a {
+    border: none;
+  }
 
-    @media screen and (max-width: 1200px) {
-        display: none;
-    }
+  @media screen and (max-width: 1200px) {
+    display: none;
+  }
 }
 
 .site-container {
-    font-size: 1.2rem;
-    max-width: $max-width;
-    margin: 0 auto;
+  font-size: 1.2rem;
+  max-width: $max-width;
+  margin: 0 auto;
 
-    @media screen and (max-width: 1024px) {
-      width: 100%;
-    }
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+  }
 
-    @media screen and (max-width: $media-mobile-max-width) {
-      font-size: 1.1rem;
-    }
+  @media screen and (max-width: $media-mobile-max-width) {
+    font-size: 1.1rem;
+  }
 }
 
 .link-button {
-    padding: 0.5rem 0.7rem 0.7rem 0.7rem;
+  padding: 0.5rem 0.7rem 0.7rem 0.7rem;
 
-    border: 1px solid darken($primary-color, 10);
-    border-radius: 0.3rem;
-    background-color: lighten($primary-color, 3);
-    color: lighten($lowlight-color, 20);
-    @include prefix(transition, all 0.2s ease-in-out);
-    @include prefix(transition-property, color, border-radius, background-color, box-shadow);
+  border: 1px solid darken($primary-color, 10);
+  border-radius: 0.3rem;
+  background-color: lighten($primary-color, 3);
+  color: lighten($lowlight-color, 20);
+  @include prefix(transition, all 0.2s ease-in-out);
+  @include prefix(transition-property, color, border-radius, background-color, box-shadow);
 
-    &:hover, &:focus {
-      background-color: lighten($primary-color, 8);
-      color: #ECF9FD;
-      @include prefix(box-shadow, 0 0 1px 4px $dark-color, 0 0 2px 6px lighten($primary-color, 8));
-    }
-    &:active {
-      background-color: $primary-color;
-      @include prefix(box-shadow, 0 0 1px 4px $primary-color, 0 0 2px 6px $primary-color);
-      border: 1px solid $primary-color;
-      @include prefix(transition-duration, 0.1s);
-    }
-    &:after {
-      display: none;
-    }
+  &:hover,
+  &:focus {
+    background-color: lighten($primary-color, 8);
+    color: #ECF9FD;
+    @include prefix(box-shadow, 0 0 1px 4px $dark-color, 0 0 2px 6px lighten($primary-color, 8));
+  }
+
+  &:active {
+    background-color: $primary-color;
+    @include prefix(box-shadow, 0 0 1px 4px $primary-color, 0 0 2px 6px $primary-color);
+    border: 1px solid $primary-color;
+    @include prefix(transition-duration, 0.1s);
+  }
+
+  &:after {
+    display: none;
+  }
 }
 
 .keyword {
@@ -395,12 +421,15 @@ h1[id] a, h2[id] a, h3[id] a {
   font-size: 1.2rem;
   margin-bottom: 0.5em;
   display: flex;
+
   span {
     flex: 1;
   }
+
   .prev {
     padding-left: 1em;
   }
+
   .next {
     padding-right: 1em;
     text-align: right;
@@ -412,267 +441,286 @@ h1[id] a, h2[id] a, h3[id] a {
 .header-box {
   background-color: $dark-color;
   border-bottom: 1px solid darken($primary-color, 5);
-  
+
   @media screen and (max-width: 1300px) {
     padding: 0 1rem;
   }
 }
 
 @include keyframes(rotatecw) {
-    0% {
-        @include prefix(transform, rotate(0deg));
-    }
-    100% {
-        @include prefix(transform, rotate(360deg));
-    }
+  0% {
+    @include prefix(transform, rotate(0deg));
+  }
+
+  100% {
+    @include prefix(transform, rotate(360deg));
+  }
 }
+
 @include keyframes(rotateccw) {
-    0% {
-        @include prefix(transform, rotate(360deg));
-    }
-    100% {
-        @include prefix(transform, rotate(0deg));
-    }
+  0% {
+    @include prefix(transform, rotate(360deg));
+  }
+
+  100% {
+    @include prefix(transform, rotate(0deg));
+  }
 }
 
 header {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
 
-    text-transform: uppercase;
+  text-transform: uppercase;
+
+  @media screen and (max-width: $media-mobile-max-width) {
+    flex-flow: row wrap;
+  }
+
+  .title {
+    position: relative;
+    flex: initial;
+    margin: 0;
+
+    font-family: $title-font-stack;
+    font-size: $header-font-size;
+    font-weight: bold;
 
     @media screen and (max-width: $media-mobile-max-width) {
-        flex-flow: row wrap;
+      font-size: 1.5rem;
     }
 
-    .title {
-        position: relative;
-        flex: initial;
-        margin: 0;
+    .spin {
+      position: absolute;
 
-        font-family: $title-font-stack;
-        font-size: $header-font-size;
-        font-weight: bold;
+      @include prefix(transition, all 0.3s);
+      @include prefix(animation-iteration-count, infinite);
+      @include prefix(animation-timing-function, linear);
+      border: 1px solid rgba($lowlight-color, 0);
 
-        @media screen and (max-width: $media-mobile-max-width) {
-            font-size: 1.5rem;
-        }
+      left: 25%;
+      top: -30%;
+      width: 40px;
+      height: 40px;
+    }
 
-        .spin {
-          position: absolute;
+    .cw {
+      @include prefix(animation-name, rotatecw);
+      @include prefix(animation-duration, 2s);
+    }
 
-          @include prefix(transition, all 0.3s);
-          @include prefix(animation-iteration-count, infinite);
-          @include prefix(animation-timing-function, linear);
-          border: 1px solid rgba($lowlight-color, 0);
+    .ccw {
+      @include prefix(animation-name, rotateccw);
+      @include prefix(animation-duration, 3s);
+    }
 
-          left: 25%;
-          top: -30%;
-          width: 40px;
-          height: 40px;
-        }
-        .cw {
-          @include prefix(animation-name, rotatecw);
-          @include prefix(animation-duration, 2s);
-        }
-        .ccw {
-          @include prefix(animation-name, rotateccw);
-          @include prefix(animation-duration, 3s);
-        }
-        &:hover .spin, &:focus .spin {
-          border: 1px solid rgba($lowlight-color, 0.7);
-          @include prefix(box-shadow, 0 0 5px 0 rgba($lowlight-color, 0.7), inset 0 0 2px 0 rgba($lowlight-color, 0.7));
-        }
+    &:hover .spin,
+    &:focus .spin {
+      border: 1px solid rgba($lowlight-color, 0.7);
+      @include prefix(box-shadow, 0 0 5px 0 rgba($lowlight-color, 0.7), inset 0 0 2px 0 rgba($lowlight-color, 0.7));
+    }
+
+    a {
+      color: $secondary-color;
+      border-bottom: none;
+
+      &:hover,
+      &:focus {
+        color: lighten($secondary-color, 15);
+        text-shadow: 0 0 10px $secondary-color;
+      }
+
+      &:after {
+        display: none;
+      }
+    }
+  }
+
+  .nav-toggle {
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    display: none;
+    padding: 0.6rem;
+    border: 1px solid darken($primary-color, 5);
+    border-radius: 0.4rem;
+    margin-right: 1rem;
+    top: -0.5rem;
+    background-color: $primary-color;
+
+    @media screen and (max-width: $media-mobile-max-width) {
+      display: block;
+    }
+
+    &:after {
+      content: '\f0c9';
+      display: block;
+      height: 1rem;
+      width: 1rem;
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      text-align: center;
+    }
+  }
+
+  .nav-checkbox {
+    position: absolute;
+    top: -99rem;
+    left: -99rem;
+
+    &:checked~.nav-toggle:after {
+      content: '\f068';
+    }
+
+    &:checked~nav {
+      max-height: 20rem;
+    }
+  }
+
+  nav {
+    flex: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $header-font-size;
+
+    position: relative;
+    top: -0.7rem;
+
+    @media screen and (max-width: $media-mobile-max-width) {
+      top: 0;
+      overflow: hidden;
+      flex: 1 100%;
+      margin-bottom: 0rem;
+      max-height: 0rem;
+      @include prefix(transition, all 0.7s ease-in-out);
+      @include prefix(transition-property, max-height, margin-bottom);
+    }
+
+    ul {
+      display: inline-flex;
+      flex-flow: row nowrap;
+
+      @media screen and (max-width: $media-mobile-max-width) {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        text-align: center;
+        border-top: 1px solid $lowlight-color;
+        border-bottom: 1px solid $lowlight-color;
+      }
+
+      li {
+        display: inline;
+        margin: 1.25rem;
+        margin-bottom: 0;
 
         a {
-            color: $secondary-color;
-            border-bottom: none;
+          color: $light-color;
+          border-bottom-color: rgba($light-color, 0);
 
-            &:hover, &:focus {
-                color: lighten($secondary-color, 15);
-                text-shadow: 0 0 10px $secondary-color;
-            }
-            &:after {
-              display: none;
-            }
+          &:hover,
+          &:focus {
+            color: lighten($primary-color, 15);
+            text-shadow: 0 0 5px $primary-color;
+            border-bottom-color: rgba($primary-color, 1);
+          }
+
+          &:after {
+            border-bottom: 2px solid $primary-color;
+          }
         }
-    }
 
-    .nav-toggle {
-        cursor: pointer;
-        position: relative;
-        z-index: 1;
-        display: none;
-        padding: 0.6rem;
-        border: 1px solid darken($primary-color, 5);
-        border-radius: 0.4rem;
-        margin-right: 1rem;
-        top: -0.5rem;
-        background-color: $primary-color;
+        &.active a {
+          color: lighten($primary-color, 15);
+
+          &:hover,
+          &:focus {
+            color: lighten($primary-color, 15);
+            text-shadow: 0 0 5px $primary-color;
+            border-bottom-color: rgba($primary-color, 1);
+          }
+
+          &:after {
+            border-bottom: 2px solid $primary-color;
+          }
+        }
 
         @media screen and (max-width: $media-mobile-max-width) {
+          background-color: $dark-color;
+          background-color: rgba($dark-color, 0.75);
+          padding: 0.5rem;
+          margin: 0rem;
+          border-top: 1px solid $lowlight-color;
+          border-bottom: 1px solid $lowlight-color;
+
+          a {
+            color: lighten($lowlight-color, 20);
             display: block;
+            width: 100%;
+            border-bottom: none;
+          }
+
+          &.active {
+            background-color: darken($primary-color, 0);
+            border-top: 1px solid darken($primary-color, 20);
+            border-bottom: 1px solid darken($primary-color, 20);
+
+            a {
+              color: lighten($lowlight-color, 30);
+            }
+          }
+        }
+      }
+    }
+
+    &.social-nav {
+      flex: 0;
+
+      li {
+        margin: 1.25rem 0.25rem;
+        margin-bottom: 0;
+      }
+
+      @media screen and (max-width: $media-mobile-max-width) {
+        flex: auto;
+        margin-bottom: 0;
+
+        ul {
+          justify-content: center;
+          flex: auto;
+          width: auto;
+          flex-direction: row;
+          text-align: center;
+          border-top: none;
+          border-bottom: none;
+        }
+
+        li {
+          border-top: none;
+          border-bottom: none;
+          margin: 0.75rem 0.5rem;
+        }
+      }
+
+      a {
+        border-bottom: none;
+        color: $secondary-color;
+
+        &:hover,
+        &:focus {
+          color: lighten($secondary-color, 15);
+          text-shadow: 0 0 5px $secondary-color;
         }
 
         &:after {
-            content: '\f0c9';
-            display: block;
-            height: 1rem;
-            width: 1rem;
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            text-align: center;
+          display: none;
         }
+      }
     }
-
-    .nav-checkbox {
-        position: absolute;
-        top: -99rem;
-        left: -99rem;
-
-        &:checked ~ .nav-toggle:after {
-            content: '\f068';
-        }
-
-        &:checked ~ nav {
-            max-height: 20rem;
-        }
-    }
-
-    nav {
-        flex: auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: $header-font-size;
-
-        position: relative;
-        top: -0.7rem;
-
-        @media screen and (max-width: $media-mobile-max-width) {
-          top: 0;
-          overflow: hidden;
-          flex: 1 100%;
-          margin-bottom: 0rem;
-          max-height: 0rem;
-          @include prefix(transition, all 0.7s ease-in-out);
-          @include prefix(transition-property, max-height, margin-bottom);
-        }
-
-        ul {
-            display: inline-flex;
-            flex-flow: row nowrap;
-
-            @media screen and (max-width: $media-mobile-max-width) {
-                display: flex;
-                width: 100%;
-                flex-direction: column;
-                text-align: center;
-                border-top: 1px solid $lowlight-color;
-                border-bottom: 1px solid $lowlight-color;
-            }
-
-            li {
-                display: inline;
-                margin: 1.25rem;
-                margin-bottom: 0;
-
-                a {
-                  color: $light-color;
-                  border-bottom-color: rgba($light-color, 0);
-                  &:hover, &:focus {
-                      color: lighten($primary-color, 15);
-                      text-shadow: 0 0 5px $primary-color;
-                      border-bottom-color: rgba($primary-color, 1);
-                  }
-                  &:after {
-                    border-bottom: 2px solid $primary-color;
-                  }
-                }
-                &.active a {
-                    color: lighten($primary-color, 15);
-                    &:hover, &:focus {
-                        color: lighten($primary-color, 15);
-                        text-shadow: 0 0 5px $primary-color;
-                        border-bottom-color: rgba($primary-color, 1);
-                    }
-                    &:after {
-                      border-bottom: 2px solid $primary-color;
-                    }
-                }
-
-                @media screen and (max-width: $media-mobile-max-width) {
-                    background-color: $dark-color;
-                    background-color: rgba($dark-color, 0.75);
-                    padding: 0.5rem;
-                    margin: 0rem;
-                    border-top: 1px solid $lowlight-color;
-                    border-bottom: 1px solid $lowlight-color;
-
-                    a {
-                        color: lighten($lowlight-color, 20);
-                        display: block;
-                        width: 100%;
-                        border-bottom: none;
-                    }
-
-                    &.active {
-                        background-color: darken($primary-color, 0);
-                        border-top: 1px solid darken($primary-color, 20);
-                        border-bottom: 1px solid darken($primary-color, 20);
-
-                        a {
-                            color: lighten($lowlight-color, 30);
-                        }
-                    }
-                }
-            }
-        }
-
-        &.social-nav {
-          flex: 0;
-
-          li {
-            margin: 1.25rem 0.25rem;
-            margin-bottom: 0;
-          }
-
-          @media screen and (max-width: $media-mobile-max-width) {
-            flex: auto;
-            margin-bottom: 0;
-
-            ul {
-              justify-content: center;
-              flex: auto;
-              width: auto;
-              flex-direction: row;
-              text-align: center;
-              border-top: none;
-              border-bottom: none;
-            }
-            li {
-              border-top: none;
-              border-bottom: none;
-              margin: 0.75rem 0.5rem;
-            }
-          }
-
-          a {
-            border-bottom: none;
-            color: $secondary-color;
-
-            &:hover, &:focus {
-                color: lighten($secondary-color, 15);
-                text-shadow: 0 0 5px $secondary-color;
-            }
-            &:after {
-              display: none;
-            }
-          }
-        }
-    }
+  }
 }
 
 // Footer
@@ -684,9 +732,9 @@ footer {
   justify-content: center;
 
   a {
-      &:after {
-        display: none;
-      }
+    &:after {
+      display: none;
+    }
   }
 
   .heart {
@@ -709,25 +757,29 @@ footer {
 // Index
 //
 .posts {
-    article {
-        > h2 a {
-            color: $lowlight-color;
-            border-bottom: none;
-            &:hover, &:focus {
-                text-shadow: 0 0 5px $lowlight-color;
-            }
-        }
-    }
+  article {
+    >h2 a {
+      color: $lowlight-color;
+      border-bottom: none;
 
-    .readmore {
-        font-size: 1.2rem;
-        text-align: right;
-        margin-bottom: 0.8rem;
+      &:hover,
+      &:focus {
+        text-shadow: 0 0 5px $lowlight-color;
+      }
     }
+  }
+
+  .readmore {
+    font-size: 1.2rem;
+    text-align: right;
+    margin-bottom: 0.8rem;
+  }
 }
+
 .title-container {
   flex: 1;
 }
+
 .main-title {
   height: 100%;
   display: flex;
@@ -747,6 +799,7 @@ footer {
       font-size: 2.2rem;
       letter-spacing: 1.0rem;
     }
+
     @media screen and (max-width: $media-mobile-max-width) {
       font-size: 1.8rem;
       letter-spacing: 0.5rem;
@@ -760,11 +813,14 @@ footer {
 .parent-content.articles-list-parent {
   background: none;
 }
+
 .article-draft {
   color: $lowlight-color;
 }
+
 .articles {
   width: 50rem;
+
   @media screen and (max-width: $media-mobile-max-width) {
     width: unset;
   }
@@ -782,6 +838,7 @@ footer {
       padding: 1rem 2rem;
       margin: 0 2rem 2rem 2rem;
     }
+
     @media screen and (max-width: $media-mobile-max-width) {
       padding: 1rem 1.5rem;
       margin: 0 1.5rem 1rem 1.5rem;
@@ -790,6 +847,7 @@ footer {
     .article-title {
       font-size: 1.6rem;
       margin-bottom: 0.5rem;
+
       @media screen and (max-width: $media-mobile-max-width) {
         font-size: 1.4rem;
       }
@@ -813,11 +871,14 @@ footer {
     .left {
       text-align: right;
     }
-    .left, .right {
+
+    .left,
+    .right {
       flex: 1;
     }
   }
 }
+
 .article-meta {
   display: flex;
   flex-flow: row nowrap;
@@ -831,10 +892,12 @@ footer {
     font-size: 1.15rem;
     font-style: italic;
     color: lighten($lowlight-color, 15);
+
     @media screen and (max-width: $media-mobile-max-width) {
       font-size: 1.0rem;
     }
   }
+
   .article-tags {
     text-align: right;
     font-size: 0.9rem;
@@ -846,9 +909,11 @@ footer {
     }
   }
 }
+
 .article-single {
   line-height: 1.3;
   padding: 1rem;
+
   @media screen and (max-width: $media-mobile-max-width) {
     padding: 0.5rem;
   }
@@ -858,18 +923,22 @@ footer {
     margin-bottom: 0.5rem;
     color: lighten($lowlight-color, 15);
   }
+
   .article-description {
     margin-bottom: 0.25rem;
   }
+
   .article-stats {
     font-size: 1.0rem;
   }
+
   hr {
     border-color: $lowlight-color;
   }
 
   .article-body {
     padding: 1rem;
+
     @media screen and (max-width: $media-mobile-max-width) {
       padding: 0.5rem;
     }
@@ -878,7 +947,8 @@ footer {
   table {
     margin-bottom: 2rem;
 
-    th, td {
+    th,
+    td {
       min-width: 5rem;
       line-height: 1.5;
       padding: 0.6rem 0.5rem;
@@ -891,7 +961,8 @@ footer {
     }
   }
 
-  ol, ul {
+  ol,
+  ul {
     margin-bottom: 1.4rem;
     padding-inline-start: 1.4rem;
   }
@@ -902,8 +973,10 @@ footer {
 
   ul {
     list-style: disc;
+
     ul {
       list-style: circle;
+
       ul {
         list-style: square;
       }
@@ -918,18 +991,22 @@ footer {
   figure {
     padding-top: 0.5rem;
     padding-bottom: 1rem;
+
     img {
       padding: 0;
     }
+
     figcaption {
       color: lighten($lowlight-color, 15);
     }
   }
+
   img {
     display: block;
     padding: 1rem;
     margin: 0 auto;
   }
+
   figcaption {
     text-align: center;
   }
@@ -947,6 +1024,7 @@ footer {
       border-bottom: 1px solid darken($lowlight-color, 15);
     }
   }
+
   .archive-month {
     padding: 1rem 0;
     display: flex;
@@ -956,10 +1034,12 @@ footer {
       border-bottom: 1px solid darken($lowlight-color, 40);
     }
   }
+
   .archive-month-header {
     margin: 1.7rem 0;
     width: 12rem;
   }
+
   .archive-posts {
     flex: 1;
   }
@@ -979,98 +1059,105 @@ footer {
     font-weight: normal;
   }
 
-  .archive-count,  {
-    color: $lowlight-color;
-    font-size: 1rem;
-  }
+  .archive-count,
+  {
+  color: $lowlight-color;
+  font-size: 1rem;
+}
 
-  .article-tags {
-    display: none;
-  }
+.article-tags {
+  display: none;
+}
 }
 
 // Code
 //
 .projects {
-    .project {
-        padding: 1.5rem;
-        border-bottom: 2px solid $primary-color;
-        @include prefix(transition, box-shadow 0.5s ease-out);
+  .project {
+    padding: 1.5rem;
+    border-bottom: 2px solid $primary-color;
+    @include prefix(transition, box-shadow 0.5s ease-out);
 
-        &:hover, &:focus {
-            @include prefix(box-shadow, 0 0 5px 1px $primary-color);
-        }
-
-        > h2 {
-            text-align: center;
-            font-size: 1.8rem;
-
-            @media screen and (max-width: $media-mobile-max-width) {
-              font-size: 1.6rem;
-            }
-        }
-
-        @media screen and (max-width: $media-mobile-max-width) {
-            padding: 0.5rem;
-        }
+    &:hover,
+    &:focus {
+      @include prefix(box-shadow, 0 0 5px 1px $primary-color);
     }
 
-    .project-name {
-      font-weight: normal;
+    >h2 {
+      text-align: center;
+      font-size: 1.8rem;
+
+      @media screen and (max-width: $media-mobile-max-width) {
+        font-size: 1.6rem;
+      }
     }
 
-    .project-detail {
-        display: flex;
-        flex-flow: row nowrap;
-
-        @media screen and (max-width: 750px) {
-            flex-direction: column;
-        }
-
-        .project-image {
-            flex: 1.61;
-            padding: 1rem;
-
-            a, img {
-              width: 100%;
-            }
-            img {
-                padding: 0;
-            }
-
-            @media screen and (max-width: $media-mobile-max-width) {
-                padding: 0.5rem;
-            }
-        }
-
-        .project-desc {
-            flex: 1;
-            padding: 1rem;
-            display: flex;
-            flex-flow: column nowrap;
-            justify-content: space-around;
-
-            .project-links {
-                padding: 2rem 0;
-                text-align: center;
-                div {
-                  padding: 0.5rem;
-                }
-                a {
-                  margin: 0 0.5rem;
-                }
-            }
-
-            @media screen and (max-width: $media-mobile-max-width) {
-                padding: 0.5rem;
-            }
-        }
-        .project-date {
-            margin-top: 0.5rem;
-            text-align: right;
-            font-style: italic;
-        }
+    @media screen and (max-width: $media-mobile-max-width) {
+      padding: 0.5rem;
     }
+  }
+
+  .project-name {
+    font-weight: normal;
+  }
+
+  .project-detail {
+    display: flex;
+    flex-flow: row nowrap;
+
+    @media screen and (max-width: 750px) {
+      flex-direction: column;
+    }
+
+    .project-image {
+      flex: 1.61;
+      padding: 1rem;
+
+      a,
+      img {
+        width: 100%;
+      }
+
+      img {
+        padding: 0;
+      }
+
+      @media screen and (max-width: $media-mobile-max-width) {
+        padding: 0.5rem;
+      }
+    }
+
+    .project-desc {
+      flex: 1;
+      padding: 1rem;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: space-around;
+
+      .project-links {
+        padding: 2rem 0;
+        text-align: center;
+
+        div {
+          padding: 0.5rem;
+        }
+
+        a {
+          margin: 0 0.5rem;
+        }
+      }
+
+      @media screen and (max-width: $media-mobile-max-width) {
+        padding: 0.5rem;
+      }
+    }
+
+    .project-date {
+      margin-top: 0.5rem;
+      text-align: right;
+      font-style: italic;
+    }
+  }
 }
 
 // Writing
@@ -1084,6 +1171,7 @@ footer {
     @media screen and (max-width: 900px) {
       padding: 1rem 3rem;
     }
+
     @media screen and (max-width: $media-mobile-max-width) {
       padding: 1rem 1.5rem;
     }
@@ -1091,6 +1179,7 @@ footer {
     .writing-title {
       font-size: 1.9rem;
       margin-bottom: 1rem;
+
       @media screen and (max-width: $media-mobile-max-width) {
         font-size: 1.5rem;
       }
@@ -1102,7 +1191,9 @@ footer {
       padding: 0 4rem;
     }
 
-    .writing-words, .writing-tags, .writing-date {
+    .writing-words,
+    .writing-tags,
+    .writing-date {
       text-align: right;
       font-size: 1.15rem;
       font-style: italic;
@@ -1120,6 +1211,7 @@ footer {
     }
   }
 }
+
 .writing-single {
   line-height: 1.5;
   padding: 1rem;
@@ -1128,6 +1220,7 @@ footer {
     text-align: center;
     color: lighten($lowlight-color, 15);
   }
+
   hr {
     border-color: $lowlight-color;
   }
@@ -1140,169 +1233,181 @@ footer {
 // Art
 //
 .art {
-    .art-piece {
-        display: flex;
-        flex-flow: row nowrap;
-        border-bottom: 2px solid $primary-color;
-        padding: 2rem 0;
+  .art-piece {
+    display: flex;
+    flex-flow: row nowrap;
+    border-bottom: 2px solid $primary-color;
+    padding: 2rem 0;
 
-        @media screen and (max-width: 750px) {
-            flex-direction: column;
-        }
-
-        .art-image {
-            flex: 2.59;
-            padding: 1rem;
-
-            a, img {
-              width: 100%;
-            }
-            img {
-                padding: 0;
-            }
-
-            @media screen and (max-width: $media-mobile-max-width) {
-                padding: 0.5rem;
-            }
-        }
-
-        .art-desc {
-            flex: 1;
-            @media screen and (max-width: $media-mobile-max-width) {
-              padding: 0 2rem;
-            }
-
-            .art-title {
-              font-style: italic;
-              color: $lowlight-color;
-
-              @media screen and (max-width: $media-mobile-max-width) {
-                margin: 0.4rem 0 0.4rem;
-              }
-            }
-            .art-desc-text {
-              padding: 2.5rem 1rem;
-
-              @media screen and (max-width: $media-mobile-max-width) {
-                  padding: 0.5rem;
-              }
-            }
-            .art-date {
-              font-style: italic;
-            }
-        }
+    @media screen and (max-width: 750px) {
+      flex-direction: column;
     }
+
+    .art-image {
+      flex: 2.59;
+      padding: 1rem;
+
+      a,
+      img {
+        width: 100%;
+      }
+
+      img {
+        padding: 0;
+      }
+
+      @media screen and (max-width: $media-mobile-max-width) {
+        padding: 0.5rem;
+      }
+    }
+
+    .art-desc {
+      flex: 1;
+
+      @media screen and (max-width: $media-mobile-max-width) {
+        padding: 0 2rem;
+      }
+
+      .art-title {
+        font-style: italic;
+        color: $lowlight-color;
+
+        @media screen and (max-width: $media-mobile-max-width) {
+          margin: 0.4rem 0 0.4rem;
+        }
+      }
+
+      .art-desc-text {
+        padding: 2.5rem 1rem;
+
+        @media screen and (max-width: $media-mobile-max-width) {
+          padding: 0.5rem;
+        }
+      }
+
+      .art-date {
+        font-style: italic;
+      }
+    }
+  }
 }
 
 // Me
 //
 .me {
-    padding: 0 6rem;
+  padding: 0 6rem;
 
-    @media screen and (max-width: 900px) {
-      padding: 0 3rem;
+  @media screen and (max-width: 900px) {
+    padding: 0 3rem;
+  }
+
+  h2 {
+    color: lighten($lowlight-color, 10);
+    font-size: 3rem;
+    text-align: center;
+
+    @media screen and (max-width: $media-mobile-max-width) {
+      font-size: 2rem;
     }
+  }
 
-    h2 {
-        color: lighten($lowlight-color, 10);
-        font-size: 3rem;
-        text-align: center;
+  hr {
+    border-color: $lowlight-color;
+    margin-bottom: 2rem;
+  }
 
-        @media screen and (max-width: $media-mobile-max-width) {
-            font-size: 2rem;
-        }
-    }
-
-    hr {
-        border-color: $lowlight-color;
-        margin-bottom: 2rem;
-    }
-
-    .name {
-      color: $secondary-color;
-    }
+  .name {
+    color: $secondary-color;
+  }
 
 }
 
 // Post
 //
 article {
-    > h2 {
-        font-size: 2.2rem;
-        color: $lowlight-color;
-        border-bottom: 2px solid desaturate(darken($lowlight-color, 25), 10);
-        margin-bottom: 0.4rem;
+  >h2 {
+    font-size: 2.2rem;
+    color: $lowlight-color;
+    border-bottom: 2px solid desaturate(darken($lowlight-color, 25), 10);
+    margin-bottom: 0.4rem;
 
-        @media screen and (max-width: $media-mobile-max-width) {
-            font-size: 1.5rem;
-        }
+    @media screen and (max-width: $media-mobile-max-width) {
+      font-size: 1.5rem;
+    }
+  }
+
+  >.meta {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    font-size: 0.9rem;
+
+    .meta-separator {
+      margin: 0 0.5rem;
+
+      @media screen and (max-width: $media-mobile-max-width) {
+        display: none;
+      }
     }
 
-    > .meta {
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-between;
-        font-size: 0.9rem;
-
-        .meta-separator {
-            margin: 0 0.5rem;
-
-            @media screen and (max-width: $media-mobile-max-width) {
-                display: none;
-            }
-        }
-
-        .read-time {
-            @media screen and (max-width: $media-mobile-max-width) {
-                display: none;
-            }
-        }
-
-        .tags {
-            text-align: right;
-            color: $lowlight-color;
-
-            .tag {
-                margin: 0 0.2rem;
-            }
-        }
+    .read-time {
+      @media screen and (max-width: $media-mobile-max-width) {
+        display: none;
+      }
     }
 
-    .post {
-        ul, ol {
-            margin-left: 2.5rem;
-            margin-bottom: 1rem;
+    .tags {
+      text-align: right;
+      color: $lowlight-color;
 
-            @media screen and (max-width: $media-mobile-max-width) {
-                margin-left: 1.2rem;
-            }
-        }
-        ul {
-            list-style-type: square;
-        }
-        ol {
-            list-style-type: decimal;
-        }
+      .tag {
+        margin: 0 0.2rem;
+      }
     }
+  }
+
+  .post {
+
+    ul,
+    ol {
+      margin-left: 2.5rem;
+      margin-bottom: 1rem;
+
+      @media screen and (max-width: $media-mobile-max-width) {
+        margin-left: 1.2rem;
+      }
+    }
+
+    ul {
+      list-style-type: square;
+    }
+
+    ol {
+      list-style-type: decimal;
+    }
+  }
 }
 
 .footnotes {
-    font-size: 1.2rem;
-    color: darken($body-color, 15);
+  font-size: 1.2rem;
+  color: darken($body-color, 15);
 }
 
 .err404 {
   padding: 0 6rem;
+
   @media screen and (max-width: 900px) {
     padding: 0 3rem;
   }
+
   @media screen and (max-width: $media-mobile-max-width) {
     padding: 0 1.5rem;
   }
+
   h2 {
-      color: $lowlight-color;
-      font-size: 2.8rem;
-      text-align: center;
+    color: $lowlight-color;
+    font-size: 2.8rem;
+    text-align: center;
   }
 }
 
