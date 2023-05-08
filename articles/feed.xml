@@ -6,7 +6,17 @@
     <description>Recent content in Articles on voithos.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 09 Mar 2023 21:40:37 -0800</lastBuildDate><atom:link href="https://voithos.io/articles/feed.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 May 2023 16:58:57 -0700</lastBuildDate><atom:link href="https://voithos.io/articles/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Creating UObjects From Async Threads</title>
+      <link>https://voithos.io/articles/creating-uobjects-from-async-threads/</link>
+      <pubDate>Sat, 06 May 2023 16:58:57 -0700</pubDate>
+      
+      <guid>https://voithos.io/articles/creating-uobjects-from-async-threads/</guid>
+      <description>When developing a project in Unreal, for performance reasons you may find yourself needing to do work on background threads. This could be an FRunnableThread, an AsyncTask(), or even UE5&amp;rsquo;s fancy new Tasks System &amp;ndash; any code that isn&amp;rsquo;t executing on the game thread.
+As a motivating example, perhaps you need to dynamically load and process some mesh / texture data at runtime. Most of the processing work is thread-agnostic, but what if you need to create UObjects to represent the data?</description>
+    </item>
+    
     <item>
       <title>Reference Shenanigans</title>
       <link>https://voithos.io/articles/reference-shenanigans/</link>

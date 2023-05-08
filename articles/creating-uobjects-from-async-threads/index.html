@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<title>
+    Creating UObjects From Async Threads | voithos.io
+  </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Managing the gotchas around Unreal&#39;s object system.">
+<link rel="icon" href="https://voithos.io/favicon.ico">
+<link rel="alternate" href="https://voithos.io/articles/feed.xml" title="voithos.io">
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&family=Oxygen+Mono&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha512-DUC8yqWf7ez3JD1jszxCWSVB0DMP78eOyBpMa5aJki1bIRARykviOuImIczkxlj1KhVSyS16w2FSQetkD4UU2w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/smoothState.js/0.7.2/jquery.smoothState.min.js" integrity="sha512-PA88Ew5anBQLPlovdwOOMj+Ky0x+M6a6bDXYve4q+NDj17AJ37FwHT4Xo758ZQqYKLyvaYko27cQDQ5P/0kOJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
+  
+  <link rel="stylesheet" href="/sass/main.min.0ab234c7f51c77bcbf32099fef945c22a67acbaf200cbd70f4ce6ec4b6233238.css">
+
+  
+  <script type="text/javascript" src="/js/index.min.ace6fcc78723eb7bb70079f22ef1aaf9ab0f12a145a0d318b61d20e1b8999d90.js" defer></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-58393577-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-58393577-1');
+</script>
+
+  </head>
+  <body>
+    <section id="main" class="smooth-scene"><section class="header-box">
+  <section class="site-container">
+    <header>
+        <h1 class="title">
+          <div class="spin cw"></div>
+          <div class="spin ccw"></div>
+          <a href="/">voithos</a>
+        </h1>
+        <input type="checkbox" id="nav-checkbox" class="nav-checkbox" role="button">
+        <label for="nav-checkbox" class="nav-toggle" onclick></label>
+        <nav class="main-nav">
+          <ul>
+            
+            
+            <li class="active">
+              <a href="/articles/" title="Articles">Articles</a>
+            </li>
+            
+            <li class="">
+              <a href="/code/" title="Code">Code</a>
+            </li>
+            
+            <li class="">
+              <a href="/writing/" title="Writing">Writing</a>
+            </li>
+            
+            <li class="">
+              <a href="/art/" title="Art">Art</a>
+            </li>
+            
+            <li class="">
+              <a href="/me/" title="Me">Me</a>
+            </li>
+            
+          </ul>
+        </nav>
+        <nav class="social-nav">
+          <ul>
+            <li>
+              <a href="https://twitter.com/voithoz"><i class="fa-brands fa-twitter"></i></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/voithoz/"><i class="fa-brands fa-instagram"></i></a>
+            </li>
+            <li>
+              <a href="https://voithos.itch.io/"><i class="fa-brands fa-itch-io"></i></a>
+            </li>
+            <li>
+              <a href="https://github.com/voithos/"><i class="fa-brands fa-github"></i></a>
+            </li>
+          </ul>
+        </nav>
+    </header>
+  </section>
+</section>
+
+      <section class="site-container">
+        <section class="parent-content scene-element scene-element--fadein ">
+<main class="article article-single">
+  <section class="article-body">
+    <h1 class="article-title">Creating UObjects From Async Threads</h1>
+    
+    <section class="article-description">
+      Managing the gotchas around Unreal&rsquo;s object system.
+    </section>
+    
+    <div class="article-meta">
+  <section class="article-stats">
+    May 6, 2023&nbsp;·&nbsp;3 min&nbsp;·&nbsp;621 words
+  </section>
+  
+  <section class="article-tags">
+    
+      <span class="article-tag pill">c&#43;&#43;</span>
+    
+      <span class="article-tag pill">unreal-engine</span>
+    
+  </section>
+  
+</div>
+
+    <hr>
+    <p>When developing a project in Unreal, for performance reasons you may find
+yourself needing to do work on background threads. This could be an
+<code>FRunnableThread</code>, an <code>AsyncTask()</code>, or even UE5&rsquo;s fancy new
+<a href="https://docs.unrealengine.com/5.0/en-US/tasks-systems-in-unreal-engine/">Tasks System</a>
+&ndash; any code that isn&rsquo;t executing on the game thread.</p>
+<p>As a motivating example, perhaps you need to dynamically load and process some
+mesh / texture data at runtime. Most of the processing work is thread-agnostic,
+but what if you need to create <strong>UObjects</strong> to represent the data?</p>
+<h2 id="approach-1-dont-do-it">Approach 1: Don&rsquo;t do it</h2>
+<p>The common adage is to only work with UObjects on the game thread, and this may
+ultimately be the simplest and most reliable approach, and perhaps the <em>only</em>
+approach in older versions of Unreal.</p>
+<p>You can still do most non-UObject related processing in the background, and only
+send data over to the game thread when ready.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>AsyncTask(ENamedThreads<span style="color:#ff79c6">::</span>AnyBackgroundThreadNormalTask, [] {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// ... Do work ...
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Send to the game thread.
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    AsyncTask(ENamedThreads<span style="color:#ff79c6">::</span>GameThread, [Data <span style="color:#ff79c6">=</span> MoveTemp(Data)] {
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">// Create UObjects, use the data, etc
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    });
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><h2 id="approach-2-do-it-but-carefully">Approach 2: Do it, but carefully</h2>
+<p>It turns out that recent versions of Unreal <em>do</em> allow you to create UObjects
+from async threads. Here&rsquo;s an example that creates a transient <code>UTexture2D</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>AsyncTask(ENamedThreads<span style="color:#ff79c6">::</span>AnyBackgroundThreadNormalTask, [] {
+</span></span><span style="display:flex;"><span>    UTexture2D<span style="color:#ff79c6">*</span> Texture <span style="color:#ff79c6">=</span> NewObject<span style="color:#ff79c6">&lt;</span>UTexture2D<span style="color:#ff79c6">&gt;</span>(GetTransientPackage(),
+</span></span><span style="display:flex;"><span>            MakeUniqueObjectName(GetTransientPackage(), UTexture2D<span style="color:#ff79c6">::</span>StaticClass(), TEXT(<span style="color:#f1fa8c">&#34;MyTexture&#34;</span>)),
+</span></span><span style="display:flex;"><span>            RF_Transient <span style="color:#ff79c6">|</span> RF_TextExportTransient <span style="color:#ff79c6">|</span> RF_DuplicateTransient);
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>});
+</span></span></code></pre></div><p>However, there are several caveats to doing this, and they generally revolve
+around the garbage collector.</p>
+<h3 id="caveat-1-clear-the-async-flag">Caveat #1: Clear the async flag</h3>
+<p>When UObjects are created outside the game thread, Unreal will detect this and
+automatically add a special &ldquo;async&rdquo; flag to the object to prevent it from
+getting prematurely garbage collected. This flag needs to be cleared after the
+UObject is moved to the game thread and attached to other objects, or else it
+will never get garbage collected.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>AsyncTask(ENamedThreads<span style="color:#ff79c6">::</span>AnyBackgroundThreadNormalTask, [] {
+</span></span><span style="display:flex;"><span>    UTexture2D<span style="color:#ff79c6">*</span> Texture <span style="color:#ff79c6">=</span> NewObject<span style="color:#ff79c6">&lt;</span>UTexture2D<span style="color:#ff79c6">&gt;</span>(...);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    AsyncTask(ENamedThreads<span style="color:#ff79c6">::</span>GameThread, [Texture]() <span style="color:#ff79c6">mutable</span> {
+</span></span><span style="display:flex;"><span>        Texture<span style="color:#ff79c6">-&gt;</span>ClearInternalFlags(EInternalObjectFlags<span style="color:#ff79c6">::</span>Async);
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><h3 id="caveat-2-guard-against-gc-interference">Caveat #2: Guard against GC interference</h3>
+<p>If you try to create a UObject from a background thread while a GC is currently
+running, you&rsquo;ll hit an assertion. You must instead use an <code>FGCScopeGuard</code> to
+lock the new object creation. Ideally, this scope should be as small as possible
+to not block GC for too long.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>AsyncTask(ENamedThreads<span style="color:#ff79c6">::</span>AnyBackgroundThreadNormalTask, [] {
+</span></span><span style="display:flex;"><span>    UTexture2D<span style="color:#ff79c6">*</span> Texture;
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        FGCScopeGuard GCGuard;
+</span></span><span style="display:flex;"><span>        Texture <span style="color:#ff79c6">=</span> NewObject<span style="color:#ff79c6">&lt;</span>UTexture2D<span style="color:#ff79c6">&gt;</span>(...);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>});
+</span></span></code></pre></div><h3 id="aside-beware-gc-bugs-ue4">Aside: Beware GC bugs (UE4)</h3>
+<p>In Unreal 4.27 (and perhaps in earlier versions of UE4), the garbage collector
+will try to schedule some collection tasks on the TaskGraph (it schedules on
+both the &ldquo;background&rdquo; and &ldquo;normal&rdquo; thread priority groups). This has an
+unfortunate consequence for users of the engine: if you&rsquo;re launching multiple
+concurrent tasks of your own that each potentially use <code>FGCScopeGuard</code>, it&rsquo;s
+possible to get into a deadlock state:</p>
+<ul>
+<li>The game thread will be blocked while doing garbage collection, as the garbage
+collector has queued tasks on the &ldquo;background&rdquo; and &ldquo;normal&rdquo; priority thread
+groups and is now waiting for them to start and run to completion.</li>
+<li>Meanwhile, your own tasks are already running on those same thread groups and
+are waiting for the GC to unlock so they can create UObjects.</li>
+</ul>
+<p>Neither can make progress; the GC tasks can&rsquo;t start because the threads are
+already in use, but your own tasks can&rsquo;t finish because they&rsquo;re waiting for the
+GC. Thus, deadlock.</p>
+<p>To avoid this, you can either launch your tasks with
+<code>ENamedThreads::AnyHiPriThreadNormalTask</code> (as it&rsquo;s the only priority group that
+does not conflict with the GC&rsquo;s work), or just go with approach #1 and don&rsquo;t
+create UObjects on async threads to begin with.</p>
+<p>Thankfully, this has been fixed in UE5 and no longer causes a deadlock. The fix
+may be easy to backport to 4.27 if desired &ndash; it largely consists of an
+<a href="https://github.com/EpicGames/UnrealEngine/blob/cdaec5b33ea5d332e51eee4e4866495c90442122/Engine/Source/Runtime/CoreUObject/Public/UObject/FastReferenceCollector.h#L554">updated <code>CollectReferences()</code> method</a>.</p>
+
+  </section>
+</main>
+<footer>
+  <i class="heart fa-solid fa-heart"></i>
+</footer>
+
+        </section>
+      </section>
+    </section>
+  </body>
+</html>
