@@ -10,7 +10,7 @@ description = "Personal site of Zaven Muradyan"
 mainSections = ['articles']
 
 [markup.highlight]
-style = 'doom-one2'
+style = 'dracula'
 
 [markup.goldmark.renderer]
 unsafe = true
