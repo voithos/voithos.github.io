@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<title>
+    Enum Class Bitmasks | voithos.io
+  </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Combining the convenience of bitmasks with the safety of scoped enums.">
+<link rel="icon" href="https://voithos.io/favicon.ico">
+<link rel="alternate" href="https://voithos.io/articles/feed.xml" title="voithos.io">
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&family=Oxygen+Mono&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha512-DUC8yqWf7ez3JD1jszxCWSVB0DMP78eOyBpMa5aJki1bIRARykviOuImIczkxlj1KhVSyS16w2FSQetkD4UU2w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/smoothState.js/0.7.2/jquery.smoothState.min.js" integrity="sha512-PA88Ew5anBQLPlovdwOOMj+Ky0x+M6a6bDXYve4q+NDj17AJ37FwHT4Xo758ZQqYKLyvaYko27cQDQ5P/0kOJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
+  
+  <link rel="stylesheet" href="/sass/main.min.800afdf747f966a0c9ade86f328c415eba457b7d37de686fddb5a90981a9f4b3.css">
+
+  
+  <script type="text/javascript" src="/js/index.min.ace6fcc78723eb7bb70079f22ef1aaf9ab0f12a145a0d318b61d20e1b8999d90.js" defer></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-58393577-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-58393577-1');
+</script>
+
+  </head>
+  <body>
+    <section id="main" class="smooth-scene"><section class="header-box">
+  <section class="site-container">
+    <header>
+        <h1 class="title">
+          <div class="spin cw"></div>
+          <div class="spin ccw"></div>
+          <a href="/">voithos</a>
+        </h1>
+        <input type="checkbox" id="nav-checkbox" class="nav-checkbox" role="button">
+        <label for="nav-checkbox" class="nav-toggle" onclick></label>
+        <nav class="main-nav">
+          <ul>
+            
+            
+            <li class="active">
+              <a href="/articles/" title="Articles">Articles</a>
+            </li>
+            
+            <li class="">
+              <a href="/code/" title="Code">Code</a>
+            </li>
+            
+            <li class="">
+              <a href="/writing/" title="Writing">Writing</a>
+            </li>
+            
+            <li class="">
+              <a href="/art/" title="Art">Art</a>
+            </li>
+            
+            <li class="">
+              <a href="/me/" title="Me">Me</a>
+            </li>
+            
+          </ul>
+        </nav>
+        <nav class="social-nav">
+          <ul>
+            <li>
+              <a href="https://twitter.com/voithoz"><i class="fa-brands fa-twitter"></i></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/voithoz/"><i class="fa-brands fa-instagram"></i></a>
+            </li>
+            <li>
+              <a href="https://voithos.itch.io/"><i class="fa-brands fa-itch-io"></i></a>
+            </li>
+            <li>
+              <a href="https://github.com/voithos/"><i class="fa-brands fa-github"></i></a>
+            </li>
+          </ul>
+        </nav>
+    </header>
+  </section>
+</section>
+
+      <section class="site-container">
+        <section class="parent-content scene-element scene-element--fadein ">
+<main class="article article-single">
+  <section class="article-body">
+    <h1 class="article-title">Enum Class Bitmasks</h1>
+    
+    <section class="article-description">
+      Combining the convenience of bitmasks with the safety of scoped enums.
+    </section>
+    
+    <div class="article-meta">
+  <section class="article-stats">
+    May 13, 2023&nbsp;·&nbsp;5 min&nbsp;·&nbsp;995 words
+  </section>
+  
+  <section class="article-tags">
+    
+      <span class="article-tag pill">c&#43;&#43;</span>
+    
+      <span class="article-tag pill">unreal-engine</span>
+    
+  </section>
+  
+</div>
+
+    <hr>
+    <p>Enums are a core part of the C and C++ languages, and are used ubiquitously to
+model logically distinct states in software systems. However, there may be times
+where you want to model a set of <strong>non-mutually-exclusive</strong> states. There are
+several other ways you could write this, including defining
+<a href="https://en.wikipedia.org/wiki/Bit_field">bitfields</a>, using <code>std::bitset</code>, or
+even using <code>std::vector&lt;bool&gt;</code>, but you can also use enums for this by treating
+them as <strong>bitmasks</strong>.</p>
+<p>For example, Vulkan defines many enums as part of its API, and these can be
+combined naturally via bitwise operators:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>VkPipelineColorBlendAttachmentState colorBlendAttachment <span style="color:#ff79c6">=</span> {};
+</span></span><span style="display:flex;"><span>colorBlendAttachment.colorWriteMask <span style="color:#ff79c6">=</span>
+</span></span><span style="display:flex;"><span>    VK_COLOR_COMPONENT_R_BIT <span style="color:#ff79c6">|</span> VK_COLOR_COMPONENT_G_BIT <span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span>    VK_COLOR_COMPONENT_B_BIT <span style="color:#ff79c6">|</span> VK_COLOR_COMPONENT_A_BIT;
+</span></span></code></pre></div><p>While the enum names above are a bit verbose, I find this kind of usage to be
+very slick and intuitive! But these C-style enums (non-scoped enums) have a
+couple issues:</p>
+<ul>
+<li>They pollute the scope they&rsquo;re declared in, leading to verbose naming like
+<code>VK_COLOR_COMPONENT_R_BIT</code> to avoid collisions.</li>
+<li>They aren&rsquo;t type safe!</li>
+</ul>
+<p>This can lead to easy mistakes that won&rsquo;t get caught by the compiler:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>VkBufferCreateInfo bufferInfo <span style="color:#ff79c6">=</span> {};
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// Oops! We actually meant to set this to the similarly-named VK_BUFFER_USAGE_VERTEX_BUFFER_BIT.
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>bufferInfo.usage <span style="color:#ff79c6">=</span> VK_FORMAT_FEATURE_VERTEX_BUFFER_BIT;
+</span></span></code></pre></div><p>In the above example, <code>bufferInfo.usage</code> should be set to values from the enum
+<code>VkBufferUsageFlagBits</code>, but accidentally got set to a value from the
+otherwise-unrelated <code>VkFormatFeatureFlagBits</code>, and this wasn&rsquo;t caught by the
+compiler.</p>
+<p>Starting with C++11, the language lets us define scoped enums, aka enum classes,
+which avoid these issues. Can we use them to define bitmasks?</p>
+<h2 id="using-enum-classes-as-bitmasks">Using enum classes as bitmasks</h2>
+<p>If we try to declare an <code>enum class</code> and use it as a bitmask naively, we get
+compilation errors:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#ff79c6">enum</span> <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">ERenderPass</span> <span style="color:#ff79c6">:</span> <span style="color:#8be9fd">uint8_t</span> {
+</span></span><span style="display:flex;"><span>    None <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>,
+</span></span><span style="display:flex;"><span>    Geometry <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">&lt;&lt;</span> <span style="color:#bd93f9">0</span>,
+</span></span><span style="display:flex;"><span>    Lighting <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">&lt;&lt;</span> <span style="color:#bd93f9">1</span>,
+</span></span><span style="display:flex;"><span>    Particles <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">&lt;&lt;</span> <span style="color:#bd93f9">2</span>,
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ERenderPass Primary <span style="color:#ff79c6">=</span> ERenderPass<span style="color:#ff79c6">::</span>Geometry <span style="color:#ff79c6">|</span> ERenderPass<span style="color:#ff79c6">::</span>Lighting;
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// ^ error: invalid operands to binary expression (&#39;ERenderPass&#39; and &#39;ERenderPass&#39;)
+</span></span></span></code></pre></div><p>This makes sense, since one of the desired features of enum classes is that they
+don&rsquo;t implicitly convert to other types (i.e. their underlying integer type)
+that support bit operators.</p>
+<p>Working around this is simple: we can just define the needed operators ourselves
+and cast to integer types. We can use <code>std::underlying_type_t</code> to ensure we cast
+to the right underlying type:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#ff79c6">enum</span> <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">ERenderPass</span> <span style="color:#ff79c6">:</span> <span style="color:#8be9fd">uint8_t</span> {
+</span></span><span style="display:flex;"><span>    None <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>,
+</span></span><span style="display:flex;"><span>    Geometry <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">&lt;&lt;</span> <span style="color:#bd93f9">0</span>,
+</span></span><span style="display:flex;"><span>    Lighting <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">&lt;&lt;</span> <span style="color:#bd93f9">1</span>,
+</span></span><span style="display:flex;"><span>    Particles <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">&lt;&lt;</span> <span style="color:#bd93f9">2</span>,
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">inline</span> <span style="color:#ff79c6">constexpr</span> ERenderPass <span style="color:#ff79c6">operator</span><span style="color:#ff79c6">|</span>(ERenderPass Lhs, ERenderPass Rhs) {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">static_cast</span><span style="color:#ff79c6">&lt;</span>ERenderPass<span style="color:#ff79c6">&gt;</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">static_cast</span><span style="color:#ff79c6">&lt;</span>std<span style="color:#ff79c6">::</span>underlying_type_t<span style="color:#ff79c6">&lt;</span>ERenderPass<span style="color:#ff79c6">&gt;&gt;</span>(Lhs) <span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">static_cast</span><span style="color:#ff79c6">&lt;</span>std<span style="color:#ff79c6">::</span>underlying_type_t<span style="color:#ff79c6">&lt;</span>ERenderPass<span style="color:#ff79c6">&gt;&gt;</span>(Rhs));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// Now this works!
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>ERenderPass Primary <span style="color:#ff79c6">=</span> ERenderPass<span style="color:#ff79c6">::</span>Geometry <span style="color:#ff79c6">|</span> ERenderPass<span style="color:#ff79c6">::</span>Lighting;
+</span></span></code></pre></div><p>If we need to use more operators, we can define those too:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#ff79c6">inline</span> <span style="color:#ff79c6">constexpr</span> ERenderPass <span style="color:#ff79c6">operator</span><span style="color:#ff79c6">&amp;</span>(ERenderPass Lhs, ERenderPass Rhs) {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">static_cast</span><span style="color:#ff79c6">&lt;</span>ERenderPass<span style="color:#ff79c6">&gt;</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">static_cast</span><span style="color:#ff79c6">&lt;</span>std<span style="color:#ff79c6">::</span>underlying_type_t<span style="color:#ff79c6">&lt;</span>ERenderPass<span style="color:#ff79c6">&gt;&gt;</span>(Lhs) <span style="color:#ff79c6">&amp;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">static_cast</span><span style="color:#ff79c6">&lt;</span>std<span style="color:#ff79c6">::</span>underlying_type_t<span style="color:#ff79c6">&lt;</span>ERenderPass<span style="color:#ff79c6">&gt;&gt;</span>(Rhs));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ERenderPass Primary <span style="color:#ff79c6">=</span> ...;
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// Now we can check bits.
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#ff79c6">if</span> ((Primary <span style="color:#ff79c6">&amp;</span> ERenderPass<span style="color:#ff79c6">::</span>Particles) <span style="color:#ff79c6">==</span> ERenderPass<span style="color:#ff79c6">::</span>Particles) {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Render particles.
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>}
+</span></span></code></pre></div><p>And that&rsquo;s basically all we need, quite simple. However, defining individual
+operators like this is quite tedious, and if we want our code to be more
+flexible and to reduce surprise in the future, we should find a better way to
+define a common set of operators for these kinds of bitmask enums.</p>
+<h2 id="preprocessor-macros">Preprocessor macros</h2>
+<p>Preprocessor macros should be avoided for most C++ code, but the repetition and
+self-contained-ness of enum class bitmask operators makes this a reasonable
+candidate for their usage.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;type_traits&gt;</span><span style="color:#ff79c6">
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6"></span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// Define bitwise operators for an enum class, allowing usage as bitmasks.
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#ff79c6">#define DEFINE_ENUM_CLASS_BITWISE_OPERATORS(Enum)                   \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">    inline constexpr Enum operator|(Enum Lhs, Enum Rhs) {           \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">        return static_cast&lt;Enum&gt;(                                   \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">            static_cast&lt;std::underlying_type_t&lt;Enum&gt;&gt;(Lhs) |        \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">            static_cast&lt;std::underlying_type_t&lt;Enum&gt;&gt;(Rhs));        \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">    }                                                               \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">    inline constexpr Enum operator&amp;(Enum Lhs, Enum Rhs) {           \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">        return static_cast&lt;Enum&gt;(                                   \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">            static_cast&lt;std::underlying_type_t&lt;Enum&gt;&gt;(Lhs) &amp;        \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">            static_cast&lt;std::underlying_type_t&lt;Enum&gt;&gt;(Rhs));        \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">    }                                                               \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">    inline constexpr Enum operator^(Enum Lhs, Enum Rhs) {           \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">        return static_cast&lt;Enum&gt;(                                   \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">            static_cast&lt;std::underlying_type_t&lt;Enum&gt;&gt;(Lhs) ^        \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">            static_cast&lt;std::underlying_type_t&lt;Enum&gt;&gt;(Rhs));        \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">    }                                                               \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">    inline constexpr Enum operator~(Enum E) {                       \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">        return static_cast&lt;Enum&gt;(                                   \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">            ~static_cast&lt;std::underlying_type_t&lt;Enum&gt;&gt;(E));         \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">    }                                                               \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">    inline Enum&amp; operator|=(Enum&amp; Lhs, Enum Rhs) {                  \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">        return Lhs = static_cast&lt;Enum&gt;(                             \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">                   static_cast&lt;std::underlying_type_t&lt;Enum&gt;&gt;(Lhs) | \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">                   static_cast&lt;std::underlying_type_t&lt;Enum&gt;&gt;(Lhs)); \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">    }                                                               \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">    inline Enum&amp; operator&amp;=(Enum&amp; Lhs, Enum Rhs) {                  \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">        return Lhs = static_cast&lt;Enum&gt;(                             \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">                   static_cast&lt;std::underlying_type_t&lt;Enum&gt;&gt;(Lhs) &amp; \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">                   static_cast&lt;std::underlying_type_t&lt;Enum&gt;&gt;(Lhs)); \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">    }                                                               \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">    inline Enum&amp; operator^=(Enum&amp; Lhs, Enum Rhs) {                  \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">        return Lhs = static_cast&lt;Enum&gt;(                             \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">                   static_cast&lt;std::underlying_type_t&lt;Enum&gt;&gt;(Lhs) ^ \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">                   static_cast&lt;std::underlying_type_t&lt;Enum&gt;&gt;(Lhs)); \
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">    }
+</span></span></span></code></pre></div><p>Using it is as simple as:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#ff79c6">enum</span> <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">ERenderPass</span> <span style="color:#ff79c6">:</span> <span style="color:#8be9fd">uint8_t</span> {
+</span></span><span style="display:flex;"><span>    None <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>,
+</span></span><span style="display:flex;"><span>    Geometry <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">&lt;&lt;</span> <span style="color:#bd93f9">0</span>,
+</span></span><span style="display:flex;"><span>    Lighting <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">&lt;&lt;</span> <span style="color:#bd93f9">1</span>,
+</span></span><span style="display:flex;"><span>    Particles <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">&lt;&lt;</span> <span style="color:#bd93f9">2</span>,
+</span></span><span style="display:flex;"><span>    All <span style="color:#ff79c6">=</span> Geometry <span style="color:#ff79c6">|</span> Lighting <span style="color:#ff79c6">|</span> Particles,
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>DEFINE_ENUM_CLASS_BITWISE_OPERATORS(ERenderPass);
+</span></span></code></pre></div><p>As it turns out, if you&rsquo;re working in <strong>Unreal Engine</strong>, the engine already has
+this kind of macro defined for you as <code>ENUM_CLASS_FLAGS()</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&#34;Misc/EnumClassFlags.h&#34;</span><span style="color:#ff79c6">
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6"></span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">enum</span> <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">ERenderPass</span> <span style="color:#ff79c6">:</span> <span style="color:#8be9fd">uint8_t</span> {
+</span></span><span style="display:flex;"><span>    None <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>,
+</span></span><span style="display:flex;"><span>    Geometry <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">&lt;&lt;</span> <span style="color:#bd93f9">0</span>,
+</span></span><span style="display:flex;"><span>    Lighting <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">&lt;&lt;</span> <span style="color:#bd93f9">1</span>,
+</span></span><span style="display:flex;"><span>    Particles <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">&lt;&lt;</span> <span style="color:#bd93f9">2</span>,
+</span></span><span style="display:flex;"><span>    All <span style="color:#ff79c6">=</span> Geometry <span style="color:#ff79c6">|</span> Lighting <span style="color:#ff79c6">|</span> Particles,
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>ENUM_CLASS_FLAGS(ERenderPass);
+</span></span></code></pre></div><p>Easy!</p>
+<p>But can we do it without a preprocessor macro?</p>
+<h2 id="template-magic">Template magic</h2>
+<p>It turns out this is possible via some template magic, namely by using
+<a href="https://en.cppreference.com/w/cpp/types/enable_if"><code>std::enable_if</code></a> to
+conditionally generate operator functions. For details, see
+<a href="https://accu.org/journals/overload/24/132/williams_2228/">this article by Anthony Williams</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;type_traits&gt;</span><span style="color:#ff79c6">
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6"></span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// Define a templatized struct to contain a bool constexpr that controls
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">// when the operators get generated.
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#ff79c6">template</span> <span style="color:#ff79c6">&lt;</span><span style="color:#ff79c6">typename</span> E<span style="color:#ff79c6">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">FEnableBitmaskOperators</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">static</span> <span style="color:#ff79c6">constexpr</span> <span style="color:#8be9fd">bool</span> enable <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">false</span>;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// This operator is only defined in the candidate set for a given type if the
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">// std::enable_if_t below evaluates to true, otherwise it is dropped.
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#ff79c6">template</span> <span style="color:#ff79c6">&lt;</span><span style="color:#ff79c6">typename</span> E<span style="color:#ff79c6">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">typename</span> std<span style="color:#ff79c6">::</span>enable_if_t<span style="color:#ff79c6">&lt;</span>FEnableBitmaskOperators<span style="color:#ff79c6">&lt;</span>E<span style="color:#ff79c6">&gt;::</span>enable, E<span style="color:#ff79c6">&gt;</span> <span style="color:#ff79c6">operator</span><span style="color:#ff79c6">|</span>(
+</span></span><span style="display:flex;"><span>    E Lhs, E Rhs) {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">static_cast</span><span style="color:#ff79c6">&lt;</span>E<span style="color:#ff79c6">&gt;</span>(<span style="color:#ff79c6">static_cast</span><span style="color:#ff79c6">&lt;</span>std<span style="color:#ff79c6">::</span>underlying_type_t<span style="color:#ff79c6">&lt;</span>E<span style="color:#ff79c6">&gt;&gt;</span>(Lhs) <span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span>                          <span style="color:#ff79c6">static_cast</span><span style="color:#ff79c6">&lt;</span>std<span style="color:#ff79c6">::</span>underlying_type_t<span style="color:#ff79c6">&lt;</span>E<span style="color:#ff79c6">&gt;&gt;</span>(Rhs));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// Rest of the operators...
+</span></span></span></code></pre></div><p>With the following usage:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#ff79c6">enum</span> <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">ERenderPass</span> <span style="color:#ff79c6">:</span> <span style="color:#8be9fd">uint8_t</span> {
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// Specialize the struct to enable the operators for our enum.
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#ff79c6">template</span> <span style="color:#ff79c6">&lt;&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">FEnableBitmaskOperators</span><span style="color:#ff79c6">&lt;</span>ERenderPass<span style="color:#ff79c6">&gt;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">static</span> <span style="color:#ff79c6">constexpr</span> <span style="color:#8be9fd">bool</span> enable <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">true</span>;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// Works!
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>ERenderPass Primary <span style="color:#ff79c6">=</span> ERenderPass<span style="color:#ff79c6">::</span>Geometry <span style="color:#ff79c6">|</span> ERenderPass<span style="color:#ff79c6">::</span>Lighting;
+</span></span></code></pre></div><p>This avoids having to rely on a preprocessor macro, but has more moving parts
+and is a bit more verbose to use. Unless the team is familiar with this kind of
+template specialization manipulation, the preprocessor-based approach is
+probably more straightforward.</p>
+
+  </section>
+</main>
+<footer>
+  <i class="heart fa-solid fa-heart"></i>
+</footer>
+
+        </section>
+      </section>
+    </section>
+  </body>
+</html>

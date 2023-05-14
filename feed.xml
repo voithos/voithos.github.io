@@ -6,7 +6,7 @@
     <description>Recent content on voithos.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 06 May 2023 16:58:57 -0700</lastBuildDate><atom:link href="https://voithos.io/feed.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 13 May 2023 14:03:57 -0700</lastBuildDate><atom:link href="https://voithos.io/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Code</title>
       <link>https://voithos.io/code/</link>
@@ -35,6 +35,16 @@
 I like creating things!
 I&amp;rsquo;m hugely interested in game dev and graphics programming, and love creating interactive visual worlds. I&amp;rsquo;m inspired by great storytelling, whatever the medium, and enjoy writing, creating art, and aspiring to tell stories of my own.
 Want to say hello? Shoot me an email or tweet at @voithoz!</description>
+    </item>
+    
+    <item>
+      <title>Enum Class Bitmasks</title>
+      <link>https://voithos.io/articles/enum-class-bitmasks/</link>
+      <pubDate>Sat, 13 May 2023 14:03:57 -0700</pubDate>
+      
+      <guid>https://voithos.io/articles/enum-class-bitmasks/</guid>
+      <description>Enums are a core part of the C and C++ languages, and are used ubiquitously to model logically distinct states in software systems. However, there may be times where you want to model a set of non-mutually-exclusive states. There are several other ways you could write this, including defining bitfields, using std::bitset, or even using std::vector&amp;lt;bool&amp;gt;, but you can also use enums for this by treating them as bitmasks.
+For example, Vulkan defines many enums as part of its API, and these can be combined naturally via bitwise operators:</description>
     </item>
     
     <item>

@@ -6,7 +6,17 @@
     <description>Recent content in c&#43;&#43; on voithos.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 06 May 2023 16:58:57 -0700</lastBuildDate><atom:link href="https://voithos.io/tags/c++/feed.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 13 May 2023 14:03:57 -0700</lastBuildDate><atom:link href="https://voithos.io/tags/c++/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Enum Class Bitmasks</title>
+      <link>https://voithos.io/articles/enum-class-bitmasks/</link>
+      <pubDate>Sat, 13 May 2023 14:03:57 -0700</pubDate>
+      
+      <guid>https://voithos.io/articles/enum-class-bitmasks/</guid>
+      <description>Enums are a core part of the C and C++ languages, and are used ubiquitously to model logically distinct states in software systems. However, there may be times where you want to model a set of non-mutually-exclusive states. There are several other ways you could write this, including defining bitfields, using std::bitset, or even using std::vector&amp;lt;bool&amp;gt;, but you can also use enums for this by treating them as bitmasks.
+For example, Vulkan defines many enums as part of its API, and these can be combined naturally via bitwise operators:</description>
+    </item>
+    
     <item>
       <title>Creating UObjects From Async Threads</title>
       <link>https://voithos.io/articles/creating-uobjects-from-async-threads/</link>
