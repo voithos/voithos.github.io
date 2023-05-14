@@ -160,12 +160,18 @@ pre {
   padding: 0.1em 0.4em;
   background: darken($lowlight-color, 18);
   border-radius: 4px;
+  color: $body-color;
 }
 
 a>code {
   background: none;
   padding: 0.1em 0.1em;
   font-size: .85em;
+  color: $contrast-color;
+}
+
+strong, em {
+  color: saturate($lowlight-color, 15);
 }
 
 strong code {
