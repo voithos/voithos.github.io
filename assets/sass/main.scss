@@ -65,6 +65,11 @@ a {
   display: inline-block;
   position: relative;
 
+  strong,
+  em {
+    color: $contrast-color;
+  }
+
   @include prefix(transition, all 0.5s ease-out);
   @include prefix(transition-property, color, text-shadow);
 
@@ -170,7 +175,8 @@ a>code {
   color: $contrast-color;
 }
 
-strong, em {
+strong,
+em {
   color: saturate($lowlight-color, 15);
 }
 
@@ -1232,6 +1238,11 @@ footer {
 
   .writing-text {
     padding: 1rem;
+  }
+
+  strong,
+  em {
+    color: $body-color;
   }
 }
 
