@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<title>
+    Fast Chaos Collision Toggling | voithos.io
+  </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The classic exchange of memory usage for CPU time.">
+<link rel="icon" href="https://voithos.io/favicon.ico">
+<link rel="alternate" href="https://voithos.io/articles/feed.xml" title="voithos.io">
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&family=Oxygen+Mono&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha512-DUC8yqWf7ez3JD1jszxCWSVB0DMP78eOyBpMa5aJki1bIRARykviOuImIczkxlj1KhVSyS16w2FSQetkD4UU2w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/smoothState.js/0.7.2/jquery.smoothState.min.js" integrity="sha512-PA88Ew5anBQLPlovdwOOMj+Ky0x+M6a6bDXYve4q+NDj17AJ37FwHT4Xo758ZQqYKLyvaYko27cQDQ5P/0kOJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
+  
+  <link rel="stylesheet" href="/sass/main.min.1041080c577e7ed9b0936bc45508941df98bf5345fdb48f79d159c752ac9a99e.css">
+
+  
+  <script type="text/javascript" src="/js/index.min.ace6fcc78723eb7bb70079f22ef1aaf9ab0f12a145a0d318b61d20e1b8999d90.js" defer></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-58393577-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-58393577-1');
+</script>
+
+  </head>
+  <body>
+    <section id="main" class="smooth-scene"><section class="header-box">
+  <section class="site-container">
+    <header>
+        <h1 class="title">
+          <div class="spin cw"></div>
+          <div class="spin ccw"></div>
+          <a href="/">voithos</a>
+        </h1>
+        <input type="checkbox" id="nav-checkbox" class="nav-checkbox" role="button">
+        <label for="nav-checkbox" class="nav-toggle" onclick></label>
+        <nav class="main-nav">
+          <ul>
+            
+            
+            <li class="active">
+              <a href="/articles/" title="Articles">Articles</a>
+            </li>
+            
+            <li class="">
+              <a href="/code/" title="Code">Code</a>
+            </li>
+            
+            <li class="">
+              <a href="/writing/" title="Writing">Writing</a>
+            </li>
+            
+            <li class="">
+              <a href="/art/" title="Art">Art</a>
+            </li>
+            
+            <li class="">
+              <a href="/me/" title="Me">Me</a>
+            </li>
+            
+          </ul>
+        </nav>
+        <nav class="social-nav">
+          <ul>
+            <li>
+              <a href="https://twitter.com/voithoz"><i class="fa-brands fa-twitter"></i></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/voithoz/"><i class="fa-brands fa-instagram"></i></a>
+            </li>
+            <li>
+              <a href="https://voithos.itch.io/"><i class="fa-brands fa-itch-io"></i></a>
+            </li>
+            <li>
+              <a href="https://github.com/voithos/"><i class="fa-brands fa-github"></i></a>
+            </li>
+          </ul>
+        </nav>
+    </header>
+  </section>
+</section>
+
+      <section class="site-container">
+        <section class="parent-content scene-element scene-element--fadein ">
+<main class="article article-single">
+  <section class="article-body">
+    <h1 class="article-title">Fast Chaos Collision Toggling</h1>
+    
+    <section class="article-description">
+      The classic exchange of memory usage for CPU time.
+    </section>
+    
+    <div class="article-meta">
+  <section class="article-stats">
+    May 22, 2023&nbsp;·&nbsp;3 min&nbsp;·&nbsp;519 words
+  </section>
+  
+  <section class="article-tags">
+    
+      <span class="article-tag pill">c&#43;&#43;</span>
+    
+      <span class="article-tag pill">unreal-engine</span>
+    
+      <span class="article-tag pill">ue5</span>
+    
+      <span class="article-tag pill">physics</span>
+    
+  </section>
+  
+</div>
+
+    <hr>
+    <p>A few weeks ago I investigated an interesting physics-related performance issue,
+specific to UE5&rsquo;s new Chaos physics engine.</p>
+<p>The code I was working on managed a large number of <code>UStaticMeshComponents</code>
+(essentially, it&rsquo;s a custom hierarchical level-of-detail system) and would
+frequently need to toggle visibility and collision shapes per tick. There were
+some cases where we seemed to be going over our frame budget, so I took a
+profile via Unreal Insights:</p>
+
+<figure><img src="/img/articles/physics_toggle_before.png" loading="lazy"/><figcaption>
+            <h4>Toggling a single primitive&#39;s collision shape</h4>
+        </figcaption>
+</figure>
+
+<p>Each time collision shapes were toggled, physics state needed to be re-created
+which took around ~150 μs on the hardware I profiled on. This may not seem too
+bad at first glance, but depending on how the camera moved on that particular
+frame, there could be ~hundreds of meshes that need switching and the cost would
+very quickly add up and overrun the frame budget. One workaround would be to
+split up the cost across multiple frames, but this would have downsides
+(potential inconsistencies between collisions and rendered meshes).</p>
+<p>This would not do!</p>
+<h2 id="investigation">Investigation</h2>
+<p>I began by seeing if there were other parts of the physics API that might not
+have this issue. Initially, I was using
+<code>UPrimitiveComponent::SetCollisionEnabled</code> to toggle collisions, but I also
+tried a couple other methods to accomplish the same thing:</p>
+<ul>
+<li>Switching collision profiles (<code>UPrimitiveComponent::SetCollisionProfileName</code>)</li>
+<li>Changing collision channel responses</li>
+</ul>
+<p>It turned out that while some of the constant-time overhead differed between
+these methods, they all ended up re-creating physics state in one way or another
+and were similarly slow.</p>
+<p>Why was it necessary for these methods to re-create physics state? Shouldn&rsquo;t
+that essentially be a boolean toggle? After reading up on it more, and finding a
+<a href="https://itscai.us/blog/post/ue-physics-framework/">really nice deep-dive article on how the Chaos framework is designed</a>,
+it made more sense: when collision is disabled, the engine doesn&rsquo;t know when it
+will be re-enabled, if ever, so it does the conservative thing and resets the
+active physics state to avoid leaving many dormant objects with inactive physics
+representations, all taking up memory.</p>
+<p>For my usage, however, these collision shapes were very likely to be re-enabled
+at a moment&rsquo;s notice, so I wanted to keep the physics state in place even at the
+cost of a little memory.</p>
+<h2 id="fast-collision-toggling">Fast Collision Toggling</h2>
+<p>After a good amount of code spelunking, I found a (somewhat niche) API that does
+exactly what I wanted. It turns out that the Chaos physics state <em>does</em> keep
+track of per-shape collision enabled status, but this just isn&rsquo;t exposed
+directly from a higher-level <code>UObject</code> API like e.g. <code>UPrimitiveComponent</code>.</p>
+<p>The following is an example of quickly toggling collision on a primitive:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&#34;Chaos/ParticleHandle.h&#34;</span><span style="color:#ff79c6">
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&#34;PhysicsProxy/SingleParticlePhysicsProxy.h&#34;</span><span style="color:#ff79c6">
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6"></span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> <span style="color:#50fa7b">FastSetCollisionEnabled</span>(UPrimitiveComponent<span style="color:#ff79c6">*</span> Primitive, <span style="color:#8be9fd">bool</span> bCollisionEnabled)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">!</span>Primitive<span style="color:#ff79c6">-&gt;</span>BodyInstance.IsValidBodyInstance())
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    FPhysicsCommand<span style="color:#ff79c6">::</span>ExecuteWrite(
+</span></span><span style="display:flex;"><span>        Primitive<span style="color:#ff79c6">-&gt;</span>BodyInstance.GetActorReferenceWithWelding(),
+</span></span><span style="display:flex;"><span>        [bCollisionEnabled](<span style="color:#ff79c6">const</span> FPhysicsActorHandle<span style="color:#ff79c6">&amp;</span> ActorHandle)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            Chaos<span style="color:#ff79c6">::</span>FRigidBodyHandle_External<span style="color:#ff79c6">&amp;</span> Body_External <span style="color:#ff79c6">=</span> ActorHandle<span style="color:#ff79c6">-&gt;</span>GetGameThreadAPI();
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">const</span> int32 NumShapes <span style="color:#ff79c6">=</span> Body_External.ShapesArray().Num();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">for</span> (int32 ShapeIndex <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>; ShapeIndex <span style="color:#ff79c6">&lt;</span> NumShapes; <span style="color:#ff79c6">++</span>ShapeIndex)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                Body_External.SetShapeSimCollisionEnabled(ShapeIndex, bCollisionEnabled);
+</span></span><span style="display:flex;"><span>                Body_External.SetShapeQueryCollisionEnabled(ShapeIndex, bCollisionEnabled);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>After switch to this and re-profiling, I got the following trace:</p>
+
+<figure><img src="/img/articles/physics_toggle_after.png" loading="lazy"/><figcaption>
+            <h4>Wow!</h4>
+        </figcaption>
+</figure>
+
+<p>At its slowest, the new method was around ~3μs, which was a 50x speedup! With
+that, even toggling many hundreds of meshes is doable in a single frame.
+Success!</p>
+
+  </section>
+</main>
+<footer>
+  <i class="heart fa-solid fa-heart"></i>
+</footer>
+
+        </section>
+      </section>
+    </section>
+  </body>
+</html>
