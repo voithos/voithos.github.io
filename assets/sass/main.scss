@@ -1029,8 +1029,16 @@ footer {
 .archive {
   padding: 0 5rem;
 
+  @media screen and (max-width: $media-mobile-max-width) {
+    padding: 0 1.2rem;
+  }
+
   .archive-year {
     margin-top: 2rem;
+
+    @media screen and (max-width: $media-mobile-max-width) {
+      margin-top: 1rem;
+    }
 
     &:not(:last-of-type) {
       border-bottom: 1px solid darken($lowlight-color, 15);
@@ -1042,6 +1050,10 @@ footer {
     display: flex;
     align-items: flex-start;
 
+    @media screen and (max-width: $media-mobile-max-width) {
+      padding: 0.5rem 0;
+    }
+
     &:not(:last-of-type) {
       border-bottom: 1px solid darken($lowlight-color, 40);
     }
@@ -1050,6 +1062,11 @@ footer {
   .archive-month-header {
     margin: 1.7rem 0;
     width: 12rem;
+
+    @media screen and (max-width: $media-mobile-max-width) {
+      margin: 0.8rem 0;
+      width: 8rem;
+    }
   }
 
   .archive-posts {
@@ -1058,11 +1075,20 @@ footer {
 
   .archive-meta .article-stats {
     font-size: 1.1rem;
+
+    @media screen and (max-width: $media-mobile-max-width) {
+      font-size: 1.0rem;
+    }
   }
 
   .archive-entry {
     padding: 0.5rem;
     margin: 0.6rem 0;
+
+    @media screen and (max-width: $media-mobile-max-width) {
+      padding: 0.2rem;
+      margin: 0.2rem 0;
+    }
   }
 
   .archive-entry-title {
