@@ -8,6 +8,16 @@
     A 3D mech arena shooter made in UE5 for Ludum Dare 54. Features multiple
     weapons and destructible terrain! Avert the meltdown!
 
+- name:     Uprooted
+  date:     2023-02-07
+  class:    project-uprooted
+  img:      uprooted.png
+  url:      https://voithos.itch.io/uprooted
+  code_url: https://github.com/voithos/uprooted
+  desc: >
+    A 3D first person shooter made in Godot for Global Game Jam.
+    For planet Earth!!!
+
 - name:     quarkGL
   date:     2023-01-20
   class:    project-quarkgl
