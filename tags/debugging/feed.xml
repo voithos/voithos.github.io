@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ue5 on voithos.io</title>
-    <link>https://voithos.io/tags/ue5/</link>
-    <description>Recent content in Ue5 on voithos.io</description>
+    <title>Debugging on voithos.io</title>
+    <link>https://voithos.io/tags/debugging/</link>
+    <description>Recent content in Debugging on voithos.io</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 21 Jul 2024 22:26:16 -0700</lastBuildDate>
-    <atom:link href="https://voithos.io/tags/ue5/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://voithos.io/tags/debugging/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Unreal Debugging</title>
       <link>https://voithos.io/articles/unreal-debugging/</link>
       <pubDate>Sun, 21 Jul 2024 22:26:16 -0700</pubDate>
       <guid>https://voithos.io/articles/unreal-debugging/</guid>
       <description>As a large and mature engine, Unreal provides a suite of debugging systems and tools to aid during development, which go hand-in-hand with your standard C++ debugger. This page aims to give an incomplete and mostly unordered whirlwind tour of some of the more useful tools I&amp;rsquo;ve run across while working in Unreal.&#xA;Note that most of my experience thus far has been in UE versions 4.27 and 5.0, although I believe the majority of the tools mentioned here work just as well for more recent versions of the engine.</description>
-    </item>
-    <item>
-      <title>Fast Chaos Collision Toggling</title>
-      <link>https://voithos.io/articles/fast-chaos-collision-toggling/</link>
-      <pubDate>Mon, 22 May 2023 23:21:17 -0700</pubDate>
-      <guid>https://voithos.io/articles/fast-chaos-collision-toggling/</guid>
-      <description>A few weeks ago I investigated an interesting physics-related performance issue, specific to UE5&amp;rsquo;s new Chaos physics engine.&#xA;The code I was working on managed a large number of UStaticMeshComponents (essentially, it&amp;rsquo;s a custom hierarchical level-of-detail system) and would frequently need to toggle visibility and collision shapes per tick. There were some cases where we seemed to be going over our frame budget, so I took a profile via Unreal Insights:</description>
     </item>
   </channel>
 </rss>

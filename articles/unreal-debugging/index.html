@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<title>
+    Unreal Debugging | voithos.io
+  </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Unreal debugging cheat sheet.">
+<link rel="icon" href="https://voithos.io/favicon.ico">
+<link rel="alternate" href="https://voithos.io/articles/feed.xml" title="voithos.io">
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&family=Oxygen+Mono&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha512-DUC8yqWf7ez3JD1jszxCWSVB0DMP78eOyBpMa5aJki1bIRARykviOuImIczkxlj1KhVSyS16w2FSQetkD4UU2w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/smoothState.js/0.7.2/jquery.smoothState.min.js" integrity="sha512-PA88Ew5anBQLPlovdwOOMj+Ky0x+M6a6bDXYve4q+NDj17AJ37FwHT4Xo758ZQqYKLyvaYko27cQDQ5P/0kOJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
+  
+  <link rel="stylesheet" href="/sass/main.min.b2d9a0514d1aed0a337c1d0587254200177a8ed5e4ef1548b94b3e52f04f0fde.css">
+
+  
+  <script type="text/javascript" src="/js/index.min.6ec5479881bc3221e976ccfd99c2f5f95b3b8703e46b66424c55cc861cc65db1.js" defer></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-58393577-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-58393577-1');
+</script>
+
+  </head>
+  <body>
+    <section id="main" class="smooth-scene"><section class="header-box">
+  <section class="site-container">
+    <header>
+        <h1 class="title">
+          <div class="spin cw"></div>
+          <div class="spin ccw"></div>
+          <a href="/">voithos</a>
+        </h1>
+        <input type="checkbox" id="nav-checkbox" class="nav-checkbox" role="button">
+        <label for="nav-checkbox" class="nav-toggle" onclick></label>
+        <nav class="main-nav">
+          <ul>
+            
+            
+            <li class="active">
+              <a href="/articles/" title="Articles">Articles</a>
+            </li>
+            
+            <li class="">
+              <a href="/code/" title="Code">Code</a>
+            </li>
+            
+            <li class="">
+              <a href="/writing/" title="Writing">Writing</a>
+            </li>
+            
+            <li class="">
+              <a href="/art/" title="Art">Art</a>
+            </li>
+            
+            <li class="">
+              <a href="/me/" title="Me">Me</a>
+            </li>
+            
+          </ul>
+        </nav>
+        <nav class="social-nav">
+          <ul>
+            <li>
+              <a href="https://twitter.com/voithoz"><i class="fa-brands fa-twitter"></i></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/voithoz/"><i class="fa-brands fa-instagram"></i></a>
+            </li>
+            <li>
+              <a href="https://voithos.itch.io/"><i class="fa-brands fa-itch-io"></i></a>
+            </li>
+            <li>
+              <a href="https://github.com/voithos/"><i class="fa-brands fa-github"></i></a>
+            </li>
+          </ul>
+        </nav>
+    </header>
+  </section>
+</section>
+
+      <section class="site-container">
+        <section class="parent-content scene-element scene-element--fadein ">
+<main class="article article-single">
+  <section class="article-body">
+    <h1 class="article-title">Unreal Debugging</h1>
+    
+    <section class="article-description">
+      Unreal debugging cheat sheet.
+    </section>
+    
+    <div class="article-meta">
+  <section class="article-stats">
+    July 21, 2024&nbsp;·&nbsp;5 min&nbsp;·&nbsp;985 words
+  </section>
+  
+  <section class="article-tags">
+    
+      <span class="article-tag pill">unreal-engine</span>
+    
+      <span class="article-tag pill">ue5</span>
+    
+      <span class="article-tag pill">debugging</span>
+    
+  </section>
+  
+</div>
+
+    <hr>
+    <p>As a large and mature engine, Unreal provides a suite of debugging systems and
+tools to aid during development, which go hand-in-hand with your standard C++
+debugger. This page aims to give an incomplete and mostly unordered whirlwind
+tour of some of the more useful tools I&rsquo;ve run across while working in Unreal.</p>
+<p>Note that most of my experience thus far has been in UE versions <code>4.27</code> and
+<code>5.0</code>, although I believe the majority of the tools mentioned here work just as
+well for more recent versions of the engine.</p>
+<p>It&rsquo;s also worth mentioning that, in addition to the tools mentioned below,
+Unreal&rsquo;s <strong>stats system</strong> and <strong>Unreal Insights</strong> can be very useful when
+debugging resource usage &ndash; but that starts to delve into the realm of profiling
+and performance optimization, so I&rsquo;ll save that for a future post.</p>
+<h2 id="console">Console</h2>
+<p>As anyone who&rsquo;s used Unreal for any length of time will attest, Unreal&rsquo;s console
+is quite powerful, and has lots of functionality that other tips in this article
+use.</p>
+<p>One somewhat hidden feature is that Unreal provides a nice web UI that lists out
+all console variables and commands, which can be launched by (appropriately)
+running the console command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">help</span>
+</span></span></code></pre></div>
+<figure><img src="/img/articles/unreal_console_help.png" style="max-width: 800px;" loading="lazy"/>
+</figure>
+
+<h2 id="build-configurations">Build configurations</h2>
+<p>To start, we have to build and launch the editor. :) Unreal projects come with
+several build configurations. When C++ debug symbols aren&rsquo;t sufficiently
+available while in a breakpoint, you can try to use a more debugger-friendly
+mode.</p>
+<ul>
+<li><code>Development</code> - A good default, but comes with tons of optimizations, making
+debugging difficult.</li>
+<li><code>DebugGame</code> - Some optimizations are turned off for the game project, but not
+the engine.</li>
+<li><code>Debug</code> - Most debugger friendly, but costly to compile when building from
+source.</li>
+</ul>
+<h2 id="disabling-optimization">Disabling optimization</h2>
+<p>In addition to controlling code optimization via build configurations (which can
+sometimes be a bit heavy handed if you don&rsquo;t need to step into engine code), you
+can disable optimizations in an entire set of modules directly in <strong>Unreal Build
+Tool</strong> by modifying the corresponding <code>.Build.cs</code> file and adding:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span>OptimizeCode = CodeOptimization.Never;
+</span></span></code></pre></div><p>Alternatively, to disable just a single file or code section, you can use the
+following pragma (use the prefix <code>PRAGMA_</code> instead of <code>UE_</code> if using &lt;5.2):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>UE_DISABLE_OPTIMIZATION
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
+</span></span><span style="display:flex;"><span>UE_ENABLE_OPTIMIZATION
+</span></span></code></pre></div><p>This is equivalent to the non-Unreal code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#ff79c6">#pragma optimize(&#34;&#34;, off)
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6"></span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">#pragma optimize(&#34;&#34;, on)
+</span></span></span></code></pre></div><h2 id="logging">Logging</h2>
+<p>Somewhat obviously, the classic <code>UE_LOG</code> is still a good way to debug.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>UE_LOG(LogTemp, Log, TEXT(<span style="color:#f1fa8c">&#34;My debug message&#34;</span>));
+</span></span></code></pre></div><p>If you need to flush output more readily (e.g. because of a crash), you can pass
+a flag to the editor: <code>-ForceLogFlush</code>.</p>
+<p>To switch verbosity levels in the editor, run the following (the category name
+must be the full name, including &ldquo;Log&rdquo; if it&rsquo;s part of the name as per
+convention):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>Log LogMyCategory Verbose
+</span></span></code></pre></div><h2 id="on-screen-messages">On-Screen Messages</h2>
+<p>You can add on-screen debug messages for just-in-time information. Akin to
+Blueprint&rsquo;s <code>Print</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>GEngine<span style="color:#ff79c6">-&gt;</span>AddOnScreenDebugMessage(
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>, <span style="color:#6272a4">/*TimeToDisplay*/</span><span style="color:#bd93f9">5.0f</span>, FColor<span style="color:#ff79c6">::</span>Green, FString<span style="color:#ff79c6">::</span>Printf(TEXT(<span style="color:#f1fa8c">&#34;Info: %d&#34;</span>), info));
+</span></span></code></pre></div><h2 id="visual-logger">Visual Logger</h2>
+<p>Unreal has a <strong>Visual Logger</strong> component that is designed to help you log events
+and debug shape information over time. It&rsquo;s a whole tool with lots of different
+ways to use it, and the
+<a href="https://docs.unrealengine.com/4.27/en-US/TestingAndOptimization/VisualLogger/">Visual Logger documentation</a>
+has a lot of info on how to get started.</p>
+<h2 id="gameplay-debugger">Gameplay Debugger</h2>
+<p>Similar to but separate from the Visual Logger, the <strong>Gameplay Debugger Tool
+(GDT)</strong> provides a powerful way to watch real-time data for a game. The
+<a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/using-the-gameplay-debugger-in-unreal-engine">official Gameplay Debugger docs</a>
+have a lot more info.</p>
+<h2 id="drawdebug">DrawDebug</h2>
+<p>An immediate-mode debug drawing API. There are lots of functions and options to
+choose from, and this comes in very handy when working in 3D (I&rsquo;m looking at
+you, <code>FRotator</code>).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&#34;DrawDebugHelpers.h&#34;</span><span style="color:#ff79c6">
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6"></span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// There are lots of DrawDebug* functions!
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>DrawDebugSphere(GetWorld(), <span style="color:#6272a4">/*Center=*/</span>FVector(<span style="color:#bd93f9">100.0</span>, <span style="color:#bd93f9">200.0</span>, <span style="color:#bd93f9">300.0</span>), <span style="color:#6272a4">/*Radius=*/</span><span style="color:#bd93f9">500.0f</span>,
+</span></span><span style="display:flex;"><span>				<span style="color:#6272a4">/*Segments=*/</span><span style="color:#bd93f9">32</span>, FColor<span style="color:#ff79c6">::</span>Red);
+</span></span></code></pre></div><h2 id="debug-camera">Debug Camera</h2>
+<p>Unreal has a debug camera that will constantly shoot out a ray at the center of
+the screen and give you debug info about what is being hit. Toggle with the <code>;</code>
+key or the command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ToggleDebugCamera
+</span></span></code></pre></div><h2 id="memory-corruption">Memory corruption</h2>
+<p>Memory corruption issues can be difficult to debug. While Unreal ostensibly has
+support for tools like <strong>AddressSanitizer</strong>, I haven&rsquo;t been able to get it
+working.</p>
+<p>However, Unreal provides a <code>-stompmalloc</code> flag which changes the allocator to
+one which tries to better detect and report memory issues &ndash; this has proven to
+be indispensible when working on low-level, memory-efficient code.</p>
+<p>Another potentially useful flag is <code>-ansimalloc</code> which uses the default C
+allocator.</p>
+<h2 id="garbage-collection">Garbage collection</h2>
+<p>Some memory issues may arise due to Unreal&rsquo;s garbage collection mechanism. To
+debug more easily, you can use the following console command to force a GC every
+frame:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>gc.CollectGarbageEveryFrame <span style="color:#bd93f9">1</span>
+</span></span></code></pre></div><h2 id="rhi-issues">RHI issues</h2>
+<p>You may run into some issues that are related to a specific Rendering Hardware
+Interface (RHI), and sometimes the default RHI of your dev machine may not match
+your target machine or console. To force a specific RHI, you can pass the
+relevant flag if your system supports it:</p>
+<ul>
+<li><code>-d3d12</code></li>
+<li><code>-d3d11</code></li>
+<li><code>-vulkan</code></li>
+<li><code>-opengl</code></li>
+</ul>
+<p>In addition, for D3D and Vulkan, you can pass <code>-d3ddebug</code> or <code>-vulkandebug</code>
+(respectively) to get more detailed logs.</p>
+<h2 id="blueprints">Blueprints</h2>
+<p>Passing the command line <code>-ScriptStackOnWarnings</code> when launching the editor
+prints a stack trace on Blueprint warnings, useful for locating tricky issues.</p>
+<h2 id="rendering-and-game-thread">Rendering and game thread</h2>
+<p>There are several console commands that give you control over rendering
+behavior.</p>
+<p>To toggle rendering, allowing you to inspect the viewport (useful for debugging
+culling techniques):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>freezerendering
+</span></span></code></pre></div><p>To pause the game thread:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pause
+</span></span></code></pre></div><p>To change tick rate to 50%:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>slomo 0.5
+</span></span></code></pre></div><h2 id="gpu-passes">GPU passes</h2>
+<p>To debug Unreal&rsquo;s GPU render passes, you can dump info on a single frame and
+analyze it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>DumpGPU
+</span></span></code></pre></div><p>This will generate a set of files under <code>Saved/GPUDumps</code> with a viewer <code>.html</code>
+page and helper scripts, which you can use to view the trace.</p>
+
+<figure><img src="/img/articles/unreal_dumpgpu.png" style="max-width: 800px;" loading="lazy"/>
+</figure>
+
+<h2 id="renderdoc">RenderDoc</h2>
+<p>Unreal has first class support for the wonderful
+<a href="https://renderdoc.org/">RenderDoc</a> graphics debugger, although it requires a
+<a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/using-renderdoc-with-unreal-engine">bit of set up</a>.</p>
+<p>After setting it up, you can capture frames several ways, including using
+console commands.</p>
+<p>To set the number of frames to capture:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>renderdoc.CaptureFrameCount <span style="color:#bd93f9">5</span>
+</span></span></code></pre></div><p>To immediately capture a frame:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>renderdoc.CaptureFrame
+</span></span></code></pre></div>
+  </section>
+</main>
+<footer>
+  <i class="heart fa-solid fa-heart"></i>
+</footer>
+
+        </section>
+      </section>
+    </section>
+  </body>
+</html>

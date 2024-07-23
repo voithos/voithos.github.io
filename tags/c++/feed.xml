@@ -1,50 +1,40 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>c&#43;&#43; on voithos.io</title>
+    <title>C&#43;&#43; on voithos.io</title>
     <link>https://voithos.io/tags/c&#43;&#43;/</link>
-    <description>Recent content in c&#43;&#43; on voithos.io</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Recent content in C&#43;&#43; on voithos.io</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 May 2023 23:21:17 -0700</lastBuildDate><atom:link href="https://voithos.io/tags/c++/feed.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 22 May 2023 23:21:17 -0700</lastBuildDate>
+    <atom:link href="https://voithos.io/tags/c++/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Fast Chaos Collision Toggling</title>
       <link>https://voithos.io/articles/fast-chaos-collision-toggling/</link>
       <pubDate>Mon, 22 May 2023 23:21:17 -0700</pubDate>
-      
       <guid>https://voithos.io/articles/fast-chaos-collision-toggling/</guid>
-      <description>A few weeks ago I investigated an interesting physics-related performance issue, specific to UE5&amp;rsquo;s new Chaos physics engine.
-The code I was working on managed a large number of UStaticMeshComponents (essentially, it&amp;rsquo;s a custom hierarchical level-of-detail system) and would frequently need to toggle visibility and collision shapes per tick. There were some cases where we seemed to be going over our frame budget, so I took a profile via Unreal Insights:</description>
+      <description>A few weeks ago I investigated an interesting physics-related performance issue, specific to UE5&amp;rsquo;s new Chaos physics engine.&#xA;The code I was working on managed a large number of UStaticMeshComponents (essentially, it&amp;rsquo;s a custom hierarchical level-of-detail system) and would frequently need to toggle visibility and collision shapes per tick. There were some cases where we seemed to be going over our frame budget, so I took a profile via Unreal Insights:</description>
     </item>
-    
     <item>
       <title>Enum Class Bitmasks</title>
       <link>https://voithos.io/articles/enum-class-bitmasks/</link>
       <pubDate>Sat, 13 May 2023 14:03:57 -0700</pubDate>
-      
       <guid>https://voithos.io/articles/enum-class-bitmasks/</guid>
-      <description>Enums are a core part of the C and C++ languages, and are used ubiquitously to model logically distinct states in software systems. However, there may be times where you want to model a set of non-mutually-exclusive states. There are several other ways you could write this, including defining bitfields, using std::bitset, or even using std::vector&amp;lt;bool&amp;gt;, but you can also use enums for this by treating them as bitmasks.
-For example, Vulkan defines many enums as part of its API, and these can be combined naturally via bitwise operators:</description>
+      <description>Enums are a core part of the C and C++ languages, and are used ubiquitously to model logically distinct states in software systems. However, there may be times where you want to model a set of non-mutually-exclusive states. There are several other ways you could write this, including defining bitfields, using std::bitset, or even using std::vector&amp;lt;bool&amp;gt;, but you can also use enums for this by treating them as bitmasks.&#xA;For example, Vulkan defines many enums as part of its API, and these can be combined naturally via bitwise operators:</description>
     </item>
-    
     <item>
       <title>Creating UObjects From Async Threads</title>
       <link>https://voithos.io/articles/creating-uobjects-from-async-threads/</link>
       <pubDate>Sat, 06 May 2023 16:58:57 -0700</pubDate>
-      
       <guid>https://voithos.io/articles/creating-uobjects-from-async-threads/</guid>
-      <description>When developing a project in Unreal, for performance reasons you may find yourself needing to do work on background threads. This could be an FRunnableThread, an AsyncTask(), or even UE5&amp;rsquo;s fancy new Tasks System &amp;ndash; any code that isn&amp;rsquo;t executing on the game thread.
-As a motivating example, perhaps you need to dynamically load and process some mesh / texture data at runtime. Most of the processing work is thread-agnostic, but what if you need to create UObjects to represent the data?</description>
+      <description>When developing a project in Unreal, for performance reasons you may find yourself needing to do work on background threads. This could be an FRunnableThread, an AsyncTask(), or even UE5&amp;rsquo;s fancy new Tasks System &amp;ndash; any code that isn&amp;rsquo;t executing on the game thread.&#xA;As a motivating example, perhaps you need to dynamically load and process some mesh / texture data at runtime. Most of the processing work is thread-agnostic, but what if you need to create UObjects to represent the data?</description>
     </item>
-    
     <item>
       <title>Reference Shenanigans</title>
       <link>https://voithos.io/articles/reference-shenanigans/</link>
       <pubDate>Thu, 09 Mar 2023 21:40:37 -0800</pubDate>
-      
       <guid>https://voithos.io/articles/reference-shenanigans/</guid>
       <description>A while back, I was working on some Unreal C++ code involving a tree traversal and a hash map used for intermediate information when I encountered a subtle bug (which of course feels obvious in hindsight). At the time, I had lost the better part of the day to the issue, but it actually led me to some interesting conclusions so I thought it&amp;rsquo;d be fun to try to present it here in a somewhat generalized and simplified way.</description>
     </item>
-    
   </channel>
 </rss>

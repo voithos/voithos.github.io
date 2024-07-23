@@ -4,157 +4,121 @@
     <title>voithos.io</title>
     <link>https://voithos.io/</link>
     <description>Recent content on voithos.io</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 May 2023 23:21:17 -0700</lastBuildDate><atom:link href="https://voithos.io/feed.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 21 Jul 2024 22:26:16 -0700</lastBuildDate>
+    <atom:link href="https://voithos.io/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Code</title>
       <link>https://voithos.io/code/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://voithos.io/code/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Art</title>
       <link>https://voithos.io/art/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://voithos.io/art/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Me</title>
       <link>https://voithos.io/me/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://voithos.io/me/</guid>
-      <description>Hi there! I&amp;rsquo;m Zaven. I&amp;rsquo;m a software engineer living in the pleasant Seattle area with my best friend Daisy (who is amazing!).
-I like creating things!
-I&amp;rsquo;m hugely interested in game dev and graphics programming, and love creating interactive visual worlds. I&amp;rsquo;m inspired by great storytelling, whatever the medium, and enjoy writing, creating art, and aspiring to tell stories of my own.
-Want to say hello? Shoot me an email or tweet at @voithoz!</description>
+      <description>Hi there! I&amp;rsquo;m Zaven. I&amp;rsquo;m a software engineer living in the pleasant Seattle area with my best friend Daisy (who is amazing!).&#xA;I like creating things!&#xA;I&amp;rsquo;m hugely interested in game dev and graphics programming, and love creating interactive visual worlds. I&amp;rsquo;m inspired by great storytelling, whatever the medium, and enjoy writing, creating art, and aspiring to tell stories of my own.&#xA;Want to say hello? Shoot me an email or tweet at @voithoz!</description>
     </item>
-    
+    <item>
+      <title>Unreal Debugging</title>
+      <link>https://voithos.io/articles/unreal-debugging/</link>
+      <pubDate>Sun, 21 Jul 2024 22:26:16 -0700</pubDate>
+      <guid>https://voithos.io/articles/unreal-debugging/</guid>
+      <description>As a large and mature engine, Unreal provides a suite of debugging systems and tools to aid during development, which go hand-in-hand with your standard C++ debugger. This page aims to give an incomplete and mostly unordered whirlwind tour of some of the more useful tools I&amp;rsquo;ve run across while working in Unreal.&#xA;Note that most of my experience thus far has been in UE versions 4.27 and 5.0, although I believe the majority of the tools mentioned here work just as well for more recent versions of the engine.</description>
+    </item>
     <item>
       <title>Fast Chaos Collision Toggling</title>
       <link>https://voithos.io/articles/fast-chaos-collision-toggling/</link>
       <pubDate>Mon, 22 May 2023 23:21:17 -0700</pubDate>
-      
       <guid>https://voithos.io/articles/fast-chaos-collision-toggling/</guid>
-      <description>A few weeks ago I investigated an interesting physics-related performance issue, specific to UE5&amp;rsquo;s new Chaos physics engine.
-The code I was working on managed a large number of UStaticMeshComponents (essentially, it&amp;rsquo;s a custom hierarchical level-of-detail system) and would frequently need to toggle visibility and collision shapes per tick. There were some cases where we seemed to be going over our frame budget, so I took a profile via Unreal Insights:</description>
+      <description>A few weeks ago I investigated an interesting physics-related performance issue, specific to UE5&amp;rsquo;s new Chaos physics engine.&#xA;The code I was working on managed a large number of UStaticMeshComponents (essentially, it&amp;rsquo;s a custom hierarchical level-of-detail system) and would frequently need to toggle visibility and collision shapes per tick. There were some cases where we seemed to be going over our frame budget, so I took a profile via Unreal Insights:</description>
     </item>
-    
     <item>
       <title>Enum Class Bitmasks</title>
       <link>https://voithos.io/articles/enum-class-bitmasks/</link>
       <pubDate>Sat, 13 May 2023 14:03:57 -0700</pubDate>
-      
       <guid>https://voithos.io/articles/enum-class-bitmasks/</guid>
-      <description>Enums are a core part of the C and C++ languages, and are used ubiquitously to model logically distinct states in software systems. However, there may be times where you want to model a set of non-mutually-exclusive states. There are several other ways you could write this, including defining bitfields, using std::bitset, or even using std::vector&amp;lt;bool&amp;gt;, but you can also use enums for this by treating them as bitmasks.
-For example, Vulkan defines many enums as part of its API, and these can be combined naturally via bitwise operators:</description>
+      <description>Enums are a core part of the C and C++ languages, and are used ubiquitously to model logically distinct states in software systems. However, there may be times where you want to model a set of non-mutually-exclusive states. There are several other ways you could write this, including defining bitfields, using std::bitset, or even using std::vector&amp;lt;bool&amp;gt;, but you can also use enums for this by treating them as bitmasks.&#xA;For example, Vulkan defines many enums as part of its API, and these can be combined naturally via bitwise operators:</description>
     </item>
-    
     <item>
       <title>Creating UObjects From Async Threads</title>
       <link>https://voithos.io/articles/creating-uobjects-from-async-threads/</link>
       <pubDate>Sat, 06 May 2023 16:58:57 -0700</pubDate>
-      
       <guid>https://voithos.io/articles/creating-uobjects-from-async-threads/</guid>
-      <description>When developing a project in Unreal, for performance reasons you may find yourself needing to do work on background threads. This could be an FRunnableThread, an AsyncTask(), or even UE5&amp;rsquo;s fancy new Tasks System &amp;ndash; any code that isn&amp;rsquo;t executing on the game thread.
-As a motivating example, perhaps you need to dynamically load and process some mesh / texture data at runtime. Most of the processing work is thread-agnostic, but what if you need to create UObjects to represent the data?</description>
+      <description>When developing a project in Unreal, for performance reasons you may find yourself needing to do work on background threads. This could be an FRunnableThread, an AsyncTask(), or even UE5&amp;rsquo;s fancy new Tasks System &amp;ndash; any code that isn&amp;rsquo;t executing on the game thread.&#xA;As a motivating example, perhaps you need to dynamically load and process some mesh / texture data at runtime. Most of the processing work is thread-agnostic, but what if you need to create UObjects to represent the data?</description>
     </item>
-    
     <item>
       <title>Reference Shenanigans</title>
       <link>https://voithos.io/articles/reference-shenanigans/</link>
       <pubDate>Thu, 09 Mar 2023 21:40:37 -0800</pubDate>
-      
       <guid>https://voithos.io/articles/reference-shenanigans/</guid>
       <description>A while back, I was working on some Unreal C++ code involving a tree traversal and a hash map used for intermediate information when I encountered a subtle bug (which of course feels obvious in hindsight). At the time, I had lost the better part of the day to the issue, but it actually led me to some interesting conclusions so I thought it&amp;rsquo;d be fun to try to present it here in a somewhat generalized and simplified way.</description>
     </item>
-    
     <item>
       <title>Reconstruction</title>
       <link>https://voithos.io/writing/reconstruction/</link>
       <pubDate>Wed, 22 Jun 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://voithos.io/writing/reconstruction/</guid>
-      <description>Face reconstruction 12%
-I slowly opened my eyes. It took some time for my mind to identify the blank, blueish-gray surface I was seeing as my ceiling. It took even longer for me to question why I was looking at it, or why I hadn’t tried getting up. A strange numbness permeated through me, like a halfway purgatory between the vivid presence of the senses and the dull emptiness of anesthesia.</description>
+      <description>Face reconstruction 12%&#xA;I slowly opened my eyes. It took some time for my mind to identify the blank, blueish-gray surface I was seeing as my ceiling. It took even longer for me to question why I was looking at it, or why I hadn’t tried getting up. A strange numbness permeated through me, like a halfway purgatory between the vivid presence of the senses and the dull emptiness of anesthesia.</description>
     </item>
-    
     <item>
       <title>Gift</title>
       <link>https://voithos.io/writing/gift/</link>
       <pubDate>Tue, 23 Mar 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://voithos.io/writing/gift/</guid>
-      <description>She started small.
-At first, it was dark, with nothing more than a sensation of a cool breeze against her skin. She pulled her arms and legs close, as they were the only real things she could feel. Her world was silent and lonely, although she couldn’t yet know. Her awareness was yet a small bud.
-After a time, she noticed a glint at the edge of her vision, a focused, mild glow from above.</description>
+      <description>She started small.&#xA;At first, it was dark, with nothing more than a sensation of a cool breeze against her skin. She pulled her arms and legs close, as they were the only real things she could feel. Her world was silent and lonely, although she couldn’t yet know. Her awareness was yet a small bud.&#xA;After a time, she noticed a glint at the edge of her vision, a focused, mild glow from above.</description>
     </item>
-    
     <item>
       <title>The Messenger</title>
       <link>https://voithos.io/writing/the-messenger/</link>
       <pubDate>Sat, 05 Dec 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://voithos.io/writing/the-messenger/</guid>
-      <description>Emerick Reeve stood, arms crossed, near the entrance of the open-air bazaar. The merchant, a quivering, balding man in his forties, stared at him intently, a film of sweat glistening on his forehead.
-“Tell me again, what was your price for the horse?” he said, unmoving. The merchant hesitated, eyed him up and down before briefly glancing at the woman standing nearby. She had a pouch of coin in hand, and was about to hand it all over before Emerick intervened.</description>
+      <description>Emerick Reeve stood, arms crossed, near the entrance of the open-air bazaar. The merchant, a quivering, balding man in his forties, stared at him intently, a film of sweat glistening on his forehead.&#xA;“Tell me again, what was your price for the horse?” he said, unmoving. The merchant hesitated, eyed him up and down before briefly glancing at the woman standing nearby. She had a pouch of coin in hand, and was about to hand it all over before Emerick intervened.</description>
     </item>
-    
     <item>
       <title>Buggy</title>
       <link>https://voithos.io/writing/buggy/</link>
       <pubDate>Sun, 06 Sep 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://voithos.io/writing/buggy/</guid>
       <description>I woke up quietly. It was early and still dark, maybe cloudy, I couldn’t really tell. I began my morning routine, but it soon became clear that it was going to be one of those gradual mornings, where my brain would take a good 20 minutes to boot up, meaning that I’d only really regain consciousness somewhere between the shower and the sink. Why had I woken up so early? Ah, that’s right, it was project day, and I had wanted to get an early start on my novel.</description>
     </item>
-    
     <item>
       <title>The Call of the Giant</title>
       <link>https://voithos.io/writing/the-call-of-the-giant/</link>
       <pubDate>Wed, 02 Sep 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://voithos.io/writing/the-call-of-the-giant/</guid>
-      <description>“Home is north.”
-Ketil froze as the words materialized in his mind. They were hushed, easy to miss, but they had been coming regularly enough now that he had learned to pick them out. For months, he had been enduring these whispers and the pull they exerted on him. He could feel it: a draw, a kind of primal longing, no doubt from whatever was the source of the words.</description>
+      <description>“Home is north.”&#xA;Ketil froze as the words materialized in his mind. They were hushed, easy to miss, but they had been coming regularly enough now that he had learned to pick them out. For months, he had been enduring these whispers and the pull they exerted on him. He could feel it: a draw, a kind of primal longing, no doubt from whatever was the source of the words.</description>
     </item>
-    
     <item>
       <title>The Tower</title>
       <link>https://voithos.io/writing/the-tower/</link>
       <pubDate>Wed, 26 Aug 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://voithos.io/writing/the-tower/</guid>
-      <description>My eyes snapped open.
-I struggled to distinguish any shape in front of me, looking up in the darkness of the room. I slowly pulled myself upright out of the glowing, neon blue pool I lay in. The cold water dripped down my face and off my hair, each droplet seeming to still hold a radiance of its own. I breathed out as my eyes adjusted to the darkness, seeing my breath materialize as a turbulent haze in front of me.</description>
+      <description>My eyes snapped open.&#xA;I struggled to distinguish any shape in front of me, looking up in the darkness of the room. I slowly pulled myself upright out of the glowing, neon blue pool I lay in. The cold water dripped down my face and off my hair, each droplet seeming to still hold a radiance of its own. I breathed out as my eyes adjusted to the darkness, seeing my breath materialize as a turbulent haze in front of me.</description>
     </item>
-    
     <item>
       <title>Amidst the Sands of the Silent Sea</title>
       <link>https://voithos.io/writing/amidst-the-sands-of-the-silent-sea/</link>
       <pubDate>Sun, 26 Jul 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://voithos.io/writing/amidst-the-sands-of-the-silent-sea/</guid>
-      <description>I remember how that time began.
-First, I saw light, as my mind coalesced from the void. The blurred lights in front of me solidified as my mind’s eye emerged, small, young, yet aware. An endless landscape spread out before me, reaching toward the horizon. I shifted my view without moving and beheld the world.
-The sky was crimson red, glowing with a flame that marked the day’s passing. The radiance was rivaled only by the uncaring sands and rocks of the barren land below me.</description>
+      <description>I remember how that time began.&#xA;First, I saw light, as my mind coalesced from the void. The blurred lights in front of me solidified as my mind’s eye emerged, small, young, yet aware. An endless landscape spread out before me, reaching toward the horizon. I shifted my view without moving and beheld the world.&#xA;The sky was crimson red, glowing with a flame that marked the day’s passing. The radiance was rivaled only by the uncaring sands and rocks of the barren land below me.</description>
     </item>
-    
     <item>
       <title>Archive</title>
       <link>https://voithos.io/archive/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://voithos.io/archive/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>
