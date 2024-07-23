@@ -21,7 +21,7 @@
 {{ partial "math.html" . }}
 {{ end }}
 
-{{ if .Site.IsServer }}
+{{ if hugo.IsServer }}
   {{ $cssOpts := (dict "enableSourceMap" true ) }}
   {{ $style := resources.Get "sass/main.scss" | resources.ToCSS $cssOpts }}
   <link rel="stylesheet" href="{{ $style.RelPermalink }}">
