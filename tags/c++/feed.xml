@@ -6,8 +6,15 @@
     <description>Recent content in C&#43;&#43; on voithos.io</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 May 2023 23:21:17 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 21 Jul 2024 22:26:16 -0700</lastBuildDate>
     <atom:link href="https://voithos.io/tags/c++/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Unreal Debugging</title>
+      <link>https://voithos.io/articles/unreal-debugging/</link>
+      <pubDate>Sun, 21 Jul 2024 22:26:16 -0700</pubDate>
+      <guid>https://voithos.io/articles/unreal-debugging/</guid>
+      <description>As a large and mature engine, Unreal provides a suite of debugging systems and tools to aid development, which go hand-in-hand with your standard C++ debugger. This page aims to give an incomplete and mostly unordered whirlwind tour of some of the more useful tools I&amp;rsquo;ve run across while working in Unreal. If I&amp;rsquo;ve missed anything big or particularly useful, I&amp;rsquo;d love to hear about it!&#xA;Note that most of my experience thus far has been in UE versions 4.</description>
+    </item>
     <item>
       <title>Fast Chaos Collision Toggling</title>
       <link>https://voithos.io/articles/fast-chaos-collision-toggling/</link>

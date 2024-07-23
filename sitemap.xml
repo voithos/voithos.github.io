@@ -14,6 +14,9 @@
   </url><url>
     <loc>https://voithos.io/me/</loc>
   </url><url>
+    <loc>https://voithos.io/tags/c&#43;&#43;/</loc>
+    <lastmod>2024-07-21T22:26:16-07:00</lastmod>
+  </url><url>
     <loc>https://voithos.io/tags/debugging/</loc>
     <lastmod>2024-07-21T22:26:16-07:00</lastmod>
   </url><url>
@@ -31,9 +34,6 @@
   </url><url>
     <loc>https://voithos.io/</loc>
     <lastmod>2024-07-21T22:26:16-07:00</lastmod>
-  </url><url>
-    <loc>https://voithos.io/tags/c&#43;&#43;/</loc>
-    <lastmod>2023-05-22T23:21:17-07:00</lastmod>
   </url><url>
     <loc>https://voithos.io/articles/fast-chaos-collision-toggling/</loc>
     <lastmod>2023-05-22T23:21:17-07:00</lastmod>

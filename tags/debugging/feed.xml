@@ -13,7 +13,7 @@
       <link>https://voithos.io/articles/unreal-debugging/</link>
       <pubDate>Sun, 21 Jul 2024 22:26:16 -0700</pubDate>
       <guid>https://voithos.io/articles/unreal-debugging/</guid>
-      <description>As a large and mature engine, Unreal provides a suite of debugging systems and tools to aid during development, which go hand-in-hand with your standard C++ debugger. This page aims to give an incomplete and mostly unordered whirlwind tour of some of the more useful tools I&amp;rsquo;ve run across while working in Unreal.&#xA;Note that most of my experience thus far has been in UE versions 4.27 and 5.0, although I believe the majority of the tools mentioned here work just as well for more recent versions of the engine.</description>
+      <description>As a large and mature engine, Unreal provides a suite of debugging systems and tools to aid development, which go hand-in-hand with your standard C++ debugger. This page aims to give an incomplete and mostly unordered whirlwind tour of some of the more useful tools I&amp;rsquo;ve run across while working in Unreal. If I&amp;rsquo;ve missed anything big or particularly useful, I&amp;rsquo;d love to hear about it!&#xA;Note that most of my experience thus far has been in UE versions 4.</description>
     </item>
   </channel>
 </rss>
