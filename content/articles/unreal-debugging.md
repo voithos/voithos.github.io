@@ -2,22 +2,24 @@
 title: "Unreal Debugging"
 date: 2024-07-21T22:26:16-07:00
 description: "Unreal debugging cheat sheet."
-tags: [unreal-engine, ue5, debugging]
+tags: [unreal-engine, ue5, debugging, c++]
 ---
 
 As a large and mature engine, Unreal provides a suite of debugging systems and
-tools to aid during development, which go hand-in-hand with your standard C++
-debugger. This page aims to give an incomplete and mostly unordered whirlwind
-tour of some of the more useful tools I've run across while working in Unreal.
+tools to aid development, which go hand-in-hand with your standard C++ debugger.
+This page aims to give an incomplete and mostly unordered whirlwind tour of some
+of the more useful tools I've run across while working in Unreal. If I've missed
+anything big or particularly useful, I'd love to hear about it!
 
 Note that most of my experience thus far has been in UE versions `4.27` and
 `5.0`, although I believe the majority of the tools mentioned here work just as
 well for more recent versions of the engine.
 
-It's also worth mentioning that, in addition to the tools mentioned below,
-Unreal's **stats system** and **Unreal Insights** can be very useful when
-debugging resource usage -- but that starts to delve into the realm of profiling
-and performance optimization, so I'll save that for a future post.
+It's also worth mentioning that I'm omitting some very significant tools in this
+list, like Unreal's **stats system** and **Unreal Insights**, which can be very
+useful when debugging resource usage or performance -- but that starts to delve
+into the realm of profiling and optimization, so I'll save that for a future
+post.
 
 ## Console
 
@@ -39,8 +41,8 @@ help
 
 To start, we have to build and launch the editor. :) Unreal projects come with
 several build configurations. When C++ debug symbols aren't sufficiently
-available while in a breakpoint, you can try to use a more debugger-friendly
-mode.
+available while stepping through code, you can try to use a more
+debugger-friendly mode.
 
 - `Development` - A good default, but comes with tons of optimizations, making
   debugging difficult.
@@ -51,10 +53,10 @@ mode.
 
 ## Disabling optimization
 
-In addition to controlling code optimization via build configurations (which can
-sometimes be a bit heavy handed if you don't need to step into engine code), you
-can disable optimizations in an entire set of modules directly in **Unreal Build
-Tool** by modifying the corresponding `.Build.cs` file and adding:
+It can often be more convenient to disable optimizations for a specific piece of
+code instead of for your entire project. You can disable optimizations in a
+module directly in **Unreal Build Tool** by modifying the corresponding
+`.Build.cs` file and adding:
 
 ```c#
 OptimizeCode = CodeOptimization.Never;
@@ -120,16 +122,16 @@ has a lot of info on how to get started.
 
 ## Gameplay Debugger
 
-Similar to but separate from the Visual Logger, the **Gameplay Debugger Tool
-(GDT)** provides a powerful way to watch real-time data for a game. The
+Somewhat akin to but separate from the Visual Logger, the **Gameplay Debugger
+Tool (GDT)** provides a powerful way to watch real-time data for a game. The
 [official Gameplay Debugger docs](https://dev.epicgames.com/documentation/en-us/unreal-engine/using-the-gameplay-debugger-in-unreal-engine)
 have a lot more info.
 
 ## DrawDebug
 
 An immediate-mode debug drawing API. There are lots of functions and options to
-choose from, and this comes in very handy when working in 3D (I'm looking at
-you, `FRotator`).
+choose from, and this comes in very handy when working in 3D and trying to
+understand what's happening (I'm looking at you, `FRotator`).
 
 ```c++
 #include "DrawDebugHelpers.h"
@@ -157,10 +159,10 @@ working.
 
 However, Unreal provides a `-stompmalloc` flag which changes the allocator to
 one which tries to better detect and report memory issues -- this has proven to
-be indispensible when working on low-level, memory-efficient code.
+be indispensible when working on low-level, memory-manipulating code.
 
 Another potentially useful flag is `-ansimalloc` which uses the default C
-allocator.
+allocator instead of Unreal's own default.
 
 ## Garbage collection
 
@@ -174,9 +176,9 @@ gc.CollectGarbageEveryFrame 1
 
 ## RHI issues
 
-You may run into some issues that are related to a specific Rendering Hardware
-Interface (RHI), and sometimes the default RHI of your dev machine may not match
-your target machine or console. To force a specific RHI, you can pass the
+You may run into some issues that are related to a specific **Rendering Hardware
+Interface (RHI)**, and sometimes the default RHI of your dev machine may not
+match your target machine or console. To force a specific RHI, you can pass the
 relevant flag if your system supports it:
 
 - `-d3d12`
@@ -190,7 +192,7 @@ In addition, for D3D and Vulkan, you can pass `-d3ddebug` or `-vulkandebug`
 ## Blueprints
 
 Passing the command line `-ScriptStackOnWarnings` when launching the editor
-prints a stack trace on Blueprint warnings, useful for locating tricky issues.
+prints a stack trace upon Blueprint warnings, useful for locating tricky issues.
 
 ## Rendering and game thread
 
@@ -226,7 +228,7 @@ DumpGPU
 ```
 
 This will generate a set of files under `Saved/GPUDumps` with a viewer `.html`
-page and helper scripts, which you can use to view the trace.
+page and launcher scripts, which you can use to view the trace.
 
 {{< figure src="/img/articles/unreal_dumpgpu.png" style="max-width: 800px;" loading="lazy" >}}
 
