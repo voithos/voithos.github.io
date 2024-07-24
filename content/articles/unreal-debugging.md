@@ -16,7 +16,7 @@ Note that most of my experience thus far has been in UE versions `4.27` and
 well for more recent versions of the engine.
 
 It's also worth mentioning that I'm omitting some very significant tools in this
-list, like Unreal's **stats system** and **Unreal Insights**, which can be very
+list, like Unreal's **stats system** and **Unreal Insights**, which can be
 useful when debugging resource usage or performance -- but that starts to delve
 into the realm of profiling and optimization, so I'll save that for a future
 post.
