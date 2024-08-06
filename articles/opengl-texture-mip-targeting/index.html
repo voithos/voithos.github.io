@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<title>
+    Opengl Texture Mip Targeting | voithos.io
+  </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Avoiding feedback loops when reading and writing to the same texture.">
+<link rel="icon" href="https://voithos.io/favicon.ico">
+<link rel="alternate" href="https://voithos.io/articles/feed.xml" title="voithos.io">
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&family=Oxygen+Mono&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha512-DUC8yqWf7ez3JD1jszxCWSVB0DMP78eOyBpMa5aJki1bIRARykviOuImIczkxlj1KhVSyS16w2FSQetkD4UU2w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/smoothState.js/0.7.2/jquery.smoothState.min.js" integrity="sha512-PA88Ew5anBQLPlovdwOOMj+Ky0x+M6a6bDXYve4q+NDj17AJ37FwHT4Xo758ZQqYKLyvaYko27cQDQ5P/0kOJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
+  
+  <link rel="stylesheet" href="/sass/main.min.b2d9a0514d1aed0a337c1d0587254200177a8ed5e4ef1548b94b3e52f04f0fde.css">
+
+  
+  <script type="text/javascript" src="/js/index.min.6ec5479881bc3221e976ccfd99c2f5f95b3b8703e46b66424c55cc861cc65db1.js" defer></script>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0524d221b0de4b35ad72aeec8ef5eda7"}'></script>
+  </head>
+  <body>
+    <section id="main" class="smooth-scene"><section class="header-box">
+  <section class="site-container">
+    <header>
+        <h1 class="title">
+          <div class="spin cw"></div>
+          <div class="spin ccw"></div>
+          <a href="/">voithos</a>
+        </h1>
+        <input type="checkbox" id="nav-checkbox" class="nav-checkbox" role="button">
+        <label for="nav-checkbox" class="nav-toggle" onclick></label>
+        <nav class="main-nav">
+          <ul>
+            
+            
+            <li class="active">
+              <a href="/articles/" title="Articles">Articles</a>
+            </li>
+            
+            <li class="">
+              <a href="/code/" title="Code">Code</a>
+            </li>
+            
+            <li class="">
+              <a href="/writing/" title="Writing">Writing</a>
+            </li>
+            
+            <li class="">
+              <a href="/art/" title="Art">Art</a>
+            </li>
+            
+            <li class="">
+              <a href="/me/" title="Me">Me</a>
+            </li>
+            
+          </ul>
+        </nav>
+        <nav class="social-nav">
+          <ul>
+            <li>
+              <a href="https://twitter.com/voithoz"><i class="fa-brands fa-twitter"></i></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/voithoz/"><i class="fa-brands fa-instagram"></i></a>
+            </li>
+            <li>
+              <a href="https://voithos.itch.io/"><i class="fa-brands fa-itch-io"></i></a>
+            </li>
+            <li>
+              <a href="https://github.com/voithos/"><i class="fa-brands fa-github"></i></a>
+            </li>
+          </ul>
+        </nav>
+    </header>
+  </section>
+</section>
+
+      <section class="site-container">
+        <section class="parent-content scene-element scene-element--fadein ">
+<main class="article article-single">
+  <section class="article-body">
+    <h1 class="article-title">Opengl Texture Mip Targeting</h1>
+    
+    <section class="article-description">
+      Avoiding feedback loops when reading and writing to the same texture.
+    </section>
+    
+    <div class="article-meta">
+  <section class="article-stats">
+    August 5, 2024&nbsp;·&nbsp;3 min&nbsp;·&nbsp;603 words
+  </section>
+  
+  <section class="article-tags">
+    
+      <span class="article-tag pill">opengl</span>
+    
+      <span class="article-tag pill">textures</span>
+    
+  </section>
+  
+</div>
+
+    <hr>
+    <p>A while back, I was implementing a
+<a href="https://learnopengl.com/Guest-Articles/2022/Phys.-Based-Bloom">bloom post process effect</a>
+for my personal renderer project, and I ran into an interesting hurdle involving
+how texture samplers and framebuffers work in OpenGL.</p>
+<p>A pretty common technique used by several engines involves repeated downsamples
+of the final (HDR) frame using a specialized blur kernel, and then a series of
+upsamples in reverse that accumulate the blurred textures, resulting in a nice
+and natural-looking bloom effect after tone mapping.</p>
+<p>Nowadays, you&rsquo;d probably want to just use <em>compute shaders</em> to generate your
+bloom texture, but if your target API was older than OpenGL 4.3, compute shaders
+wouldn&rsquo;t be available. So, I wanted to try building it with just standard
+framebuffers and direct dispatch.</p>
+<h2 id="the-problem">The problem</h2>
+<p>Commonly, bloom implementations like this would use multiple textures (at
+least 2) and ping-pong the downsampling and upsampling between the two to make
+the calls easier.</p>
+<p>However, since the downsamples/upsamples are sequential, all you really need
+conceptually is a single texture with a mipmap chain, so this is what I opted
+for.</p>
+<p>I initially tried using <code>textureLod()</code> in the fragment shader to sample from a
+specific mip level (for both downsampling and upsampling) but it turns out that
+if the texture filtering mode doesn&rsquo;t use mipmaps (i.e. if the filtering mode is
+<code>GL_NEAREST</code> or <code>GL_LINEAR</code>, instead of something like
+<code>GL_LINEAR_MIPMAP_LINEAR</code>) then <code>textureLod()</code> will always sample from <em>mip 0</em>.
+Since I was <em>also</em> writing to the same texture I was sampling from (just at a
+different mip level), I was a bit hesitant to use the other filtering modes, but
+the biggest reason to avoid this came from something I found in the OpenGL spec.</p>
+<p>Whenever a texture is sampled from while also being rendered to, you can run the
+risk of hitting <strong>undefined behavior (the value of rendered fragments is
+undefined)</strong>. This is referred to as a <em>feedback loop</em>. The specifics of the
+OpenGL spec are fairly conservative about what can trigger this, even if the
+shader has logic that wouldn&rsquo;t actually ever sample from the same texel that
+it&rsquo;s writing to. See the spec for details:
+<a href="https://registry.khronos.org/OpenGL/specs/gl/glspec40.core.pdf#page=299">https://registry.khronos.org/OpenGL/specs/gl/glspec40.core.pdf#page=299</a></p>
+<h2 id="the-solution">The solution</h2>
+<p>The requirements in the spec also point towards a solution: if you explicitly
+set the <code>GL_TEXTURE_BASE_LEVEL</code> and <code>GL_TEXTURE_MAX_LEVEL</code> texture params
+appropriately during each step of the bloom, it will be impossible for the
+shader to sample from the same mip level that it&rsquo;s writing to, thus avoiding the
+undefined behavior. The details are as follows:</p>
+<p>First, to select the mip level to render to, you can use
+<code>glFramebufferTexture2D</code>, along with <code>glViewport</code> to set the width/height of the
+mip you are rendering to.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>glBindFramebuffer(GL_FRAMEBUFFER, framebufferID);
+</span></span><span style="display:flex;"><span>glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureID, mipmaplevelToRenderTo);
+</span></span><span style="display:flex;"><span>glViewport(<span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, mipWidth, mipHeight);
+</span></span></code></pre></div><p>Then, to limit the mip level that you&rsquo;re sampling from, the safest way is to use
+the <code>GL_TEXTURE_BASE_LEVEL</code> and <code>GL_TEXTURE_MAX_LEVEL</code> texture parameters.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>glBindTexture(GL_TEXTURE_2D, textureID);
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd">int</span> mipToSampleFrom <span style="color:#ff79c6">=</span> mipmaplevelToRenderTo <span style="color:#ff79c6">-</span> <span style="color:#bd93f9">1</span>;
+</span></span><span style="display:flex;"><span>glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, mipToSampleFrom);
+</span></span><span style="display:flex;"><span>glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, mipToSampleFrom);
+</span></span></code></pre></div><p>In the shader, this will allow you to use a simple <code>texture(sampler, uv)</code> (or
+similar) as normal, and it will only sample from the one mip level you
+specified. Note that <code>GL_TEXTURE_BASE_LEVEL</code> also changes the meaning of GLSL
+functions like <code>textureSize()</code>, which take a LOD parameter: if you&rsquo;ve modified
+<code>GL_TEXTURE_BASE_LEVEL</code>, then the LOD will be <em>relative to the base level</em>,
+meaning that <code>textureSize(sampler, 0)</code> will conveniently return the size of the
+currently configured base mip level.</p>
+<p>To reset, just set those params to their default OpenGL values:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, <span style="color:#bd93f9">0</span>);
+</span></span><span style="display:flex;"><span>glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, <span style="color:#bd93f9">1000</span>);
+</span></span></code></pre></div><p>This allows us to read from and write to different mip levels of a single
+texture with only a single framebuffer object.</p>
+
+<figure><img src="/img/articles/mip_chain_bloom.png" loading="lazy"/><figcaption>
+            <h4>One downsample step, with a single texture</h4>
+        </figcaption>
+</figure>
+
+
+  </section>
+</main>
+<footer>
+  <i class="heart fa-solid fa-heart"></i>
+</footer>
+
+        </section>
+      </section>
+    </section>
+  </body>
+</html>
