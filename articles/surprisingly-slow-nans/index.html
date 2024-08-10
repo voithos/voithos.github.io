@@ -94,7 +94,7 @@
     
     <div class="article-meta">
   <section class="article-stats">
-    August 8, 2024&nbsp;·&nbsp;3 min&nbsp;·&nbsp;607 words
+    August 8, 2024&nbsp;·&nbsp;3 min&nbsp;·&nbsp;610 words
   </section>
   
   <section class="article-tags">
@@ -146,7 +146,8 @@ potential issue?</p>
 </span></span></code></pre></div><p>Hint: there&rsquo;s a potential NaN in there! The <code>translation</code> param comes from a
 position delta, but that delta is 0 for the first frame of an input (the
 position doesn&rsquo;t change when there&rsquo;s no movement), and <code>normalize(translation)</code>
-divides by the length of the vector, which &ndash; you guessed it &ndash; is 0. Boom, NaN.</p>
+divides the vector components by the length of the vector, which &ndash; you guessed
+it &ndash; is 0/0. Boom, NaN.</p>
 <p>But why did this cause a <em>performance issue</em> instead of just giving bad output?</p>
 <p>Looking down the control flow of the raycast code led me down to the bounding
 box (AABB) intersection routine, which just tests the ray against each box face
