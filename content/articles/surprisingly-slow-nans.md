@@ -47,7 +47,8 @@ float RaycastDistance(const float3& origin, const float3& translation) {
 Hint: there's a potential NaN in there! The `translation` param comes from a
 position delta, but that delta is 0 for the first frame of an input (the
 position doesn't change when there's no movement), and `normalize(translation)`
-divides by the length of the vector, which -- you guessed it -- is 0. Boom, NaN.
+divides the vector components by the length of the vector, which -- you guessed
+it -- is 0/0. Boom, NaN.
 
 But why did this cause a _performance issue_ instead of just giving bad output?
 
