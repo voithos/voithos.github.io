@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>In-House-Engine on voithos.io</title>
+    <link>https://voithos.io/tags/in-house-engine/</link>
+    <description>Recent content in In-House-Engine on voithos.io</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 08 Aug 2024 21:22:54 -0700</lastBuildDate>
+    <atom:link href="https://voithos.io/tags/in-house-engine/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Surprisingly Slow NaNs</title>
+      <link>https://voithos.io/articles/surprisingly-slow-nans/</link>
+      <pubDate>Thu, 08 Aug 2024 21:22:54 -0700</pubDate>
+      <guid>https://voithos.io/articles/surprisingly-slow-nans/</guid>
+      <description>A while ago, I had to debug a strange performance issue in an in-house engine I was using, and I was quite surprised when I discovered the cause. The tl;dr is that it involved some unexpected but innocuous-seeming NaNs that ended up tanking the performance, and not just from the fact that operations involving NaNs are much slower than finite floats on some architectures.&#xA;Story time!&#xA;The code in question was part of the movement / interaction system, and involved performing a few raycasts against the collision system to find a reference point for movement.</description>
+    </item>
+  </channel>
+</rss>

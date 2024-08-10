@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<title>
+    Surprisingly Slow NaNs | voithos.io
+  </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A case of unexpected performance regression.">
+<link rel="icon" href="https://voithos.io/favicon.ico">
+<link rel="alternate" href="https://voithos.io/articles/feed.xml" title="voithos.io">
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&family=Oxygen+Mono&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha512-DUC8yqWf7ez3JD1jszxCWSVB0DMP78eOyBpMa5aJki1bIRARykviOuImIczkxlj1KhVSyS16w2FSQetkD4UU2w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/smoothState.js/0.7.2/jquery.smoothState.min.js" integrity="sha512-PA88Ew5anBQLPlovdwOOMj+Ky0x+M6a6bDXYve4q+NDj17AJ37FwHT4Xo758ZQqYKLyvaYko27cQDQ5P/0kOJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
+  
+  <link rel="stylesheet" href="/sass/main.min.b2d9a0514d1aed0a337c1d0587254200177a8ed5e4ef1548b94b3e52f04f0fde.css">
+
+  
+  <script type="text/javascript" src="/js/index.min.6ec5479881bc3221e976ccfd99c2f5f95b3b8703e46b66424c55cc861cc65db1.js" defer></script>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0524d221b0de4b35ad72aeec8ef5eda7"}'></script>
+  </head>
+  <body>
+    <section id="main" class="smooth-scene"><section class="header-box">
+  <section class="site-container">
+    <header>
+        <h1 class="title">
+          <div class="spin cw"></div>
+          <div class="spin ccw"></div>
+          <a href="/">voithos</a>
+        </h1>
+        <input type="checkbox" id="nav-checkbox" class="nav-checkbox" role="button">
+        <label for="nav-checkbox" class="nav-toggle" onclick></label>
+        <nav class="main-nav">
+          <ul>
+            
+            
+            <li class="active">
+              <a href="/articles/" title="Articles">Articles</a>
+            </li>
+            
+            <li class="">
+              <a href="/code/" title="Code">Code</a>
+            </li>
+            
+            <li class="">
+              <a href="/writing/" title="Writing">Writing</a>
+            </li>
+            
+            <li class="">
+              <a href="/art/" title="Art">Art</a>
+            </li>
+            
+            <li class="">
+              <a href="/me/" title="Me">Me</a>
+            </li>
+            
+          </ul>
+        </nav>
+        <nav class="social-nav">
+          <ul>
+            <li>
+              <a href="https://twitter.com/voithoz"><i class="fa-brands fa-twitter"></i></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/voithoz/"><i class="fa-brands fa-instagram"></i></a>
+            </li>
+            <li>
+              <a href="https://voithos.itch.io/"><i class="fa-brands fa-itch-io"></i></a>
+            </li>
+            <li>
+              <a href="https://github.com/voithos/"><i class="fa-brands fa-github"></i></a>
+            </li>
+          </ul>
+        </nav>
+    </header>
+  </section>
+</section>
+
+      <section class="site-container">
+        <section class="parent-content scene-element scene-element--fadein ">
+<main class="article article-single">
+  <section class="article-body">
+    <h1 class="article-title">Surprisingly Slow NaNs</h1>
+    
+    <section class="article-description">
+      A case of unexpected performance regression.
+    </section>
+    
+    <div class="article-meta">
+  <section class="article-stats">
+    August 8, 2024&nbsp;·&nbsp;3 min&nbsp;·&nbsp;607 words
+  </section>
+  
+  <section class="article-tags">
+    
+      <span class="article-tag pill">c&#43;&#43;</span>
+    
+      <span class="article-tag pill">floating-point</span>
+    
+      <span class="article-tag pill">performance</span>
+    
+      <span class="article-tag pill">in-house-engine</span>
+    
+  </section>
+  
+</div>
+
+    <hr>
+    <p>A while ago, I had to debug a strange performance issue in an in-house engine I
+was using, and I was quite surprised when I discovered the cause. The tl;dr is
+that it involved some unexpected but innocuous-seeming NaNs that ended up
+tanking the performance, and not just from the fact that
+<a href="https://randomascii.wordpress.com/2012/05/20/thats-not-normalthe-performance-of-odd-floats/">operations involving NaNs are much slower than finite floats</a>
+on some architectures.</p>
+<p>Story time!</p>
+<p>The code in question was part of the movement / interaction system, and involved
+performing a few raycasts against the collision system to find a reference point
+for movement. There would be some noticable hitches / frame hiccups when this
+system was active, but it was relatively new code (in a relatively new codebase)
+so bugs and unoptimized code paths were not unexpected. In particular, I thought
+that this may have just been due to the raycast collision code itself &ndash; at the
+time, raycast acceleration had not been implemented yet, meaning we&rsquo;d have to do
+a naive per-triangle intersection.</p>
+<p>However, the hitching remained even after we implemented raycast acceleration
+(with a tile-based bounding box tree &ndash; essentially a simple BVH). After
+profiling it, I noticed a consistent pattern: it would hitch during the <em>first
+frame after an input event</em>, but was fine during subsequent frames while the
+input was still active (even though this code ran every frame). Then, if the
+input was released and re-activated, it&rsquo;d hitch again! And the raycast was
+taking upwards of <em>24ms</em> when it hitched, which was clearly unacceptable if we
+wanted to hit 60 fps.</p>
+<p>The suspect function seemed fairly reasonable at first glance: it just traced a
+ray in the direction of a 3D translation, and took the shortest distance of
+allowable travel (a bit of a makeshift collision check). Can you spot the
+potential issue?</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#8be9fd">float</span> <span style="color:#50fa7b">RaycastDistance</span>(<span style="color:#ff79c6">const</span> float3<span style="color:#ff79c6">&amp;</span> origin, <span style="color:#ff79c6">const</span> float3<span style="color:#ff79c6">&amp;</span> translation) {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">const</span> <span style="color:#ff79c6">auto</span> hit <span style="color:#ff79c6">=</span> TraceRay(Ray(origin, normalize(translation)));
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> hit <span style="color:#ff79c6">?</span> std<span style="color:#ff79c6">::</span>min(length(translation), hit.distance) <span style="color:#ff79c6">:</span> length(translation);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Hint: there&rsquo;s a potential NaN in there! The <code>translation</code> param comes from a
+position delta, but that delta is 0 for the first frame of an input (the
+position doesn&rsquo;t change when there&rsquo;s no movement), and <code>normalize(translation)</code>
+divides by the length of the vector, which &ndash; you guessed it &ndash; is 0. Boom, NaN.</p>
+<p>But why did this cause a <em>performance issue</em> instead of just giving bad output?</p>
+<p>Looking down the control flow of the raycast code led me down to the bounding
+box (AABB) intersection routine, which just tests the ray against each box face
+/ slab. It turned out that
+<a href="https://en.wikipedia.org/wiki/NaN#Comparison_with_NaN">NaN&rsquo;s comparison rules</a>
+meant that all the early-exit tests would fail, and thus <strong>every ray-box
+intersection test would return a hit</strong>, resulting in a raycast <strong>intersecting
+with every node in the BVH</strong>. Oof!</p>
+<p>The fix was extremely simple: just don&rsquo;t attempt to raycast when the
+<code>translation</code> distance is zero.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#8be9fd">float</span> translation_dist <span style="color:#ff79c6">=</span> length(translation);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">if</span> (translation_dist <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">0</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd">float</span> clamped_dist <span style="color:#ff79c6">=</span> RaycastDistance(origin, translation);
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Rest of the code...
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>}
+</span></span></code></pre></div><p>I also added explicit NaN checks to the bounding box test code (for example,
+using <a href="https://abseil.io/docs/cpp/guides/logging#CHECK">Abseil&rsquo;s DCHECK</a>).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#8be9fd">bool</span> <span style="color:#50fa7b">HasNaN</span>(<span style="color:#ff79c6">const</span> float3<span style="color:#ff79c6">&amp;</span> vec) {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> std<span style="color:#ff79c6">::</span>isnan(vec.x) <span style="color:#ff79c6">||</span> std<span style="color:#ff79c6">::</span>isnan(vec.y) <span style="color:#ff79c6">||</span> std<span style="color:#ff79c6">::</span>isnan(vec.z);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>std<span style="color:#ff79c6">::</span>optional<span style="color:#ff79c6">&lt;</span>Hit<span style="color:#ff79c6">&gt;</span> BoundingBox<span style="color:#ff79c6">::</span>Intersect(<span style="color:#ff79c6">const</span> Ray<span style="color:#ff79c6">&amp;</span> ray) {
+</span></span><span style="display:flex;"><span>    DCHECK(<span style="color:#ff79c6">!</span>HasNaN(ray.origin));
+</span></span><span style="display:flex;"><span>    DCHECK(<span style="color:#ff79c6">!</span>HasNaN(ray.direction));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// ... Rest of intersection code ...
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>}
+</span></span></code></pre></div><p>Of course, this would only catch NaNs in this specific code path. It&rsquo;s possible
+to get wider signaling when floating point operations result in NaNs or
+infinities using APIs like
+<a href="https://linux.die.net/man/3/feenableexcept"><code>feenableexcept</code></a> or
+<a href="https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/controlfp-s?view=msvc-170"><code>_controlfp_s</code></a>
+if you&rsquo;re on Windows, but this can often result in false positives, especially
+if you use third party libraries that may generate NaNs in internal calls, so
+using these wider techniques may require a bit more finesse.</p>
+
+  </section>
+</main>
+<footer>
+  <i class="heart fa-solid fa-heart"></i>
+</footer>
+
+        </section>
+      </section>
+    </section>
+  </body>
+</html>

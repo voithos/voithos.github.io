@@ -6,8 +6,15 @@
     <description>Recent content in Articles on voithos.io</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 05 Aug 2024 14:46:38 -0800</lastBuildDate>
+    <lastBuildDate>Thu, 08 Aug 2024 21:22:54 -0700</lastBuildDate>
     <atom:link href="https://voithos.io/articles/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Surprisingly Slow NaNs</title>
+      <link>https://voithos.io/articles/surprisingly-slow-nans/</link>
+      <pubDate>Thu, 08 Aug 2024 21:22:54 -0700</pubDate>
+      <guid>https://voithos.io/articles/surprisingly-slow-nans/</guid>
+      <description>A while ago, I had to debug a strange performance issue in an in-house engine I was using, and I was quite surprised when I discovered the cause. The tl;dr is that it involved some unexpected but innocuous-seeming NaNs that ended up tanking the performance, and not just from the fact that operations involving NaNs are much slower than finite floats on some architectures.&#xA;Story time!&#xA;The code in question was part of the movement / interaction system, and involved performing a few raycasts against the collision system to find a reference point for movement.</description>
+    </item>
     <item>
       <title>Opengl Texture Mip Targeting</title>
       <link>https://voithos.io/articles/opengl-texture-mip-targeting/</link>
