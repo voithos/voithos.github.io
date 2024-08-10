@@ -2,7 +2,7 @@
 title: "Fast Chaos Collision Toggling"
 date: 2023-05-22T23:21:17-07:00
 description: "The classic exchange of memory usage for CPU time."
-tags: [c++, unreal-engine, ue5, physics]
+tags: [c++, unreal-engine, ue5, physics, performance]
 ---
 
 A few weeks ago I investigated an interesting physics-related performance issue,
