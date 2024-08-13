@@ -91,6 +91,15 @@ Somewhat obviously, the classic `UE_LOG` is still a good way to debug.
 UE_LOG(LogTemp, Log, TEXT("My debug message"));
 ```
 
+Starting with **UE 5.2**, you can also use the new `UE_LOGFMT` macro to easily
+interpolate values into the message.
+
+```c++
+#include "Logging/StructuredLog.h"
+
+UE_LOGFMT(LogTemp, Log, "Pokemon box {Box} has {Num} 'mons!", BoxId,  BoxContent.Num());
+```
+
 If you need to flush output more readily (e.g. because of a crash), you can pass
 a flag to the editor: `-ForceLogFlush`.
 
@@ -150,6 +159,18 @@ key or the command:
 ```shell
 ToggleDebugCamera
 ```
+
+## ShowDebug
+
+Several Unreal systems can display real-time debug information on screen, which
+can be activated by a `ShowDebug` console command. The console's autocomplete
+can list the categories!
+
+```shell
+ShowDebug EnhancedInput
+```
+
+{{< figure src="/img/articles/showdebug.png" style="max-width: 800px;" loading="lazy" >}}
 
 ## Memory corruption
 
