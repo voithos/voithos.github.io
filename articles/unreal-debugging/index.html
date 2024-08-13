@@ -94,7 +94,7 @@
     
     <div class="article-meta">
   <section class="article-stats">
-    July 21, 2024&nbsp;·&nbsp;5 min&nbsp;·&nbsp;1006 words
+    July 21, 2024&nbsp;·&nbsp;6 min&nbsp;·&nbsp;1066 words
   </section>
   
   <section class="article-tags">
@@ -172,6 +172,11 @@ following pragma (use the prefix <code>PRAGMA_</code> instead of <code>UE_</code
 </span></span></span></code></pre></div><h2 id="logging">Logging</h2>
 <p>Somewhat obviously, the classic <code>UE_LOG</code> is still a good way to debug.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>UE_LOG(LogTemp, Log, TEXT(<span style="color:#f1fa8c">&#34;My debug message&#34;</span>));
+</span></span></code></pre></div><p>Starting with <strong>UE 5.2</strong>, you can also use the new <code>UE_LOGFMT</code> macro to easily
+interpolate values into the message.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&#34;Logging/StructuredLog.h&#34;</span><span style="color:#ff79c6">
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6"></span>
+</span></span><span style="display:flex;"><span>UE_LOGFMT(LogTemp, Log, <span style="color:#f1fa8c">&#34;Pokemon box {Box} has {Num} &#39;mons!&#34;</span>, BoxId,  BoxContent.Num());
 </span></span></code></pre></div><p>If you need to flush output more readily (e.g. because of a crash), you can pass
 a flag to the editor: <code>-ForceLogFlush</code>.</p>
 <p>To switch verbosity levels in the editor, run the following (the category name
@@ -208,7 +213,16 @@ understand what&rsquo;s happening (I&rsquo;m looking at you, <code>FRotator</cod
 the screen and give you debug info about what is being hit. Toggle with the <code>;</code>
 key or the command:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ToggleDebugCamera
-</span></span></code></pre></div><h2 id="memory-corruption">Memory corruption</h2>
+</span></span></code></pre></div><h2 id="showdebug">ShowDebug</h2>
+<p>Several Unreal systems can display real-time debug information on screen, which
+can be activated by a <code>ShowDebug</code> console command. The console&rsquo;s autocomplete
+can list the categories!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ShowDebug EnhancedInput
+</span></span></code></pre></div>
+<figure><img src="/img/articles/showdebug.png" style="max-width: 800px;" loading="lazy"/>
+</figure>
+
+<h2 id="memory-corruption">Memory corruption</h2>
 <p>Memory corruption issues can be difficult to debug. While Unreal ostensibly has
 support for tools like <strong>AddressSanitizer</strong>, I haven&rsquo;t been able to get it
 working.</p>
