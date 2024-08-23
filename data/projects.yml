@@ -1,3 +1,13 @@
+- name:     Sticky Ships
+  date:     2024-08-20
+  class:    project-sticky-ships
+  img:      sticky-ships.png
+  url:      https://voithos.itch.io/sticky-ships
+  code_url: https://github.com/voithos/sticky-ships
+  desc: >
+    A 2D bullet hell with attachable ship parts! Fuse new components and grow
+    your ship to scale, while destroying everything that comes at you!
+
 - name:     Orbital Meltdown
   date:     2023-10-02
   class:    project-orbital-meltdown
