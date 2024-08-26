@@ -6,8 +6,15 @@
     <description>Recent content in C&#43;&#43; on voithos.io</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 08 Aug 2024 21:22:54 -0700</lastBuildDate>
+    <lastBuildDate>Wed, 14 Aug 2024 22:46:32 -0700</lastBuildDate>
     <atom:link href="https://voithos.io/tags/c++/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AsyncTask Timing</title>
+      <link>https://voithos.io/articles/asynctask-timing/</link>
+      <pubDate>Wed, 14 Aug 2024 22:46:32 -0700</pubDate>
+      <guid>https://voithos.io/articles/asynctask-timing/</guid>
+      <description>Unreal&amp;rsquo;s AsyncTask API is great when you want to do some heavier processing without blocking the game thread, or in general when you need to specifically control execution on other threads (such as for RHI work).1 Often, you&amp;rsquo;ll need to switch between different threads while performing the work (like switching to the game thread to create UObjects).&#xA;The ability to schedule async tasks begs the question: when do these tasks actually begin executing?</description>
+    </item>
     <item>
       <title>Surprisingly Slow NaNs</title>
       <link>https://voithos.io/articles/surprisingly-slow-nans/</link>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<title>
+    AsyncTask Timing | voithos.io
+  </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A performance consideration for async work.">
+<link rel="icon" href="https://voithos.io/favicon.ico">
+<link rel="alternate" href="https://voithos.io/articles/feed.xml" title="voithos.io">
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&family=Oxygen+Mono&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha512-DUC8yqWf7ez3JD1jszxCWSVB0DMP78eOyBpMa5aJki1bIRARykviOuImIczkxlj1KhVSyS16w2FSQetkD4UU2w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/smoothState.js/0.7.2/jquery.smoothState.min.js" integrity="sha512-PA88Ew5anBQLPlovdwOOMj+Ky0x+M6a6bDXYve4q+NDj17AJ37FwHT4Xo758ZQqYKLyvaYko27cQDQ5P/0kOJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
+  
+  <link rel="stylesheet" href="/sass/main.min.b2d9a0514d1aed0a337c1d0587254200177a8ed5e4ef1548b94b3e52f04f0fde.css">
+
+  
+  <script type="text/javascript" src="/js/index.min.6ec5479881bc3221e976ccfd99c2f5f95b3b8703e46b66424c55cc861cc65db1.js" defer></script>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0524d221b0de4b35ad72aeec8ef5eda7"}'></script>
+  </head>
+  <body>
+    <section id="main" class="smooth-scene"><section class="header-box">
+  <section class="site-container">
+    <header>
+        <h1 class="title">
+          <div class="spin cw"></div>
+          <div class="spin ccw"></div>
+          <a href="/">voithos</a>
+        </h1>
+        <input type="checkbox" id="nav-checkbox" class="nav-checkbox" role="button">
+        <label for="nav-checkbox" class="nav-toggle" onclick></label>
+        <nav class="main-nav">
+          <ul>
+            
+            
+            <li class="active">
+              <a href="/articles/" title="Articles">Articles</a>
+            </li>
+            
+            <li class="">
+              <a href="/code/" title="Code">Code</a>
+            </li>
+            
+            <li class="">
+              <a href="/writing/" title="Writing">Writing</a>
+            </li>
+            
+            <li class="">
+              <a href="/art/" title="Art">Art</a>
+            </li>
+            
+            <li class="">
+              <a href="/me/" title="Me">Me</a>
+            </li>
+            
+          </ul>
+        </nav>
+        <nav class="social-nav">
+          <ul>
+            <li>
+              <a href="https://twitter.com/voithoz"><i class="fa-brands fa-twitter"></i></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/voithoz/"><i class="fa-brands fa-instagram"></i></a>
+            </li>
+            <li>
+              <a href="https://voithos.itch.io/"><i class="fa-brands fa-itch-io"></i></a>
+            </li>
+            <li>
+              <a href="https://github.com/voithos/"><i class="fa-brands fa-github"></i></a>
+            </li>
+          </ul>
+        </nav>
+    </header>
+  </section>
+</section>
+
+      <section class="site-container">
+        <section class="parent-content scene-element scene-element--fadein ">
+<main class="article article-single">
+  <section class="article-body">
+    <h1 class="article-title">AsyncTask Timing</h1>
+    
+    <section class="article-description">
+      A performance consideration for async work.
+    </section>
+    
+    <div class="article-meta">
+  <section class="article-stats">
+    August 14, 2024&nbsp;·&nbsp;4 min&nbsp;·&nbsp;730 words
+  </section>
+  
+  <section class="article-tags">
+    
+      <span class="article-tag pill">unreal-engine</span>
+    
+      <span class="article-tag pill">ue5</span>
+    
+      <span class="article-tag pill">c&#43;&#43;</span>
+    
+      <span class="article-tag pill">performance</span>
+    
+  </section>
+  
+</div>
+
+    <hr>
+    <p>Unreal&rsquo;s <code>AsyncTask</code> API is great when you want to do some heavier processing
+without blocking the game thread, or in general when you need to specifically
+control execution on other threads (such as for RHI work).<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> Often, you&rsquo;ll
+need to switch between different threads while performing the work (like
+<a href="https://voithos.io/articles/creating-uobjects-from-async-threads/">switching to the game thread to create
+UObjects</a>).</p>
+<p>The ability to schedule async tasks begs the question: when do these tasks
+actually begin executing?</p>
+<p>Firstly, why would we care? Usually it doesn&rsquo;t matter much, since async work is
+typically going to be more heavyweight but less time-sensitive. However, for
+latency-sensitive use cases, async tasks can potentially introduce <em>frame
+delays</em>, which can be non-ideal.</p>
+<p>For background threads, the answer to &ldquo;when does it execute&rdquo; seems conceptually
+straightforward: as soon as a background worker is available, the task will
+begin executing on that worker.</p>
+<p>What about when scheduling work on the game thread? Here, it&rsquo;s a little less
+obvious. The simplest thing Unreal could do would be to have a single step
+during each world tick where it would process scheduled game thread tasks, but
+this would result in a worst-case delay of almost 1 frame, depending on when
+exactly a task gets scheduled. Thankfully, Unreal seems to do something a bit
+more sophisticated than that, and is able to trigger game thread tasks more
+readily, as long as there are cycles available. The details of how this actually
+works seem to be a bit opaque, so if anyone knows more about it, I&rsquo;d love to
+hear.</p>
+<p>For a slightly more concrete example, consider the following scenario: I was
+working on a system that involved loading runtime-fetched glTF payloads from a
+cache, and processing them asynchronously into renderable UObjects (essentially
+implementing a custom glTF loader). Since the results were to be rendered in
+response to user input, I wanted to minimize the latency as much as possible.</p>
+<p>It turned out that the loading code would make several round-trips between
+background and game threads, something like the following (except not so
+egregious, as it was written across multiple functions):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#8be9fd">void</span> UGltfSubsystem<span style="color:#ff79c6">::</span>Process()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  AsyncTask(ENamedThreads<span style="color:#ff79c6">::</span>GameThread, [] {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// ... Gather some info from game thread ...
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
+</span></span><span style="display:flex;"><span>    AsyncTask(ENamedThreads<span style="color:#ff79c6">::</span>AnyBackgroundThreadNormalTask, [] {
+</span></span><span style="display:flex;"><span>      <span style="color:#6272a4">// ... Load glTF, part 1 ...
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
+</span></span><span style="display:flex;"><span>      AsyncTask(ENamedThreads<span style="color:#ff79c6">::</span>GameThread, [] {
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">// ... Create some UObjects ...
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
+</span></span><span style="display:flex;"><span>        AsyncTask(ENamedThreads<span style="color:#ff79c6">::</span>AnyBackgroundThreadNormalTask, [] {
+</span></span><span style="display:flex;"><span>          <span style="color:#6272a4">// ... More processing ...
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
+</span></span><span style="display:flex;"><span>          AsyncTask(ENamedThreads<span style="color:#ff79c6">::</span>GameThread, [] {
+</span></span><span style="display:flex;"><span>            <span style="color:#6272a4">// Finally done, finalize.
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>          });
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>      });
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>We can consider an analogous bit of code that simulates the work (badly) with
+some sleeps on the background threads:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#8be9fd">void</span> <span style="color:#50fa7b">LogWithLabel</span>(<span style="color:#ff79c6">const</span> FString<span style="color:#ff79c6">&amp;</span> Label)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  UE_LOG(LogTemp, Log, TEXT(<span style="color:#f1fa8c">&#34;%s, frame %d&#34;</span>), <span style="color:#ff79c6">*</span>Label, GFrameNumber);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> <span style="color:#50fa7b">SleepHalfFrame</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// My system happened to run at 120 FPS.
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  FPlatformProcess<span style="color:#ff79c6">::</span>Sleep(<span style="color:#bd93f9">0.5f</span> <span style="color:#ff79c6">/</span> <span style="color:#bd93f9">120.f</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> UGltfSubsystem<span style="color:#ff79c6">::</span>Process()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  LogWithLabel(TEXT(<span style="color:#f1fa8c">&#34;1. AnyThread&#34;</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  AsyncTask(ENamedThreads<span style="color:#ff79c6">::</span>GameThread, [] {
+</span></span><span style="display:flex;"><span>    LogWithLabel(TEXT(<span style="color:#f1fa8c">&#34;3. GameThread&#34;</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    AsyncTask(ENamedThreads<span style="color:#ff79c6">::</span>AnyBackgroundThreadNormalTask, [] {
+</span></span><span style="display:flex;"><span>      LogWithLabel(TEXT(<span style="color:#f1fa8c">&#34;4. AnyBackgroundThreadNormalTask&#34;</span>));
+</span></span><span style="display:flex;"><span>      SleepHalfFrame();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      AsyncTask(ENamedThreads<span style="color:#ff79c6">::</span>GameThread, [] {
+</span></span><span style="display:flex;"><span>        LogWithLabel(TEXT(<span style="color:#f1fa8c">&#34;5. GameThread&#34;</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        AsyncTask(ENamedThreads<span style="color:#ff79c6">::</span>AnyBackgroundThreadNormalTask, [] {
+</span></span><span style="display:flex;"><span>          LogWithLabel(TEXT(<span style="color:#f1fa8c">&#34;6. AnyBackgroundThreadNormalTask&#34;</span>));
+</span></span><span style="display:flex;"><span>          SleepHalfFrame();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>          AsyncTask(ENamedThreads<span style="color:#ff79c6">::</span>GameThread,
+</span></span><span style="display:flex;"><span>                    [] { LogWithLabel(TEXT(<span style="color:#f1fa8c">&#34;7. GameThread&#34;</span>)); });
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>      });
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  LogWithLabel(TEXT(<span style="color:#f1fa8c">&#34;2. After AsyncTask&#34;</span>));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Resulting in the following log output on my machine:</p>
+<pre tabindex="0"><code>[2024.08.24-20.00.18:801][152]LogTemp: 1. AnyThread, frame 153
+[2024.08.24-20.00.18:801][152]LogTemp: 2. After AsyncTask, frame 153
+[2024.08.24-20.00.18:817][152]LogTemp: 3. GameThread, frame 153
+[2024.08.24-20.00.18:817][152]LogTemp: 4. AnyBackgroundThreadNormalTask, frame 153
+[2024.08.24-20.00.18:836][152]LogTemp: 5. GameThread, frame 154
+[2024.08.24-20.00.18:836][152]LogTemp: 6. AnyBackgroundThreadNormalTask, frame 154
+[2024.08.24-20.00.18:847][153]LogTemp: 7. GameThread, frame 155
+</code></pre><p>While the specifics of the timings are going to be very incidental to my machine
+and on exactly how long <code>FPlatformProcess::Sleep()</code> decided to sleep for, the
+main thing this illustrates is that <em>switching task threads isn&rsquo;t free</em>, as
+there is overhead and extra delay even with lots of computing headroom.</p>
+<p>In my case, I decided to refactor the glTF load process to front-load everything
+it needs from the game thread and pass it to the background task, avoiding
+multiple round-trips.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#8be9fd">void</span> UGltfSubsystem<span style="color:#ff79c6">::</span>Process()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  LogWithLabel(TEXT(<span style="color:#f1fa8c">&#34;1. GameThread&#34;</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// ... Front-load everything we need from the game thread ...
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  FGltfProcessInfo GltfProcessInfo <span style="color:#ff79c6">=</span> ...;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  AsyncTask(ENamedThreads<span style="color:#ff79c6">::</span>AnyBackgroundThreadNormalTask, [GltfProcessInfo <span style="color:#ff79c6">=</span> MoveTemp(GltfProcessInfo)] {
+</span></span><span style="display:flex;"><span>    LogWithLabel(TEXT(<span style="color:#f1fa8c">&#34;3. AnyBackgroundThreadNormalTask&#34;</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// ... Refactor background processing to happen in one go ...
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
+</span></span><span style="display:flex;"><span>    AsyncTask(ENamedThreads<span style="color:#ff79c6">::</span>GameThread, [] {
+</span></span><span style="display:flex;"><span>      LogWithLabel(TEXT(<span style="color:#f1fa8c">&#34;7. GameThread&#34;</span>));
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  LogWithLabel(TEXT(<span style="color:#f1fa8c">&#34;2. After AsyncTask&#34;</span>));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This won&rsquo;t always be doable depending on your architecture or requirements, but
+in my case it helped avoid a bit of extra delay!</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Unreal&rsquo;s newer
+<a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/tasks-systems-in-unreal-engine?application_version=5.0">Tasks system</a>
+is a bit of a higher-level API with similar capabilities &ndash; it&rsquo;s much better
+at letting you define task dependencies and data flow, but is a bit less
+flexible when controlling exactly which threads you want to run on.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+  </section>
+</main>
+<footer>
+  <i class="heart fa-solid fa-heart"></i>
+</footer>
+
+        </section>
+      </section>
+    </section>
+  </body>
+</html>
