@@ -1,5 +1,5 @@
 ---
-title: "Opengl Texture Mip Targeting"
+title: "OpenGL Texture Mip Targeting"
 date: 2024-08-05T14:46:38-08:00
 description:
   "Avoiding feedback loops when reading and writing to the same texture."
