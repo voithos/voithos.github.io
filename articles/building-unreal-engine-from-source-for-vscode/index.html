@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<title>
+    Building Unreal Engine From Source for VSCode | voithos.io
+  </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The &#39;joys&#39; of using a non-standard IDE.">
+<link rel="icon" href="https://voithos.io/favicon.ico">
+<link rel="alternate" href="https://voithos.io/articles/feed.xml" title="voithos.io">
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&family=Oxygen+Mono&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha512-DUC8yqWf7ez3JD1jszxCWSVB0DMP78eOyBpMa5aJki1bIRARykviOuImIczkxlj1KhVSyS16w2FSQetkD4UU2w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/smoothState.js/0.7.2/jquery.smoothState.min.js" integrity="sha512-PA88Ew5anBQLPlovdwOOMj+Ky0x+M6a6bDXYve4q+NDj17AJ37FwHT4Xo758ZQqYKLyvaYko27cQDQ5P/0kOJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
+  
+  <link rel="stylesheet" href="/sass/main.min.b2d9a0514d1aed0a337c1d0587254200177a8ed5e4ef1548b94b3e52f04f0fde.css">
+
+  
+  <script type="text/javascript" src="/js/index.min.6ec5479881bc3221e976ccfd99c2f5f95b3b8703e46b66424c55cc861cc65db1.js" defer></script>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0524d221b0de4b35ad72aeec8ef5eda7"}'></script>
+  </head>
+  <body>
+    <section id="main" class="smooth-scene"><section class="header-box">
+  <section class="site-container">
+    <header>
+        <h1 class="title">
+          <div class="spin cw"></div>
+          <div class="spin ccw"></div>
+          <a href="/">voithos</a>
+        </h1>
+        <input type="checkbox" id="nav-checkbox" class="nav-checkbox" role="button">
+        <label for="nav-checkbox" class="nav-toggle" onclick></label>
+        <nav class="main-nav">
+          <ul>
+            
+            
+            <li class="active">
+              <a href="/articles/" title="Articles">Articles</a>
+            </li>
+            
+            <li class="">
+              <a href="/code/" title="Code">Code</a>
+            </li>
+            
+            <li class="">
+              <a href="/writing/" title="Writing">Writing</a>
+            </li>
+            
+            <li class="">
+              <a href="/art/" title="Art">Art</a>
+            </li>
+            
+            <li class="">
+              <a href="/me/" title="Me">Me</a>
+            </li>
+            
+          </ul>
+        </nav>
+        <nav class="social-nav">
+          <ul>
+            <li>
+              <a href="https://twitter.com/voithoz"><i class="fa-brands fa-twitter"></i></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/voithoz/"><i class="fa-brands fa-instagram"></i></a>
+            </li>
+            <li>
+              <a href="https://voithos.itch.io/"><i class="fa-brands fa-itch-io"></i></a>
+            </li>
+            <li>
+              <a href="https://github.com/voithos/"><i class="fa-brands fa-github"></i></a>
+            </li>
+          </ul>
+        </nav>
+    </header>
+  </section>
+</section>
+
+      <section class="site-container">
+        <section class="parent-content scene-element scene-element--fadein ">
+<main class="article article-single">
+  <section class="article-body">
+    <h1 class="article-title">Building Unreal Engine From Source for VSCode</h1>
+    
+    <section class="article-description">
+      The &lsquo;joys&rsquo; of using a non-standard IDE.
+    </section>
+    
+    <div class="article-meta">
+  <section class="article-stats">
+    August 25, 2024&nbsp;·&nbsp;3 min&nbsp;·&nbsp;590 words
+  </section>
+  
+  <section class="article-tags">
+    
+      <span class="article-tag pill">unreal-engine</span>
+    
+      <span class="article-tag pill">ue5</span>
+    
+      <span class="article-tag pill">build-system</span>
+    
+      <span class="article-tag pill">vscode</span>
+    
+  </section>
+  
+</div>
+
+    <hr>
+    <p>I spent a bit of time today compiling Unreal Engine from source using VSCode,
+and while the process was mostly straightforward, there were a few hiccups that
+took me a second to work around. This page aims to document a couple tricks to
+make this easier!</p>
+<p>Note that using VSCode is generally the less-trodden path; if you&rsquo;re alright
+with using Visual Studio Community Edition or have access to Visual Studio
+Professional (or even JetBrains Rider, my favorite Unreal IDE), those will
+typically be easier to set up. Alas, sometimes it&rsquo;s hard to beat
+free-as-in-gratis-and-libre. :)</p>
+<h2 id="versions">Versions</h2>
+<p>The specific versions of Unreal and its dependencies that I used were as
+follows. Note that this guide is for <em>Windows</em>.</p>
+<ul>
+<li>Unreal Engine 5.4</li>
+<li>Visual Studio 2022 Build Tools</li>
+<li>Microsoft .NET SDK 8</li>
+<li>VSCode 1.92</li>
+</ul>
+<p>It&rsquo;s possible that this approach will also work with older or more recent
+versions of the engine and its dependencies, but your mileage may vary.</p>
+<h2 id="setup">Setup</h2>
+<p>Most of the steps listed here are just variations of the
+<a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/building-unreal-engine-from-source?application_version=5.4">official Building Unreal Engine from Source docs</a>.
+You&rsquo;ll need to execute some commands via a terminal (e.g. <em>PowerShell</em>).</p>
+<ol>
+<li>
+<p>First, install the prerequisites. VS2022 Build Tools are needed to compile
+C++, and .NET SDK is needed to build UnrealBuildTool (among other things). I
+like to use
+<a href="https://learn.microsoft.com/en-us/windows/package-manager/winget/">winget</a>
+for easy installation.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>winget install Microsoft.VisualStudio.2022.BuildTools
+</span></span><span style="display:flex;"><span>winget install Microsoft.DotNet.SDK.8
+</span></span></code></pre></div></li>
+<li>
+<p>Next, go through the steps necessary to
+<a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/downloading-unreal-engine-source-code">obtain access to the engine source, and download it with Git</a>.
+This will take some time. Once it&rsquo;s done, <code>cd</code> into the root of the repo.</p>
+</li>
+<li>
+<p>Run <code>Setup.bat</code> to initialize dependencies. This will also take some time.</p>
+</li>
+<li>
+<p>Run <code>GenerateProjectFiles.bat -vscode</code>, which will generate a
+<code>UE5.code-workspace</code> file.</p>
+</li>
+<li>
+<p>Open <code>UE5.code-workspace</code> in VSCode, switch to the &ldquo;Run and Debug&rdquo; menu, and
+select &ldquo;<strong>Launch UnrealEditor (Development)</strong>&rdquo; from the drop-down menu. Press
+Ctrl+F5 to begin compiling. This will take a <strong>long</strong> while.</p>
+
+   <figure><img src="/img/articles/vscode_launch_unreal_editor.png" loading="lazy"/>
+   </figure>
+
+</li>
+<li>
+<p>After compilation finishes (hopefully successfully), Unreal&rsquo;s project
+selection screen should be open. If you&rsquo;ve already got an existing project,
+you can skip this step.</p>
+<p>If not, at this point you can create a (presumably C++) project with whatever
+options you&rsquo;d like. Once you click &ldquo;<strong>Create</strong>&rdquo;, Unreal will set up the
+project directory, and possibly close without reopening (this is ok). If you
+try to open the project right now, Unreal will complain about missing
+modules, which we&rsquo;ll need to compile.</p>
+
+   <figure><img src="/img/articles/unreal_missing_modules.png" loading="lazy"/>
+   </figure>
+
+</li>
+<li>
+<p>Next we need to generate the VSCode workspace for your project, using
+<code>GenerateProjectFiles.bat</code>. From the engine directory, run:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>.\GenerateProjectFiles.bat -project=<span style="color:#f1fa8c">&#34;C:\Absolute\Path\To\MyProject.uproject&#34;</span> -game -engine -vscode
+</span></span></code></pre></div><p>Note that the project path <em>must</em> be absolute. The flags <code>-game</code> and
+<code>-engine</code> include both game and engine source directories in the workspace,
+which is usually what you want. Finally, <code>-vscode</code> specifies that we should
+generate VSCode project files<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
+</li>
+<li>
+<p>Open the newly generated <code>MyProject.code-workspace</code> in VSCode, and this time
+select the &ldquo;<strong>Launch MyProjectEditor (Development)</strong>&rdquo; option (the specific
+name will depend on your project, but be sure to select the one that ends in
+<em>Editor</em>). Press Ctrl+F5 to compile and launch your project editor, after
+which you should be all set up and ready to edit C++!</p>
+
+   <figure><img src="/img/articles/vscode_launch_project_editor.png" loading="lazy"/>
+   </figure>
+
+</li>
+<li>
+<p>Optionally (but recommended), you can switch Unreal&rsquo;s default source editor
+under <code>Editor Preferences &gt; General &gt; Source Code &gt; Source Code Editor</code> to
+VSCode, which will cause Unreal to generate the right kind of project files
+both for new projects, and when using the &ldquo;<strong>Generate Visual Studio project
+files</strong>&rdquo; right-click menu in explorer. You may need to do this if you&rsquo;ve
+added a new C++ file and are seeing red squigglies.</p>
+
+   <figure><img src="/img/articles/generate_project_files_menu.png" loading="lazy"/>
+   </figure>
+
+</li>
+</ol>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Other IDE flags exist as well, like <code>-rider</code> or even <code>-cmakefile</code> and
+<code>-makefile</code>.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+  </section>
+</main>
+<footer>
+  <i class="heart fa-solid fa-heart"></i>
+</footer>
+
+        </section>
+      </section>
+    </section>
+  </body>
+</html>
