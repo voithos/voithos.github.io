@@ -1,6 +1,6 @@
 ---
 title: "Fancier Ticking in Unreal"
-date: 2024-08-28T19:46:05-07:00
+date: 2024-09-02T19:46:05-07:00
 description: "Controlled updates during the game loop."
 tags: [unreal-engine, ue5, c++]
 ---
