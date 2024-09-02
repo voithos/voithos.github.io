@@ -63,8 +63,8 @@ and optionally with in-line changes such as annotations and abbreviations.
 
 ## Tables
 
-Tables aren't part of the core Markdown spec[^2], but Hugo supports supports
-them out-of-the-box.
+Tables aren't part of the core Markdown spec[^2], but Hugo supports them
+out-of-the-box.
 
 [^2]: Which is a travesty.
 
