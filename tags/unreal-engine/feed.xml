@@ -6,8 +6,15 @@
     <description>Recent content in Unreal-Engine on voithos.io</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 25 Aug 2024 20:59:17 -0700</lastBuildDate>
+    <lastBuildDate>Mon, 02 Sep 2024 16:46:05 -0700</lastBuildDate>
     <atom:link href="https://voithos.io/tags/unreal-engine/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Fancier Ticking in Unreal</title>
+      <link>https://voithos.io/articles/fancier-ticking-in-unreal/</link>
+      <pubDate>Mon, 02 Sep 2024 16:46:05 -0700</pubDate>
+      <guid>https://voithos.io/articles/fancier-ticking-in-unreal/</guid>
+      <description>Unreal&amp;rsquo;s ticking system is a core part of the engine, fulfilling the role of the classic game loop. Despite being so central, though, I&amp;rsquo;ve found it to be a bit complex, with lots of flags and knobs that aren&amp;rsquo;t always very well documented. And while there are several resources that explain how to do basic ticking, there are a few fancier techniques that don&amp;rsquo;t have as much coverage, which this page aims to help explain.</description>
+    </item>
     <item>
       <title>Building Unreal Engine From Source for VSCode</title>
       <link>https://voithos.io/articles/building-unreal-engine-from-source-for-vscode/</link>
