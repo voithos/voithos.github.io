@@ -271,7 +271,7 @@ blockquote.alert {
       color: lighten($warm-color, 25);
     }
 
-    background-color: rgba($warm-color, 0.3);
+    background-color: rgba($warm-color, 0.25);
     border-color: $warm-color;
   }
 
@@ -280,7 +280,7 @@ blockquote.alert {
       color: lighten($contrast-color, 25);
     }
 
-    background-color: rgba($contrast-color, 0.3);
+    background-color: rgba($contrast-color, 0.25);
     border-color: $contrast-color;
   }
 }

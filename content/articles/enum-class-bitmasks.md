@@ -6,6 +6,12 @@ description:
 tags: [c++, unreal-engine]
 ---
 
+> [!IMPORTANT]
+>
+> This article describes adding bitwise operator support to scoped enums, but a
+> better approach is to [use a separate template type to represents
+> bitflags]({{< ref "/articles/type-safe-enum-class-bit-flags" >}}).
+
 Enums are a core part of the C and C++ languages, and are used ubiquitously to
 model logically distinct states in software systems. However, there may be times
 where you want to model a set of **non-mutually-exclusive** states. There are

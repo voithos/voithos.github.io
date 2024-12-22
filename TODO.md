@@ -9,3 +9,4 @@
 - Add prev/next buttons inside individual articles?
 - Detect broken links
 - Improve styling for scroll bars inside code blocks
+- Add copy button for code blocks
