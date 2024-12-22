@@ -19,7 +19,7 @@
 
 
   
-  <link rel="stylesheet" href="/sass/main.min.b2d9a0514d1aed0a337c1d0587254200177a8ed5e4ef1548b94b3e52f04f0fde.css">
+  <link rel="stylesheet" href="/sass/main.min.458d81f497fae245b24b7746bc1166a7b9a7315e420c3b925c9c6cd98dc67d37.css">
 
   
   <script type="text/javascript" src="/js/index.min.6ec5479881bc3221e976ccfd99c2f5f95b3b8703e46b66424c55cc861cc65db1.js" defer></script>
@@ -143,45 +143,45 @@ operate on the respective <code>FTickFunction</code>, which is the source of tru
 an <code>FTickFunction</code> (but this list is not exhaustive). The defaults are the same
 for both Actors and ActorComponents, unless otherwise specified.</p>
 <table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Default (Actor / ActorComponent)</th>
-<th>Usage</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>bCanEverTick</code></td>
-<td><em>false</em></td>
-<td>Whether ticking is ever possible. If this is false, the other flags are ignored. Think of this as a setup flag rather than a runtime flag.</td>
-</tr>
-<tr>
-<td><code>bStartWithTickEnabled</code></td>
-<td><em>true</em></td>
-<td>Whether ticking begins upon creation.</td>
-</tr>
-<tr>
-<td><code>TickInterval</code></td>
-<td><em>0.0f</em></td>
-<td>The interval, in seconds, between ticks. If &lt;= 0, or less than frame time, will tick every frame.</td>
-</tr>
-<tr>
-<td><code>TickGroup</code></td>
-<td><em>TG_PrePhysics</em> / <em>TG_DuringPhysics</em></td>
-<td>The coarse tick group during which to tick. Semantically important.<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></td>
-</tr>
-<tr>
-<td><code>bHighPriority</code></td>
-<td><em>false</em></td>
-<td>Whether to run this tick first inside the tick group (see section below on controlling tick order).</td>
-</tr>
-<tr>
-<td><code>bRunOnAnyThread</code></td>
-<td><em>false</em></td>
-<td>Whether to parallelize this tick with other &ldquo;async ticks&rdquo; (see section bellow on parallelization).</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Field</th>
+          <th>Default (Actor / ActorComponent)</th>
+          <th>Usage</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>bCanEverTick</code></td>
+          <td><em>false</em></td>
+          <td>Whether ticking is ever possible. If this is false, the other flags are ignored. Think of this as a setup flag rather than a runtime flag.</td>
+      </tr>
+      <tr>
+          <td><code>bStartWithTickEnabled</code></td>
+          <td><em>true</em></td>
+          <td>Whether ticking begins upon creation.</td>
+      </tr>
+      <tr>
+          <td><code>TickInterval</code></td>
+          <td><em>0.0f</em></td>
+          <td>The interval, in seconds, between ticks. If &lt;= 0, or less than frame time, will tick every frame.</td>
+      </tr>
+      <tr>
+          <td><code>TickGroup</code></td>
+          <td><em>TG_PrePhysics</em> / <em>TG_DuringPhysics</em></td>
+          <td>The coarse tick group during which to tick. Semantically important.<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></td>
+      </tr>
+      <tr>
+          <td><code>bHighPriority</code></td>
+          <td><em>false</em></td>
+          <td>Whether to run this tick first inside the tick group (see section below on controlling tick order).</td>
+      </tr>
+      <tr>
+          <td><code>bRunOnAnyThread</code></td>
+          <td><em>false</em></td>
+          <td>Whether to parallelize this tick with other &ldquo;async ticks&rdquo; (see section bellow on parallelization).</td>
+      </tr>
+  </tbody>
 </table>
 <p>Some of these are fairly self-explanatory, others less so (which we&rsquo;ll cover in
 later sections).</p>

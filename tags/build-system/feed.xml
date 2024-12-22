@@ -13,7 +13,7 @@
       <link>https://voithos.io/articles/building-unreal-engine-from-source-for-vscode/</link>
       <pubDate>Sun, 25 Aug 2024 20:59:17 -0700</pubDate>
       <guid>https://voithos.io/articles/building-unreal-engine-from-source-for-vscode/</guid>
-      <description>I spent a bit of time today compiling Unreal Engine from source using VSCode, and while the process was mostly straightforward, there were a few hiccups that took me a second to work around. This page aims to document a couple tricks to make this easier!&#xA;Note that using VSCode is generally the less-trodden path; if you&amp;rsquo;re alright with using Visual Studio Community Edition or have access to Visual Studio Professional (or even JetBrains Rider, my favorite Unreal IDE), those will typically be easier to set up.</description>
+      <description>&lt;p&gt;I spent a bit of time today compiling Unreal Engine from source using VSCode,&#xA;and while the process was mostly straightforward, there were a few hiccups that&#xA;took me a second to work around. This page aims to document a couple tricks to&#xA;make this easier!&lt;/p&gt;&#xA;&lt;p&gt;Note that using VSCode is generally the less-trodden path; if you&amp;rsquo;re alright&#xA;with using Visual Studio Community Edition or have access to Visual Studio&#xA;Professional (or even JetBrains Rider, my favorite Unreal IDE), those will&#xA;typically be easier to set up. Alas, sometimes it&amp;rsquo;s hard to beat&#xA;free-as-in-gratis-and-libre. :)&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

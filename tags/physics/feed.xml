@@ -13,7 +13,7 @@
       <link>https://voithos.io/articles/fast-chaos-collision-toggling/</link>
       <pubDate>Mon, 22 May 2023 23:21:17 -0700</pubDate>
       <guid>https://voithos.io/articles/fast-chaos-collision-toggling/</guid>
-      <description>A few weeks ago I investigated an interesting physics-related performance issue, specific to UE5&amp;rsquo;s new Chaos physics engine.&#xA;The code I was working on managed a large number of UStaticMeshComponents (essentially, it&amp;rsquo;s a custom hierarchical level-of-detail system) and would frequently need to toggle visibility and collision shapes per tick. There were some cases where we seemed to be going over our frame budget, so I took a profile via Unreal Insights:</description>
+      <description>&lt;p&gt;A few weeks ago I investigated an interesting physics-related performance issue,&#xA;specific to UE5&amp;rsquo;s new Chaos physics engine.&lt;/p&gt;&#xA;&lt;p&gt;The code I was working on managed a large number of &lt;code&gt;UStaticMeshComponents&lt;/code&gt;&#xA;(essentially, it&amp;rsquo;s a custom hierarchical level-of-detail system) and would&#xA;frequently need to toggle visibility and collision shapes per tick. There were&#xA;some cases where we seemed to be going over our frame budget, so I took a&#xA;profile via Unreal Insights:&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

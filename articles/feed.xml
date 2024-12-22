@@ -6,77 +6,84 @@
     <description>Recent content in Articles on voithos.io</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 02 Sep 2024 16:46:05 -0700</lastBuildDate>
+    <lastBuildDate>Sat, 21 Dec 2024 14:59:55 -0800</lastBuildDate>
     <atom:link href="https://voithos.io/articles/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Type-safe Enum Class Bit Flags</title>
+      <link>https://voithos.io/articles/type-safe-enum-class-bit-flags/</link>
+      <pubDate>Sat, 21 Dec 2024 14:59:55 -0800</pubDate>
+      <guid>https://voithos.io/articles/type-safe-enum-class-bit-flags/</guid>
+      <description>&lt;p&gt;I previously wrote an article about &lt;a href=&#34;https://voithos.io/articles/enum-class-bitmasks/&#34;&gt;defining bitwise operators on scoped&#xA;enums&lt;/a&gt; in order to use them as bit&#xA;flags. While the original approach (using either macros, or&#xA;&lt;a href=&#34;https://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error&#34;&gt;SFINAE&lt;/a&gt;)&#xA;works, there&amp;rsquo;s a different approach that avoids some of the downsides and is&#xA;just as (if not more) convenient.&lt;/p&gt;&#xA;&lt;h2 id=&#34;type-safety&#34;&gt;Type safety&lt;/h2&gt;&#xA;&lt;p&gt;C++ scoped enumerations (&lt;code&gt;enum class&lt;/code&gt;) have several benefits over traditional&#xA;C-style enums, with one of the most important being &lt;strong&gt;type safety&lt;/strong&gt;. Scoped&#xA;enums provide safety not only between enum and integer types, but also between&#xA;discrete enum types.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Fancier Ticking in Unreal</title>
       <link>https://voithos.io/articles/fancier-ticking-in-unreal/</link>
       <pubDate>Mon, 02 Sep 2024 16:46:05 -0700</pubDate>
       <guid>https://voithos.io/articles/fancier-ticking-in-unreal/</guid>
-      <description>Unreal&amp;rsquo;s ticking system is a core part of the engine, fulfilling the role of the classic game loop. Despite being so central, though, I&amp;rsquo;ve found it to be a bit complex, with lots of flags and knobs that aren&amp;rsquo;t always very well documented. And while there are several resources that explain how to do basic ticking, there are a few fancier techniques that don&amp;rsquo;t have as much coverage, which this page aims to help explain.</description>
+      <description>&lt;p&gt;Unreal&amp;rsquo;s ticking system is a core part of the engine, fulfilling the role of the&#xA;classic &lt;em&gt;game loop&lt;/em&gt;. Despite being so central, though, I&amp;rsquo;ve found it to be a bit&#xA;complex, with lots of flags and knobs that aren&amp;rsquo;t always very well documented.&#xA;And while there are several resources that explain how to do basic ticking,&#xA;there are a few fancier techniques that don&amp;rsquo;t have as much coverage, which this&#xA;page aims to help explain.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Building Unreal Engine From Source for VSCode</title>
       <link>https://voithos.io/articles/building-unreal-engine-from-source-for-vscode/</link>
       <pubDate>Sun, 25 Aug 2024 20:59:17 -0700</pubDate>
       <guid>https://voithos.io/articles/building-unreal-engine-from-source-for-vscode/</guid>
-      <description>I spent a bit of time today compiling Unreal Engine from source using VSCode, and while the process was mostly straightforward, there were a few hiccups that took me a second to work around. This page aims to document a couple tricks to make this easier!&#xA;Note that using VSCode is generally the less-trodden path; if you&amp;rsquo;re alright with using Visual Studio Community Edition or have access to Visual Studio Professional (or even JetBrains Rider, my favorite Unreal IDE), those will typically be easier to set up.</description>
+      <description>&lt;p&gt;I spent a bit of time today compiling Unreal Engine from source using VSCode,&#xA;and while the process was mostly straightforward, there were a few hiccups that&#xA;took me a second to work around. This page aims to document a couple tricks to&#xA;make this easier!&lt;/p&gt;&#xA;&lt;p&gt;Note that using VSCode is generally the less-trodden path; if you&amp;rsquo;re alright&#xA;with using Visual Studio Community Edition or have access to Visual Studio&#xA;Professional (or even JetBrains Rider, my favorite Unreal IDE), those will&#xA;typically be easier to set up. Alas, sometimes it&amp;rsquo;s hard to beat&#xA;free-as-in-gratis-and-libre. :)&lt;/p&gt;</description>
     </item>
     <item>
       <title>AsyncTask Timing</title>
       <link>https://voithos.io/articles/asynctask-timing/</link>
       <pubDate>Wed, 14 Aug 2024 22:46:32 -0700</pubDate>
       <guid>https://voithos.io/articles/asynctask-timing/</guid>
-      <description>Unreal&amp;rsquo;s AsyncTask API is great when you want to do some heavier processing without blocking the game thread, or in general when you need to specifically control execution on other threads (such as for RHI work).1 Often, you&amp;rsquo;ll need to switch between different threads while performing the work (like switching to the game thread to create UObjects).&#xA;The ability to schedule async tasks begs the question: when do these tasks actually begin executing?</description>
+      <description>&lt;p&gt;Unreal&amp;rsquo;s &lt;code&gt;AsyncTask&lt;/code&gt; API is great when you want to do some heavier processing&#xA;without blocking the game thread, or in general when you need to specifically&#xA;control execution on other threads (such as for RHI work).&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; Often, you&amp;rsquo;ll&#xA;need to switch between different threads while performing the work (like&#xA;&lt;a href=&#34;https://voithos.io/articles/creating-uobjects-from-async-threads/&#34;&gt;switching to the game thread to create&#xA;UObjects&lt;/a&gt;).&lt;/p&gt;&#xA;&lt;p&gt;The ability to schedule async tasks begs the question: when do these tasks&#xA;actually begin executing?&lt;/p&gt;</description>
     </item>
     <item>
       <title>Surprisingly Slow NaNs</title>
       <link>https://voithos.io/articles/surprisingly-slow-nans/</link>
       <pubDate>Thu, 08 Aug 2024 21:22:54 -0700</pubDate>
       <guid>https://voithos.io/articles/surprisingly-slow-nans/</guid>
-      <description>A while ago, I had to debug a strange performance issue in an in-house engine I was using, and I was quite surprised when I discovered the cause. The tl;dr is that it involved some unexpected but innocuous-seeming NaNs that ended up tanking the performance, and not just from the fact that operations involving NaNs are much slower than finite floats on some architectures.&#xA;Story time!&#xA;The code in question was part of the movement / interaction system, and involved performing a few raycasts against the collision system to find a reference point for movement.</description>
+      <description>&lt;p&gt;A while ago, I had to debug a strange performance issue in an in-house engine I&#xA;was using, and I was quite surprised when I discovered the cause. The tl;dr is&#xA;that it involved some unexpected but innocuous-seeming NaNs that ended up&#xA;tanking the performance, and not just from the fact that&#xA;&lt;a href=&#34;https://randomascii.wordpress.com/2012/05/20/thats-not-normalthe-performance-of-odd-floats/&#34;&gt;operations involving NaNs are much slower than finite floats&lt;/a&gt;&#xA;on some architectures.&lt;/p&gt;&#xA;&lt;p&gt;Story time!&lt;/p&gt;&#xA;&lt;p&gt;The code in question was part of the movement / interaction system, and involved&#xA;performing a few raycasts against the collision system to find a reference point&#xA;for movement. There would be some noticable hitches / frame hiccups when this&#xA;system was active, but it was relatively new code (in a relatively new codebase)&#xA;so bugs and unoptimized code paths were not unexpected. In particular, I thought&#xA;that this may have just been due to the raycast collision code itself &amp;ndash; at the&#xA;time, raycast acceleration had not been implemented yet, meaning we&amp;rsquo;d have to do&#xA;a naive per-triangle intersection.&lt;/p&gt;</description>
     </item>
     <item>
       <title>OpenGL Texture Mip Targeting</title>
       <link>https://voithos.io/articles/opengl-texture-mip-targeting/</link>
       <pubDate>Mon, 05 Aug 2024 14:46:38 -0800</pubDate>
       <guid>https://voithos.io/articles/opengl-texture-mip-targeting/</guid>
-      <description>A while back, I was implementing a bloom post process effect for my personal renderer project, and I ran into an interesting hurdle involving how texture samplers and framebuffers work in OpenGL.&#xA;A pretty common technique used by several engines involves repeated downsamples of the final (HDR) frame using a specialized blur kernel, and then a series of upsamples in reverse that accumulate the blurred textures, resulting in a nice and natural-looking bloom effect after tone mapping.</description>
+      <description>&lt;p&gt;A while back, I was implementing a&#xA;&lt;a href=&#34;https://learnopengl.com/Guest-Articles/2022/Phys.-Based-Bloom&#34;&gt;bloom post process effect&lt;/a&gt;&#xA;for my personal renderer project, and I ran into an interesting hurdle involving&#xA;how texture samplers and framebuffers work in OpenGL.&lt;/p&gt;&#xA;&lt;p&gt;A pretty common technique used by several engines involves repeated downsamples&#xA;of the final (HDR) frame using a specialized blur kernel, and then a series of&#xA;upsamples in reverse that accumulate the blurred textures, resulting in a nice&#xA;and natural-looking bloom effect after tone mapping.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Unreal Debugging</title>
       <link>https://voithos.io/articles/unreal-debugging/</link>
       <pubDate>Sun, 21 Jul 2024 22:26:16 -0700</pubDate>
       <guid>https://voithos.io/articles/unreal-debugging/</guid>
-      <description>As a large and mature engine, Unreal provides a suite of debugging systems and tools to aid development, which go hand-in-hand with your standard C++ debugger. This page aims to give an incomplete and mostly unordered whirlwind tour of some of the more useful tools I&amp;rsquo;ve run across while working in Unreal. If I&amp;rsquo;ve missed anything big or particularly useful, I&amp;rsquo;d love to hear about it!&#xA;Note that most of my experience thus far has been in UE versions 4.</description>
+      <description>&lt;p&gt;As a large and mature engine, Unreal provides a suite of debugging systems and&#xA;tools to aid development, which go hand-in-hand with your standard C++ debugger.&#xA;This page aims to give an incomplete and mostly unordered whirlwind tour of some&#xA;of the more useful tools I&amp;rsquo;ve run across while working in Unreal. If I&amp;rsquo;ve missed&#xA;anything big or particularly useful, I&amp;rsquo;d love to hear about it!&lt;/p&gt;&#xA;&lt;p&gt;Note that most of my experience thus far has been in UE versions &lt;code&gt;4.27&lt;/code&gt; and&#xA;&lt;code&gt;5.0&lt;/code&gt;, although I believe the majority of the tools mentioned here work just as&#xA;well for more recent versions of the engine.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Fast Chaos Collision Toggling</title>
       <link>https://voithos.io/articles/fast-chaos-collision-toggling/</link>
       <pubDate>Mon, 22 May 2023 23:21:17 -0700</pubDate>
       <guid>https://voithos.io/articles/fast-chaos-collision-toggling/</guid>
-      <description>A few weeks ago I investigated an interesting physics-related performance issue, specific to UE5&amp;rsquo;s new Chaos physics engine.&#xA;The code I was working on managed a large number of UStaticMeshComponents (essentially, it&amp;rsquo;s a custom hierarchical level-of-detail system) and would frequently need to toggle visibility and collision shapes per tick. There were some cases where we seemed to be going over our frame budget, so I took a profile via Unreal Insights:</description>
+      <description>&lt;p&gt;A few weeks ago I investigated an interesting physics-related performance issue,&#xA;specific to UE5&amp;rsquo;s new Chaos physics engine.&lt;/p&gt;&#xA;&lt;p&gt;The code I was working on managed a large number of &lt;code&gt;UStaticMeshComponents&lt;/code&gt;&#xA;(essentially, it&amp;rsquo;s a custom hierarchical level-of-detail system) and would&#xA;frequently need to toggle visibility and collision shapes per tick. There were&#xA;some cases where we seemed to be going over our frame budget, so I took a&#xA;profile via Unreal Insights:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Enum Class Bitmasks</title>
       <link>https://voithos.io/articles/enum-class-bitmasks/</link>
       <pubDate>Sat, 13 May 2023 14:03:57 -0700</pubDate>
       <guid>https://voithos.io/articles/enum-class-bitmasks/</guid>
-      <description>Enums are a core part of the C and C++ languages, and are used ubiquitously to model logically distinct states in software systems. However, there may be times where you want to model a set of non-mutually-exclusive states. There are several other ways you could write this, including defining bitfields, using std::bitset, or even using std::vector&amp;lt;bool&amp;gt;, but you can also use enums for this by treating them as bitmasks.&#xA;For example, Vulkan defines many enums as part of its API, and these can be combined naturally via bitwise operators:</description>
+      <description>&lt;blockquote class=&#34;alert alert-important&#34;&gt;&#xD;&#xA;    &lt;p class=&#34;alert-heading&#34;&gt;&#xD;&#xA;        &lt;i class=&#34;alert-icon fa-solid fa-circle-exclamation&#34;&gt;&lt;/i&gt;&#xD;&#xA;        &#xD;&#xA;            Important&#xD;&#xA;        &#xD;&#xA;    &lt;/p&gt;&#xD;&#xA;    &lt;p&gt;&lt;p&gt;This article describes adding bitwise operator support to scoped enums, but a&#xA;better approach is to &lt;a href=&#34;https://voithos.io/articles/type-safe-enum-class-bit-flags/&#34;&gt;use a separate template type to represents&#xA;bitflags&lt;/a&gt;.&lt;/p&gt;&#xA;&#xD;&#xA;&lt;/blockquote&gt;&lt;p&gt;Enums are a core part of the C and C++ languages, and are used ubiquitously to&#xA;model logically distinct states in software systems. However, there may be times&#xA;where you want to model a set of &lt;strong&gt;non-mutually-exclusive&lt;/strong&gt; states. There are&#xA;several other ways you could write this, including defining&#xA;&lt;a href=&#34;https://en.wikipedia.org/wiki/Bit_field&#34;&gt;bitfields&lt;/a&gt;, using &lt;code&gt;std::bitset&lt;/code&gt;, or&#xA;even using &lt;code&gt;std::vector&amp;lt;bool&amp;gt;&lt;/code&gt;, but you can also use enums for this by treating&#xA;them as &lt;strong&gt;bitmasks&lt;/strong&gt;.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Creating UObjects From Async Threads</title>
       <link>https://voithos.io/articles/creating-uobjects-from-async-threads/</link>
       <pubDate>Sat, 06 May 2023 16:58:57 -0700</pubDate>
       <guid>https://voithos.io/articles/creating-uobjects-from-async-threads/</guid>
-      <description>When developing a project in Unreal, for performance reasons you may find yourself needing to do work on background threads. This could be an FRunnableThread, an AsyncTask(), or even UE5&amp;rsquo;s fancy new Tasks System &amp;ndash; any code that isn&amp;rsquo;t executing on the game thread.&#xA;As a motivating example, perhaps you need to dynamically load and process some mesh / texture data at runtime. Most of the processing work is thread-agnostic, but what if you need to create UObjects to represent the data?</description>
+      <description>&lt;p&gt;When developing a project in Unreal, for performance reasons you may find&#xA;yourself needing to do work on background threads. This could be an&#xA;&lt;code&gt;FRunnableThread&lt;/code&gt;, an &lt;code&gt;AsyncTask()&lt;/code&gt;, or even UE5&amp;rsquo;s fancy new&#xA;&lt;a href=&#34;https://docs.unrealengine.com/5.0/en-US/tasks-systems-in-unreal-engine/&#34;&gt;Tasks System&lt;/a&gt;&#xA;&amp;ndash; any code that isn&amp;rsquo;t executing on the game thread.&lt;/p&gt;&#xA;&lt;p&gt;As a motivating example, perhaps you need to dynamically load and process some&#xA;mesh / texture data at runtime. Most of the processing work is thread-agnostic,&#xA;but what if you need to create &lt;strong&gt;UObjects&lt;/strong&gt; to represent the data?&lt;/p&gt;</description>
     </item>
     <item>
       <title>Reference Shenanigans</title>
       <link>https://voithos.io/articles/reference-shenanigans/</link>
       <pubDate>Thu, 09 Mar 2023 21:40:37 -0800</pubDate>
       <guid>https://voithos.io/articles/reference-shenanigans/</guid>
-      <description>A while back, I was working on some Unreal C++ code involving a tree traversal and a hash map used for intermediate information when I encountered a subtle bug (which of course feels obvious in hindsight). At the time, I had lost the better part of the day to the issue, but it actually led me to some interesting conclusions so I thought it&amp;rsquo;d be fun to try to present it here in a somewhat generalized and simplified way.</description>
+      <description>&lt;p&gt;A while back, I was working on some Unreal C++ code involving a tree traversal&#xA;and a hash map used for intermediate information when I encountered a subtle&#xA;bug (which of course feels obvious in hindsight). At the time, I had lost the&#xA;better part of the day to the issue, but it actually led me to some interesting&#xA;conclusions so I thought it&amp;rsquo;d be fun to try to present it here in a somewhat&#xA;generalized and simplified way.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

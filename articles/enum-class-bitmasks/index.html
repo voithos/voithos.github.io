@@ -19,7 +19,7 @@
 
 
   
-  <link rel="stylesheet" href="/sass/main.min.b2d9a0514d1aed0a337c1d0587254200177a8ed5e4ef1548b94b3e52f04f0fde.css">
+  <link rel="stylesheet" href="/sass/main.min.458d81f497fae245b24b7746bc1166a7b9a7315e420c3b925c9c6cd98dc67d37.css">
 
   
   <script type="text/javascript" src="/js/index.min.6ec5479881bc3221e976ccfd99c2f5f95b3b8703e46b66424c55cc861cc65db1.js" defer></script>
@@ -91,7 +91,7 @@
     
     <div class="article-meta">
   <section class="article-stats">
-    May 13, 2023&nbsp;·&nbsp;5 min&nbsp;·&nbsp;995 words
+    May 13, 2023&nbsp;·&nbsp;5 min&nbsp;·&nbsp;1020 words
   </section>
   
   <section class="article-tags">
@@ -105,7 +105,20 @@
 </div>
 
     <hr>
-    <p>Enums are a core part of the C and C++ languages, and are used ubiquitously to
+    
+
+<blockquote class="alert alert-important">
+    <p class="alert-heading">
+        <i class="alert-icon fa-solid fa-circle-exclamation"></i>
+        
+            Important
+        
+    </p>
+    <p><p>This article describes adding bitwise operator support to scoped enums, but a
+better approach is to <a href="https://voithos.io/articles/type-safe-enum-class-bit-flags/">use a separate template type to represents
+bitflags</a>.</p>
+
+</blockquote><p>Enums are a core part of the C and C++ languages, and are used ubiquitously to
 model logically distinct states in software systems. However, there may be times
 where you want to model a set of <strong>non-mutually-exclusive</strong> states. There are
 several other ways you could write this, including defining

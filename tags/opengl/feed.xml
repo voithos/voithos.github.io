@@ -13,7 +13,7 @@
       <link>https://voithos.io/articles/opengl-texture-mip-targeting/</link>
       <pubDate>Mon, 05 Aug 2024 14:46:38 -0800</pubDate>
       <guid>https://voithos.io/articles/opengl-texture-mip-targeting/</guid>
-      <description>A while back, I was implementing a bloom post process effect for my personal renderer project, and I ran into an interesting hurdle involving how texture samplers and framebuffers work in OpenGL.&#xA;A pretty common technique used by several engines involves repeated downsamples of the final (HDR) frame using a specialized blur kernel, and then a series of upsamples in reverse that accumulate the blurred textures, resulting in a nice and natural-looking bloom effect after tone mapping.</description>
+      <description>&lt;p&gt;A while back, I was implementing a&#xA;&lt;a href=&#34;https://learnopengl.com/Guest-Articles/2022/Phys.-Based-Bloom&#34;&gt;bloom post process effect&lt;/a&gt;&#xA;for my personal renderer project, and I ran into an interesting hurdle involving&#xA;how texture samplers and framebuffers work in OpenGL.&lt;/p&gt;&#xA;&lt;p&gt;A pretty common technique used by several engines involves repeated downsamples&#xA;of the final (HDR) frame using a specialized blur kernel, and then a series of&#xA;upsamples in reverse that accumulate the blurred textures, resulting in a nice&#xA;and natural-looking bloom effect after tone mapping.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
