@@ -61,6 +61,12 @@ and optionally with in-line changes such as annotations and abbreviations.
     [talk](https://www.youtube.com/watch?v=PAAkCSZUG1c) during Gopherfest,
     November 18, 2015.
 
+## Links
+
+Lots of [links to arbitrary things](https://www.shadertoy.com/).
+
+Also [relative links]({{< ref "/me" >}}).
+
 ## Tables
 
 Tables aren't part of the core Markdown spec[^2], but Hugo supports them
