@@ -61,6 +61,35 @@ and optionally with in-line changes such as annotations and abbreviations.
     [talk](https://www.youtube.com/watch?v=PAAkCSZUG1c) during Gopherfest,
     November 18, 2015.
 
+## Alerts
+
+> [!NOTE]
+>
+> This is a notice.
+
+> [!TIP]
+>
+> This is a very cool tip.
+
+> [!IMPORTANT]
+>
+> Super important notice.
+
+> [!WARNING]
+>
+> Also important but just a warning.
+
+> [!NOTE] Notes can have custom titles
+>
+> And you can have _internal styles_ and additional **content** with some
+> `cool code`.
+>
+> Hoo hoo.
+>
+> ```c++
+> void like(SomeKinda code);
+> ```
+
 ## Links
 
 Lots of [links to arbitrary things](https://www.shadertoy.com/).

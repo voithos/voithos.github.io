@@ -1,0 +1,18 @@
+{{ $icons := dict
+    "important" "circle-exclamation"
+    "note" "note-sticky"
+    "tip" "lightbulb"
+    "warning" "triangle-exclamation"
+  }}
+{{ $type := cond (index $icons .AlertType) .AlertType "note" }}
+<blockquote class="alert alert-{{ .AlertType }}">
+    <p class="alert-heading">
+        <i class="alert-icon fa-solid fa-{{ index $icons $type }}"></i>
+        {{ with .AlertTitle }}
+            {{ . }}
+        {{ else }}
+            {{ or (i18n .AlertType) (title .AlertType) }}
+        {{ end }}
+    </p>
+    {{ .Text }}
+</blockquote>
