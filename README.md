@@ -4,7 +4,7 @@ Personal site of Zaven Muradyan.
 
 ### Requirements
 
-- hugo v0.128: Static site generator of choice
+- hugo v0.139: Static site generator of choice
 - node v22.4.1: For THREE.js
 
 ### Articles
