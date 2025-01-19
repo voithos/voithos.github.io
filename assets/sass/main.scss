@@ -1114,7 +1114,7 @@ footer {
     }
 
     &:not(:last-of-type) {
-      border-bottom: 1px solid darken($lowlight-color, 40);
+      border-bottom: 1px dashed darken($lowlight-color, 30);
     }
   }
 
