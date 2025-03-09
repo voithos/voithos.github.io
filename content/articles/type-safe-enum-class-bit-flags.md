@@ -3,6 +3,8 @@ title: "Type-safe Enum Class Bit Flags"
 date: 2024-12-21T14:59:55-08:00
 description: "Improved bit flags for scoped enums."
 tags: [c++]
+params:
+  articleNumber: 11
 ---
 
 I previously wrote an article about [defining bitwise operators on scoped

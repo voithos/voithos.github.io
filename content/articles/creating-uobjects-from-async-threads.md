@@ -3,6 +3,8 @@ title: "Creating UObjects From Async Threads"
 date: 2023-05-06T16:58:57-07:00
 description: "Managing the gotchas around Unreal's object system."
 tags: [c++, unreal-engine]
+params:
+  articleNumber: 2
 ---
 
 When developing a project in Unreal, for performance reasons you may find

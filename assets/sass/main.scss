@@ -915,12 +915,29 @@ footer {
       margin: 0 1.5rem 1rem 1.5rem;
     }
 
+    .article-title-box {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+    }
+
     .article-title {
       font-size: 1.6rem;
-      margin-bottom: 0.5rem;
+      flex: 1;
 
       @media screen and (max-width: $media-mobile-max-width) {
         font-size: 1.4rem;
+      }
+    }
+
+    .article-number {
+      font-size: 1.2rem;
+      color: $lowlight-color;
+      margin-top: 0.25rem;
+      margin-left: 0.5rem;
+
+      @media screen and (max-width: $media-mobile-max-width) {
+        font-size: 1.1rem;
       }
     }
 
@@ -989,10 +1006,23 @@ footer {
     padding: 0.5rem;
   }
 
+  .article-title-box {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+  }
+
   .article-title {
     margin: 0;
-    margin-bottom: 0.5rem;
     color: lighten($lowlight-color, 15);
+    flex: 1;
+  }
+
+  .article-number {
+    font-size: 1.5rem;
+    color: $lowlight-color;
+    margin-top: 0.25rem;
+    margin-left: 0.5rem;
   }
 
   .article-description {

@@ -3,6 +3,8 @@ title: "Surprisingly Slow NaNs"
 date: 2024-08-08T21:22:54-07:00
 description: "A case of unexpected performance regression."
 tags: [c++, floating-point, performance, in-house-engine]
+params:
+  articleNumber: 7
 ---
 
 A while ago, I had to debug a strange performance issue in an in-house engine I

@@ -3,6 +3,8 @@ title: "Building Unreal Engine From Source for VSCode"
 date: 2024-08-25T20:59:17-07:00
 description: "The 'joys' of using a non-standard IDE."
 tags: [unreal-engine, ue5, build-system, vscode]
+params:
+  articleNumber: 9
 ---
 
 I spent a bit of time today compiling Unreal Engine from source using VSCode,

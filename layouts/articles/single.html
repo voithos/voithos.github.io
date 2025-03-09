@@ -1,7 +1,14 @@
 {{ define "main" }}
 <main class="article article-single">
   <section class="article-body">
-    <h1 class="article-title">{{ .Title }}</h1>
+    <div class="article-title-box">
+      <h1 class="article-title">{{ .Title }}</h1>
+      {{ if .Params.articleNumber }}
+        <span class="article-number">#{{ .Params.articleNumber }}</span>
+      {{ else }}
+        {{ warnf "Article %s does not have a valid article number" .Title }}
+      {{ end }}
+    </div>
     {{ if .Description }}
     <section class="article-description">
       {{ .Description | markdownify }}

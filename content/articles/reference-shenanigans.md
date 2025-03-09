@@ -3,6 +3,8 @@ title: "Reference Shenanigans"
 date: 2023-03-09T21:40:37-08:00
 description: "The subtleties of memory safety, and how syntax can mask bugs."
 tags: [c++, unreal-engine]
+params:
+  articleNumber: 1
 ---
 
 A while back, I was working on some Unreal C++ code involving a tree traversal

@@ -3,6 +3,8 @@ title: "AsyncTask Timing"
 date: 2024-08-14T22:46:32-07:00
 description: "A performance consideration for async work."
 tags: [unreal-engine, ue5, c++, performance]
+params:
+  articleNumber: 8
 ---
 
 Unreal's `AsyncTask` API is great when you want to do some heavier processing

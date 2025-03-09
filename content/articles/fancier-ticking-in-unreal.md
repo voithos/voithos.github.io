@@ -3,6 +3,8 @@ title: "Fancier Ticking in Unreal"
 date: 2024-09-02T16:46:05-07:00
 description: "Controlled updates during the game loop."
 tags: [unreal-engine, ue5, c++]
+params:
+  articleNumber: 10
 ---
 
 Unreal's ticking system is a core part of the engine, fulfilling the role of the

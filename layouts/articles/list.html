@@ -3,10 +3,17 @@
 <main class="articles articles-list">
   {{ range .Paginator.Pages }}
     <article class="article-blurb">
-      <section class="article-title">
-        <a href="{{.Permalink}}">{{.Title}}</a>
-        {{- if .Draft }}<sup><span class="article-draft">&nbsp;&nbsp;[draft]</span></sup>{{- end }}
-      </section>
+      <div class="article-title-box">
+        <section class="article-title">
+          <a href="{{.Permalink}}">{{.Title}}</a>
+          {{- if .Draft }}<sup><span class="article-draft">&nbsp;&nbsp;[draft]</span></sup>{{- end }}
+        </section>
+        {{ if .Params.articleNumber }}
+          <span class="article-number">#{{ .Params.articleNumber }}</span>
+        {{ else }}
+          {{ warnf "Article %s does not have a valid article number" .Title }}
+        {{ end }}
+      </div>
       {{ if .Description }}
       <section class="article-description">
         {{ .Description | markdownify }}

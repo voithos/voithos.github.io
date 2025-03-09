@@ -4,6 +4,8 @@ date: 2023-05-13T14:03:57-07:00
 description:
   "Combining the convenience of bitmasks with the safety of scoped enums."
 tags: [c++, unreal-engine]
+params:
+  articleNumber: 3
 ---
 
 > [!IMPORTANT]
