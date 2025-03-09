@@ -348,36 +348,27 @@ h6 {
   font-style: italic;
 }
 
-h1[id] a,
-h2[id] a,
-h3[id] a {
-  color: $lowlight-color;
-  position: relative;
+h1[id],
+h2[id],
+h3[id] {
+  .heading-link {
+    color: rgba($lowlight-color, 0);
+    position: relative;
+    @include prefix(transition, color 0.25s ease, text-shadow 0.5s ease-out);
 
-  &:hover,
-  &:focus {
-    color: $lowlight-color;
-    text-shadow: 0 0 5px $lowlight-color;
-    border-bottom: 2px solid $lowlight-color;
+    &:hover,
+    &:focus {
+      text-shadow: 0 0 5px $lowlight-color;
+    }
+
+    &:after {
+      display: none;
+    }
   }
 
-  @media screen and (min-width: 1024px) {
-    &:before {
-      content: '\00B6'; // Pilcrow
-      display: block;
-      position: absolute;
-      left: -1.5rem;
-      color: rgba($lowlight-color, 0);
-
-      @include prefix(transition, color 0.5s ease-out);
-    }
-
-    // Order matters: 'before' is a pseudo-element, whereas 'hover' is
-    // a pseudo-class
-    &:hover:before,
-    &:focus:before {
-      color: rgba($lowlight-color, 1);
-    }
+  &:hover .heading-link,
+  &:focus .heading-link {
+    color: $lowlight-color;
   }
 }
 
