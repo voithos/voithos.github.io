@@ -1516,6 +1516,13 @@ article {
   color: darken($body-color, 15);
 }
 
+.footnote-ref,
+.footnote-backref {
+  &:after {
+    display: none;
+  }
+}
+
 .err404 {
   padding: 0 6rem;
 
