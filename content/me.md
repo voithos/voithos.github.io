@@ -10,7 +10,7 @@ weight: 3
 ---
 
 I'm a software engineer living in the pleasant Seattle area with my best friend
-Daisy ([who is _**amazing**_!](https://ladychamomile.ink/)).
+Daisy ([who is _**amazing!**_](https://ladychamomile.ink/)).
 
 I like creating things!
 
