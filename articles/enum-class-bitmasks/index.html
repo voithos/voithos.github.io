@@ -19,11 +19,11 @@
 
 
   
-  <link rel="stylesheet" href="/sass/main.min.d2e236cc9afe3bc926a4c215d223d0257fb3d5a9318a329c1db6a39fe4cb27ec.css">
+  <link rel="stylesheet" href="/sass/main.min.f78bbde44ef1d89ecaa6d5fd3049688038eed927ca36a8929da2f423b4345bed.css">
 
   
   <script type="text/javascript" src="/js/index.min.6ec5479881bc3221e976ccfd99c2f5f95b3b8703e46b66424c55cc861cc65db1.js" defer></script>
-<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0524d221b0de4b35ad72aeec8ef5eda7"}'></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="15ea2043-9487-4989-898e-0abc536e5f33" data-domains="voithos.io"></script>
   </head>
   <body>
     <section id="main" class="smooth-scene"><section class="header-box">
@@ -86,7 +86,12 @@
         <section class="parent-content scene-element scene-element--fadein ">
 <main class="article article-single">
   <section class="article-body">
-    <h1 class="article-title">Enum Class Bitmasks</h1>
+    <div class="article-title-box">
+      <h1 class="article-title">Enum Class Bitmasks</h1>
+      
+        <span class="article-number">#3</span>
+      
+    </div>
     
     <section class="article-description">
       Combining the convenience of bitmasks with the safety of scoped enums.
@@ -153,8 +158,9 @@ otherwise-unrelated <code>VkFormatFeatureFlagBits</code>, and this wasn&rsquo;t 
 compiler.</p>
 <p>Starting with C++11, the language lets us define scoped enums, aka enum classes,
 which avoid these issues. Can we use them to define bitmasks?</p>
-<h2 id="using-enum-classes-as-bitmasks">Using enum classes as bitmasks</h2>
-<p>If we try to declare an <code>enum class</code> and use it as a bitmask naively, we get
+<h2 id="using-enum-classes-as-bitmasks">
+  Using enum classes as bitmasks&nbsp;<a class="heading-link" href="#using-enum-classes-as-bitmasks">＃</a>
+</h2><p>If we try to declare an <code>enum class</code> and use it as a bitmask naively, we get
 compilation errors:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#ff79c6">enum</span> <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">ERenderPass</span> <span style="color:#ff79c6">:</span> <span style="color:#8be9fd">uint8_t</span> {
 </span></span><span style="display:flex;"><span>    None <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>,
@@ -201,8 +207,9 @@ to the right underlying type:</p>
 operators like this is quite tedious, and if we want our code to be more
 flexible and to reduce surprise in the future, we should find a better way to
 define a common set of operators for these kinds of bitmask enums.</p>
-<h2 id="preprocessor-macros">Preprocessor macros</h2>
-<p>Preprocessor macros should be avoided for most C++ code, but the repetition and
+<h2 id="preprocessor-macros">
+  Preprocessor macros&nbsp;<a class="heading-link" href="#preprocessor-macros">＃</a>
+</h2><p>Preprocessor macros should be avoided for most C++ code, but the repetition and
 self-contained-ness of enum class bitmask operators makes this a reasonable
 candidate for their usage.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;type_traits&gt;</span><span style="color:#ff79c6">
@@ -266,8 +273,9 @@ this kind of macro defined for you as <code>ENUM_CLASS_FLAGS()</code>.</p>
 </span></span><span style="display:flex;"><span>ENUM_CLASS_FLAGS(ERenderPass);
 </span></span></code></pre></div><p>Easy!</p>
 <p>But can we do it without a preprocessor macro?</p>
-<h2 id="template-magic">Template magic</h2>
-<p>It turns out this is possible via some template magic, namely by using
+<h2 id="template-magic">
+  Template magic&nbsp;<a class="heading-link" href="#template-magic">＃</a>
+</h2><p>It turns out this is possible via some template magic, namely by using
 <a href="https://en.cppreference.com/w/cpp/types/enable_if"><code>std::enable_if</code></a> to
 conditionally generate operator functions. For details, see
 <a href="https://accu.org/journals/overload/24/132/williams_2228/">this article by Anthony Williams</a>.</p>

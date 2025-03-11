@@ -19,11 +19,11 @@
 
 
   
-  <link rel="stylesheet" href="/sass/main.min.d2e236cc9afe3bc926a4c215d223d0257fb3d5a9318a329c1db6a39fe4cb27ec.css">
+  <link rel="stylesheet" href="/sass/main.min.f78bbde44ef1d89ecaa6d5fd3049688038eed927ca36a8929da2f423b4345bed.css">
 
   
   <script type="text/javascript" src="/js/index.min.6ec5479881bc3221e976ccfd99c2f5f95b3b8703e46b66424c55cc861cc65db1.js" defer></script>
-<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0524d221b0de4b35ad72aeec8ef5eda7"}'></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="15ea2043-9487-4989-898e-0abc536e5f33" data-domains="voithos.io"></script>
   </head>
   <body>
     <section id="main" class="smooth-scene"><section class="header-box">
@@ -86,7 +86,12 @@
         <section class="parent-content scene-element scene-element--fadein ">
 <main class="article article-single">
   <section class="article-body">
-    <h1 class="article-title">Fast Chaos Collision Toggling</h1>
+    <div class="article-title-box">
+      <h1 class="article-title">Fast Chaos Collision Toggling</h1>
+      
+        <span class="article-number">#4</span>
+      
+    </div>
     
     <section class="article-description">
       The classic exchange of memory usage for CPU time.
@@ -135,8 +140,9 @@ very quickly add up and overrun the frame budget. One workaround would be to
 split up the cost across multiple frames, but this would have downsides
 (potential inconsistencies between collisions and rendered meshes).</p>
 <p>This would not do!</p>
-<h2 id="investigation">Investigation</h2>
-<p>I began by seeing if there were other parts of the physics API that might not
+<h2 id="investigation">
+  Investigation&nbsp;<a class="heading-link" href="#investigation">＃</a>
+</h2><p>I began by seeing if there were other parts of the physics API that might not
 have this issue. Initially, I was using
 <code>UPrimitiveComponent::SetCollisionEnabled</code> to toggle collisions, but I also
 tried a couple other methods to accomplish the same thing:</p>
@@ -157,8 +163,9 @@ representations, all taking up memory.</p>
 <p>For my usage, however, these collision shapes were very likely to be re-enabled
 at a moment&rsquo;s notice, so I wanted to keep the physics state in place even at the
 cost of a little memory.</p>
-<h2 id="fast-collision-toggling">Fast Collision Toggling</h2>
-<p>After a good amount of code spelunking, I found a (somewhat niche) API that does
+<h2 id="fast-collision-toggling">
+  Fast Collision Toggling&nbsp;<a class="heading-link" href="#fast-collision-toggling">＃</a>
+</h2><p>After a good amount of code spelunking, I found a (somewhat niche) API that does
 exactly what I wanted. It turns out that the Chaos physics state <em>does</em> keep
 track of per-shape collision enabled status, but this just isn&rsquo;t exposed
 directly from a higher-level <code>UObject</code> API like e.g. <code>UPrimitiveComponent</code>.</p>

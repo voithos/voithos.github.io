@@ -19,11 +19,11 @@
 
 
   
-  <link rel="stylesheet" href="/sass/main.min.d2e236cc9afe3bc926a4c215d223d0257fb3d5a9318a329c1db6a39fe4cb27ec.css">
+  <link rel="stylesheet" href="/sass/main.min.f78bbde44ef1d89ecaa6d5fd3049688038eed927ca36a8929da2f423b4345bed.css">
 
   
   <script type="text/javascript" src="/js/index.min.6ec5479881bc3221e976ccfd99c2f5f95b3b8703e46b66424c55cc861cc65db1.js" defer></script>
-<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0524d221b0de4b35ad72aeec8ef5eda7"}'></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="15ea2043-9487-4989-898e-0abc536e5f33" data-domains="voithos.io"></script>
   </head>
   <body>
     <section id="main" class="smooth-scene"><section class="header-box">
@@ -86,7 +86,12 @@
         <section class="parent-content scene-element scene-element--fadein ">
 <main class="article article-single">
   <section class="article-body">
-    <h1 class="article-title">OpenGL Texture Mip Targeting</h1>
+    <div class="article-title-box">
+      <h1 class="article-title">OpenGL Texture Mip Targeting</h1>
+      
+        <span class="article-number">#6</span>
+      
+    </div>
     
     <section class="article-description">
       Avoiding feedback loops when reading and writing to the same texture.
@@ -120,8 +125,9 @@ and natural-looking bloom effect after tone mapping.</p>
 bloom texture, but if your target API was older than OpenGL 4.3, compute shaders
 wouldn&rsquo;t be available. So, I wanted to try building it with just standard
 framebuffers and direct dispatch.</p>
-<h2 id="the-problem">The problem</h2>
-<p>Commonly, bloom implementations like this would use multiple textures (at
+<h2 id="the-problem">
+  The problem&nbsp;<a class="heading-link" href="#the-problem">＃</a>
+</h2><p>Commonly, bloom implementations like this would use multiple textures (at
 least 2) and ping-pong the downsampling and upsampling between the two to make
 the calls easier.</p>
 <p>However, since the downsamples/upsamples are sequential, all you really need
@@ -142,8 +148,9 @@ OpenGL spec are fairly conservative about what can trigger this, even if the
 shader has logic that wouldn&rsquo;t actually ever sample from the same texel that
 it&rsquo;s writing to. See the spec for details:
 <a href="https://registry.khronos.org/OpenGL/specs/gl/glspec40.core.pdf#page=299">https://registry.khronos.org/OpenGL/specs/gl/glspec40.core.pdf#page=299</a></p>
-<h2 id="the-solution">The solution</h2>
-<p>The requirements in the spec also point towards a solution: if you explicitly
+<h2 id="the-solution">
+  The solution&nbsp;<a class="heading-link" href="#the-solution">＃</a>
+</h2><p>The requirements in the spec also point towards a solution: if you explicitly
 set the <code>GL_TEXTURE_BASE_LEVEL</code> and <code>GL_TEXTURE_MAX_LEVEL</code> texture params
 appropriately during each step of the bloom, it will be impossible for the
 shader to sample from the same mip level that it&rsquo;s writing to, thus avoiding the
