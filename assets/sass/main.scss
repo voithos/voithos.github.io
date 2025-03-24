@@ -1432,6 +1432,10 @@ footer {
     @media screen and (max-width: $media-mobile-max-width) {
       font-size: 2rem;
     }
+
+    .heading-link {
+      display: none;
+    }
   }
 
   hr {
