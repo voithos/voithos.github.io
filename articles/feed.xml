@@ -6,8 +6,15 @@
     <description>Recent content in Articles on voithos.io</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 21 Dec 2024 14:59:55 -0800</lastBuildDate>
+    <lastBuildDate>Thu, 27 Mar 2025 21:04:55 -0700</lastBuildDate>
     <atom:link href="https://voithos.io/articles/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>std::move() Is (Not) Free</title>
+      <link>https://voithos.io/articles/std-move-is-not-free/</link>
+      <pubDate>Thu, 27 Mar 2025 21:04:55 -0700</pubDate>
+      <guid>https://voithos.io/articles/std-move-is-not-free/</guid>
+      <description>&lt;p&gt;When I first learned of &lt;code&gt;std::move()&lt;/code&gt;, it felt magical. We can just move objects&#xA;around efficiently without dealing with pointers? Wow! So, like every C++11&#xA;newcomer, I got to work using it wherever I could, and didn&amp;rsquo;t think much more of&#xA;it. Move all the things, right?&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;But wait&lt;/em&gt;, are moves really free? I don&amp;rsquo;t know if I was the only one to have&#xA;that misconception, but it took me a bit to fully internalize not just how they&#xA;work at the language level (this is the first thing you typically learn) but&#xA;what the code is actually doing at runtime and how I should conceptualize it&#xA;(spoiler: &amp;ldquo;move&amp;rdquo; isn&amp;rsquo;t really accurate).&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Type-safe Enum Class Bit Flags</title>
       <link>https://voithos.io/articles/type-safe-enum-class-bit-flags/</link>

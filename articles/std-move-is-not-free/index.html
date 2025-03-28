@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<title>
+    std::move() Is (Not) Free | voithos.io
+  </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Understanding move semantics at runtime.">
+<link rel="icon" href="https://voithos.io/favicon.ico">
+<link rel="alternate" href="https://voithos.io/articles/feed.xml" title="voithos.io">
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&family=Oxygen+Mono&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha512-DUC8yqWf7ez3JD1jszxCWSVB0DMP78eOyBpMa5aJki1bIRARykviOuImIczkxlj1KhVSyS16w2FSQetkD4UU2w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/smoothState.js/0.7.2/jquery.smoothState.min.js" integrity="sha512-PA88Ew5anBQLPlovdwOOMj+Ky0x+M6a6bDXYve4q+NDj17AJ37FwHT4Xo758ZQqYKLyvaYko27cQDQ5P/0kOJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
+  
+  <link rel="stylesheet" href="/sass/main.min.5b115557db62b681a3716c2a85c7fc8f80e3f9b27c27633c33c8443405511de0.css">
+
+  
+  <script type="text/javascript" src="/js/index.min.6ec5479881bc3221e976ccfd99c2f5f95b3b8703e46b66424c55cc861cc65db1.js" defer></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="15ea2043-9487-4989-898e-0abc536e5f33" data-domains="voithos.io"></script>
+  </head>
+  <body>
+    <section id="main" class="smooth-scene"><section class="header-box">
+  <section class="site-container">
+    <header>
+        <h1 class="title">
+          <div class="spin cw"></div>
+          <div class="spin ccw"></div>
+          <a href="/">voithos</a>
+        </h1>
+        <input type="checkbox" id="nav-checkbox" class="nav-checkbox" role="button">
+        <label for="nav-checkbox" class="nav-toggle" onclick></label>
+        <nav class="main-nav">
+          <ul>
+            
+            
+            <li class="active">
+              <a href="/articles/" title="Articles">Articles</a>
+            </li>
+            
+            <li class="">
+              <a href="/code/" title="Code">Code</a>
+            </li>
+            
+            <li class="">
+              <a href="/writing/" title="Writing">Writing</a>
+            </li>
+            
+            <li class="">
+              <a href="/art/" title="Art">Art</a>
+            </li>
+            
+            <li class="">
+              <a href="/me/" title="Me">Me</a>
+            </li>
+            
+          </ul>
+        </nav>
+        <nav class="social-nav">
+          <ul>
+            <li>
+              <a href="https://bsky.app/profile/voithoz.bsky.social"><i class="fa-brands fa-bluesky"></i></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/voithoz/"><i class="fa-brands fa-instagram"></i></a>
+            </li>
+            <li>
+              <a href="https://voithos.itch.io/"><i class="fa-brands fa-itch-io"></i></a>
+            </li>
+            <li>
+              <a href="https://github.com/voithos/"><i class="fa-brands fa-github"></i></a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/zaven-muradyan/"><i class="fa-brands fa-linkedin"></i></a>
+            </li>
+          </ul>
+        </nav>
+    </header>
+  </section>
+</section>
+
+      <section class="site-container">
+        <section class="parent-content scene-element scene-element--fadein ">
+<main class="article article-single">
+  <section class="article-body">
+    <div class="article-title-box">
+      <h1 class="article-title">std::move() Is (Not) Free</h1>
+      
+        <span class="article-number">#12</span>
+      
+    </div>
+    
+    <section class="article-description">
+      Understanding move semantics at runtime.
+    </section>
+    
+    <div class="article-meta">
+  <section class="article-stats">
+    March 27, 2025&nbsp;·&nbsp;5 min&nbsp;·&nbsp;867 words
+  </section>
+  
+  <section class="article-tags">
+    
+      <span class="article-tag pill">c&#43;&#43;</span>
+    
+  </section>
+  
+</div>
+
+    <hr>
+    <p>When I first learned of <code>std::move()</code>, it felt magical. We can just move objects
+around efficiently without dealing with pointers? Wow! So, like every C++11
+newcomer, I got to work using it wherever I could, and didn&rsquo;t think much more of
+it. Move all the things, right?</p>
+<p><em>But wait</em>, are moves really free? I don&rsquo;t know if I was the only one to have
+that misconception, but it took me a bit to fully internalize not just how they
+work at the language level (this is the first thing you typically learn) but
+what the code is actually doing at runtime and how I should conceptualize it
+(spoiler: &ldquo;move&rdquo; isn&rsquo;t really accurate).</p>
+<h2 id="how-does-stdmove-work">
+  How does <code>std::move()</code> work?&nbsp;<a class="heading-link" href="#how-does-stdmove-work">＃</a>
+</h2><p>There are many articles and
+<a href="https://stackoverflow.com/a/27026280">StackOverflow posts</a> already that explain
+how <code>std::move()</code> works and why you should use it, along with its nuances<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>,
+so I won&rsquo;t go into detail here.</p>
+<p>But as a quick refresher: you likely know that <code>std::move()</code> doesn&rsquo;t actually
+move anything by itself, it just casts its argument to an rvalue (specifically
+an <a href="https://en.cppreference.com/w/cpp/language/value_category">xvalue</a>,
+&ldquo;eXpiring&rdquo; value). A simplified implementation could be something like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#ff79c6">template</span><span style="color:#ff79c6">&lt;</span><span style="color:#ff79c6">typename</span> T<span style="color:#ff79c6">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">constexpr</span> std<span style="color:#ff79c6">::</span>remove_reference_t<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;&amp;&amp;</span> move(T<span style="color:#ff79c6">&amp;&amp;</span> t) <span style="color:#ff79c6">noexcept</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">static_cast</span><span style="color:#ff79c6">&lt;</span>std<span style="color:#ff79c6">::</span>remove_reference_t<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;&amp;&amp;&gt;</span>(t);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>So it&rsquo;s essentially just a glorified <code>static_cast</code>, but it allows the compiler
+to reuse the object&rsquo;s internal resources and avoid a copy. <code>std::move()</code> is a
+way to tell the compiler, &ldquo;I&rsquo;m done with this object, so feel free to
+cannibalize its resources efficiently.&rdquo; The object itself isn&rsquo;t really ever
+&ldquo;moved&rdquo; at all; it remains at the same address and will soon be destroyed, but
+its resources can be efficiently reused by the new moved-to object.</p>
+<h2 id="moves-can-be-efficient">
+  Moves can be efficient&nbsp;<a class="heading-link" href="#moves-can-be-efficient">＃</a>
+</h2><p>This &ldquo;cannibalizing&rdquo; of internal resources is what makes moves usually more
+efficient than copies, specifically for objects that have heavy and dynamic
+internal resources, like many of the common STL data structures.</p>
+<p>The classic example is <code>std::vector</code>, which of course can represent an
+arbitrarily large set of data, but the <em>vector object itself</em> (not the data it
+owns) is internally made up of just 3 pointers (vector start, vector end, and
+the end of the allocated region). Copying the vector is expensive since all the
+allocated data also needs to be copied, but when moving the only things that
+need to be copied into the new vector object are the 3 pointers &ndash; no deep
+copying, no new allocations.</p>
+<p>If you&rsquo;re curious, you can even
+<a href="https://godbolt.org/z/vqroo3Pj6">see this in action by looking at the generated assembly instructions</a>!</p>
+<p>The story is similar for things like <code>std::string</code>, <code>std::unordered_map</code>, and
+likely many of the other data structures you work with.</p>
+<h2 id="moves-are-sometimes-just-copies">
+  Moves are sometimes just copies&nbsp;<a class="heading-link" href="#moves-are-sometimes-just-copies">＃</a>
+</h2><p>But what if the object doesn&rsquo;t have such internal resources? Consider a <code>struct</code>
+that just has a bunch of primitive and aggregate members:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">Pose</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">Quat</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd">float</span> a, b, c, d;
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd">float</span> x, y, z;
+</span></span><span style="display:flex;"><span>    Quat q;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>Unlike in the previous examples, there isn&rsquo;t an internal pointer to some
+far-away allocated data that can be easily copied into the new object; all the
+data is packed into the struct itself, and can&rsquo;t be magically moved. In this
+case the move isn&rsquo;t faster than a copy &ndash; in fact, it&rsquo;s
+<a href="https://godbolt.org/z/Y1xs5v7xc">basically identical at the assembly level</a>.</p>
+<p>So for types with no dynamic resources, moving them is equivalent to copying
+them<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>. I like to think about move semantics as being closer to a
+&ldquo;<strong>destructive shallow copy</strong>&rdquo; &ndash; they&rsquo;re only more efficient when there&rsquo;s
+<em>depth</em> to reuse, typically in the form of separate allocations that can have
+ownership transferred cheaply.</p>
+<p>But what if you don&rsquo;t want to think about it? Using <code>std::move()</code> on
+plain-old-data types usually isn&rsquo;t any worse than letting the copy happen,
+except for one important case: copy elision.</p>
+<h2 id="dont-stdmove-your-return-values">
+  Don&rsquo;t std::move() your return values&nbsp;<a class="heading-link" href="#dont-stdmove-your-return-values">＃</a>
+</h2><p>The
+<a href="https://stackoverflow.com/questions/12953127/what-are-copy-elision-and-return-value-optimization">details of copy elision</a>
+are described elsewhere, but essentially the C++ standard allows compilers to
+perform copy elision under certain circumstances, some of the most common being
+when returning values (<abbr title="Return Value Optimization">RVO</abbr> and
+<abbr title="Named Return Value Optimization">NRVO</abbr>). Instead of
+constructing temporaries and copying them around, the object can be constructed
+directly at the final return memory location in the caller&rsquo;s stack space! Notice
+that this <em>entirely avoids copying or moving</em>, so it&rsquo;s strictly better than a
+move. And starting with C++17, RVO in particular is &ldquo;guaranteed&rdquo;.</p>
+<p>However, adding an <code>std::move()</code> when returning forces a move and <em>breaks the
+requirements for copy elision</em>, so it&rsquo;s strictly a performance hindrance when
+returning a local:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>Geofront <span style="color:#50fa7b">FindNERV</span>() {
+</span></span><span style="display:flex;"><span>  Geofront geo <span style="color:#ff79c6">=</span> GetTokyo3();
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// Don&#39;t do this!
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  <span style="color:#6272a4">// return std::move(geo);
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  <span style="color:#6272a4">// Do this instead.
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  <span style="color:#ff79c6">return</span> geo;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Removing the <code>std::move()</code> here will allow NRVO elision, but even if the
+compiler can&rsquo;t elide it for some reason it will fall back to a move (not a
+copy), so you should almost always omit the explicit <code>std::move()</code>.</p>
+
+
+<blockquote class="alert alert-note">
+    <p class="alert-heading">
+        <i class="alert-icon fa-solid fa-note-sticky"></i>
+        
+            Note
+        
+    </p>
+    <p><p>One exception is if you&rsquo;re moving-from a <em>member field</em> instead of a local, in
+which case an explicit <code>std::move()</code> at time of return is required to avoid a
+copy.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Eva</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">public</span><span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span>    ATField Consume() {
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">// std::move is required here to avoid a copy.
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>        <span style="color:#ff79c6">return</span> std<span style="color:#ff79c6">::</span>move(field_);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">private</span><span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span>    ATField field_;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div>
+</blockquote><div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Nuances like move construction vs assignment, rules around <code>const</code>, and the
+valid-but-unspecified state of moved-from objects.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>Hence why &ldquo;move&rdquo; is a bit of a misnomer.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+  </section>
+</main>
+<footer>
+  <i class="heart fa-solid fa-heart"></i>
+</footer>
+
+        </section>
+      </section>
+    </section>
+  </body>
+</html>

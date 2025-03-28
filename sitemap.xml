@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://voithos.io/articles/</loc>
-    <lastmod>2024-12-21T14:59:55-08:00</lastmod>
+    <lastmod>2025-03-27T21:04:55-07:00</lastmod>
   </url><url>
     <loc>https://voithos.io/code/</loc>
   </url><url>
@@ -15,15 +15,18 @@
     <loc>https://voithos.io/me/</loc>
   </url><url>
     <loc>https://voithos.io/tags/c&#43;&#43;/</loc>
-    <lastmod>2024-12-21T14:59:55-08:00</lastmod>
+    <lastmod>2025-03-27T21:04:55-07:00</lastmod>
+  </url><url>
+    <loc>https://voithos.io/articles/std-move-is-not-free/</loc>
+    <lastmod>2025-03-27T21:04:55-07:00</lastmod>
   </url><url>
     <loc>https://voithos.io/tags/</loc>
-    <lastmod>2024-12-21T14:59:55-08:00</lastmod>
-  </url><url>
-    <loc>https://voithos.io/articles/type-safe-enum-class-bit-flags/</loc>
-    <lastmod>2024-12-21T14:59:55-08:00</lastmod>
+    <lastmod>2025-03-27T21:04:55-07:00</lastmod>
   </url><url>
     <loc>https://voithos.io/</loc>
+    <lastmod>2025-03-27T21:04:55-07:00</lastmod>
+  </url><url>
+    <loc>https://voithos.io/articles/type-safe-enum-class-bit-flags/</loc>
     <lastmod>2024-12-21T14:59:55-08:00</lastmod>
   </url><url>
     <loc>https://voithos.io/articles/fancier-ticking-in-unreal/</loc>
