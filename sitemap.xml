@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://voithos.io/articles/</loc>
-    <lastmod>2025-03-27T21:04:55-07:00</lastmod>
+    <lastmod>2025-03-31T19:33:02-07:00</lastmod>
   </url><url>
     <loc>https://voithos.io/code/</loc>
   </url><url>
@@ -14,16 +14,28 @@
   </url><url>
     <loc>https://voithos.io/me/</loc>
   </url><url>
+    <loc>https://voithos.io/tags/debugging/</loc>
+    <lastmod>2025-03-31T19:33:02-07:00</lastmod>
+  </url><url>
+    <loc>https://voithos.io/tags/</loc>
+    <lastmod>2025-03-31T19:33:02-07:00</lastmod>
+  </url><url>
+    <loc>https://voithos.io/articles/the-merits-of-dumb-debug-tools/</loc>
+    <lastmod>2025-03-31T19:33:02-07:00</lastmod>
+  </url><url>
+    <loc>https://voithos.io/tags/tooling/</loc>
+    <lastmod>2025-03-31T19:33:02-07:00</lastmod>
+  </url><url>
+    <loc>https://voithos.io/tags/unreal-engine/</loc>
+    <lastmod>2025-03-31T19:33:02-07:00</lastmod>
+  </url><url>
+    <loc>https://voithos.io/</loc>
+    <lastmod>2025-03-31T19:33:02-07:00</lastmod>
+  </url><url>
     <loc>https://voithos.io/tags/c&#43;&#43;/</loc>
     <lastmod>2025-03-27T21:04:55-07:00</lastmod>
   </url><url>
     <loc>https://voithos.io/articles/std-move-is-not-free/</loc>
-    <lastmod>2025-03-27T21:04:55-07:00</lastmod>
-  </url><url>
-    <loc>https://voithos.io/tags/</loc>
-    <lastmod>2025-03-27T21:04:55-07:00</lastmod>
-  </url><url>
-    <loc>https://voithos.io/</loc>
     <lastmod>2025-03-27T21:04:55-07:00</lastmod>
   </url><url>
     <loc>https://voithos.io/articles/type-safe-enum-class-bit-flags/</loc>
@@ -33,9 +45,6 @@
     <lastmod>2024-09-02T16:46:05-07:00</lastmod>
   </url><url>
     <loc>https://voithos.io/tags/ue5/</loc>
-    <lastmod>2024-09-02T16:46:05-07:00</lastmod>
-  </url><url>
-    <loc>https://voithos.io/tags/unreal-engine/</loc>
     <lastmod>2024-09-02T16:46:05-07:00</lastmod>
   </url><url>
     <loc>https://voithos.io/tags/build-system/</loc>
@@ -70,9 +79,6 @@
   </url><url>
     <loc>https://voithos.io/tags/textures/</loc>
     <lastmod>2024-08-05T14:46:38-08:00</lastmod>
-  </url><url>
-    <loc>https://voithos.io/tags/debugging/</loc>
-    <lastmod>2024-07-21T22:26:16-07:00</lastmod>
   </url><url>
     <loc>https://voithos.io/articles/unreal-debugging/</loc>
     <lastmod>2024-07-21T22:26:16-07:00</lastmod>

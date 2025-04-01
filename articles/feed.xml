@@ -6,8 +6,15 @@
     <description>Recent content in Articles on voithos.io</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 27 Mar 2025 21:04:55 -0700</lastBuildDate>
+    <lastBuildDate>Mon, 31 Mar 2025 19:33:02 -0700</lastBuildDate>
     <atom:link href="https://voithos.io/articles/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Merits of Dumb Debug Tools</title>
+      <link>https://voithos.io/articles/the-merits-of-dumb-debug-tools/</link>
+      <pubDate>Mon, 31 Mar 2025 19:33:02 -0700</pubDate>
+      <guid>https://voithos.io/articles/the-merits-of-dumb-debug-tools/</guid>
+      <description>&lt;p&gt;I work a lot with &lt;a href=&#34;https://github.com/CesiumGS/3d-tiles&#34;&gt;3D Tiles&lt;/a&gt; and, like any&#xA;complex rendering system, issues can arise that are state-specific and very&#xA;temporal, making them difficult to debug. This was especially true when working&#xA;on the initial implementation of a custom 3D Tiles renderer, which required&#xA;handling some very specific edge cases.&lt;/p&gt;&#xA;&lt;p&gt;Now, I&amp;rsquo;m no stranger to &lt;code&gt;printf&lt;/code&gt; debugging &amp;ndash; it&amp;rsquo;s fast, ubiquitous, and&#xA;sometimes the only real option. But occasionally the state space is so large&#xA;that &lt;code&gt;printf&lt;/code&gt; debugging becomes untenable, and this is where specialized&#xA;debugging tools can shine.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>std::move() Is (Not) Free</title>
       <link>https://voithos.io/articles/std-move-is-not-free/</link>

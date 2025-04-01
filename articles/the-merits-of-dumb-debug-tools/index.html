@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<title>
+    The Merits of Dumb Debug Tools | voithos.io
+  </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Getting the best value out of the simplest viable tooling.">
+<link rel="icon" href="https://voithos.io/favicon.ico">
+<link rel="alternate" href="https://voithos.io/articles/feed.xml" title="voithos.io">
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&family=Oxygen+Mono&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha512-DUC8yqWf7ez3JD1jszxCWSVB0DMP78eOyBpMa5aJki1bIRARykviOuImIczkxlj1KhVSyS16w2FSQetkD4UU2w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/smoothState.js/0.7.2/jquery.smoothState.min.js" integrity="sha512-PA88Ew5anBQLPlovdwOOMj+Ky0x+M6a6bDXYve4q+NDj17AJ37FwHT4Xo758ZQqYKLyvaYko27cQDQ5P/0kOJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
+  
+  <link rel="stylesheet" href="/sass/main.min.5b115557db62b681a3716c2a85c7fc8f80e3f9b27c27633c33c8443405511de0.css">
+
+  
+  <script type="text/javascript" src="/js/index.min.6ec5479881bc3221e976ccfd99c2f5f95b3b8703e46b66424c55cc861cc65db1.js" defer></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="15ea2043-9487-4989-898e-0abc536e5f33" data-domains="voithos.io"></script>
+  </head>
+  <body>
+    <section id="main" class="smooth-scene"><section class="header-box">
+  <section class="site-container">
+    <header>
+        <h1 class="title">
+          <div class="spin cw"></div>
+          <div class="spin ccw"></div>
+          <a href="/">voithos</a>
+        </h1>
+        <input type="checkbox" id="nav-checkbox" class="nav-checkbox" role="button">
+        <label for="nav-checkbox" class="nav-toggle" onclick></label>
+        <nav class="main-nav">
+          <ul>
+            
+            
+            <li class="active">
+              <a href="/articles/" title="Articles">Articles</a>
+            </li>
+            
+            <li class="">
+              <a href="/code/" title="Code">Code</a>
+            </li>
+            
+            <li class="">
+              <a href="/writing/" title="Writing">Writing</a>
+            </li>
+            
+            <li class="">
+              <a href="/art/" title="Art">Art</a>
+            </li>
+            
+            <li class="">
+              <a href="/me/" title="Me">Me</a>
+            </li>
+            
+          </ul>
+        </nav>
+        <nav class="social-nav">
+          <ul>
+            <li>
+              <a href="https://bsky.app/profile/voithoz.bsky.social"><i class="fa-brands fa-bluesky"></i></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/voithoz/"><i class="fa-brands fa-instagram"></i></a>
+            </li>
+            <li>
+              <a href="https://voithos.itch.io/"><i class="fa-brands fa-itch-io"></i></a>
+            </li>
+            <li>
+              <a href="https://github.com/voithos/"><i class="fa-brands fa-github"></i></a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/zaven-muradyan/"><i class="fa-brands fa-linkedin"></i></a>
+            </li>
+          </ul>
+        </nav>
+    </header>
+  </section>
+</section>
+
+      <section class="site-container">
+        <section class="parent-content scene-element scene-element--fadein ">
+<main class="article article-single">
+  <section class="article-body">
+    <div class="article-title-box">
+      <h1 class="article-title">The Merits of Dumb Debug Tools</h1>
+      
+        <span class="article-number">#13</span>
+      
+    </div>
+    
+    <section class="article-description">
+      Getting the best value out of the simplest viable tooling.
+    </section>
+    
+    <div class="article-meta">
+  <section class="article-stats">
+    March 31, 2025&nbsp;·&nbsp;5 min&nbsp;·&nbsp;1013 words
+  </section>
+  
+  <section class="article-tags">
+    
+      <span class="article-tag pill">unreal-engine</span>
+    
+      <span class="article-tag pill">debugging</span>
+    
+      <span class="article-tag pill">tooling</span>
+    
+  </section>
+  
+</div>
+
+    <hr>
+    <p>I work a lot with <a href="https://github.com/CesiumGS/3d-tiles">3D Tiles</a> and, like any
+complex rendering system, issues can arise that are state-specific and very
+temporal, making them difficult to debug. This was especially true when working
+on the initial implementation of a custom 3D Tiles renderer, which required
+handling some very specific edge cases.</p>
+<p>Now, I&rsquo;m no stranger to <code>printf</code> debugging &ndash; it&rsquo;s fast, ubiquitous, and
+sometimes the only real option. But occasionally the state space is so large
+that <code>printf</code> debugging becomes untenable, and this is where specialized
+debugging tools can shine.</p>
+<h2 id="the-quest-for-editor-tooling">
+  The quest for editor tooling&nbsp;<a class="heading-link" href="#the-quest-for-editor-tooling">＃</a>
+</h2><p>The best game engines, in my opinion, go beyond just providing excellent runtime
+features &ndash; equally or more important is having a flexible and robust editor
+experience, and Unreal is no exception here. A great editor is not only useful
+for content creation, but for debugging and system understanding. Even something
+as basic as having the scene visualized in the Outliner can provide a ton of
+insight into what&rsquo;s happening at runtime. And this kind of runtime insight was
+exactly what I needed for 3D Tiles.</p>
+<p>Briefly, 3D Tiles are essentially a Hierarchical Level of Detail system, so
+meshes are represented in a tree structure with progressive refinement. At a
+high level, for each frame a tile renderer has to:</p>
+<ol>
+<li>Traverse the (partial) tree it has in memory</li>
+<li>Determine which tiles it should render and which ones it needs to load, and
+queue them up in the respective rendering / network subsystems</li>
+<li>Process outstanding tile network responses, decode meshes, etc (most of this
+can happen in background tasks)</li>
+</ol>
+<p>Rinse and repeat for the next frame.</p>
+<p>The data that drives these decisions is either inherent to the tileset (e.g. the
+particular tileset&rsquo;s tree structure, tile bounding boxes, geometric error) or
+temporal &ndash; that is, specific to the current frame (e.g. screen space error,
+tile network priority, current rendering candidacy). Altogether, it&rsquo;s a lot of
+information and operations for even just a single frame, and the behavior
+changes over time (the renderer may decide one thing on one frame, but decide
+something else altogether on the next because it received a few important tiles
+from the network).</p>
+<p>The rendering system was implemented as a custom Unreal Actor (with various
+internal Components), and while that meant that I could easily expose basic
+configuration settings, there still wasn&rsquo;t anything out of the box that would
+let me inspect the runtime state.</p>
+<p>What I really wanted was a <strong>tree visualizer</strong>, a UI that could show the
+inherent 3D Tiles tree structure and per-node information, and would allow me to
+pause and step through the frame-by-frame traversal to see the temporal state.
+The Unreal Editor is flexible, and you can certainly define many kinds of custom
+editor UI ranging from basic details widgets all the way to completely custom
+editor panels!</p>
+<p>Unfortunately, this is where the <em>dilemma</em> set in. I&rsquo;m a big proponent of
+building custom tooling to fit one&rsquo;s needs, but Unreal&rsquo;s Slate system is complex
+and I wasn&rsquo;t the most experienced with it. I looked for existing UI that I could
+take inspiration from, and the closest thing I could find was Unreal&rsquo;s <em>Behavior
+Tree</em> visualizer.</p>
+
+<figure><img src="/img/articles/unreal_behavior_tree_editor.png" style="max-width: 800px;" loading="lazy"/><figcaption>
+            <h4>Can I has tree UI?</h4>
+        </figcaption>
+</figure>
+
+<p>This UI had some of the elements I was looking for, but it was far more
+complicated than what I needed and the code was nontrivial to navigate and learn
+from. In addition, it was missing a very important feature: automatic node
+layout. Editing a tree structure manually makes sense for a hand-crafted
+behavior tree, but not so much for a generated tile dataset with potentially
+~thousands of nodes.</p>
+<p>Building this kind of dynamic, interactive UI from scratch would be a tall task,
+and would take away a lot of time from the actual goal at hand. Importantly, if
+such a UI would be very frequently used by a lot of people (say, a team of
+designers creating content for the game) then <em>it might still be worth building
+it</em>. In this case, however, this tool would only be infrequently used by a
+handful of engineers, so the investment wouldn&rsquo;t be worth it.</p>
+<h2 id="simpler-is-better">
+  Simpler is better&nbsp;<a class="heading-link" href="#simpler-is-better">＃</a>
+</h2><p>So building a custom visualizer UI was way too complex, and <code>printf</code> debugging
+couldn&rsquo;t handle the state space. What to do?</p>
+<p>Look outside of Unreal!</p>
+<p>The Unreal Editor&rsquo;s strength lies in integration and efficiency, but there are
+many easily accessible tools outside that space. One such system is <em>Graphviz</em>,
+which is a general purpose graph visualization software. Graphs can be described
+in a simple text language and the visualizer takes care of laying out nodes.
+It&rsquo;s simple and easy to generate, and there are tools like
+<a href="https://edotor.net/">Edotor</a> that allow interactive editing and inspection.</p>
+<p>Graphviz wasn&rsquo;t designed to be a complete metadata visualization UI, but I
+realized that I could map many aspects of the 3D Tiles&rsquo; tree information into
+various attributes of the Graphviz nodes &ndash; things like shape, color, line
+style, and edge style representing various states that a tile could be in. This
+led to a simple &ldquo;grammar&rdquo; of tile visual representations which I quickly got
+used to reading.</p>
+
+<figure><img src="/img/articles/tiles_graphviz.png" style="max-width: 800px;" loading="lazy"/><figcaption>
+            <h4>Colors and shapes galore!</h4>
+        </figcaption>
+</figure>
+
+<p>I also added a lot of auxiliary information (numeric things like screen space
+error or network priority) into the mouseover label text, which let me inspect
+detailed info for specific nodes without overwhelming the visualization.</p>
+
+<figure><img src="/img/articles/tiles_graphviz_mouseover.png" style="max-width: 800px;" loading="lazy"/><figcaption>
+            <h4>Details as needed.</h4>
+        </figcaption>
+</figure>
+
+<p>Finally, to be able to compare the tree between runs, I devised a deterministic
+ID scheme for the tiles based on traversal order (3D Tiles don&rsquo;t have first
+class IDs themselves).</p>
+<p>Prior to this, I&rsquo;d been stuck debugging the tile renderer issues for several
+days, but after implementing this tooling (which only took a couple hours to
+build) I was able to root-cause and fix the issues in a single debugging
+session. Huge success!</p>
+<h2 id="make-more-dumb-tools">
+  Make more dumb tools&nbsp;<a class="heading-link" href="#make-more-dumb-tools">＃</a>
+</h2><p>So what&rsquo;s the lesson? Custom debug tooling can help solve problems that would be
+nigh impossible without it, and well-designed tools will pay back dividends over
+time. But often the most suitable tool is the <em>simplest one that does the job</em>
+(but no simpler).</p>
+
+  </section>
+</main>
+<footer>
+  <i class="heart fa-solid fa-heart"></i>
+</footer>
+
+        </section>
+      </section>
+    </section>
+  </body>
+</html>

@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Debugging on voithos.io</title>
-    <link>https://voithos.io/tags/debugging/</link>
-    <description>Recent content in Debugging on voithos.io</description>
+    <title>Tooling on voithos.io</title>
+    <link>https://voithos.io/tags/tooling/</link>
+    <description>Recent content in Tooling on voithos.io</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 31 Mar 2025 19:33:02 -0700</lastBuildDate>
-    <atom:link href="https://voithos.io/tags/debugging/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://voithos.io/tags/tooling/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>The Merits of Dumb Debug Tools</title>
       <link>https://voithos.io/articles/the-merits-of-dumb-debug-tools/</link>
       <pubDate>Mon, 31 Mar 2025 19:33:02 -0700</pubDate>
       <guid>https://voithos.io/articles/the-merits-of-dumb-debug-tools/</guid>
       <description>&lt;p&gt;I work a lot with &lt;a href=&#34;https://github.com/CesiumGS/3d-tiles&#34;&gt;3D Tiles&lt;/a&gt; and, like any&#xA;complex rendering system, issues can arise that are state-specific and very&#xA;temporal, making them difficult to debug. This was especially true when working&#xA;on the initial implementation of a custom 3D Tiles renderer, which required&#xA;handling some very specific edge cases.&lt;/p&gt;&#xA;&lt;p&gt;Now, I&amp;rsquo;m no stranger to &lt;code&gt;printf&lt;/code&gt; debugging &amp;ndash; it&amp;rsquo;s fast, ubiquitous, and&#xA;sometimes the only real option. But occasionally the state space is so large&#xA;that &lt;code&gt;printf&lt;/code&gt; debugging becomes untenable, and this is where specialized&#xA;debugging tools can shine.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Unreal Debugging</title>
-      <link>https://voithos.io/articles/unreal-debugging/</link>
-      <pubDate>Sun, 21 Jul 2024 22:26:16 -0700</pubDate>
-      <guid>https://voithos.io/articles/unreal-debugging/</guid>
-      <description>&lt;p&gt;As a large and mature engine, Unreal provides a suite of debugging systems and&#xA;tools to aid development, which go hand-in-hand with your standard C++ debugger.&#xA;This page aims to give an incomplete and mostly unordered whirlwind tour of some&#xA;of the more useful tools I&amp;rsquo;ve run across while working in Unreal. If I&amp;rsquo;ve missed&#xA;anything big or particularly useful, I&amp;rsquo;d love to hear about it!&lt;/p&gt;&#xA;&lt;p&gt;Note that most of my experience thus far has been in UE versions &lt;code&gt;4.27&lt;/code&gt; and&#xA;&lt;code&gt;5.0&lt;/code&gt;, although I believe the majority of the tools mentioned here work just as&#xA;well for more recent versions of the engine.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
