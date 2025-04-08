@@ -1,7 +1,7 @@
 baseURL = "https://voithos.io/"
 languageCode = "en-us"
 title = "voithos.io"
-paginate = 10
+pagination.pagerSize = 10
 enableEmoji = true
 
 [params]
