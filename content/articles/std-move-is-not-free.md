@@ -20,7 +20,7 @@ what the code is actually doing at runtime and how I should conceptualize it
 
 ## How does `std::move()` work?
 
-There are many articles and
+There are many [articles](https://abseil.io/tips/77) and
 [StackOverflow posts](https://stackoverflow.com/a/27026280) already that explain
 how `std::move()` works and why you should use it, along with its nuances[^1],
 so I won't go into detail here.
