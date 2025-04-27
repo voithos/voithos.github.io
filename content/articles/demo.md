@@ -3,6 +3,8 @@ title: "Demo"
 date: 2023-01-31
 description: "Example markdown formatting and styling."
 tags: [markdown, demo]
+params:
+  articleNumber: -1
 math: true
 draft: true
 ---
