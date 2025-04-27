@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<title>
+    Draw That Triangle: How to Learn Graphics Programming | voithos.io
+  </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A useful mindset, and practical resources.">
+<link rel="icon" href="https://voithos.io/favicon.ico">
+<link rel="alternate" href="https://voithos.io/articles/feed.xml" title="voithos.io">
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&family=Oxygen+Mono&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha512-DUC8yqWf7ez3JD1jszxCWSVB0DMP78eOyBpMa5aJki1bIRARykviOuImIczkxlj1KhVSyS16w2FSQetkD4UU2w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/smoothState.js/0.7.2/jquery.smoothState.min.js" integrity="sha512-PA88Ew5anBQLPlovdwOOMj+Ky0x+M6a6bDXYve4q+NDj17AJ37FwHT4Xo758ZQqYKLyvaYko27cQDQ5P/0kOJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
+  
+  <link rel="stylesheet" href="/sass/main.min.bd7b5a1b06f8c59d36ad2bb7755ffdc2d337d9b0e1ed30f5540afb888ad9b8e7.css">
+
+  
+  <script type="text/javascript" src="/js/index.min.6ec5479881bc3221e976ccfd99c2f5f95b3b8703e46b66424c55cc861cc65db1.js" defer></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="15ea2043-9487-4989-898e-0abc536e5f33" data-domains="voithos.io"></script>
+  </head>
+  <body>
+    <section id="main" class="smooth-scene"><section class="header-box">
+  <section class="site-container">
+    <header>
+        <h1 class="title">
+          <div class="spin cw"></div>
+          <div class="spin ccw"></div>
+          <a href="/">voithos</a>
+        </h1>
+        <input type="checkbox" id="nav-checkbox" class="nav-checkbox" role="button">
+        <label for="nav-checkbox" class="nav-toggle" onclick></label>
+        <nav class="main-nav">
+          <ul>
+            
+            
+            <li class="active">
+              <a href="/articles/" title="Articles">Articles</a>
+            </li>
+            
+            <li class="">
+              <a href="/code/" title="Code">Code</a>
+            </li>
+            
+            <li class="">
+              <a href="/writing/" title="Writing">Writing</a>
+            </li>
+            
+            <li class="">
+              <a href="/art/" title="Art">Art</a>
+            </li>
+            
+            <li class="">
+              <a href="/me/" title="Me">Me</a>
+            </li>
+            
+          </ul>
+        </nav>
+        <nav class="social-nav">
+          <ul>
+            <li>
+              <a href="https://bsky.app/profile/voithoz.bsky.social"><i class="fa-brands fa-bluesky"></i></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/voithoz/"><i class="fa-brands fa-instagram"></i></a>
+            </li>
+            <li>
+              <a href="https://voithos.itch.io/"><i class="fa-brands fa-itch-io"></i></a>
+            </li>
+            <li>
+              <a href="https://github.com/voithos/"><i class="fa-brands fa-github"></i></a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/zaven-muradyan/"><i class="fa-brands fa-linkedin"></i></a>
+            </li>
+          </ul>
+        </nav>
+    </header>
+  </section>
+</section>
+
+      <section class="site-container">
+        <section class="parent-content scene-element scene-element--fadein ">
+<main class="article article-single">
+  <section class="article-body">
+    <div class="article-title-box">
+      <h1 class="article-title">Draw That Triangle: How to Learn Graphics Programming</h1>
+      
+        <span class="article-number">#14</span>
+      
+    </div>
+    
+    <section class="article-description">
+      A useful mindset, and practical resources.
+    </section>
+    
+    <div class="article-meta">
+  <section class="article-stats">
+    April 7, 2025&nbsp;·&nbsp;12 min&nbsp;·&nbsp;2380 words
+  </section>
+  
+  <section class="article-tags">
+    
+      <span class="article-tag pill">graphics</span>
+    
+      <span class="article-tag pill">c&#43;&#43;</span>
+    
+      <span class="article-tag pill">math</span>
+    
+  </section>
+  
+</div>
+
+    <hr>
+    <h2 id="backstory">
+  Backstory&nbsp;<a class="heading-link" href="#backstory">＃</a>
+</h2><p>Growing up, video games had always been special. The rich visual experiences
+that they offered seemed almost magical, and crafting such experiences seemed
+unreachable for a mere mortal like me. But then I discovered an early version of
+GameMaker and realized that making games was a learnable skill like anything
+else. Over time, this interest expanded to include rich 3D visuals and the
+graphics techniques used to build them.</p>
+<p>Despite this, there weren&rsquo;t any prospects for a game dev or graphics job in the
+small town I grew up in, so in college I focused on studying more &ldquo;practical&rdquo;
+domains like web dev.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> Over the years I was able to progress in my career and
+do interesting work in places like Google, and on the side I continued lightly
+pursuing my graphics and game dev interests as a hobby.</p>
+<p>But I wasn&rsquo;t satisfied, so in 2018 I decided that I wanted to transition fully
+to working on graphics, and started to accelerate my learning.</p>
+<p>Much of it felt mysterious at first. There were buzzwords galore &ndash; PBR, vertex
+and pixel shaders, normal mapping, GI. And many things were challenging, even
+though I was an experienced engineer: the various graphics APIs and their
+nuances, memory management, shader authoring and debugging, and especially all
+the math.</p>
+<p>Nowadays I consider myself a proficient graphics engineer (albeit not yet a
+master). I&rsquo;ve learned a ton over the last few years, and was fortunate to find
+opportunities in the industry.<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> I&rsquo;m generally very happy with my journey, but
+there are a few things I would&rsquo;ve done differently if I had to do it again now.</p>
+<p>Several articles already give specific suggestions on where to start &ndash; some of
+my favorites are:</p>
+<ul>
+<li><a href="https://interplayoflight.wordpress.com/2018/07/08/how-to-start-learn-graphics-programming/">How to start learning graphics programming</a>
+by Kostas Anagnostou</li>
+<li><a href="https://www.stefanpijnacker.nl/article/graphics-programming-where-to-start/">Graphics Programming - Where To Start?</a>
+by Stefan Pijnacker</li>
+<li><a href="https://alextardif.com/LearningGraphics.html">Finding Your Home in Game Graphics Programming</a>
+by Alex Tardif</li>
+</ul>
+<p>But with this article, I wanted to cover some higher level suggestions and
+mindsets that I wish I had when I was starting to learn. After that, though,
+I&rsquo;ll also list some specific resources that I found most helpful.</p>
+<h2 id="a-practical-approach-to-graphics">
+  A practical approach to graphics&nbsp;<a class="heading-link" href="#a-practical-approach-to-graphics">＃</a>
+</h2><p>The absolute best way to learn graphics is to <strong>make things</strong>, build projects,
+and experiment. Starting with basic tutorials is good, but branching away from
+them once you have your footing is even better.</p>
+<p>To avoid frustration during the learning process, it does help to focus on some
+fundamentals first so that you can tackle any issues that arise, but ultimately
+theoretical knowledge will only get you so far; the greatest learning comes from
+putting it into practice.</p>
+<p>Along this line, in the following sections, I talk about some specific mindsets
+I wish I&rsquo;d had when learning.</p>
+<h3 id="dont-obsess-over-math">
+  Don&rsquo;t obsess over math&nbsp;<a class="heading-link" href="#dont-obsess-over-math">＃</a>
+</h3><p>I don&rsquo;t have a deep traditional math education &ndash; the vast majority of my
+working math knowledge has been picked up and solidified through self-study and
+repeated use.</p>
+<p>When I was starting, I thought that if I didn&rsquo;t have a watertight grasp of all
+the things I was reading online &ndash; linear algebra, differential and integral
+calculus, projective geometry &ndash; then I&rsquo;d make some grave errors or run into
+dead ends.</p>
+<p>This is simply not true; math fundamentals are essential, but you don&rsquo;t have to
+become a <em>master</em> before you can start applying them.</p>
+<p>The important thing is: whatever math you use &ndash; cross products, transform
+matrices, quaternions, etc &ndash; try to understand it and &ldquo;explain to yourself&rdquo; how
+it actually works. Draw diagrams, test out small code samples, and try to
+visualize what&rsquo;s happening. By doing this, you&rsquo;ll slowly build more practice and
+intuition. Math in graphics is never just about abstract formulas; it&rsquo;s a
+<em>toolset for manipulating space, light, and movement</em>.</p>
+<p>Remember that this will be an ongoing process. Don&rsquo;t expect to understand
+everything fully on your first pass, and try not to get stuck on details that
+may be fuzzy; often, learning related concepts or just trying your hand at some
+implementation can clarify things.</p>
+<h3 id="keep-performance-in-mind">
+  Keep performance in mind&nbsp;<a class="heading-link" href="#keep-performance-in-mind">＃</a>
+</h3><p>More so than many other fields in software, graphics programming requires
+keeping performance in mind early and often. It&rsquo;s crucial to understand both the
+cost of your high level design decisions and the specific details of your
+implementation.</p>
+<p>Modern CPUs and GPUs are impressively powerful, but with that come more layered
+and complex rendering problems.</p>
+<p>3D data is heavyweight, and access patterns can greatly affect performance. It&rsquo;s
+not just about asymptotic complexity, either: the constant factors can matter,
+and the performance differences between techniques can make or break feasibility
+of a given visual or feature.</p>
+<p>In that sense, I find graphics code to be fairly <em>&ldquo;low level&rdquo;</em>. The details of
+what the actual hardware is doing is important, and performance requirements
+dictate that there be fewer abstraction layers, especially when it comes to data
+representation. Because of this, performance requirements can drive the choice
+of engine and language.</p>
+<p>It&rsquo;s useful to stay curious, avoid making assumptions, and profile when
+comparing different graphics techniques. But be sure to profile the right
+thing!<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<h3 id="there-is-no-perfect-way-to-render-something">
+  There is no perfect way to render something&nbsp;<a class="heading-link" href="#there-is-no-perfect-way-to-render-something">＃</a>
+</h3><p>All rendering techniques are approximations of reality.</p>
+<p>As such, they make tradeoffs between performance and accuracy; it&rsquo;s never
+strictly better or more correct to do it one way, and what works for one project
+may not work for another. A mobile game will have different needs than a AAA
+console title or an offline VFX engine.</p>
+<p>So be creative, experiment, and don&rsquo;t be afraid to try unique and non-physical
+rendering techniques. Being able to know when to &ldquo;break the rules&rdquo; and try an
+unconventional approach takes experience, and is a skill I&rsquo;m still working on
+mastering. But this is where the real magic happens!</p>
+<p><strong>If it runs well and looks good, it&rsquo;s good!</strong> Don&rsquo;t chase technical purity, and
+remember that what may seem like a glaring problem for you may not even be
+noticed by your players.</p>
+<h2 id="where-to-start">
+  Where to start&nbsp;<a class="heading-link" href="#where-to-start">＃</a>
+</h2><p>Having a better learning mindset was the main thing I wish I&rsquo;d had when
+embarking on my own journey, but I couldn&rsquo;t write a &ldquo;how to learn graphics&rdquo;
+article without also offering some specific learning resources, so the following
+sections go into some details.</p>
+<h3 id="learn-c">
+  Learn C++&nbsp;<a class="heading-link" href="#learn-c">＃</a>
+</h3><p>For the most part, C++ is still the lingua franca of graphics programming. It&rsquo;s
+a widespread, mature language with a huge ecosystem of libraries, tools, and
+resources. Many renderers and engines are built around the language, including
+Unreal, and most graphics APIs have straightforward C++ SDKs.</p>
+<p>As a language, C++ offers low-level control and manual memory management, which
+is crucial for performance-critical applications while still providing
+abstractions to keep software development manageable.</p>
+<p>Practically speaking, C++ is a must for industry graphics programming work. So
+how should you start learning it?</p>
+<ul>
+<li>
+<p>If you&rsquo;re new to programming in general, I would recommend learning the basics
+in a different, higher level language like Python first before diving in to
+C++. Once ready, <a href="https://www.learncpp.com/">learncpp.com</a> offers step by step
+tutorials to guide you through the details of the language.</p>
+</li>
+<li>
+<p>If you&rsquo;re a seasoned programmer, I recommend taking a look through
+<a href="https://learnxinyminutes.com/c++/">Learn X in Y minutes</a> which can give you
+an ultra-fast crash course in the language.</p>
+</li>
+<li>
+<p>If you&rsquo;re already a C++ programmer, keep learning! It&rsquo;s a large and complex
+language, and while you won&rsquo;t want to (ab)use the more esoteric parts of it,
+it can be useful to become familiar with its advanced constructs. I&rsquo;d
+recommend reading (and subscribing to) the tremendously useful
+<a href="https://abseil.io/tips/">C++ Tips of the Week</a>, which cover specific topics
+in detail.</p>
+</li>
+</ul>
+<p>Most importantly, write some actual graphics code! You&rsquo;ll learn the language
+better when applying it to problems you care about.</p>
+<h3 id="real-time-vs-offline">
+  Real-time vs offline&nbsp;<a class="heading-link" href="#real-time-vs-offline">＃</a>
+</h3><p>A good first step is to decide whether you&rsquo;re interested in <strong>real-time</strong> or
+<strong>offline</strong> rendering.</p>
+<p>Real-time rendering prioritizes speed and interactivity, meaning you only have
+<em>milliseconds</em> to generate the next frame. This is the domain of video games,
+VR/AR, and other real-time systems.</p>
+<p>In contrast, offline rendering prioritizes visual fidelity with detailed
+physical simulations. Each frame may take minutes or hours to render! This is
+the realm of film VFX, feature animation, and high fidelity visualizations.</p>
+<p>While the underlying theory around lighting, rendering, geometry representation,
+etc, can have a lot of overlap, in practice the particular techniques that
+you&rsquo;ll use will vastly differ between real-time and offline.</p>
+<p>If you aren&rsquo;t yet sure where your interests lie, I&rsquo;d recommend briefly dabbling
+in both! Even though I specialize in real-time now, studying offline rendering
+gave me a better understanding of how light actually works in the real world and
+what my real-time approximations should be targeting. And with modern
+ray-tracing hardware, the divide between real-time and offline techniques is
+shrinking.</p>
+<h3 id="real-time-rendering">
+  Real-time rendering&nbsp;<a class="heading-link" href="#real-time-rendering">＃</a>
+</h3><h4 id="get-a-lay-of-the-land">
+  Get a lay of the land&nbsp;<a class="heading-link" href="#get-a-lay-of-the-land">＃</a>
+</h4><p>To get started with real-time graphics, it pays to begin with concept-focused
+learning materials on first principles before diving into more specific modern
+topics. There are many resources for this, but here are some of my favorites:</p>
+<ul>
+<li>
+<p>I wholeheartedly
+recommend <a href="https://www.youtube.com/playlist?list=PLplnkTzzqsZS3R5DjmCQsqupu43oS9CFN">Cem Yuksel&rsquo;s lectures on Interactive Computer Graphics</a>.
+In my opinion, they provide a great balance of theory and practice (leaning
+more on the &ldquo;practice&rdquo; side), and can give you a solid whirlwind tour of
+everything from the very basics to things like global illumination, volume
+rendering, and compute shaders. The lectures were recorded in 2021, so the
+material is comparatively recent and up-to-date at the time of writing.</p>
+</li>
+<li>
+<p>If you like books, &ldquo;Real-Time Rendering&rdquo; by Tomas Möller, Eric Haines, and
+Naty Hoffman is very good. Fair warning, it&rsquo;s dense! It can act as a detailed
+step-by-step introduction for first principles all the way to advanced
+rendering techniques, but it can also work as a reference to look up specific
+details as needed.</p>
+</li>
+<li>
+<p>I&rsquo;d also recommend starting a little
+<a href="https://github.com/voithos/quarkGL">personal renderer</a> project in order to
+experiment with the things you learn. You can base this off either the
+lectures or chapters above, or other tutorials
+like <a href="https://learnopengl.com/">learnopengl.com</a> (which is indeed
+OpenGL-specific, but nonetheless goes into many graphics fundamentals). As you
+put your learning into practice, always try to experiment beyond the material.
+Adjust parameters, predict what will happen, observe the effects and compare
+with your predictions to reinforce your understanding.</p>
+</li>
+<li>
+<p>At some point, your graphics code will inevitably misbehave, but debugging
+graphics and shaders is not as easy as code running on the CPU. This is where
+graphics debuggers like <a href="https://renderdoc.org/">RenderDoc</a> are essential.
+Learn how to use them to capture a frame, inspect the draw calls, shader
+inputs/outputs, and texture contents. Compare your mental model of the
+renderer with what the frame capture tells you, and investigate any
+discrepancies to fix potential issues.</p>
+</li>
+</ul>
+<p>Through all of this, there&rsquo;s the practical question of which graphics API to
+use, i.e. OpenGL or Vulkan (or even Direct3D if you&rsquo;re feeling brave). Any of
+them can work, but OpenGL and ~similar APIs are high-level and much easier to
+start with, so my recommendation is to stick with OpenGL at first.</p>
+<h4 id="go-deeper">
+  Go deeper&nbsp;<a class="heading-link" href="#go-deeper">＃</a>
+</h4><p>Once you&rsquo;ve gotten a grasp of the basics of real-time rendering, resources
+become more specialized based on what you&rsquo;d like to learn.</p>
+<p>Up until now, I&rsquo;ve recommended using an API like OpenGL. A good next step is to
+try a more modern API like <em>Vulkan</em> or <em>Direct3D 12</em>, which more closely match
+how today&rsquo;s GPU hardware actually works and will unlock improved capabilities
+and performance (at the cost of complexity). I&rsquo;d suggest going through
+<a href="https://vkguide.dev/">vkguide.dev</a> covering Vulkan 1.3, which includes new
+Vulkan features that greatly simplify how you use the API compared to older
+versions.</p>
+<p>Beyond that, you can dive into more complex rendering techniques that interest
+you. There are books like the &ldquo;GPU Zen&rdquo; series that do deep-dives on specific
+techniques, and there are hours of recorded GDC and SIGGRAPH talks on new
+methods, stories of real-world implementations, and tutorials on the latest GPU
+hardware features. Pick a technique &ndash; deferred shading, SSAO, ray traced
+shadows &ndash; and implement it from scratch.</p>
+<p>At this point, you can also begin to study sample code like the
+<a href="https://github.com/SaschaWillems/Vulkan">Vulkan examples</a> or
+<a href="https://github.com/microsoft/DirectX-Graphics-Samples/">DirectX samples</a>, or
+browse the code of existing renderers like
+<a href="https://google.github.io/filament/Filament.html">Filament</a> or
+<a href="https://github.com/godotengine/godot">Godot</a> to learn from solid
+implementations. You can even go to the primary sources and begin
+<a href="https://morgan3d.github.io/advanced-ray-tracing-course/reading-research.pdf">reading new research papers on graphics techniques</a>.</p>
+<h3 id="offline-rendering">
+  Offline rendering&nbsp;<a class="heading-link" href="#offline-rendering">＃</a>
+</h3><p>I&rsquo;m not the most well-versed in the latest offline rendering techniques, but the
+time I spent studying it definitely gave me valuable insight into how light
+propagates. Some specific resources I&rsquo;d recommend:</p>
+<ul>
+<li>
+<p><a href="https://raytracing.github.io/">Peter Shirley&rsquo;s series on raytracing</a> is the
+perfect introduction and super satisfying to complete, even if you just go
+through the first &ldquo;Ray Tracing in One Weekend&rdquo;.</p>
+</li>
+<li>
+<p>Similar to my real-time recommendation, I&rsquo;d suggest playing around with a
+<a href="https://github.com/voithos/muon">toy path tracer project</a> of your own while
+going through any learning materials.</p>
+</li>
+<li>
+<p>&ldquo;Physically Based Rendering: From Theory To Implementation&rdquo; by Matt Pharr,
+Wenzel Jakob, and Greg Humphreys is a widely recognized work, but it can be a
+bit dense to go through linearly. I&rsquo;ve found it more useful as a reference
+resource to compare notes to when trying to understand a concept, think
+through an implementation, or to just get a refresher. Many of the concepts in
+the book can also be reused in real-time rendering!</p>
+</li>
+</ul>
+<p>Once you&rsquo;re beyond the basics here, there will be many specialized learning
+materials you can find on various light-transport techniques, etc, but I&rsquo;m less
+familiar with these.</p>
+<h2 id="summary-build-your-way-to-understanding">
+  Summary: build your way to understanding&nbsp;<a class="heading-link" href="#summary-build-your-way-to-understanding">＃</a>
+</h2><p>Graphics is a challenging but rewarding journey, combining math, CS, art, and
+creativity in ways few other disciplines do. Experiment and be creative, don&rsquo;t
+get stuck in analysis paralysis.</p>
+<p>Start with a basic renderer, then slowly implement more techniques and add
+features. Each feature will build upon your understanding and unlock new
+possibilities. And new ideas are always being explored and shared &ndash; there will
+always be more to learn!</p>
+<p>Don&rsquo;t let the unknowns hold you back! Embrace the learning process. Go draw that
+triangle. :)</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>And I&rsquo;d wager this is not an uncommon story &ndash; a strong interest in graphics
+coupled with depressingly limited opportunities.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>I worked on some fascinating graphics-related simulation work at Wing
+starting in 2020, and since 2022 I&rsquo;ve been working on exciting 3D features
+in Google Maps.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>Profile on target hardware when possible, and avoid comparing apples to
+oranges! But that&rsquo;s a topic for a separate post.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+  </section>
+</main>
+<footer>
+  <i class="heart fa-solid fa-heart"></i>
+</footer>
+
+        </section>
+      </section>
+    </section>
+  </body>
+</html>

@@ -6,8 +6,15 @@
     <description>Recent content in C&#43;&#43; on voithos.io</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 27 Mar 2025 21:04:55 -0700</lastBuildDate>
+    <lastBuildDate>Mon, 07 Apr 2025 20:45:54 -0700</lastBuildDate>
     <atom:link href="https://voithos.io/tags/c++/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Draw That Triangle: How to Learn Graphics Programming</title>
+      <link>https://voithos.io/articles/draw-that-triangle-how-to-learn-graphics-programming/</link>
+      <pubDate>Mon, 07 Apr 2025 20:45:54 -0700</pubDate>
+      <guid>https://voithos.io/articles/draw-that-triangle-how-to-learn-graphics-programming/</guid>
+      <description>&lt;h2 id=&#34;backstory&#34;&gt;&#xD;&#xA;  Backstory&amp;nbsp;&lt;a class=&#34;heading-link&#34; href=&#34;#backstory&#34;&gt;＃&lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&lt;p&gt;Growing up, video games had always been special. The rich visual experiences&#xA;that they offered seemed almost magical, and crafting such experiences seemed&#xA;unreachable for a mere mortal like me. But then I discovered an early version of&#xA;GameMaker and realized that making games was a learnable skill like anything&#xA;else. Over time, this interest expanded to include rich 3D visuals and the&#xA;graphics techniques used to build them.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>std::move() Is (Not) Free</title>
       <link>https://voithos.io/articles/std-move-is-not-free/</link>

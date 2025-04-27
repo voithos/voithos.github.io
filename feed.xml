@@ -6,7 +6,7 @@
     <description>Recent content on voithos.io</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 31 Mar 2025 19:33:02 -0700</lastBuildDate>
+    <lastBuildDate>Mon, 07 Apr 2025 20:45:54 -0700</lastBuildDate>
     <atom:link href="https://voithos.io/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Code</title>
@@ -28,6 +28,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://voithos.io/me/</guid>
       <description>&lt;h2 id=&#34;hi-there-im-span-classnamezavenspan&#34;&gt;&#xD;&#xA;  Hi there! I&amp;rsquo;m &lt;span class=&#34;name&#34;&gt;Zaven&lt;/span&gt;.&amp;nbsp;&lt;a class=&#34;heading-link&#34; href=&#34;#hi-there-im-span-classnamezavenspan&#34;&gt;＃&lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&lt;hr&gt;&#xA;&lt;p&gt;I&amp;rsquo;m a software engineer living in the pleasant Seattle area with my best friend&#xA;Daisy (&lt;a href=&#34;https://ladychamomile.ink/&#34;&gt;who is &lt;em&gt;&lt;strong&gt;amazing!&lt;/strong&gt;&lt;/em&gt;&lt;/a&gt;).&lt;/p&gt;&#xA;&lt;p&gt;I like creating things!&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;m hugely interested in &lt;span class=&#34;keyword&#34;&gt;game dev&lt;/span&gt; and &lt;span&#xD;&#xA;class=&#34;keyword&#34;&gt;graphics programming&lt;/span&gt;, and love creating interactive&#xA;visual worlds. I&amp;rsquo;m inspired by great storytelling, whatever the medium, and&#xA;enjoy &lt;a href=&#34;https://voithos.io/writing/&#34;&gt;writing&lt;/a&gt;, &lt;a href=&#34;https://voithos.io/art/&#34;&gt;creating art&lt;/a&gt;, and&#xA;aspiring to tell stories of my own.&lt;/p&gt;&#xA;&lt;p&gt;Want to say hello? Shoot me an &lt;a href=&#34;mailto:zaven@voithos.io&#34;&gt;email&lt;/a&gt;!&lt;/p&gt;&#xA;&lt;p&gt;&lt;span class=&#34;keyword&#34;&gt;以上！&lt;/span&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Draw That Triangle: How to Learn Graphics Programming</title>
+      <link>https://voithos.io/articles/draw-that-triangle-how-to-learn-graphics-programming/</link>
+      <pubDate>Mon, 07 Apr 2025 20:45:54 -0700</pubDate>
+      <guid>https://voithos.io/articles/draw-that-triangle-how-to-learn-graphics-programming/</guid>
+      <description>&lt;h2 id=&#34;backstory&#34;&gt;&#xD;&#xA;  Backstory&amp;nbsp;&lt;a class=&#34;heading-link&#34; href=&#34;#backstory&#34;&gt;＃&lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&lt;p&gt;Growing up, video games had always been special. The rich visual experiences&#xA;that they offered seemed almost magical, and crafting such experiences seemed&#xA;unreachable for a mere mortal like me. But then I discovered an early version of&#xA;GameMaker and realized that making games was a learnable skill like anything&#xA;else. Over time, this interest expanded to include rich 3D visuals and the&#xA;graphics techniques used to build them.&lt;/p&gt;</description>
     </item>
     <item>
       <title>The Merits of Dumb Debug Tools</title>
