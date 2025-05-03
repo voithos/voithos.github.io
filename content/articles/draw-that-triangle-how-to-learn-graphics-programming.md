@@ -9,12 +9,15 @@ params:
 
 ## Backstory
 
+_Feel free to skip this section if you're not interested in some motivating
+personal history of mine. :)_
+
 Growing up, video games had always been special. The rich visual experiences
-that they offered seemed almost magical, and crafting such experiences seemed
+that they offered seemed almost magical, and crafting such experiences felt
 unreachable for a mere mortal like me. But then I discovered an early version of
 GameMaker and realized that making games was a learnable skill like anything
-else. Over time, this interest expanded to include rich 3D visuals and the
-graphics techniques used to build them.
+else, even for me. Over time, this interest expanded to include rich 3D visuals
+and the graphics techniques used to build them.
 
 Despite this, there weren't any prospects for a game dev or graphics job in the
 small town I grew up in, so in college I focused on studying more "practical"
@@ -24,9 +27,9 @@ pursuing my graphics and game dev interests as a hobby.
 
 [^1]:
     And I'd wager this is not an uncommon story -- a strong interest in graphics
-    coupled with depressingly limited opportunities.
+    and games coupled with depressingly limited opportunities.
 
-But I wasn't satisfied, so in 2018 I decided that I wanted to transition fully
+But I wasn't satisfied! So in 2018 I decided that I wanted to transition fully
 to working on graphics, and started to accelerate my learning.
 
 Much of it felt mysterious at first. There were buzzwords galore -- PBR, vertex
@@ -37,16 +40,19 @@ the math.
 
 Nowadays I consider myself a proficient graphics engineer (albeit not yet a
 master). I've learned a ton over the last few years, and was fortunate to find
-opportunities in the industry.[^2] I'm generally very happy with my journey, but
-there are a few things I would've done differently if I had to do it again now.
+fun opportunities in the industry.[^2] I'm generally very happy with my journey
+and am excited to see where it goes next, but there are a few things I would've
+done differently if I had to learn it all again now.
 
 [^2]:
     I worked on some fascinating graphics-related simulation work at Wing
     starting in 2020, and since 2022 I've been working on exciting 3D features
     in Google Maps.
 
-Several articles already give specific suggestions on where to start -- some of
-my favorites are:
+## Why this article?
+
+Several resources already give overviews and specific suggestions on where to
+start -- some of my favorites are:
 
 - [How to start learning graphics programming](https://interplayoflight.wordpress.com/2018/07/08/how-to-start-learn-graphics-programming/)
   by Kostas Anagnostou
@@ -55,13 +61,17 @@ my favorites are:
 - [Finding Your Home in Game Graphics Programming](https://alextardif.com/LearningGraphics.html)
   by Alex Tardif
 
-But with this article, I wanted to cover some higher level suggestions and
-mindsets that I wish I had when I was starting to learn. After that, though,
-I'll also list some specific resources that I found most helpful.
+But with this article, I wanted to cover something a little different. Looking
+back at my journey, my approach to learning felt a bit overly meticulous which
+slowed down my progress, so in this article I'll offer some higher level
+mindsets that I wish I had when I was starting.
 
-## A practical approach to graphics
+I can't resist also sharing my favorite learning resources, though, so in later
+sections I'll list the ones that I found most helpful.
 
-The absolute best way to learn graphics is to **make things**, build projects,
+## A practical mindset for graphics
+
+The absolute best way to learn graphics is to **make things**: build projects
 and experiment. Starting with basic tutorials is good, but branching away from
 them once you have your footing is even better.
 
@@ -79,13 +89,16 @@ I don't have a deep traditional math education -- the vast majority of my
 working math knowledge has been picked up and solidified through self-study and
 repeated use.
 
-When I was starting, I thought that if I didn't have a watertight grasp of all
-the things I was reading online -- linear algebra, differential and integral
-calculus, projective geometry -- then I'd make some grave errors or run into
-dead ends.
+When I was starting, I spent a lot of time studying relevant math in isolation
+before writing my first line of graphics code. This was a big worry for me, and
+the cause of a lot of impostor syndrome! I thought that if I didn't have a
+watertight grasp of all the things I was reading online -- linear algebra,
+differential and integral calculus, projective geometry -- then I'd make some
+grave errors or run into dead ends.
 
-This is simply not true; math fundamentals are essential, but you don't have to
-become a _master_ before you can start applying them.
+This is simply not true; yes, math fundamentals are crucial, but they aren't
+"all or nothing". You don't have to become a _master_ before you can start
+applying them.
 
 The important thing is: whatever math you use -- cross products, transform
 matrices, quaternions, etc -- try to understand it and "explain to yourself" how
@@ -114,11 +127,11 @@ not just about asymptotic complexity, either: the constant factors can matter,
 and the performance differences between techniques can make or break feasibility
 of a given visual or feature.
 
-In that sense, I find graphics code to be fairly _"low level"_. The details of
-what the actual hardware is doing is important, and performance requirements
+In that sense, I find graphics code to be relatively _"low level"_. The details
+of what the actual hardware is doing are important, and performance requirements
 dictate that there be fewer abstraction layers, especially when it comes to data
-representation. Because of this, performance requirements can drive the choice
-of engine and language.
+representation. Because of this, performance criteria can drive the choice of
+engine and language.
 
 It's useful to stay curious, avoid making assumptions, and profile when
 comparing different graphics techniques. But be sure to profile the right
@@ -126,11 +139,15 @@ thing![^3]
 
 [^3]:
     Profile on target hardware when possible, and avoid comparing apples to
-    oranges! But that's a topic for a separate post.
+    oranges! But that's a topic that warrants its own post.
 
 ### There is no perfect way to render something
 
-All rendering techniques are approximations of reality.
+All rendering techniques are approximations of reality.[^4]
+
+[^4]:
+    Even stylized techniques are usually just "less accurate" approximations of
+    reality. :)
 
 As such, they make tradeoffs between performance and accuracy; it's never
 strictly better or more correct to do it one way, and what works for one project
@@ -145,6 +162,48 @@ mastering. But this is where the real magic happens!
 **If it runs well and looks good, it's good!** Don't chase technical purity, and
 remember that what may seem like a glaring problem for you may not even be
 noticed by your players.
+
+### Write down your learnings
+
+There are many overloaded concepts and techniques in graphics (many things have
+multiple / slightly different names depending on graphics API, e.g.
+pixel/fragment shaders), and it can be challenging to keep things straight as
+you're learning (e.g.
+[parallax mapping](https://en.wikipedia.org/wiki/Parallax_mapping) vs
+[parallax occlusion mapping](https://en.wikipedia.org/wiki/Parallax_occlusion_mapping),
+or the [many](https://en.wikipedia.org/wiki/Screen_space_ambient_occlusion)
+[flavors](https://developer.nvidia.com/rendering-technologies/horizon-based-ambient-occlusion-plus)
+of [ambient](https://en.wikipedia.org/wiki/Screen_space_directional_occlusion)
+[occlusion](https://github.com/GameTechDev/XeGTAO) that all have similar
+sounding names).
+
+I've found it useful to write things down as part of the learning process, and
+wish I'd started doing it earlier. Which particular approach is best for
+note-taking, and how much you should do it, will vary from person to person[^5]
+but the _act of writing_ is in many ways more important than the notes
+themselves.
+
+[^5]:
+    I'm a big fan of
+    [personal knowledge management](https://en.wikipedia.org/wiki/Personal_knowledge_management)
+    (PKM), but this is another one of those big topics that warrants its own
+    separate post.
+
+Even just keeping a small personal glossary of terms can be useful to:
+
+- Define concepts for yourself as you learn them.
+- Find connections between related ideas.
+- Have a jumping off point for new concepts, even if you don't fully understand
+  them, making it easier to search and deep-dive later as the need arises.
+- Organize overloaded terms and disambiguate similar-but-different techniques.
+
+This can be especially useful when
+[reading research papers](https://morgan3d.github.io/advanced-ray-tracing-course/reading-research.pdf),
+which can often be dense with new terms and ideas.
+
+The important thing is to encourage your mind to make connections, so try a few
+approaches until you find one that works well for you. Don't stress over making
+your notes ideal -- aim for effectiveness, not completionism.
 
 ## Where to start
 
@@ -252,8 +311,12 @@ topics. There are many resources for this, but here are some of my favorites:
 
 Through all of this, there's the practical question of which graphics API to
 use, i.e. OpenGL or Vulkan (or even Direct3D if you're feeling brave). Any of
-them can work, but OpenGL and ~similar APIs are high-level and much easier to
+them can work, but OpenGL and ~similar APIs are higher-level and much easier to
 start with, so my recommendation is to stick with OpenGL at first.
+
+If you're already familiar with web technology, WebGL would be an easy API to
+start with. And regardless of API, I'd highly recommend regularly taking a look
+at [Shadertoy](https://www.shadertoy.com/) for learning and inspiration.
 
 #### Go deeper
 
