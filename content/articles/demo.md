@@ -1,6 +1,6 @@
 ---
 title: "Demo"
-date: 2023-01-31
+date: 2025-05-03
 description: "Example markdown formatting and styling."
 tags: [markdown, demo]
 params:
