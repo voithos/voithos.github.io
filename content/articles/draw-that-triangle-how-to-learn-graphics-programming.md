@@ -323,10 +323,10 @@ at [Shadertoy](https://www.shadertoy.com/) for learning and inspiration.
 Once you've gotten a grasp of the basics of real-time rendering, resources
 become more specialized based on what you'd like to learn.
 
-Up until now, I've recommended using an API like OpenGL. A good next step is to
-try a more modern API like _Vulkan_ or _Direct3D 12_, which more closely match
-how today's GPU hardware actually works and will unlock improved capabilities
-and performance (at the cost of complexity). I'd suggest going through
+Up until now, I've recommended using an API like OpenGL. The next step is to try
+a more modern API like _Vulkan_ or _Direct3D 12_, which more closely match how
+today's GPU hardware actually works and will unlock improved capabilities and
+performance (at the cost of complexity). I'd suggest going through
 [vkguide.dev](https://vkguide.dev/) covering Vulkan 1.3, which includes new
 Vulkan features that greatly simplify how you use the API compared to older
 versions.
@@ -385,3 +385,10 @@ always be more to learn!
 
 Don't let the unknowns hold you back! Embrace the learning process. Go draw that
 triangle. :)
+
+<hr class="dotted">
+
+###### Acknowledgements
+
+Thanks go to my good friend and fellow graphics engineer Omar El Sheikh for
+reviewing and offering suggestions for this article.
