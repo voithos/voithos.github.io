@@ -372,7 +372,7 @@ Once you're beyond the basics here, there will be many specialized learning
 materials you can find on various light-transport techniques, etc, but I'm less
 familiar with these.
 
-## Summary: build your way to understanding
+## Build your way to understanding
 
 Graphics is a challenging but rewarding journey, combining math, CS, art, and
 creativity in ways few other disciplines do. Experiment and be creative, don't
