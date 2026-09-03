@@ -1362,62 +1362,230 @@ footer {
 
 // Art
 //
-.art {
-  .art-piece {
+.art-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 1rem;
+  width: 60rem;
+  max-width: 100%;
+
+  @media screen and (max-width: $media-mobile-max-width) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+}
+
+.art-thumb {
+  display: block;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  @include prefix(box-shadow, 0 1px 3px 1px $dark-color);
+  @include prefix(transition, box-shadow 0.3s ease-out);
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    padding: 0;
+    box-shadow: none;
+    @include prefix(transition, transform 0.35s ease-out);
+  }
+
+  &:hover,
+  &:focus-visible {
+    @include prefix(box-shadow, 0 0 5px 1px $primary-color);
+
+    img {
+      @include prefix(transform, scale(1.05));
+    }
+  }
+}
+
+// Scroll lock while the lightbox is up.
+html.art-lightbox-open {
+  overflow: hidden;
+}
+
+.art-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: $body-color;
+  overflow: hidden;
+
+  // Holds focus so no control lights up; the modal itself needs no ring.
+  &:focus {
+    outline: none;
+  }
+
+  opacity: 0;
+  @include prefix(transform, scale(0.95));
+  transition: opacity 0.25s ease-out,
+  transform 0.25s ease-out,
+  // allow-discrete keeps the dialog in the top layer long enough to animate out.
+  display 0.25s allow-discrete,
+  overlay 0.25s allow-discrete;
+
+  &::backdrop {
+    background: rgba($dark-color, 0.94);
+    opacity: 0;
+    transition:
+      opacity 0.25s ease-out,
+      display 0.25s allow-discrete,
+      overlay 0.25s allow-discrete;
+  }
+
+  &[open] {
     display: flex;
     flex-flow: row nowrap;
-    border-bottom: 2px solid $primary-color;
-    padding: 2rem 0;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem 1rem;
+    opacity: 1;
+    @include prefix(transform, none);
 
-    @media screen and (max-width: 750px) {
-      flex-direction: column;
+    &::backdrop {
+      opacity: 1;
     }
+  }
 
-    .art-image {
-      flex: 2.59;
-      padding: 1rem;
+  // Nothing to transition from when coming out of `display: none`.
+  @starting-style {
+    &[open] {
+      opacity: 0;
+      @include prefix(transform, scale(0.95));
 
-      a,
-      img {
-        width: 100%;
-      }
-
-      img {
-        padding: 0;
-      }
-
-      @media screen and (max-width: $media-mobile-max-width) {
-        padding: 0.5rem;
+      &::backdrop {
+        opacity: 0;
       }
     }
+  }
 
-    .art-desc {
+  .art-stage {
+    flex: 2.59;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    height: 100%;
+  }
+
+  .art-full {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    padding: 0;
+  }
+
+  .art-info {
+    flex: 1;
+    min-width: 0;
+    max-width: 24rem;
+    max-height: 100%;
+    overflow-y: auto;
+    padding: 0 1rem;
+
+    .art-title {
+      font-style: italic;
+      color: $lowlight-color;
+      margin: 0 0 1rem;
+      font-size: 1.5rem;
+    }
+
+    .art-date {
+      margin-top: 1rem;
+      font-style: italic;
+      color: $lowlight-color;
+
+      &::before {
+        content: '–';
+        margin-right: 0.25rem;
+      }
+    }
+  }
+
+  .art-nav,
+  .art-close {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 3rem;
+    min-height: 3rem;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: $lowlight-color;
+    font-size: 1.75rem;
+    cursor: pointer;
+    @include prefix(transition, color 0.2s ease-out);
+
+    &:hover,
+    &:focus-visible {
+      color: $primary-color;
+    }
+  }
+
+  .art-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 1.5rem;
+  }
+
+  @media screen and (max-width: $media-mobile-max-width) {
+    &[open] {
+      flex-flow: column nowrap;
+      padding: 3rem 0.5rem 1rem;
+      gap: 0.5rem;
+    }
+
+    .art-stage {
+      flex: none;
+      width: 100%;
+      min-height: 0;
+      max-height: 60vh;
+    }
+
+    .art-info {
       flex: 1;
-
-      @media screen and (max-width: $media-mobile-max-width) {
-        padding: 0 2rem;
-      }
+      max-width: none;
+      width: 100%;
+      text-align: center;
 
       .art-title {
-        font-style: italic;
-        color: $lowlight-color;
-
-        @media screen and (max-width: $media-mobile-max-width) {
-          margin: 0.4rem 0 0.4rem;
-        }
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
       }
+    }
 
-      .art-desc-text {
-        padding: 2.5rem 1rem;
+    // Overlay the arrows on the left/right edges so they don't eat width.
+    .art-nav {
+      position: absolute;
+      top: 50%;
+      @include prefix(transform, translateY(-50%));
+    }
 
-        @media screen and (max-width: $media-mobile-max-width) {
-          padding: 0.5rem;
-        }
-      }
+    .art-prev {
+      left: 0;
+    }
 
-      .art-date {
-        font-style: italic;
-      }
+    .art-next {
+      right: 0;
     }
   }
 }

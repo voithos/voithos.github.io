@@ -1,15 +1,17 @@
 import * as THREE from 'three';
-import { WEBGL } from 'three/examples/jsm/WebGL.js';
+import {WEBGL} from 'three/examples/jsm/WebGL.js';
+
+import {maybeCloseArtLightbox, maybeInitArtLightbox} from './art.js';
 
 class ShaderBackdrop {
   constructor() {
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(
-      90, window.innerWidth / window.innerHeight, 0.1, 1000);
+        90, window.innerWidth / window.innerHeight, 0.1, 1000);
 
     try {
       this.renderer = new THREE.WebGLRenderer(
-        { antialias: false, failIfMajorPerformanceCaveat: true });
+          {antialias: false, failIfMajorPerformanceCaveat: true});
     } catch (ex) {
       // WebGL unsupported, or running on software rendering.
       console.log(ex);
@@ -25,9 +27,9 @@ class ShaderBackdrop {
 
     // Set up scene and shader.
     this.uniforms = {
-      iTime: { type: 'f', value: 0.1 },
-      iResolution: { type: 'v2', value: new THREE.Vector2() },
-      iMouse: { type: 'v2', value: new THREE.Vector2() },
+      iTime: {type: 'f', value: 0.1},
+      iResolution: {type: 'v2', value: new THREE.Vector2()},
+      iMouse: {type: 'v2', value: new THREE.Vector2()},
     };
     this.uniforms.iResolution.value.x = window.innerWidth;
     this.uniforms.iResolution.value.y = window.innerHeight;
@@ -257,7 +259,6 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 
       // Introduce some noise to time.
       float dt = fract(hash21(sampleCoord) + iTime);
-      // TODO: Why is this clamped?
       noisyTime = mod(iTime + dt * 0.003, 4000.0);
 
       // Calculate ray origin and direction.
@@ -325,7 +326,7 @@ void main() {
     });
 
     this.targetMousePos =
-      new THREE.Vector2(window.innerWidth / 2, window.innerHeight / 2);
+        new THREE.Vector2(window.innerWidth / 2, window.innerHeight / 2);
     window.addEventListener('mousemove', (e) => {
       this.targetMousePos.x = e.clientX;
       this.targetMousePos.y = e.clientY;
@@ -387,7 +388,7 @@ void main() {
     requestAnimationFrame(() => this.animate());
     if (this.isFading) {
       this.currentOpacity =
-        Math.max(Math.min(this.currentOpacity + this.fadeOffset, 1.0), 0.0);
+          Math.max(Math.min(this.currentOpacity + this.fadeOffset, 1.0), 0.0);
       if (this.currentOpacity === this.targetOpacity) {
         this.isFading = false;
         if (this.currentOpacity === 0.0) {
@@ -418,10 +419,14 @@ function enableSmoothState(backdrop) {
     scroll: false,
     prefetch: true,
     cacheLength: 2,
+    // .no-smoothstate is only honored on click by default, but we want to honor
+    // those for hover prefetch as well.
+    anchors: 'a:not(.no-smoothstate)',
     onStart: {
       duration: 300,
       render: ($container) => {
-        $('html, body').animate({ scrollTop: 0 });
+        maybeCloseArtLightbox();
+        $('html, body').animate({scrollTop: 0});
         // Reverse CSS animations.
         $container.addClass('is-exiting');
         smoothState.restartCSSAnimations();
@@ -436,6 +441,7 @@ function enableSmoothState(backdrop) {
       },
     },
     onAfter: () => {
+      maybeInitArtLightbox();
       if (backdrop) {
         // Enable the backdrop on the main page, and disable it on subsequent
         // pages.
@@ -455,6 +461,7 @@ function enableSmoothState(backdrop) {
   smoothState = $('#main').smoothState(options).data('smoothState');
 }
 
+// TODO: Extract this to a helper module.
 var backdrop = null;
 if (WEBGL.isWebGLAvailable()) {
   backdrop = new ShaderBackdrop();
@@ -463,9 +470,11 @@ if (WEBGL.isWebGLAvailable()) {
   }
 } else {
   console.warn(
-    'Browser does not support WebGL; defaulting to static background');
+      'Browser does not support WebGL; defaulting to static background');
 }
 
 if (typeof jQuery !== 'undefined') {
   enableSmoothState(backdrop);
 }
+
+maybeInitArtLightbox();

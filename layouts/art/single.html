@@ -1,19 +1,51 @@
 {{ define "main" }}
 <main class="art">
-  {{ range .Site.Data.art }}
-  <section class="art-piece">
-    <section class="art-image">
-      <img alt="{{ .name }}" src="/img/art/{{ .img }}" loading="lazy">
-    </section>
-    <section class="art-desc">
-      <section class="art-desc-text">
+  <ul class="art-grid">
+    {{ range .Site.Data.art }}
+    {{/* Generate thumbnails for the images. */}}
+    {{ $src := resources.Get (printf "img/art/%s" .img) }}
+    {{ $thumb := $src.Fill (printf "600x600 webp q75 %s" (default "Center" .anchor)) }}
+    {{/* Serve the original for GIFs (processing drops the animation) and for
+         small images (lossy webp smears the pixel art). */}}
+    {{ $full := $src }}
+    {{ if and (ne (path.Ext .img) ".gif") (gt (math.Max $src.Width $src.Height) 1600) }}
+      {{ $full = $src.Fit "1600x1600 webp q85" }}
+    {{ end }}
+    {{ $slug := default (path.BaseName .img) .slug | urlize }}
+    <li>
+      <a class="art-thumb no-smoothstate" href="{{ $full.RelPermalink }}"
+         data-art-slug="{{ $slug }}">
+        <img alt="{{ .name }}" src="{{ $thumb.RelPermalink }}"
+             width="{{ $thumb.Width }}" height="{{ $thumb.Height }}"
+             loading="lazy" decoding="async">
+      </a>
+      {{/* Source of truth for the lightbox panel. */}}
+      <article class="art-piece" hidden data-art-slug="{{ $slug }}"
+               data-art-full="{{ $full.RelPermalink }}"
+               data-art-width="{{ $full.Width }}" data-art-height="{{ $full.Height }}">
         <h4 class="art-title">{{ .name }}</h4>
-        {{ .desc | markdownify }}
-        <br>
-        –<span class="art-date">{{ .date | dateFormat "January, 2006" }}</span>
-      </section>
-    </section>
-  </section>
-  {{ end }}
+        <div class="art-desc">{{ .desc | markdownify }}</div>
+        <p class="art-date">{{ .date | dateFormat "January, 2006" }}</p>
+      </article>
+    </li>
+    {{ end }}
+  </ul>
+
+  {{/* tabindex parks focus on the dialog so no button shows a focus ring. */}}
+  <dialog class="art-lightbox" tabindex="-1" aria-label="Artwork viewer">
+    <button type="button" class="art-nav art-prev" aria-label="Previous piece">
+      <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+    </button>
+    <figure class="art-stage">
+      <img class="art-full" alt="">
+    </figure>
+    <aside class="art-info"></aside>
+    <button type="button" class="art-nav art-next" aria-label="Next piece">
+      <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+    </button>
+    <button type="button" class="art-close" aria-label="Close">
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+  </dialog>
 </main>
 {{ end }}
