@@ -1,0 +1,16 @@
+{{ define "main" }}
+<main class="tags-index">
+  <h1 class="tags-index-title">{{ .Title }}</h1>
+
+  <section class="tags-index-list">
+    {{- range .Data.Terms.Alphabetical }}
+      {{- $count := len (where .Page.Pages "Type" "in" site.Params.mainSections) }}
+      {{- if $count }}
+      <a class="article-tag pill" href="{{ .Page.RelPermalink }}">
+        {{ .Page.Data.Term }}<sup class="count-badge">&nbsp;{{ $count }}</sup>
+      </a>
+      {{- end }}
+    {{- end }}
+  </section>
+</main>
+{{ end }}

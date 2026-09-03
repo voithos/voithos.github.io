@@ -1,0 +1,29 @@
+{{ define "main" }}
+{{- $pages := where .Pages "Type" "in" site.Params.mainSections }}
+<main class="tag-page">
+  <h1 class="tag-title">
+    Tagged: <code>{{ .Data.Term }}</code>
+    <sup class="count-badge">&nbsp;{{ len $pages }}</sup>
+  </h1>
+
+  <section class="tag-entries">
+    {{- range $pages.ByDate.Reverse }}
+    <div class="tag-entry">
+      <h3 class="tag-entry-title">
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+        {{- if .Draft }}<sup><span class="article-draft">&nbsp;&nbsp;[draft]</span></sup>{{- end }}
+      </h3>
+      <div class="tag-meta">
+        {{ partial "article_meta.html" . }}
+      </div>
+    </div>
+    {{- end }}
+  </section>
+
+  <section class="extra-links">
+    <div class="left">
+    〈&nbsp;<a class="primary" href="/tags">All tags</a>
+    </div>
+  </section>
+</main>
+{{ end }}

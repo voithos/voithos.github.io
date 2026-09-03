@@ -2,10 +2,10 @@
   <section class="article-stats">
     {{ .Date | dateFormat ":date_long" }}&nbsp;·&nbsp;{{ .ReadingTime }} min&nbsp;·&nbsp;{{ .WordCount }} words
   </section>
-  {{ if .Params.tags }}
+  {{ with .GetTerms "tags" }}
   <section class="article-tags">
-    {{ range .Params.tags }}
-      <span class="article-tag pill">{{ . }}</span>
+    {{ range . }}
+      <a class="article-tag pill" href="{{ .RelPermalink }}">{{ .Data.Term }}</a>
     {{ end }}
   </section>
   {{ end }}

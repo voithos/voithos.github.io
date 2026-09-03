@@ -2,6 +2,8 @@
 <title>{{- block "title" . -}}
   {{ if .IsHome }}
     {{ .Site.Title }}
+  {{ else if eq .Kind "term" }}
+    {{ .Data.Term }} | {{ .Site.Title }}
   {{ else }}
     {{ .Title }} | {{ .Site.Title }}
   {{ end }}

@@ -478,6 +478,11 @@ h6[id] {
   color: saturate($lowlight-color, 15);
 }
 
+.count-badge {
+  color: $lowlight-color;
+  font-size: 1rem;
+}
+
 .pill {
   color: $dark-color;
   background-color: $lowlight-color;
@@ -485,6 +490,23 @@ h6[id] {
   border-radius: 1.0em;
   vertical-align: middle;
   white-space: nowrap;
+}
+
+a.article-tag {
+  margin: 0 0.1rem;
+  color: $dark-color;
+  @include prefix(transition, background-color 0.2s ease-in-out);
+
+  &:hover,
+  &:focus {
+    color: $dark-color;
+    background-color: lighten($lowlight-color, 18);
+    text-shadow: none;
+  }
+
+  &:after {
+    display: none;
+  }
 }
 
 .pagination {
@@ -889,7 +911,7 @@ footer {
 }
 
 .articles {
-  width: 50rem;
+  width: $articles-width;
 
   @media screen and (max-width: $media-mobile-max-width) {
     width: unset;
@@ -954,6 +976,7 @@ footer {
     font-size: 1.2rem;
     display: flex;
     flex-flow: row nowrap;
+    align-items: baseline;
 
     .left {
       text-align: right;
@@ -1185,13 +1208,78 @@ footer {
     font-weight: normal;
   }
 
-  .archive-count {
-    color: $lowlight-color;
-    font-size: 1rem;
+  .article-tags {
+    display: none;
+  }
+}
+
+// Tags
+//
+.tag-page {
+  width: $articles-width;
+  padding: 0 5rem;
+
+  @media screen and (max-width: $media-mobile-max-width) {
+    width: unset;
+    padding: 0 1.2rem;
+  }
+
+  .tag-entries {
+    margin-top: 2rem;
+  }
+
+  .tag-entry {
+    padding: 0.5rem;
+    margin: 0.6rem 0;
+
+    &:not(:last-of-type) {
+      border-bottom: 1px dashed darken($lowlight-color, 30);
+    }
+
+    @media screen and (max-width: $media-mobile-max-width) {
+      padding: 0.2rem;
+      margin: 0.2rem 0;
+    }
+  }
+
+  .tag-entry-title {
+    margin: 0.4rem 0;
+    font-size: 1.3rem;
+    font-weight: normal;
+  }
+
+  .tag-meta .article-stats {
+    font-size: 1.1rem;
+
+    @media screen and (max-width: $media-mobile-max-width) {
+      font-size: 1.0rem;
+    }
   }
 
   .article-tags {
     display: none;
+  }
+}
+
+.tags-index {
+  width: $articles-width;
+  padding: 0 5rem;
+
+  @media screen and (max-width: $media-mobile-max-width) {
+    width: unset;
+    padding: 0 1.2rem;
+  }
+
+  .tags-index-list {
+    margin-top: 2rem;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0.7rem;
+  }
+
+  .count-badge {
+    color: darken($lowlight-color, 40);
+    font-size: 0.8rem;
   }
 }
 
