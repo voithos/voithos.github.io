@@ -51,3 +51,31 @@
         @content;
     }
 }
+
+// Switch to thin scrollbars that better match the rest of the site.
+@mixin scrollbar($thumb-color, $thumb-hover-color, $size: 0.75rem, $inset: 0.2rem) {
+    scrollbar-width: thin;
+    scrollbar-color: $thumb-color transparent;
+
+    &::-webkit-scrollbar {
+        width: $size;
+        height: $size;
+    }
+
+    &::-webkit-scrollbar-track,
+    &::-webkit-scrollbar-corner {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $thumb-color;
+        background-clip: content-box;
+        border: $inset solid transparent;
+        border-radius: $size;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: $thumb-hover-color;
+        background-clip: content-box;
+    }
+}

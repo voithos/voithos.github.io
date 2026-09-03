@@ -125,6 +125,9 @@ pre {
   margin-bottom: 1rem;
   @include prefix(transition, border-radius 0.2s ease-in-out);
 
+  // Custom translucent scrollbar so that it matches the rest of the site.
+  @include scrollbar(rgba($body-color, 0.22), rgba($body-color, 0.42));
+
   &:hover {
     border-radius: 0;
   }
