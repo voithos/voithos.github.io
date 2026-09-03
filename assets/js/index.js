@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import {WEBGL} from 'three/examples/jsm/WebGL.js';
 
 import {maybeCloseArtLightbox, maybeInitArtLightbox} from './art.js';
+import {maybeInitCodeCopy} from './codecopy.js';
 
 class ShaderBackdrop {
   constructor() {
@@ -405,6 +406,12 @@ void main() {
   }
 }
 
+// Sets up everything that depends on the injected page content.
+function initInjectedPageContent() {
+  maybeInitArtLightbox();
+  maybeInitCodeCopy();
+}
+
 function isOnMainPage() {
   const pathname = window.location.pathname;
   return pathname === '' || pathname === '/';
@@ -441,7 +448,7 @@ function enableSmoothState(backdrop) {
       },
     },
     onAfter: () => {
-      maybeInitArtLightbox();
+      initInjectedPageContent();
       if (backdrop) {
         // Enable the backdrop on the main page, and disable it on subsequent
         // pages.
@@ -477,4 +484,4 @@ if (typeof jQuery !== 'undefined') {
   enableSmoothState(backdrop);
 }
 
-maybeInitArtLightbox();
+initInjectedPageContent();

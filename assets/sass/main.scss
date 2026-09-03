@@ -158,6 +158,46 @@ pre {
   }
 }
 
+.code-copy {
+  position: relative;
+}
+
+.copy-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: none;
+  color: $lowlight-color;
+  font-size: 1rem;
+  cursor: pointer;
+  opacity: 0;
+  @include prefix(transition, opacity 0.2s ease-in-out, color 0.2s ease-in-out);
+
+  &:hover,
+  &:focus-visible {
+    color: $body-color;
+  }
+
+  // Snaps to the copied color, but fades back out via the transition above.
+  &.copied {
+    color: $primary-color;
+    @include prefix(transition, opacity 0.2s ease-in-out);
+  }
+
+  // Nothing to hover with (e.g. mobile), so keep the button visible.
+  @media (hover: none) {
+    opacity: 1;
+  }
+}
+
+.code-copy:hover .copy-button,
+.copy-button:focus-visible {
+  opacity: 1;
+}
+
 :not(pre, h1, h2, h3, h4, h5, h6)>code {
   font-family: $mono-font-stack;
   font-size: .75em;
