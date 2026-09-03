@@ -1,5 +1,7 @@
 $ErrorActionPreference = "Stop"
-Set-PSDebug -Trace 1
+
+# Uncomment to trace.
+# Set-PSDebug -Trace 1
 
 # First clone the source repo so that we don't affect the current checked out
 # state.
