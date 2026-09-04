@@ -957,6 +957,7 @@ footer {
 
 .articles {
   width: $articles-width;
+  max-width: 100%; // Prevent overflowing viewport.
 
   @media screen and (max-width: $media-mobile-max-width) {
     width: unset;
@@ -1262,6 +1263,7 @@ footer {
 //
 .tag-page {
   width: $articles-width;
+  max-width: 100%; // Prevent overflowing viewport.
   padding: 0 5rem;
 
   @media screen and (max-width: $media-mobile-max-width) {
@@ -1308,6 +1310,7 @@ footer {
 
 .tags-index {
   width: $articles-width;
+  max-width: 100%; // Prevent overflowing viewport.
   padding: 0 5rem;
 
   @media screen and (max-width: $media-mobile-max-width) {
