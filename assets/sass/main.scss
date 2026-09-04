@@ -476,7 +476,9 @@ h6[id] {
 
 .site-container {
   font-size: 1.2rem;
-  max-width: $max-width;
+  // Try to center and wrap content, but never past the space #main gives it, to avoid overflow.
+  // Quoted so that sass emits the CSS min() instead of evaluating it.
+  max-width: unquote("min(#{$max-width}, 100%)");
   margin: 0 auto;
 
   @media screen and (max-width: 1024px) {

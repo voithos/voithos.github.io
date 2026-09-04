@@ -267,11 +267,11 @@ other small creatures.
 
 Direct image inclusion:
 
-<img src="https://mdg.imgix.net/assets/images/san-juan-mountains.jpg?auto=format&fit=clip&q=40&w=1080" style="max-width: 800px;" loading="lazy">
+<img src="https://mdg.imgix.net/assets/images/san-juan-mountains.jpg?auto=format&fit=clip&q=40&w=1080" style="max-width: min(800px, 100%);" loading="lazy">
 
 Figure with a caption:
 
-{{< figure src="https://mdg.imgix.net/assets/images/san-juan-mountains.jpg?auto=format&fit=clip&q=40&w=1080" title="Would you look at that nice mountain" style="max-width: 500px;" loading="lazy" >}}
+{{< figure src="https://mdg.imgix.net/assets/images/san-juan-mountains.jpg?auto=format&fit=clip&q=40&w=1080" title="Would you look at that nice mountain" style="max-width: min(500px, 100%);" loading="lazy" >}}
 
 ---
 

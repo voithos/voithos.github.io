@@ -67,7 +67,7 @@ and I wasn't the most experienced with it. I looked for existing UI that I could
 take inspiration from, and the closest thing I could find was Unreal's _Behavior
 Tree_ visualizer.
 
-{{< figure src="/img/articles/unreal_behavior_tree_editor.png" title="Can I has tree UI?" style="max-width: 800px;" loading="lazy" >}}
+{{< figure src="/img/articles/unreal_behavior_tree_editor.png" title="Can I has tree UI?" style="max-width: min(800px, 100%);" loading="lazy" >}}
 
 This UI had some of the elements I was looking for, but it was far more
 complicated than what I needed and the code was nontrivial to navigate and learn
@@ -104,13 +104,13 @@ style, and edge style representing various states that a tile could be in. This
 led to a simple "grammar" of tile visual representations which I quickly got
 used to reading.
 
-{{< figure src="/img/articles/tiles_graphviz.png" title="Colors and shapes galore!" style="max-width: 800px;" loading="lazy" >}}
+{{< figure src="/img/articles/tiles_graphviz.png" title="Colors and shapes galore!" style="max-width: min(800px, 100%);" loading="lazy" >}}
 
 I also added a lot of auxiliary information (numeric things like screen space
 error or network priority) into the mouseover label text, which let me inspect
 detailed info for specific nodes without overwhelming the visualization.
 
-{{< figure src="/img/articles/tiles_graphviz_mouseover.png" title="Details as needed." style="max-width: 800px;" loading="lazy" >}}
+{{< figure src="/img/articles/tiles_graphviz_mouseover.png" title="Details as needed." style="max-width: min(800px, 100%);" loading="lazy" >}}
 
 Finally, to be able to compare the tree between runs, I devised a deterministic
 ID scheme for the tiles based on traversal order (3D Tiles don't have first

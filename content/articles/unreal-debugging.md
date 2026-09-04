@@ -37,7 +37,7 @@ running the console command:
 help
 ```
 
-{{< figure src="/img/articles/unreal_console_help.png" style="max-width: 800px;" loading="lazy" >}}
+{{< figure src="/img/articles/unreal_console_help.png" style="max-width: min(800px, 100%);" loading="lazy" >}}
 
 ## Build configurations
 
@@ -172,7 +172,7 @@ can list the categories!
 ShowDebug EnhancedInput
 ```
 
-{{< figure src="/img/articles/showdebug.png" style="max-width: 800px;" loading="lazy" >}}
+{{< figure src="/img/articles/showdebug.png" style="max-width: min(800px, 100%);" loading="lazy" >}}
 
 ## Memory corruption
 
@@ -253,7 +253,7 @@ DumpGPU
 This will generate a set of files under `Saved/GPUDumps` with a viewer `.html`
 page and launcher scripts, which you can use to view the trace.
 
-{{< figure src="/img/articles/unreal_dumpgpu.png" style="max-width: 800px;" loading="lazy" >}}
+{{< figure src="/img/articles/unreal_dumpgpu.png" style="max-width: min(800px, 100%);" loading="lazy" >}}
 
 ## RenderDoc
 
