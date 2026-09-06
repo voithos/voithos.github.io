@@ -64,6 +64,9 @@ a {
   text-decoration: none;
   display: inline-block;
   position: relative;
+  // 'anywhere' rather than 'break-word' so that a bare URL also shrinks the
+  // inline-block's min-content width instead of just wrapping inside it.
+  overflow-wrap: anywhere;
 
   strong,
   em {
@@ -148,6 +151,26 @@ pre {
     }
   }
 
+  table {
+    width: 100%;
+  }
+
+  // Make the line number column resize to its digits.
+  table td:nth-of-type(1) {
+    min-width: 0;
+
+    pre {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  // Without this, the code block doesn't shrink to viewport width.
+  table td:nth-of-type(2) {
+    min-width: 0;
+    max-width: 0;
+  }
+
   table td:nth-of-type(1) pre {
     border-radius: 1rem 0 0 1rem;
   }
@@ -204,6 +227,8 @@ pre {
 :not(pre, h1, h2, h3, h4, h5, h6)>code {
   font-family: $mono-font-stack;
   font-size: .75em;
+  // Long identifiers break rather than push past the article width.
+  overflow-wrap: break-word;
   margin: auto 0.1em;
   padding: 0.1em 0.4em;
   background: darken($lowlight-color, 18);
