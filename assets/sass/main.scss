@@ -1136,6 +1136,13 @@ footer {
     @media screen and (max-width: $media-mobile-max-width) {
       padding: 0.5rem;
     }
+
+    // Have tables scroll instead of forcing overflow on the viewport for small screens.
+    >table {
+      display: block;
+      overflow-x: auto;
+      @include scrollbar(rgba($body-color, 0.22), rgba($body-color, 0.42));
+    }
   }
 
   table {
