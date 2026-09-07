@@ -810,6 +810,12 @@ header {
           }
         }
 
+        // Reduce margin slightly above mobile boundary so that we avoid wrapping.
+        @media screen and (max-width: 800px) {
+          margin-left: 1rem;
+          margin-right: 1rem;
+        }
+
         @media screen and (max-width: $media-mobile-max-width) {
           background-color: $dark-color;
           background-color: rgba($dark-color, 0.75);
