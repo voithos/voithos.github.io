@@ -1,6 +1,7 @@
 // Art page lightbox.
 
 const SCROLL_LOCK_CLASS = 'art-lightbox-open';
+const MIN_SWIPE_DISTANCE_PX = 50;
 
 // Index of the piece currently shown.
 let current = 0;
@@ -122,6 +123,48 @@ function onKeydown(e) {
   }
 }
 
+function initSwipeNavigation(lightbox) {
+  const stage = lightbox.querySelector('.art-stage');
+  let start = null;
+
+  const reset = () => {
+    start = null;
+  };
+  stage.addEventListener('touchstart', (e) => {
+    start = e.touches.length === 1 ? e.touches[0] : null;
+  }, {passive: true});
+  // Cancel on multitouch.
+  lightbox.addEventListener('touchstart', (e) => {
+    if (e.touches.length !== 1) {
+      reset();
+    }
+  }, {passive: true});
+  stage.addEventListener('touchend', (e) => {
+    const origin = start;
+    reset();
+    if (!origin || e.touches.length || !lightbox.open) {
+      return;
+    }
+    const end = Array.from(e.changedTouches)
+                    .find((touch) => touch.identifier === origin.identifier);
+    if (!end) {
+      return;
+    }
+    const dx = end.clientX - origin.clientX;
+    const dy = end.clientY - origin.clientY;
+    if (Math.abs(dx) < MIN_SWIPE_DISTANCE_PX ||
+        Math.abs(dx) < Math.abs(dy) * 1.5) {
+      return;
+    }
+    if (e.cancelable) {
+      e.preventDefault();
+    }
+    stepPiece(dx < 0 ? 1 : -1);
+  }, {passive: false});
+  stage.addEventListener('touchcancel', reset, {passive: true});
+  lightbox.addEventListener('close', reset);
+}
+
 // Explicit dismissal.
 function onCancel(e) {
   e.preventDefault();
@@ -149,6 +192,7 @@ export function maybeInitArtLightbox() {
   lightbox.addEventListener('keydown', onKeydown);
   lightbox.addEventListener('cancel', onCancel);
   lightbox.addEventListener('close', onClose);
+  initSwipeNavigation(lightbox);
 
   // Deep link support.
   const slug = window.location.hash.slice(1);

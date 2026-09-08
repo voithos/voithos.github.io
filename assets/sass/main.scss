@@ -1685,6 +1685,8 @@ html.art-lightbox-open {
   }
 
   .art-stage {
+    // This avoids mishandling horizontal swipes for e.g. back swipes.
+    touch-action: pan-y pinch-zoom;
     flex: 2.59;
     display: flex;
     align-items: center;
