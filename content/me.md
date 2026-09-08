@@ -14,7 +14,7 @@ Daisy ([who is _**amazing!**_](https://ladychamomile.ink/)).
 
 I like creating things!
 
-I'm hugely interested in <span class="keyword">game dev</span> and <span
+I'm highly interested in <span class="keyword">game dev</span> and <span
 class="keyword">graphics programming</span>, and love creating interactive
 visual worlds. I'm inspired by great storytelling, whatever the medium, and
 enjoy [writing]({{< ref "/writing" >}}), [creating art]({{< ref "/art" >}}), and
