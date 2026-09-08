@@ -33,10 +33,10 @@
   <script type="text/javascript" src="{{ $js.RelPermalink }}" defer></script>
 {{ else }}
   {{ $style := resources.Get "sass/main.scss" | css.Sass | resources.Minify | resources.Fingerprint }}
-  <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+  <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
 
   {{ $js := resources.Get "js/index.js" | js.Build | resources.Minify | resources.Fingerprint }}
-  <script type="text/javascript" src="{{ $js.RelPermalink }}" defer></script>
+  <script type="text/javascript" src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
 {{ end }}
 
 
