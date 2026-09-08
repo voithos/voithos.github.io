@@ -5,7 +5,7 @@ menu: "main"
 weight: 3
 ---
 
-## Hi there! I'm <span class="name">Zaven</span>.
+## Hi there! I'm <span class="name">Zaven Muradyan</span>.
 
 ---
 
