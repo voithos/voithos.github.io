@@ -7,6 +7,10 @@
  * @author  Miguel Ángel Pérez   reachme@miguel-perez.com
  * @see     https://github.com/miguel-perez/jquery.smoothState.js
  *
+ * Vendored from smoothState.js 0.7.2 (MIT).
+ * Local fixes:
+ * - retain the loaded page across animation delays, to avoid
+ *   evicting cache entries during back/forward nav
  */
 
 ;(function ( $, window, document, undefined ) {
@@ -377,16 +381,16 @@
           }
         },
 
-        /** Updates the contents from cache[url] */
-        updateContent = function (url) {
+        /** Updates the contents from the page retained by this transition. */
+        updateContent = function (url, page) {
           // If the content has been requested and is done:
           var containerId = '#' + elementId,
-              $newContent = cache[url] ? $(cache[url].html.html()) : null;
+              $newContent = page ? $(page.html.html()) : null;
 
-          if($newContent.length) {
+          if($newContent && $newContent.length) {
 
             // Update the title
-            document.title = cache[url].title;
+            document.title = page.title;
 
             // Update current url
             $container.data('smoothState').href = url;
@@ -450,18 +454,19 @@
 
               /** Page is ready, update the content */
               loaded: function () {
-                var eventName = hasRunCallback ? 'ss.onProgressEnd' : 'ss.onStartEnd';
+                var eventName = hasRunCallback ? 'ss.onProgressEnd' : 'ss.onStartEnd',
+                    page = cache[settings.url];
 
                 if(!callbBackEnded || !hasRunCallback) {
                   $container.one(eventName, function(){
-                    updateContent(settings.url);
+                    updateContent(settings.url, page);
                   });
                 } else if(callbBackEnded) {
-                  updateContent(settings.url);
+                  updateContent(settings.url, page);
                 }
 
                 if(push) {
-                  window.history.pushState({ id: elementId }, cache[settings.url].title, settings.url);
+                  window.history.pushState({ id: elementId }, page.title, settings.url);
                 }
               },
 
