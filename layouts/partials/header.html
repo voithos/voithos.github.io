@@ -7,7 +7,11 @@
           <a href="/">voithos</a>
         </h1>
         <input type="checkbox" id="nav-checkbox" class="nav-checkbox" role="button">
-        <label for="nav-checkbox" class="nav-toggle" onclick></label>
+        <label for="nav-checkbox" class="nav-toggle" onclick>
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+        </label>
         <nav class="main-nav">
           <ul>
             {{ $currentPage := . }}

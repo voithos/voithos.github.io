@@ -716,14 +716,14 @@ header {
       display: block;
     }
 
-    &:after {
-      content: '\f0c9';
+    .nav-toggle-line {
       display: block;
-      height: 1rem;
       width: 1rem;
-      font-family: 'Font Awesome 6 Free';
-      font-weight: 900;
-      text-align: center;
+      height: $nav-bar-height;
+      border-radius: $nav-bar-height;
+      background-color: currentColor;
+      @include prefix(transition, transform 0.3s ease, opacity 0.2s ease);
+      margin-top: $nav-bar-gap;
     }
   }
 
@@ -732,12 +732,39 @@ header {
     top: -99rem;
     left: -99rem;
 
-    &:checked~.nav-toggle:after {
-      content: '\f068';
-    }
+    @media screen and (max-width: $media-mobile-max-width) {
 
-    &:checked~nav {
-      max-height: 20rem;
+      // Checked animation. Animates outer bars into an X and drops the middle one.
+      &:checked~.nav-toggle {
+        .nav-toggle-line:nth-child(1) {
+          @include prefix(transform, translateY($nav-bar-height + $nav-bar-gap) rotate(45deg));
+        }
+
+        .nav-toggle-line:nth-child(2) {
+          opacity: 0;
+          @include prefix(transform, scaleX(0));
+        }
+
+        .nav-toggle-line:nth-child(3) {
+          @include prefix(transform, translateY(-1 * ($nav-bar-height + $nav-bar-gap)) rotate(-45deg));
+        }
+      }
+
+      &:checked~nav {
+        grid-template-rows: minmax(0, 1fr);
+
+        li {
+          opacity: 1;
+          @include prefix(transform, none);
+
+          // Cascade-delay for the items. 8 is an arbitrary max-number-of-links.
+          @for $i from 1 through 8 {
+            &:nth-child(#{$i}) {
+              @include prefix(transition-delay, 40ms + ($i - 1) * 40ms);
+            }
+          }
+        }
+      }
     }
   }
 
@@ -756,9 +783,13 @@ header {
       overflow: hidden;
       flex: 1 100%;
       margin-bottom: 0rem;
-      max-height: 0rem;
-      @include prefix(transition, all 0.7s ease-in-out);
-      @include prefix(transition-property, max-height, margin-bottom);
+
+      // We have to use grid just so we can use 0fr -> 1fr.
+      display: grid;
+      grid-template-rows: minmax(0, 0fr);
+      grid-template-columns: minmax(0, 1fr);
+      transition: grid-template-rows 0.35s ease;
+      align-items: stretch;
     }
 
     ul {
@@ -768,6 +799,7 @@ header {
       @media screen and (max-width: $media-mobile-max-width) {
         display: flex;
         width: 100%;
+        min-height: 0; // Allow shrinking to nothing.
         flex-direction: column;
         text-align: center;
         border-top: 1px solid $lowlight-color;
@@ -823,6 +855,10 @@ header {
           margin: 0rem;
           border-top: 1px solid $lowlight-color;
           border-bottom: 1px solid $lowlight-color;
+
+          opacity: 0;
+          @include prefix(transform, translateY(-0.75rem));
+          @include prefix(transition, opacity 0.3s ease, transform 0.3s ease);
 
           a {
             color: lighten($lowlight-color, 20);
