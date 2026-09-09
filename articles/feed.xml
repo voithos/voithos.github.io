@@ -6,8 +6,15 @@
     <description>Recent content in Articles on voithos.io</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 07 Apr 2025 20:45:54 -0700</lastBuildDate>
+    <lastBuildDate>Tue, 08 Sep 2026 21:43:11 -0700</lastBuildDate>
     <atom:link href="https://voithos.io/articles/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>When (Not) to Use alloca()</title>
+      <link>https://voithos.io/articles/when-not-to-use-alloca/</link>
+      <pubDate>Tue, 08 Sep 2026 21:43:11 -0700</pubDate>
+      <guid>https://voithos.io/articles/when-not-to-use-alloca/</guid>
+      <description>&lt;p&gt;Recently (or rather, a few months ago) I ran across the use of &lt;code&gt;alloca()&lt;/code&gt; in&#xA;some engine internals. For those unfamiliar like I was,&#xA;&lt;a href=&#34;https://man7.org/linux/man-pages/man3/alloca.3.html&#34;&gt;&lt;code&gt;alloca()&lt;/code&gt;&lt;/a&gt; is a C&#xA;function that allows you to dynamically allocate memory on the stack &amp;ndash; in other&#xA;words, what &lt;code&gt;malloc()&lt;/code&gt; is for the heap, &lt;code&gt;alloca()&lt;/code&gt; is for the stack.&#xA;Unfortunately, there&amp;rsquo;s some nuance in how it works, and a good deal of&#xA;plain-old-footguns, so let&amp;rsquo;s take a deeper look.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Draw That Triangle: How to Learn Graphics Programming</title>
       <link>https://voithos.io/articles/draw-that-triangle-how-to-learn-graphics-programming/</link>

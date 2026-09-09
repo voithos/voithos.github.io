@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://voithos.io/articles/</loc>
-    <lastmod>2025-05-03T00:00:00+00:00</lastmod>
+    <lastmod>2026-09-08T21:43:11-07:00</lastmod>
   </url><url>
     <loc>https://voithos.io/code/</loc>
   </url><url>
@@ -14,11 +14,20 @@
   </url><url>
     <loc>https://voithos.io/me/</loc>
   </url><url>
-    <loc>https://voithos.io/</loc>
-    <lastmod>2025-05-03T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://voithos.io/tags/c&#43;&#43;/</loc>
-    <lastmod>2025-04-07T20:45:54-07:00</lastmod>
+    <lastmod>2026-09-08T21:43:11-07:00</lastmod>
+  </url><url>
+    <loc>https://voithos.io/tags/memory/</loc>
+    <lastmod>2026-09-08T21:43:11-07:00</lastmod>
+  </url><url>
+    <loc>https://voithos.io/tags/</loc>
+    <lastmod>2026-09-08T21:43:11-07:00</lastmod>
+  </url><url>
+    <loc>https://voithos.io/</loc>
+    <lastmod>2026-09-08T21:43:11-07:00</lastmod>
+  </url><url>
+    <loc>https://voithos.io/articles/when-not-to-use-alloca/</loc>
+    <lastmod>2026-09-08T21:43:11-07:00</lastmod>
   </url><url>
     <loc>https://voithos.io/articles/draw-that-triangle-how-to-learn-graphics-programming/</loc>
     <lastmod>2025-04-07T20:45:54-07:00</lastmod>
@@ -27,9 +36,6 @@
     <lastmod>2025-04-07T20:45:54-07:00</lastmod>
   </url><url>
     <loc>https://voithos.io/tags/math/</loc>
-    <lastmod>2025-04-07T20:45:54-07:00</lastmod>
-  </url><url>
-    <loc>https://voithos.io/tags/</loc>
     <lastmod>2025-04-07T20:45:54-07:00</lastmod>
   </url><url>
     <loc>https://voithos.io/tags/debugging/</loc>

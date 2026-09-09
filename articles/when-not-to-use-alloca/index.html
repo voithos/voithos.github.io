@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<title>
+    When (Not) to Use alloca() | voithos.io
+  </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Alternatives to the Siren song of allocation.">
+<link rel="icon" href="https://voithos.io/favicon.ico">
+<link rel="alternate" href="https://voithos.io/articles/feed.xml" title="voithos.io">
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&family=Oxygen+Mono&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha512-DUC8yqWf7ez3JD1jszxCWSVB0DMP78eOyBpMa5aJki1bIRARykviOuImIczkxlj1KhVSyS16w2FSQetkD4UU2w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="/js/vendor/jquery.smoothState.min.d74f8f2b06678c6241748b48048d0a210c5dabdbfc9d5a8e4bd8bb943e34c101.js" integrity="sha256-10&#43;PKwZnjGJBdItIBI0KIQxdq9v8nVqOS9i7lD40wQE="></script>
+
+
+
+
+  
+  <link rel="stylesheet" href="/sass/main.min.fd039a3bf7ea641740044a934ad84d2105159b82a5377eba1ae02ff263bd5399.css" integrity="sha256-/QOaO/fqZBdABEqTSthNIQUVm4KlN366GuAv8mO9U5k=">
+
+  
+  <script type="text/javascript" src="/js/index.min.6c62c8ca4d9bdb5cf7865bd910738ee2c08201482f66cc6721189cd609547733.js" integrity="sha256-bGLIyk2b21z3hlvZEHOO4sCCAUgvZsxnIRic1glUdzM=" defer></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="15ea2043-9487-4989-898e-0abc536e5f33" data-domains="voithos.io"></script>
+  </head>
+  <body>
+    <section id="main" class="smooth-scene"><section class="header-box">
+  <section class="site-container">
+    <header>
+        <h1 class="title">
+          <div class="spin cw"></div>
+          <div class="spin ccw"></div>
+          <a href="/">voithos</a>
+        </h1>
+        <input type="checkbox" id="nav-checkbox" class="nav-checkbox" role="button">
+        <label for="nav-checkbox" class="nav-toggle" onclick>
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+        </label>
+        <nav class="main-nav">
+          <ul>
+            
+            
+            <li class="active">
+              <a href="/articles/" title="Articles">Articles</a>
+            </li>
+            
+            <li class="">
+              <a href="/code/" title="Code">Code</a>
+            </li>
+            
+            <li class="">
+              <a href="/writing/" title="Writing">Writing</a>
+            </li>
+            
+            <li class="">
+              <a href="/art/" title="Art">Art</a>
+            </li>
+            
+            <li class="">
+              <a href="/me/" title="Me">Me</a>
+            </li>
+            
+          </ul>
+        </nav>
+        <nav class="social-nav">
+          <ul>
+            <li>
+              <a href="https://bsky.app/profile/voithoz.bsky.social"><i class="fa-brands fa-bluesky"></i></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/voithoz/"><i class="fa-brands fa-instagram"></i></a>
+            </li>
+            <li>
+              <a href="https://voithos.itch.io/"><i class="fa-brands fa-itch-io"></i></a>
+            </li>
+            <li>
+              <a href="https://github.com/voithos/"><i class="fa-brands fa-github"></i></a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/zaven-muradyan/"><i class="fa-brands fa-linkedin"></i></a>
+            </li>
+          </ul>
+        </nav>
+    </header>
+  </section>
+</section>
+
+      <section class="site-container">
+        <section class="parent-content scene-element scene-element--fadein ">
+<main class="article article-single">
+  <section class="article-body">
+    <div class="article-title-box">
+      <h1 class="article-title">When (Not) to Use alloca()</h1>
+      
+        <span class="article-number">#15</span>
+      
+    </div>
+    
+    <section class="article-description">
+      Alternatives to the Siren song of allocation.
+    </section>
+    
+    <div class="article-meta">
+  <section class="article-stats">
+    September 8, 2026&nbsp;·&nbsp;4 min&nbsp;·&nbsp;791 words
+  </section>
+  
+  <section class="article-tags">
+    
+      <a class="article-tag pill" href="/tags/c&#43;&#43;/">c&#43;&#43;</a>
+    
+      <a class="article-tag pill" href="/tags/memory/">memory</a>
+    
+  </section>
+  
+</div>
+
+    <hr>
+    <p>Recently (or rather, a few months ago) I ran across the use of <code>alloca()</code> in
+some engine internals. For those unfamiliar like I was,
+<a href="https://man7.org/linux/man-pages/man3/alloca.3.html"><code>alloca()</code></a> is a C
+function that allows you to dynamically allocate memory on the stack &ndash; in other
+words, what <code>malloc()</code> is for the heap, <code>alloca()</code> is for the stack.
+Unfortunately, there&rsquo;s some nuance in how it works, and a good deal of
+plain-old-footguns, so let&rsquo;s take a deeper look.</p>
+<h2 id="why-would-you-use-it">
+  Why would you use it?&nbsp;<a class="heading-link" href="#why-would-you-use-it">＃</a>
+</h2><p>Conceptually, <code>alloca(size_t size)</code> allocates the passed number of bytes in the
+stack frame and could be implemented by just bumping the stack pointer (modulo
+some bookkeeping). This is faster than <code>malloc()</code> and also means you don&rsquo;t have
+to explicitly <code>free()</code> the resulting memory since it will just get cleaned up
+when returning from the function (this is where the naming comes from, the &ldquo;a&rdquo;
+meaning &ldquo;automatic&rdquo;).</p>
+
+
+<blockquote class="alert alert-note">
+    <p class="alert-heading">
+        <i class="alert-icon fa-solid fa-note-sticky"></i>
+        
+            Note
+        
+    </p>
+    <p><p>There is a feature in C99 known as Variable Length Arrays which can
+conceivably be used to similar effect; however, I won&rsquo;t go into detail here,
+as they have similar issues to <code>alloca()</code> and are not present in C++ outside
+of compiler extensions.</p>
+
+</blockquote><p>Common use cases for such a thing would be for transient values, things like
+intermediate string concatenation results, index arrays, etc. The instance I ran
+across was using <code>alloca()</code> for an internal temporary string, akin to:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#8be9fd">void</span> <span style="color:#50fa7b">TouchFile</span>(<span style="color:#ff79c6">const</span> Str<span style="color:#ff79c6">&amp;</span> folder, <span style="color:#ff79c6">const</span> Str<span style="color:#ff79c6">&amp;</span> file) {
+</span></span><span style="display:flex;"><span>  size_t n <span style="color:#ff79c6">=</span> folder.length() <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">+</span> file.length() <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd">char</span><span style="color:#ff79c6">*</span> path <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">static_cast</span><span style="color:#ff79c6">&lt;</span><span style="color:#8be9fd">char</span><span style="color:#ff79c6">*&gt;</span>(alloca(n));
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// memcpy ...
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  <span style="color:#6272a4">// path is only used inside this fn.
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>}
+</span></span></code></pre></div><h2 id="problems">
+  Problems&nbsp;<a class="heading-link" href="#problems">＃</a>
+</h2><p>While seemingly convenient, it turns out there are several issues with this
+function.</p>
+<p>First and most pedantic of all, it&rsquo;s not part of any C or C++ standard and is
+thus not portable; it only exists as compiler extensions. In fact, because of
+its nature, it <em>has to</em> be a compiler extension (cannot be implemented as a
+library, which also means you can&rsquo;t override it yourself).</p>
+<p>A more serious issue is that it fails catastrophically (stack overflow) if the
+allocation fails, and there is no form of error recovery. This can lead to
+security exploits, especially if the allocation size is externally supplied.
+This also doesn&rsquo;t play nicely if the code is running on a worker thread, which
+engines often configure with less stack space (&lt;1 MB) compared to the main
+thread. Of course, other approaches can also cause stack overflows, but being
+dynamic, <code>alloca()</code> has a higher likelihood of allocating large blocks when not
+used conservatively.</p>
+<p>As a prime example, one of <code>alloca()</code>&rsquo;s gotchas is that the allocated memory is
+not &ldquo;freed&rdquo; at block scope level but rather when the enclosing function returns.
+Calling it in a loop will accumulate allocations &ndash; and it&rsquo;s possible to run
+into this unintentionally due to function inlining, although compilers try to
+guard against this.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#8be9fd">void</span> <span style="color:#50fa7b">TouchAll</span>(<span style="color:#ff79c6">const</span> Str<span style="color:#ff79c6">&amp;</span> folder, Span<span style="color:#ff79c6">&lt;</span>Str<span style="color:#ff79c6">&gt;</span> files) {
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">for</span> (<span style="color:#ff79c6">const</span> Str<span style="color:#ff79c6">&amp;</span> <span style="color:#8be9fd;font-style:italic">f</span> : files) {
+</span></span><span style="display:flex;"><span>    size_t n <span style="color:#ff79c6">=</span> folder.length() <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">+</span> f.length() <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// OOPS: Every allocation remains until we return from TouchAll.
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#8be9fd">char</span><span style="color:#ff79c6">*</span> path <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">static_cast</span><span style="color:#ff79c6">&lt;</span><span style="color:#8be9fd">char</span><span style="color:#ff79c6">*&gt;</span>(alloca(n));
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Despite its at-a-glance convenience, the above downsides are significant enough
+to warrant looking for alternatives.</p>
+<h2 id="better-alternatives">
+  Better alternatives&nbsp;<a class="heading-link" href="#better-alternatives">＃</a>
+</h2><p>The simplest alternative is the boring one: don&rsquo;t allocate dynamically if you
+can help it. In many cases you can just use a fixed size array local and check
+to make sure your data fits. A fixed array keeps the limit bounded and highly
+visible in code, at the cost of a bit less flexibility.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#8be9fd">void</span> <span style="color:#50fa7b">TouchFile</span>(<span style="color:#ff79c6">const</span> Str<span style="color:#ff79c6">&amp;</span> folder, <span style="color:#ff79c6">const</span> Str<span style="color:#ff79c6">&amp;</span> file) {
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  <span style="color:#8be9fd">char</span> pathBuf[<span style="color:#bd93f9">1024</span>];
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">if</span> (n <span style="color:#ff79c6">&gt;</span> <span style="color:#ff79c6">sizeof</span>(pathBuf)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// Handle the overflow case...
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd">char</span><span style="color:#ff79c6">*</span> path <span style="color:#ff79c6">=</span> pathBuf;
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// memcpy ...
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>}
+</span></span></code></pre></div><p>A better solution could be a dedicated container type that combines a fixed
+buffer with heap fallback, like <code>absl::InlinedVector</code>. This allows you to
+optimize for the common case while automatically handling larger edge cases.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#8be9fd">void</span> <span style="color:#50fa7b">TouchFile</span>(<span style="color:#ff79c6">const</span> Str<span style="color:#ff79c6">&amp;</span> folder, <span style="color:#ff79c6">const</span> Str<span style="color:#ff79c6">&amp;</span> file) {
+</span></span><span style="display:flex;"><span>  absl<span style="color:#ff79c6">::</span>InlinedVector<span style="color:#ff79c6">&lt;</span><span style="color:#8be9fd">char</span>, <span style="color:#bd93f9">1024</span><span style="color:#ff79c6">&gt;</span> path;
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>}
+</span></span></code></pre></div><p>If you want to avoid hitting <code>malloc()</code> / the system allocator entirely, you
+could use a separate scratch allocator, something like a per-frame
+bump-allocated arena that can easily be cleared for the next frame, or a
+thread-local scratch to avoid contention.</p>
+<p>And so far we&rsquo;ve only been discussing &ldquo;general&rdquo; memory; if you know the type of
+object you want in advance, something like an object pool may be better (no
+fragmentation, arbitrary lifetime, but introduces bookkeeping).</p>
+<p>Altogether, the alternatives to <code>alloca()</code> cover most of its potential use cases
+with fewer downsides, leaving for it only the remotest edge cases: logging
+during allocation failures, or before custom allocators are set up, etc &ndash;
+essentially, situations where other approaches are unsuitable due to an
+uninitialized or degraded environment.</p>
+
+  </section>
+</main>
+<footer>
+  <i class="heart fa-solid fa-heart"></i>
+</footer>
+
+        </section>
+      </section>
+    </section>
+  </body>
+</html>

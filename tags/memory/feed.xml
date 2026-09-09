@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Memory on voithos.io</title>
+    <link>https://voithos.io/tags/memory/</link>
+    <description>Recent content in Memory on voithos.io</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 08 Sep 2026 21:43:11 -0700</lastBuildDate>
+    <atom:link href="https://voithos.io/tags/memory/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>When (Not) to Use alloca()</title>
+      <link>https://voithos.io/articles/when-not-to-use-alloca/</link>
+      <pubDate>Tue, 08 Sep 2026 21:43:11 -0700</pubDate>
+      <guid>https://voithos.io/articles/when-not-to-use-alloca/</guid>
+      <description>&lt;p&gt;Recently (or rather, a few months ago) I ran across the use of &lt;code&gt;alloca()&lt;/code&gt; in&#xA;some engine internals. For those unfamiliar like I was,&#xA;&lt;a href=&#34;https://man7.org/linux/man-pages/man3/alloca.3.html&#34;&gt;&lt;code&gt;alloca()&lt;/code&gt;&lt;/a&gt; is a C&#xA;function that allows you to dynamically allocate memory on the stack &amp;ndash; in other&#xA;words, what &lt;code&gt;malloc()&lt;/code&gt; is for the heap, &lt;code&gt;alloca()&lt;/code&gt; is for the stack.&#xA;Unfortunately, there&amp;rsquo;s some nuance in how it works, and a good deal of&#xA;plain-old-footguns, so let&amp;rsquo;s take a deeper look.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
