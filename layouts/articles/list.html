@@ -1,7 +1,8 @@
 {{ define "parent-content-class" }}articles-list-parent{{ end }}
 {{ define "main" }}
 <main class="articles articles-list">
-  {{ range .Paginator.Pages }}
+  {{ $pages := (where .Pages "Draft" true) | append (where .Pages "Draft" false) }}
+  {{ range (.Paginate $pages).Pages }}
     <article class="article-blurb">
       <div class="article-title-box">
         <section class="article-title">
