@@ -43,24 +43,6 @@
     </nav>
   {{- end }}
 
-  <section class="extra-links">
-    <span aria-hidden="true">〈&nbsp;</span>
-    <div class="extra-links-items">
-      <div class="extra-links-pair">
-        <a class="primary" href="/archive">Archive</a>
-        <span aria-hidden="true">｜</span>
-        <a class="primary" href="/tags">Tags</a>
-      </div>
-      <span class="extra-links-divider" aria-hidden="true">｜</span>
-      <div class="extra-links-pair">
-        <a class="primary" href="/articles/feed.xml">RSS <i class="fa-solid fa-rss" aria-hidden="true"></i></a>
-        <span aria-hidden="true">｜</span>
-        <a class="primary" href="https://buttondown.com/voithos" aria-label="Subscribe via Email">
-          Subscribe <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-        </a>
-      </div>
-    </div>
-    <span aria-hidden="true">&nbsp;〉</span>
-  </section>
+  {{ partial "article_extra_links.html" . }}
 </main>
 {{ end }}
