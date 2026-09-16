@@ -1088,16 +1088,31 @@ footer {
   .extra-links {
     font-size: 1.2rem;
     display: flex;
-    flex-flow: row nowrap;
-    align-items: baseline;
+    justify-content: center;
+    align-items: center;
 
-    .left {
-      text-align: right;
+    .extra-links-items,
+    .extra-links-pair {
+      display: flex;
+      align-items: baseline;
     }
 
-    .left,
-    .right {
-      flex: 1;
+    a {
+      white-space: nowrap;
+    }
+
+    @media screen and (max-width: 480px) {
+      column-gap: 0.5rem;
+
+      .extra-links-items {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .extra-links-divider {
+        display: none;
+      }
     }
   }
 }

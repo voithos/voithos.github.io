@@ -44,21 +44,23 @@
   {{- end }}
 
   <section class="extra-links">
-    <div class="left">
-    〈&nbsp;<a class="primary" href="/archive">Archive</a>
+    <span aria-hidden="true">〈&nbsp;</span>
+    <div class="extra-links-items">
+      <div class="extra-links-pair">
+        <a class="primary" href="/archive">Archive</a>
+        <span aria-hidden="true">｜</span>
+        <a class="primary" href="/tags">Tags</a>
+      </div>
+      <span class="extra-links-divider" aria-hidden="true">｜</span>
+      <div class="extra-links-pair">
+        <a class="primary" href="/articles/feed.xml">RSS <i class="fa-solid fa-rss" aria-hidden="true"></i></a>
+        <span aria-hidden="true">｜</span>
+        <a class="primary" href="https://buttondown.com/voithos" aria-label="Subscribe via Email">
+          Subscribe <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+        </a>
+      </div>
     </div>
-    <div class="center">
-      ｜
-    </div>
-    <div class="middle">
-      <a class="primary" href="/tags">Tags</a>
-    </div>
-    <div class="center">
-      ｜
-    </div>
-    <div class="right">
-      <a class="primary" href="/articles/feed.xml">RSS Feed</a>&nbsp;〉
-    </div>
+    <span aria-hidden="true">&nbsp;〉</span>
   </section>
 </main>
 {{ end }}
