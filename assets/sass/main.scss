@@ -23,6 +23,7 @@
 html {
   background-color: black;
   background: url($background-image-url);
+  color-scheme: dark;
 }
 
 body {
@@ -1635,9 +1636,12 @@ footer {
   }
 }
 
-// Scroll lock while the lightbox is up.
-html.art-lightbox-open {
-  overflow: hidden;
+// Scroll lock while the lightbox is up. Pins the page instead of hiding overflow,
+// so the scrollbar stays and nothing shifts.
+html.art-lightbox-open body {
+  position: fixed;
+  left: 0;
+  right: 0;
 }
 
 .art-lightbox {

@@ -5,6 +5,8 @@ const MIN_SWIPE_DISTANCE_PX = 50;
 
 // Index of the piece currently shown.
 let current = 0;
+// Scroll position the page is pinned at while the lightbox is up.
+let pinnedScrollY = 0;
 
 function getLightbox() {
   return document.querySelector('.art-lightbox');
@@ -27,6 +29,24 @@ function setHash(slug) {
   const url = slug ? `${window.location.pathname}#${slug}` :
                      window.location.pathname + window.location.search;
   window.history.replaceState(window.history.state, '', url);
+}
+
+// Pins the page in place so it can't scroll. Unlike hiding overflow, this keeps
+// the page's scrollbar, just with nothing to scroll.
+function lockScroll() {
+  pinnedScrollY = window.scrollY;
+  document.body.style.top = `-${pinnedScrollY}px`;
+  document.documentElement.classList.add(SCROLL_LOCK_CLASS);
+}
+
+function unlockScroll() {
+  const html = document.documentElement;
+  if (!html.classList.contains(SCROLL_LOCK_CLASS)) {
+    return;
+  }
+  html.classList.remove(SCROLL_LOCK_CLASS);
+  document.body.style.top = '';
+  window.scrollTo(0, pinnedScrollY);
 }
 
 function preload(piece) {
@@ -60,8 +80,8 @@ function open(slug, updateHash = true) {
 
   render(lightbox, piece);
   if (!lightbox.open) {
+    lockScroll();
     lightbox.showModal();
-    document.documentElement.classList.add(SCROLL_LOCK_CLASS);
     lightbox.focus();
   }
   if (updateHash) {
@@ -91,7 +111,7 @@ export function maybeCloseArtLightbox() {
     dismiss(lightbox, false);
   }
   // The container may already be gone; make sure the page can scroll.
-  document.documentElement.classList.remove(SCROLL_LOCK_CLASS);
+  unlockScroll();
 }
 
 function onThumbClick(e) {
@@ -173,7 +193,7 @@ function onCancel(e) {
 
 // Cleanup, should be called on every dismissal path.
 function onClose(e) {
-  document.documentElement.classList.remove(SCROLL_LOCK_CLASS);
+  unlockScroll();
   // Clear the selected image if any.
   e.currentTarget.querySelector('.art-full').removeAttribute('src');
 }
