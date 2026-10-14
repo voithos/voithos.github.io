@@ -3,6 +3,7 @@ import {WEBGL} from 'three/examples/jsm/WebGL.js';
 
 import {maybeCloseArtLightbox, maybeInitArtLightbox} from './art.js';
 import {maybeInitCodeCopy} from './codecopy.js';
+import {maybeInitProjectGrid} from './projects.js';
 
 class ShaderBackdrop {
   constructor() {
@@ -410,6 +411,7 @@ void main() {
 function initInjectedPageContent() {
   maybeInitArtLightbox();
   maybeInitCodeCopy();
+  maybeInitProjectGrid();
 }
 
 function isOnMainPage() {

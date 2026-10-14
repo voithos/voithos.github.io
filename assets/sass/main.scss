@@ -1427,23 +1427,280 @@ footer {
 
 // Code
 //
-.projects {
-  .project {
-    padding: 1.5rem;
-    border-bottom: 2px solid $primary-color;
-    @include prefix(transition, box-shadow 0.5s ease-out);
+$project-gap: 1rem;
+$project-gap-mobile: 0.5rem;
+$ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+$ease-in-expo: cubic-bezier(0.7, 0, 0.84, 0);
+$panel-open: 0.5s $ease-out-expo;
+$panel-close: 0.35s $ease-in-expo;
 
-    &:hover,
-    &:focus {
-      @include prefix(box-shadow, 0 0 5px 1px $primary-color);
+// Rows are spaced by bottom margins rather than row-gap, so that we don't get a spacing pop
+// when the detail panel opens.
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: $project-gap;
+  padding: $project-gap $project-gap 0;
+
+  @media screen and (max-width: $media-mobile-max-width) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: $project-gap-mobile;
+    padding: $project-gap-mobile $project-gap-mobile 0;
+  }
+
+  .project {
+    margin-bottom: $project-gap;
+
+    @media screen and (max-width: $media-mobile-max-width) {
+      margin-bottom: $project-gap-mobile;
+    }
+  }
+
+  .project-tile {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+
+    // Same sweeping underline as links. Sits below the edge so the glow doesn't
+    // compete with it, and above the active outline so it isn't hidden.
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      right: 0;
+      z-index: 1;
+      width: 0%;
+      border-bottom: 2px solid $contrast-color;
+      @include prefix(transition, width 0.3s ease);
     }
 
-    >h2 {
-      text-align: center;
-      font-size: 1.8rem;
+    &:hover,
+    &:focus-visible {
+      &:after {
+        left: 0;
+        width: 100%;
+      }
 
-      @media screen and (max-width: $media-mobile-max-width) {
-        font-size: 1.6rem;
+      .project-thumb {
+        @include prefix(box-shadow, 0 0 6px 2px $primary-color);
+      }
+
+      .project-caption {
+        opacity: 1;
+      }
+    }
+  }
+
+  .project-thumb {
+    position: relative;
+    display: block;
+    aspect-ratio: 1;
+    overflow: hidden;
+    outline: 2px solid transparent;
+    @include prefix(box-shadow, 0 1px 3px 1px $dark-color);
+    @include prefix(transition, box-shadow 0.3s ease-out, outline-color 0.3s ease-out);
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      object-fit: cover;
+      box-shadow: none;
+    }
+  }
+
+  .project-caption {
+    position: absolute;
+    inset: auto 0 0 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: 2.5rem 0.75rem 0.6rem;
+    background: linear-gradient(to top, rgba($dark-color, 0.9), rgba($dark-color, 0));
+    color: $light-color;
+    text-align: left;
+    opacity: 0;
+    @include prefix(transition, opacity 0.25s ease-out);
+
+    // Nothing to hover with (e.g. mobile), so keep captions visible.
+    @media (hover: none) {
+      opacity: 1;
+    }
+
+    @media screen and (max-width: $media-mobile-max-width) {
+      padding: 1.5rem 0.5rem 0.4rem;
+      font-size: 0.9rem;
+    }
+  }
+
+  .project-caption-name {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .project-caption-date {
+    flex-shrink: 0;
+    color: $lowlight-color;
+    font-size: 0.9rem;
+
+    @media screen and (max-width: $media-mobile-max-width) {
+      display: none;
+    }
+  }
+
+  .project.is-active {
+    .project-thumb {
+      outline-color: $primary-color;
+    }
+
+    .project-caption {
+      opacity: 1;
+    }
+  }
+}
+
+.project-panel {
+  position: relative;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-rows: 0fr;
+  margin-bottom: 0;
+  // Otherwise the browser's scroll anchoring can latch onto a collapsing panel
+  // and drag the page along with it.
+  overflow-anchor: none;
+  @include prefix(transition, grid-template-rows $panel-close, margin-bottom $panel-close);
+
+  &.is-open {
+    grid-template-rows: 1fr;
+    margin-bottom: $project-gap;
+    @include prefix(transition, grid-template-rows $panel-open, margin-bottom $panel-open);
+
+    @media screen and (max-width: $media-mobile-max-width) {
+      margin-bottom: $project-gap-mobile;
+    }
+  }
+
+  // Collapsing while another panel opens: mirror its timing so the combined
+  // height changes smoothly.
+  &.is-leaving {
+    @include prefix(transition, grid-template-rows $panel-open, margin-bottom $panel-open);
+  }
+
+  // Caret pointing up at the active tile.
+  &:before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: var(--caret-x, 50%);
+    border: 10px solid transparent;
+    border-top: 0;
+    border-bottom-color: $primary-color;
+    opacity: 0;
+    @include prefix(transform, translateX(-50%));
+    @include prefix(transition, opacity 0.2s ease-in, left 0.4s $ease-out-expo);
+  }
+
+  &.is-open:before {
+    opacity: 1;
+  }
+}
+
+.project-panel-inner {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  // Inset shadows rather than borders, so the lines don't linger after the
+  // panel collapses.
+  @include prefix(box-shadow, inset 0 2px 0 $primary-color, inset 0 -2px 0 $primary-color);
+  background: rgba($dark-color, 0.6);
+  @include prefix(transition, height 0.4s $ease-out-expo);
+}
+
+.project-panel-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 1;
+  padding: 0.5rem 0.7rem;
+  border: 0;
+  background: none;
+  color: $lowlight-color;
+  font-size: 1.2rem;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    color: $light-color;
+  }
+}
+
+.project-detail {
+  display: flex;
+  flex-flow: row nowrap;
+  opacity: 0;
+  @include prefix(transform, translateY(-1rem));
+  @include prefix(transition, opacity 0.2s ease-in, transform 0.2s ease-in);
+
+  .project-panel.is-open & {
+    opacity: 1;
+    @include prefix(transform, none);
+    @include prefix(transition, opacity 0.3s ease-out 0.08s, transform 0.45s $ease-out-expo 0.08s);
+  }
+
+  .project-panel.is-open.is-content-hidden & {
+    opacity: 0;
+    @include prefix(transition, opacity 0.15s ease-in);
+  }
+
+  @media screen and (max-width: 750px) {
+    flex-direction: column;
+  }
+
+  .project-image {
+    flex: 1.61;
+    padding: 1rem;
+
+    a,
+    img {
+      width: 100%;
+    }
+
+    img {
+      padding: 0;
+    }
+
+    @media screen and (max-width: $media-mobile-max-width) {
+      padding: 0.5rem;
+    }
+  }
+
+  .project-desc {
+    flex: 1;
+    padding: 1rem;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+
+    .project-links {
+      padding: 2rem 0;
+      text-align: center;
+
+      div {
+        padding: 0.5rem;
+      }
+
+      a {
+        margin: 0 0.5rem;
       }
     }
 
@@ -1452,66 +1709,15 @@ footer {
     }
   }
 
-  .project-name {
+  .project-detail-name {
+    margin-top: 0;
     font-weight: normal;
   }
 
-  .project-detail {
-    display: flex;
-    flex-flow: row nowrap;
-
-    @media screen and (max-width: 750px) {
-      flex-direction: column;
-    }
-
-    .project-image {
-      flex: 1.61;
-      padding: 1rem;
-
-      a,
-      img {
-        width: 100%;
-      }
-
-      img {
-        padding: 0;
-      }
-
-      @media screen and (max-width: $media-mobile-max-width) {
-        padding: 0.5rem;
-      }
-    }
-
-    .project-desc {
-      flex: 1;
-      padding: 1rem;
-      display: flex;
-      flex-flow: column nowrap;
-      justify-content: space-around;
-
-      .project-links {
-        padding: 2rem 0;
-        text-align: center;
-
-        div {
-          padding: 0.5rem;
-        }
-
-        a {
-          margin: 0 0.5rem;
-        }
-      }
-
-      @media screen and (max-width: $media-mobile-max-width) {
-        padding: 0.5rem;
-      }
-    }
-
-    .project-date {
-      margin-top: 0.5rem;
-      text-align: right;
-      font-style: italic;
-    }
+  .project-date {
+    margin-top: 0.5rem;
+    text-align: right;
+    font-style: italic;
   }
 }
 
@@ -1612,9 +1818,21 @@ footer {
 .art-thumb {
   display: block;
   aspect-ratio: 1 / 1;
-  overflow: hidden;
   @include prefix(box-shadow, 0 1px 3px 1px $dark-color);
   @include prefix(transition, box-shadow 0.3s ease-out);
+
+  // Below the edge, so the glow doesn't compete with the underline.
+  &:after {
+    bottom: -2px;
+  }
+
+  // Clips the hover zoom here rather than on the link, which would also clip
+  // the underline.
+  .art-thumb-image {
+    display: block;
+    height: 100%;
+    overflow: hidden;
+  }
 
   img {
     display: block;

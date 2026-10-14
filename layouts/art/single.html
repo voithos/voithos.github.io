@@ -15,9 +15,11 @@
     <li>
       <a class="art-thumb no-smoothstate" href="{{ $full.RelPermalink }}"
          data-art-slug="{{ $slug }}">
-        <img alt="{{ .name }}" src="{{ $thumb.RelPermalink }}"
-             width="{{ $thumb.Width }}" height="{{ $thumb.Height }}"
-             loading="lazy" decoding="async">
+        <span class="art-thumb-image">
+          <img alt="{{ .name }}" src="{{ $thumb.RelPermalink }}"
+               width="{{ $thumb.Width }}" height="{{ $thumb.Height }}"
+               loading="lazy" decoding="async">
+        </span>
       </a>
       {{/* Source of truth for the lightbox panel. */}}
       <article class="art-piece" hidden data-art-slug="{{ $slug }}"

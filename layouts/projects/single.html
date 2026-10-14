@@ -1,26 +1,29 @@
 {{ define "main" }}
-<main class="projects">
+<main class="project-grid">
   {{ range .Site.Data.projects }}
   <section class="project project-{{ .class }}">
-    <h2 class="project-name">
-      {{ if .url }}
-        <a class="no-smoothstate" href="{{ .url }}">{{ .name }}</a>
-      {{ else }}
-        {{ .name }}
-      {{ end }}
-    </h2>
-    <section class="project-detail">
+    <button class="project-tile" type="button" aria-expanded="false">
+      <span class="project-thumb">
+        <img alt="{{ .name }}" src="/img/projects/{{ .img }}" loading="lazy">
+        <span class="project-caption">
+          <span class="project-caption-name">{{ .name }}</span>
+          <span class="project-caption-date">{{ .date | dateFormat "2006" }}</span>
+        </span>
+      </span>
+    </button>
+    <template class="project-detail-template">
       <section class="project-image">
         {{ if .url }}
           <a class="no-smoothstate" href="{{ .url }}">
-            <img alt="{{ .name }}" src="/img/projects/{{ .img }}" loading="lazy">
+            <img alt="{{ .name }}" src="/img/projects/{{ .img }}">
           </a>
         {{ else }}
-          <img alt="{{ .name }}" src="/img/projects/{{ .img }}" loading="lazy">
+          <img alt="{{ .name }}" src="/img/projects/{{ .img }}">
         {{ end }}
       </section>
       <section class="project-desc">
         <section class="project-desc-text">
+          <h2 class="project-detail-name">{{ .name }}</h2>
           {{ .desc | markdownify }}
           <br>
           <div class="project-date">–{{ .date | dateFormat "January, 2006" }}</div>
@@ -43,7 +46,7 @@
           {{ end }}
         </section>
       </section>
-    </section>
+    </template>
   </section>
   {{ end }}
 </main>
