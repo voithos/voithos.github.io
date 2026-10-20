@@ -1871,7 +1871,10 @@ html.art-lightbox-open body {
   height: 100%;
   max-height: 100%;
   margin: 0;
-  padding: 0;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem 1rem;
   border: none;
   background: transparent;
   color: $body-color;
@@ -1901,10 +1904,6 @@ html.art-lightbox-open body {
 
   &[open] {
     display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    gap: 1rem;
-    padding: 2rem 1rem;
     opacity: 1;
     @include prefix(transform, none);
 
@@ -2001,11 +2000,9 @@ html.art-lightbox-open body {
   }
 
   @media screen and (max-width: $media-mobile-max-width) {
-    &[open] {
-      flex-flow: column nowrap;
-      padding: 3rem 0.5rem 1rem;
-      gap: 0.5rem;
-    }
+    flex-flow: column nowrap;
+    padding: 3rem 0.5rem 1rem;
+    gap: 0.5rem;
 
     .art-stage {
       flex: none;

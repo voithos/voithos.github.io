@@ -192,10 +192,14 @@ function onCancel(e) {
 }
 
 // Cleanup, should be called on every dismissal path.
-function onClose(e) {
+async function onClose(e) {
+  const lightbox = e.currentTarget;
   unlockScroll();
-  // Clear the selected image if any.
-  e.currentTarget.querySelector('.art-full').removeAttribute('src');
+  // Clear the selected image once faded out, so it doesn't vanish mid-fade.
+  await Promise.allSettled(lightbox.getAnimations().map((a) => a.finished));
+  if (!lightbox.open) {
+    lightbox.querySelector('.art-full').removeAttribute('src');
+  }
 }
 
 // Initializes the art lightbox. Must be called on load and after every
