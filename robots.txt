@@ -1,0 +1,59 @@
+# Opt out of AI training crawlers. Search engines and AI assistants
+# fetching pages on a user's behalf are still allowed.
+# Reference: https://github.com/ai-robots-txt/ai.robots.txt
+
+# OpenAI
+User-agent: GPTBot
+# Anthropic
+User-agent: ClaudeBot
+User-agent: anthropic-ai
+# Google (Gemini training; does not affect Google Search)
+User-agent: Google-Extended
+# Apple (Apple Intelligence training; does not affect Applebot search)
+User-agent: Applebot-Extended
+# Meta
+User-agent: meta-externalagent
+User-agent: FacebookBot
+# Amazon
+User-agent: Amazonbot
+# ByteDance
+User-agent: Bytespider
+User-agent: TikTokSpider
+# Mistral
+User-agent: MistralAI-Training
+# Cohere
+User-agent: cohere-training-data-crawler
+# DeepSeek
+User-agent: DeepSeekBot
+# Alibaba, Baidu, Moonshot, Huawei, Yandex
+User-agent: QwenBot
+User-agent: ERNIEBot
+User-agent: KimiBot
+User-agent: PanguBot
+User-agent: YandexAdditional
+User-agent: YandexAdditionalBot
+# Ai2
+User-agent: AI2Bot
+User-agent: Ai2Bot-Dolma
+# Open datasets and data resellers
+User-agent: CCBot
+User-agent: LAIONDownloader
+User-agent: laion-huggingface-processor
+User-agent: img2dataset
+User-agent: Diffbot
+User-agent: omgili
+User-agent: omgilibot
+User-agent: Webzio-Extended
+User-agent: Brightbot 1.0
+User-agent: Timpibot
+# Research and other model training
+User-agent: Cotoyogi
+User-agent: ICC-Crawler
+User-agent: SBIntuitionsBot
+User-agent: FriendlyCrawler
+User-agent: VelenPublicWebCrawler
+User-agent: Factset_spyderbot
+Disallow: /
+
+User-agent: *
+Allow: /
