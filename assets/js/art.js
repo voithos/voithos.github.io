@@ -2,6 +2,15 @@
 
 const SCROLL_LOCK_CLASS = 'art-lightbox-open';
 const MIN_SWIPE_DISTANCE_PX = 50;
+// Movement a touch needs before we decide whether it's a horizontal drag.
+const DRAG_SLOP_PX = 10;
+const SLIDE_DURATION_MS = 150;
+const RESTING_POSE = {
+  transform: 'translateX(0)',
+  opacity: 1
+};
+
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 // Index of the piece currently shown.
 let current = 0;
@@ -97,11 +106,94 @@ function dismiss(lightbox, clearHash = true) {
   }
 }
 
-// Render the next/previous piece. Wraps around.
-function stepPiece(offset) {
+// How far an image drifts while sliding fully out.
+function slideTravel(lightbox) {
+  return lightbox.querySelector('.art-stage').clientWidth / 2;
+}
+
+// Image pose at horizontal offset `x`, fading out as it nears `travel`.
+function slidePose(x, travel) {
+  return {
+    transform: `translateX(${x}px)`,
+    opacity: Math.max(0, 1 - Math.abs(x) / travel),
+  };
+}
+
+// Animates an element through `keyframes`. A single keyframe starts from
+// wherever the element is, so a slide picks up where a drag left the image.
+function slide(element, keyframes) {
+  return element
+      .animate(keyframes, {
+        duration: SLIDE_DURATION_MS,
+        easing: 'ease-out',
+        fill: 'forwards',
+      })
+      .finished.catch(() => {});
+}
+
+function isSliding(lightbox) {
+  return lightbox.querySelector('.art-full').getAnimations().length > 0;
+}
+
+// Stops any slide and puts the image and info back at rest.
+function clearSlide(lightbox) {
+  for (const el
+           of [lightbox.querySelector('.art-full'),
+               lightbox.querySelector('.art-info')]) {
+    el.getAnimations().forEach((a) => a.cancel());
+    el.style.transform = '';
+    el.style.opacity = '';
+  }
+}
+
+async function springBack(lightbox) {
+  if (reducedMotion.matches) {
+    clearSlide(lightbox);
+    return;
+  }
+  await slide(lightbox.querySelector('.art-full'), [RESTING_POSE]);
+  clearSlide(lightbox);
+}
+
+// Slides to the next/previous piece, wrapping around. Ignored while a slide
+// is already running.
+async function stepPiece(offset) {
+  const lightbox = getLightbox();
+  if (isSliding(lightbox)) {
+    return;
+  }
   const piece = pieceAt(offset);
-  render(getLightbox(), piece);
   setHash(piece.dataset.artSlug);
+
+  if (reducedMotion.matches) {
+    clearSlide(lightbox);
+    render(lightbox, piece);
+    return;
+  }
+
+  const image = lightbox.querySelector('.art-full');
+  const info = lightbox.querySelector('.art-info');
+  const travel = slideTravel(lightbox);
+  // Next exits left, previous exits right.
+  const exitX = offset > 0 ? -travel : travel;
+
+  slide(info, [{opacity: 0}]);
+  await slide(image, [slidePose(exitX, travel)]);
+  // Closing mid-slide cancels the animations and lands here early.
+  if (!lightbox.open) {
+    return;
+  }
+
+  render(lightbox, piece);
+  // Don't slide in an empty frame while the new image decodes.
+  await image.decode().catch(() => {});
+  if (!lightbox.open) {
+    return;
+  }
+
+  slide(info, [{opacity: 0}, {opacity: 1}]);
+  await slide(image, [slidePose(-exitX, travel), RESTING_POSE]);
+  clearSlide(lightbox);
 }
 
 // Closes the art lightbox if it's open.
@@ -145,44 +237,81 @@ function onKeydown(e) {
 
 function initSwipeNavigation(lightbox) {
   const stage = lightbox.querySelector('.art-stage');
+  const image = lightbox.querySelector('.art-full');
   let start = null;
+  // Offset of a recognized horizontal drag, null until then.
+  let dragX = null;
 
-  const reset = () => {
+  const forget = () => {
     start = null;
+    dragX = null;
   };
-  stage.addEventListener('touchstart', (e) => {
-    start = e.touches.length === 1 ? e.touches[0] : null;
-  }, {passive: true});
+  const cancel = () => {
+    if (dragX !== null) {
+      springBack(lightbox);
+    }
+    forget();
+  };
+  const isTracked = (e) => start && e.pointerId === start.pointerId;
+
+  stage.addEventListener('pointerdown', (e) => {
+    // Let a running slide finish before taking another drag.
+    if (!e.isPrimary || e.button !== 0 || isSliding(lightbox)) {
+      return;
+    }
+    start = e;
+  });
   // Cancel on multitouch.
-  lightbox.addEventListener('touchstart', (e) => {
-    if (e.touches.length !== 1) {
-      reset();
+  lightbox.addEventListener('pointerdown', (e) => {
+    if (!e.isPrimary) {
+      cancel();
     }
-  }, {passive: true});
-  stage.addEventListener('touchend', (e) => {
-    const origin = start;
-    reset();
-    if (!origin || e.touches.length || !lightbox.open) {
+  });
+  stage.addEventListener('pointermove', (e) => {
+    if (!isTracked(e)) {
       return;
     }
-    const end = Array.from(e.changedTouches)
-                    .find((touch) => touch.identifier === origin.identifier);
-    if (!end) {
+    const dx = e.clientX - start.clientX;
+    const dy = e.clientY - start.clientY;
+    if (dragX === null) {
+      if (Math.max(Math.abs(dx), Math.abs(dy)) < DRAG_SLOP_PX) {
+        return;
+      }
+      if (Math.abs(dx) < Math.abs(dy) * 1.5) {
+        // Mostly vertical; not a swipe.
+        start = null;
+        return;
+      }
+      // Keeps the release on the stage, so ending a mouse drag over the
+      // backdrop doesn't count as a click that closes the lightbox.
+      stage.setPointerCapture(e.pointerId);
+    }
+    dragX = dx;
+    Object.assign(image.style, slidePose(dx, slideTravel(lightbox)));
+  });
+  stage.addEventListener('pointerup', (e) => {
+    if (!isTracked(e)) {
       return;
     }
-    const dx = end.clientX - origin.clientX;
-    const dy = end.clientY - origin.clientY;
-    if (Math.abs(dx) < MIN_SWIPE_DISTANCE_PX ||
-        Math.abs(dx) < Math.abs(dy) * 1.5) {
+    const dx = dragX;
+    forget();
+    if (dx === null || !lightbox.open) {
       return;
     }
-    if (e.cancelable) {
-      e.preventDefault();
+    if (Math.abs(dx) < MIN_SWIPE_DISTANCE_PX) {
+      springBack(lightbox);
+    } else {
+      stepPiece(dx < 0 ? 1 : -1);
     }
-    stepPiece(dx < 0 ? 1 : -1);
-  }, {passive: false});
-  stage.addEventListener('touchcancel', reset, {passive: true});
-  lightbox.addEventListener('close', reset);
+  });
+  stage.addEventListener('pointercancel', (e) => {
+    if (isTracked(e)) {
+      cancel();
+    }
+  });
+  // A mouse drag would otherwise pick up the image for drag-and-drop.
+  stage.addEventListener('dragstart', (e) => e.preventDefault());
+  lightbox.addEventListener('close', forget);
 }
 
 // Explicit dismissal.
@@ -195,6 +324,7 @@ function onCancel(e) {
 async function onClose(e) {
   const lightbox = e.currentTarget;
   unlockScroll();
+  clearSlide(lightbox);
   // Clear the selected image once faded out, so it doesn't vanish mid-fade.
   await Promise.allSettled(lightbox.getAnimations().map((a) => a.finished));
   if (!lightbox.open) {

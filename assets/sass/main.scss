@@ -1933,6 +1933,8 @@ html.art-lightbox-open body {
     justify-content: center;
     min-width: 0;
     height: 100%;
+    // Clips sliding images at the stage edge instead of over the info panel.
+    overflow: hidden;
   }
 
   .art-full {
