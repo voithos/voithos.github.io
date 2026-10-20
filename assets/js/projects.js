@@ -1,5 +1,7 @@
 // Project page grid.
 
+import {fadeInOnLoad} from './fade.js';
+
 const GRID_SELECTOR = '.project-grid';
 // How long to scroll along after a click; must be longer than the slowest
 // animation.
@@ -171,6 +173,8 @@ function initGrid(grid) {
   // The panel showing `active`. Panels it replaces collapse and detach.
   let panel = null;
   let followFrame = 0;
+
+  fadeInOnLoad(grid.querySelectorAll('.project-thumb img'));
 
   function markActive(project) {
     if (active) {

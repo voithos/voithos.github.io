@@ -1,5 +1,7 @@
 // Art page lightbox.
 
+import {fadeInOnLoad} from './fade.js';
+
 const SCROLL_LOCK_CLASS = 'art-lightbox-open';
 const MIN_SWIPE_DISTANCE_PX = 50;
 // Movement a touch needs before we decide whether it's a horizontal drag.
@@ -351,7 +353,9 @@ export function maybeInitArtLightbox() {
   }
   // No need to de-register these since smoothState will clear the container
   // after navigation.
-  document.querySelector('.art-grid').addEventListener('click', onThumbClick);
+  const grid = document.querySelector('.art-grid');
+  grid.addEventListener('click', onThumbClick);
+  fadeInOnLoad(grid.querySelectorAll('.art-thumb img'));
   lightbox.addEventListener('click', onLightboxClick);
   lightbox.addEventListener('keydown', onKeydown);
   lightbox.addEventListener('cancel', onCancel);

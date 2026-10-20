@@ -263,6 +263,19 @@ img {
   }
 }
 
+.fade-in {
+  @include prefix(transition, opacity 0.6s ease-out);
+
+  &.is-loading {
+    opacity: 0;
+    @include prefix(transition, none);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    @include prefix(transition, none);
+  }
+}
+
 p {
   margin-bottom: 1rem;
 }
@@ -1826,12 +1839,9 @@ $panel-close: 0.35s $ease-in-expo;
     bottom: -2px;
   }
 
-  // Clips the hover zoom here rather than on the link, which would also clip
-  // the underline.
   .art-thumb-image {
     display: block;
     height: 100%;
-    overflow: hidden;
   }
 
   img {
@@ -1841,16 +1851,11 @@ $panel-close: 0.35s $ease-in-expo;
     object-fit: cover;
     padding: 0;
     box-shadow: none;
-    @include prefix(transition, transform 0.35s ease-out);
   }
 
   &:hover,
   &:focus-visible {
     @include prefix(box-shadow, 0 0 5px 1px $primary-color);
-
-    img {
-      @include prefix(transform, scale(1.05));
-    }
   }
 }
 
