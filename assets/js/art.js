@@ -219,8 +219,10 @@ function onLightboxClick(e) {
     stepPiece(-1);
   } else if (e.target.closest('.art-next')) {
     stepPiece(1);
-  } else if (e.target.closest('.art-close') || e.target === e.currentTarget) {
-    // A click on the dialog itself rather than its contents is the backdrop.
+  } else if (
+      e.target.closest('.art-close') || e.target === e.currentTarget ||
+      e.target.classList.contains('art-stage')) {
+    // The dialog itself and the stage around the image are the backdrop.
     dismiss(e.currentTarget);
   }
 }
@@ -241,6 +243,8 @@ function initSwipeNavigation(lightbox) {
   let start = null;
   // Offset of a recognized horizontal drag, null until then.
   let dragX = null;
+  // Whether the latest press moved past the slop, in any direction.
+  let moved = false;
 
   const forget = () => {
     start = null;
@@ -255,6 +259,7 @@ function initSwipeNavigation(lightbox) {
   const isTracked = (e) => start && e.pointerId === start.pointerId;
 
   stage.addEventListener('pointerdown', (e) => {
+    moved = false;
     // Let a running slide finish before taking another drag.
     if (!e.isPrimary || e.button !== 0 || isSliding(lightbox)) {
       return;
@@ -277,13 +282,13 @@ function initSwipeNavigation(lightbox) {
       if (Math.max(Math.abs(dx), Math.abs(dy)) < DRAG_SLOP_PX) {
         return;
       }
+      moved = true;
       if (Math.abs(dx) < Math.abs(dy) * 1.5) {
         // Mostly vertical; not a swipe.
         start = null;
         return;
       }
-      // Keeps the release on the stage, so ending a mouse drag over the
-      // backdrop doesn't count as a click that closes the lightbox.
+      // Keeps the release on the stage even if the pointer wanders off it.
       stage.setPointerCapture(e.pointerId);
     }
     dragX = dx;
@@ -309,6 +314,11 @@ function initSwipeNavigation(lightbox) {
       cancel();
     }
   });
+  stage.addEventListener('click', (e) => {
+    if (moved) {
+      e.stopPropagation();
+    }
+  }, {capture: true});
   // A mouse drag would otherwise pick up the image for drag-and-drop.
   stage.addEventListener('dragstart', (e) => e.preventDefault());
   lightbox.addEventListener('close', forget);
