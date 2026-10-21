@@ -1,0 +1,24 @@
+{{/* Returns a square grid thumbnail and a display image for an image resource.
+
+     Params:
+       src: the image resource.
+       anchor: optional crop anchor for the thumbnail (default "Center").
+
+     The display image is the full image, or a large webp when the full image is
+     too heavy to serve. Light full images are kept, since lossy webp smears
+     small pixel art. GIFs always stay full, since processing drops the
+     animation. */}}
+{{ $thumbSpec := "600x600 webp q75" }}
+{{ $largeSpec := "1600x1600 webp q85" }}
+{{ $maxFullSide := 1600 }}
+{{ $maxFullBytes := 200000 }}
+
+{{ $src := .src }}
+{{ $thumb := $src.Fill (printf "%s %s" $thumbSpec (default "Center" .anchor)) }}
+{{ $img := $src }}
+{{ $isHeavy := or (gt (math.Max $src.Width $src.Height) $maxFullSide)
+                  (gt (len $src.Content) $maxFullBytes) }}
+{{ if and (ne $src.MediaType.SubType "gif") $isHeavy }}
+  {{ $img = $src.Fit $largeSpec }}
+{{ end }}
+{{ return dict "thumb" $thumb "img" $img }}

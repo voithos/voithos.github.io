@@ -1,10 +1,16 @@
 {{ define "main" }}
 <main class="project-grid">
   {{ range .Site.Data.projects }}
+  {{ $src := resources.Get (printf "img/projects/%s" .img) }}
+  {{ $images := partial "image-variants.html" (dict "src" $src "anchor" .anchor) }}
+  {{ $thumb := $images.thumb }}
+  {{ $img := $images.img }}
   <section class="project project-{{ .class }}">
     <button class="project-tile" type="button" aria-expanded="false">
       <span class="project-thumb">
-        <img alt="{{ .name }}" src="/img/projects/{{ .img }}" loading="lazy">
+        <img alt="{{ .name }}" src="{{ $thumb.RelPermalink }}"
+             width="{{ $thumb.Width }}" height="{{ $thumb.Height }}"
+             loading="lazy" decoding="async">
         <span class="project-caption">
           <span class="project-caption-name">{{ .name }}</span>
           <span class="project-caption-date">{{ .date | dateFormat "2006" }}</span>
@@ -15,10 +21,12 @@
       <section class="project-image">
         {{ if .url }}
           <a class="no-smoothstate" href="{{ .url }}">
-            <img alt="{{ .name }}" src="/img/projects/{{ .img }}">
+            <img alt="{{ .name }}" src="{{ $img.RelPermalink }}"
+                 width="{{ $img.Width }}" height="{{ $img.Height }}">
           </a>
         {{ else }}
-          <img alt="{{ .name }}" src="/img/projects/{{ .img }}">
+          <img alt="{{ .name }}" src="{{ $img.RelPermalink }}"
+               width="{{ $img.Width }}" height="{{ $img.Height }}">
         {{ end }}
       </section>
       <section class="project-desc">
