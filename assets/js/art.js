@@ -27,6 +27,10 @@ function getPieces() {
   return Array.from(document.querySelectorAll('.art-grid .art-piece'));
 }
 
+const imageOf = (lightbox) => lightbox.querySelector('.art-full');
+const infoOf = (lightbox) => lightbox.querySelector('.art-info');
+const stageOf = (lightbox) => lightbox.querySelector('.art-stage');
+
 // The piece `offset` places from the current one, wrapping around.
 function pieceAt(offset) {
   const pieces = getPieces();
@@ -68,14 +72,13 @@ function preload(piece) {
 function render(lightbox, piece) {
   current = getPieces().indexOf(piece);
 
-  const image = lightbox.querySelector('.art-full');
+  const image = imageOf(lightbox);
   image.src = piece.dataset.artFull;
   image.alt = piece.querySelector('.art-title').textContent;
   image.width = piece.dataset.artWidth;
   image.height = piece.dataset.artHeight;
 
-  lightbox.querySelector('.art-info')
-      .replaceChildren(...piece.cloneNode(true).childNodes);
+  infoOf(lightbox).replaceChildren(...piece.cloneNode(true).childNodes);
 
   preload(pieceAt(1));
   preload(pieceAt(-1));
@@ -110,7 +113,7 @@ function dismiss(lightbox, clearHash = true) {
 
 // How far an image drifts while sliding fully out.
 function slideTravel(lightbox) {
-  return lightbox.querySelector('.art-stage').clientWidth / 2;
+  return stageOf(lightbox).clientWidth / 2;
 }
 
 // Image pose at horizontal offset `x`, fading out as it nears `travel`.
@@ -134,14 +137,12 @@ function slide(element, keyframes) {
 }
 
 function isSliding(lightbox) {
-  return lightbox.querySelector('.art-full').getAnimations().length > 0;
+  return imageOf(lightbox).getAnimations().length > 0;
 }
 
 // Stops any slide and puts the image and info back at rest.
 function clearSlide(lightbox) {
-  for (const el
-           of [lightbox.querySelector('.art-full'),
-               lightbox.querySelector('.art-info')]) {
+  for (const el of [imageOf(lightbox), infoOf(lightbox)]) {
     el.getAnimations().forEach((a) => a.cancel());
     el.style.transform = '';
     el.style.opacity = '';
@@ -153,7 +154,7 @@ async function springBack(lightbox) {
     clearSlide(lightbox);
     return;
   }
-  await slide(lightbox.querySelector('.art-full'), [RESTING_POSE]);
+  await slide(imageOf(lightbox), [RESTING_POSE]);
   clearSlide(lightbox);
 }
 
@@ -173,8 +174,8 @@ async function stepPiece(offset) {
     return;
   }
 
-  const image = lightbox.querySelector('.art-full');
-  const info = lightbox.querySelector('.art-info');
+  const image = imageOf(lightbox);
+  const info = infoOf(lightbox);
   const travel = slideTravel(lightbox);
   // Next exits left, previous exits right.
   const exitX = offset > 0 ? -travel : travel;
@@ -240,8 +241,8 @@ function onKeydown(e) {
 }
 
 function initSwipeNavigation(lightbox) {
-  const stage = lightbox.querySelector('.art-stage');
-  const image = lightbox.querySelector('.art-full');
+  const stage = stageOf(lightbox);
+  const image = imageOf(lightbox);
   let start = null;
   // Offset of a recognized horizontal drag, null until then.
   let dragX = null;
@@ -340,7 +341,7 @@ async function onClose(e) {
   // Clear the selected image once faded out, so it doesn't vanish mid-fade.
   await Promise.allSettled(lightbox.getAnimations().map((a) => a.finished));
   if (!lightbox.open) {
-    lightbox.querySelector('.art-full').removeAttribute('src');
+    imageOf(lightbox).removeAttribute('src');
   }
 }
 
